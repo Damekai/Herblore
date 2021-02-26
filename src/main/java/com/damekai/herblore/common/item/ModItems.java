@@ -1,0 +1,62 @@
+package com.damekai.herblore.common.item;
+
+import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.block.ModBlocks;
+import com.damekai.herblore.common.effect.HerbloreEffect;
+import com.damekai.herblore.common.effect.ModHerbloreEffects;
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.HashMap;
+
+public class ModItems
+{
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
+
+    public static final RegistryObject<ItemReagent> REAGENT_A = ITEMS.register("reagent_a", () -> new ItemReagent(
+            new HashMap<RegistryObject<HerbloreEffect>, Integer>() {{
+                put(ModHerbloreEffects.DEBUG_ALPHA, 1);
+                put(ModHerbloreEffects.DEBUG_BETA, 1);
+                put(ModHerbloreEffects.DEBUG_GAMMA, 1);
+            }}
+            ));
+
+    public static final RegistryObject<ItemReagent> REAGENT_B = ITEMS.register("reagent_b", () -> new ItemReagent(
+            new HashMap<RegistryObject<HerbloreEffect>, Integer>() {{
+                put(ModHerbloreEffects.DEBUG_ALPHA, 2);
+                put(ModHerbloreEffects.DEBUG_BETA, 1);
+            }}
+            ));
+
+    public static final RegistryObject<ItemReagent> REAGENT_C = ITEMS.register("reagent_c", () -> new ItemReagent(
+            new HashMap<RegistryObject<HerbloreEffect>, Integer>() {{
+                put(ModHerbloreEffects.DEBUG_ALPHA, 1);
+                put(ModHerbloreEffects.DEBUG_GAMMA, 2);
+            }}
+            ));
+
+
+    public static final RegistryObject<ItemMilledReagent> REAGENT_A_MILLED = ITEMS.register("reagent_a_milled", () -> new ItemMilledReagent(REAGENT_A));
+    public static final RegistryObject<ItemMilledReagent> REAGENT_B_MILLED = ITEMS.register("reagent_b_milled", () -> new ItemMilledReagent(REAGENT_B));
+    public static final RegistryObject<ItemMilledReagent> REAGENT_C_MILLED = ITEMS.register("reagent_c_milled", () -> new ItemMilledReagent(REAGENT_C));
+
+    public static final RegistryObject<Item> EMPTY_FLASK = ITEMS.register("empty_flask", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> CRUDE_FLASK = ITEMS.register("crude_flask", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> FLASK = ITEMS.register("flask", ItemFlask::new);
+
+    public static final RegistryObject<Item> PESTLE_AND_MORTAR = ITEMS.register("pestle_and_mortar", ItemPestleAndMortar::new);
+
+    public static final RegistryObject<BlockItem> ATHANOR = ITEMS.register("athanor", () -> new BlockItem(ModBlocks.ATHANOR.get(), defaultItemProperties()));
+
+    public static Item.Properties defaultItemProperties()
+    {
+        return (new Item.Properties())
+                .group(ModItemGroups.HERBLORE);
+    }
+
+}

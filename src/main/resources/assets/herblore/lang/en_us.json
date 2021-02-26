@@ -1,0 +1,24 @@
+{
+    "itemGroup.herblore": "Herblore",
+
+    "item.herblore.empty_flask": "Empty Flask",
+    "item.herblore.crude_flask": "Crude Flask",
+    "item.herblore.flask": "Flask",
+
+    "item.herblore.pestle_and_mortar": "Pestle and Mortar",
+
+    "item.herblore.reagent_a": "Reagent A",
+    "item.herblore.reagent_a_milled": "Milled Reagent A",
+    "item.herblore.reagent_b": "Reagent B",
+    "item.herblore.reagent_b_milled": "Milled Reagent B",
+    "item.herblore.reagent_c": "Reagent C",
+    "item.herblore.reagent_c_milled": "Milled Reagent C",
+
+    "block.herblore.athanor": "Athanor",
+
+    "herblore_effect.herblore.debug_alpha": "Debug Effect Alpha",
+    "herblore_effect.herblore.debug_beta": "Debug Effect Beta",
+    "herblore_effect.herblore.debug_gamma": "Debug Effect Gamma",
+    "herblore_effect.herblore.debug_delta": "Debug Effect Delta",
+    "herblore_effect.herblore.debug_epsilon": "Debug Effect Epsilon"
+}
