@@ -46,19 +46,15 @@ public class ItemFlask extends Item
 
         CompoundNBT nbt = player.getHeldItem(hand).getOrCreateTag();
 
-        if (nbt.contains("flask_effects", Constants.NBT.TAG_LIST))
+        if (nbt.contains("flask_effect"))
         {
             Herblore.LOGGER.debug(nbt.toString());
 
             HerbloreEffectHandler herbloreEffectHandler = player.getCapability(CapabilityHerbloreEffectHandler.HERBLORE_EFFECT_HANDLER_CAPABILITY).orElse(null);
             if (herbloreEffectHandler != null)
             {
-                ListNBT nbtList = nbt.getList("flask_effects", Constants.NBT.TAG_COMPOUND);
-
-                for (INBT tag : nbtList)
-                {
-                    herbloreEffectHandler.applyHerbloreEffects(player, HerbloreEffectInstance.read((CompoundNBT) tag));
-                }
+                CompoundNBT flaskEffectTag = nbt.getCompound("flask_effect");
+                herbloreEffectHandler.applyHerbloreEffects(player, HerbloreEffectInstance.read(flaskEffectTag));
             }
 
             return ActionResult.resultSuccess(player.getHeldItem(hand));

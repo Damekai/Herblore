@@ -49,7 +49,7 @@ public class CrudeFlaskRecipe extends SpecialRecipe
         ItemStack crudeFlaskOutput = new ItemStack(ModItems.CRUDE_FLASK.get());
 
         ArrayList<ItemReagent> inputReagents = getInputReagents(inventory);
-        crudeFlaskOutput.getOrCreateTag().put("flask_effects", FlaskHelper.makeFlaskNBTList(inputReagents.toArray(new ItemReagent[0])));
+        crudeFlaskOutput.getOrCreateTag().put("flask_effect", FlaskHelper.makeFlaskNBT(inputReagents.toArray(new ItemReagent[0])));
 
         Herblore.LOGGER.debug(crudeFlaskOutput.getOrCreateTag().toString());
 

@@ -2,6 +2,7 @@ package com.damekai.herblore.common.util;
 
 import com.damekai.herblore.common.effect.HerbloreEffect;
 import com.damekai.herblore.common.effect.HerbloreEffectInstance;
+import com.damekai.herblore.common.effect.ModHerbloreEffects;
 import com.damekai.herblore.common.item.ItemFlask;
 import com.damekai.herblore.common.item.ItemReagent;
 import net.minecraft.inventory.IInventory;
@@ -22,63 +23,71 @@ import java.util.*;
 
 public class FlaskHelper
 {
-    public static ListNBT makeFlaskNBTList(ItemReagent... reagents)
+    public static CompoundNBT makeFlaskNBT(ItemReagent... reagents)
     {
-        ListNBT nbtList = new ListNBT();
+        CompoundNBT nbt = new CompoundNBT();
 
-        Map<HerbloreEffect, MutableInt> combinedHerbloreEffectPointsMap = new HashMap<>();
+        HerbloreEffect resultingEffect = null;
+        int resultingEffectPoints = 0;
 
-        for (ItemReagent reagent : reagents)
+        ItemReagent firstReagent = reagents[0];
+
+        for (RegistryObject<HerbloreEffect> herbloreEffect : firstReagent.getHerbloreEffectPoints().keySet())
         {
-            Map<RegistryObject<HerbloreEffect>, Integer> herbloreEffectPointsMap = reagent.getHerbloreEffectPoints();
-
-            for (Map.Entry<RegistryObject<HerbloreEffect>, Integer> entry : herbloreEffectPointsMap.entrySet())
+            boolean sharedBetweenAllReagents = true;
+            int sumPoints = 0;
+            for (int i = 1; i < reagents.length; i++)
             {
-                HerbloreEffect herbloreEffect = entry.getKey().get();
-                int herbloreEffectPoints = entry.getValue();
-
-                if (!combinedHerbloreEffectPointsMap.containsKey(herbloreEffect))
+                ItemReagent reagent = reagents[i];
+                if (!reagent.getHerbloreEffectPoints().containsKey(herbloreEffect))
                 {
-                    combinedHerbloreEffectPointsMap.put(herbloreEffect, new MutableInt(herbloreEffectPoints));
+                    sharedBetweenAllReagents = false;
+                    break;
                 }
                 else
                 {
-                    combinedHerbloreEffectPointsMap.get(herbloreEffect).value += herbloreEffectPoints;
+                    sumPoints += reagent.getHerbloreEffectPoints().get(herbloreEffect);
                 }
             }
-        }
-
-        for (Map.Entry<HerbloreEffect, MutableInt> entry : combinedHerbloreEffectPointsMap.entrySet())
-        {
-            if (entry.getValue().value > 1)
+            if (sharedBetweenAllReagents && sumPoints > resultingEffectPoints)
             {
-                HerbloreEffectInstance herbloreEffectInstance = new HerbloreEffectInstance(entry.getKey(), entry.getValue().value, 40); // TODO: Calculate duration.
-                nbtList.add(herbloreEffectInstance.write(new CompoundNBT()));
+                resultingEffect = herbloreEffect.get();
+                resultingEffectPoints = sumPoints;
             }
         }
 
-        return nbtList;
+        HerbloreEffectInstance resultingEffectInstance;
+        if (resultingEffect != null)
+        {
+            resultingEffectInstance = new HerbloreEffectInstance(resultingEffect, resultingEffectPoints, 40); // TODO: Calculate duration.
+        }
+        else
+        {
+            resultingEffectInstance = new HerbloreEffectInstance(ModHerbloreEffects.DEBUG_ALPHA.get(), 0, 0); // TODO: Put some empty effect thing here.
+        }
+
+        return resultingEffectInstance.write(new CompoundNBT());
     }
 
     // Modified version of PotionUtils.addPotionTooltip() from vanilla.
     @OnlyIn(Dist.CLIENT)
     public static void addFlaskTooltip(ItemStack stack, List<ITextComponent> lores)
     {
-        ListNBT nbtList = stack.getOrCreateTag().getList("flask_effects", Constants.NBT.TAG_COMPOUND);
-
-        for (INBT tag : nbtList)
+        if (!stack.getOrCreateTag().contains("flask_effect"))
         {
-            HerbloreEffectInstance herbloreEffectInstance = HerbloreEffectInstance.read((CompoundNBT) tag);
-
-            IFormattableTextComponent lore = new TranslationTextComponent(herbloreEffectInstance.getHerbloreEffect().getTranslationKey());
-            lore.appendString(" (");
-            lore.appendString(String.valueOf(herbloreEffectInstance.getPotency()));
-            lore.appendString(") : ");
-            lore.appendString(StringUtils.ticksToElapsedTime(herbloreEffectInstance.getDuration()));
-            lore.mergeStyle(TextFormatting.GREEN);
-
-            lores.add(lore);
+            return;
         }
+
+        HerbloreEffectInstance herbloreEffectInstance = HerbloreEffectInstance.read(stack.getOrCreateTag().getCompound("flask_effect"));
+
+        IFormattableTextComponent lore = new TranslationTextComponent(herbloreEffectInstance.getHerbloreEffect().getTranslationKey());
+        lore.appendString(" (");
+        lore.appendString(String.valueOf(herbloreEffectInstance.getPotency()));
+        lore.appendString(") : ");
+        lore.appendString(StringUtils.ticksToElapsedTime(herbloreEffectInstance.getDuration()));
+        lore.mergeStyle(TextFormatting.GREEN);
+
+        lores.add(lore);
     }
 
     private static String intToNumerals(int value)
