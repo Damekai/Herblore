@@ -16,9 +16,11 @@
 
     "block.herblore.athanor": "Athanor",
 
-    "herblore_effect.herblore.debug_alpha": "Debug Effect Alpha",
-    "herblore_effect.herblore.debug_beta": "Debug Effect Beta",
-    "herblore_effect.herblore.debug_gamma": "Debug Effect Gamma",
-    "herblore_effect.herblore.debug_delta": "Debug Effect Delta",
-    "herblore_effect.herblore.debug_epsilon": "Debug Effect Epsilon"
+    "flask_effect.herblore.debug_alpha": "Debug Effect Alpha",
+    "flask_effect.herblore.debug_beta": "Debug Effect Beta",
+    "flask_effect.herblore.debug_gamma": "Debug Effect Gamma",
+    "flask_effect.herblore.debug_delta": "Debug Effect Delta",
+    "flask_effect.herblore.debug_epsilon": "Debug Effect Epsilon",
+
+    "flask.herblore.debug_bonanza": "Flask of Debug Bonanza"
 }

@@ -56,9 +56,9 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
                     setStage(3);
 
                     // Copy NBT list of effects from crude flask to completed flask.
-                    CompoundNBT flaskEffect = flaskStack.getOrCreateTag().getCompound("flask_effect").copy();
+                    CompoundNBT flaskEffect = flaskStack.getOrCreateTag().getCompound("flask_instance").copy();
                     flaskStack = new ItemStack(ModItems.FLASK.get(), 1);
-                    flaskStack.getOrCreateTag().put("flask_effect", flaskEffect);
+                    flaskStack.getOrCreateTag().put("flask_instance", flaskEffect);
                 }
             }
         }

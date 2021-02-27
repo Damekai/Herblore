@@ -2,9 +2,9 @@ package com.damekai.herblore.common.effect;
 
 import net.minecraft.entity.LivingEntity;
 
-public class HerbloreEffectHealthRegeneration extends HerbloreEffect
+public class FlaskEffectHealthRegeneration extends FlaskEffect
 {
-    public HerbloreEffectHealthRegeneration()
+    public FlaskEffectHealthRegeneration()
     {
         super("health_regeneration");
     }

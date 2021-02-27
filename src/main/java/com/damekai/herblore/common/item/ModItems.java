@@ -2,12 +2,12 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.ModBlocks;
-import com.damekai.herblore.common.effect.HerbloreEffect;
-import com.damekai.herblore.common.effect.ModHerbloreEffects;
-import net.minecraft.block.Block;
+import com.damekai.herblore.common.effect.FlaskEffect;
+import com.damekai.herblore.common.effect.ModFlaskEffects;
+import com.damekai.herblore.common.flask.Flask;
+import com.damekai.herblore.common.flask.ModFlasks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,26 +19,26 @@ public class ModItems
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
     public static final RegistryObject<ItemReagent> REAGENT_A = ITEMS.register("reagent_a", () -> new ItemReagent(
-            new HashMap<RegistryObject<HerbloreEffect>, Integer>() {{
-                put(ModHerbloreEffects.DEBUG_ALPHA, 1);
-                put(ModHerbloreEffects.DEBUG_BETA, 1);
-                put(ModHerbloreEffects.DEBUG_GAMMA, 1);
+            new HashMap<RegistryObject<Flask>, Integer>() {{
+                put(ModFlasks.DEBUG_CDE, 2);
+                put(ModFlasks.DEBUG_BONANZA, 1);
             }}
             ));
 
     public static final RegistryObject<ItemReagent> REAGENT_B = ITEMS.register("reagent_b", () -> new ItemReagent(
-            new HashMap<RegistryObject<HerbloreEffect>, Integer>() {{
-                put(ModHerbloreEffects.DEBUG_ALPHA, 2);
-                put(ModHerbloreEffects.DEBUG_BETA, 1);
+            new HashMap<RegistryObject<Flask>, Integer>() {{
+                put(ModFlasks.DEBUG_AB, 1);
+                put(ModFlasks.DEBUG_CDE, 1);
+                put(ModFlasks.DEBUG_BONANZA, 1);
             }}
-            ));
+    ));
 
     public static final RegistryObject<ItemReagent> REAGENT_C = ITEMS.register("reagent_c", () -> new ItemReagent(
-            new HashMap<RegistryObject<HerbloreEffect>, Integer>() {{
-                put(ModHerbloreEffects.DEBUG_ALPHA, 1);
-                put(ModHerbloreEffects.DEBUG_GAMMA, 2);
+            new HashMap<RegistryObject<Flask>, Integer>() {{
+                put(ModFlasks.DEBUG_AB, 1);
+                put(ModFlasks.DEBUG_BONANZA, 2);
             }}
-            ));
+    ));
 
 
     public static final RegistryObject<ItemMilledReagent> REAGENT_A_MILLED = ITEMS.register("reagent_a_milled", () -> new ItemMilledReagent(REAGENT_A));

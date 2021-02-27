@@ -6,15 +6,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-import javax.annotation.Nullable;
-
-public abstract class HerbloreEffect extends ForgeRegistryEntry<HerbloreEffect>
+public abstract class FlaskEffect extends ForgeRegistryEntry<FlaskEffect>
 {
     private final String translationKey;
 
-    public HerbloreEffect(String translationName)
+    public FlaskEffect(String translationName)
     {
-        translationKey = "herblore_effect." + Herblore.MOD_ID + "." + translationName;
+        translationKey = "flask_effect." + Herblore.MOD_ID + "." + translationName;
     }
 
     public void onApply(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
@@ -42,9 +40,9 @@ public abstract class HerbloreEffect extends ForgeRegistryEntry<HerbloreEffect>
         return translationKey;
     }
 
-    public static HerbloreEffect getHerbloreEffectFromRegistry(ResourceLocation name)
+    public static FlaskEffect getFlaskEffectFromRegistry(ResourceLocation name)
     {
-        for (RegistryObject<HerbloreEffect> registeredEffect : ModHerbloreEffects.HERBLORE_EFFECTS.getEntries())
+        for (RegistryObject<FlaskEffect> registeredEffect : ModFlaskEffects.FLASK_EFFECTS.getEntries())
         {
             if (name.equals(registeredEffect.get().getRegistryName()))
             {

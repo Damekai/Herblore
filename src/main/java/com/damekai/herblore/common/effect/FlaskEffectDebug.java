@@ -3,11 +3,11 @@ package com.damekai.herblore.common.effect;
 import com.damekai.herblore.common.Herblore;
 import net.minecraft.entity.LivingEntity;
 
-public class HerbloreEffectDebug extends HerbloreEffect
+public class FlaskEffectDebug extends FlaskEffect
 {
     private final String debugTag;
 
-    public HerbloreEffectDebug(String translationName, String debugTag)
+    public FlaskEffectDebug(String translationName, String debugTag)
     {
         super(translationName);
         this.debugTag = debugTag;

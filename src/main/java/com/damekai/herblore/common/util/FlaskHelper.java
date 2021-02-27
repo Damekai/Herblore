@@ -1,93 +1,84 @@
 package com.damekai.herblore.common.util;
 
-import com.damekai.herblore.common.effect.HerbloreEffect;
-import com.damekai.herblore.common.effect.HerbloreEffectInstance;
-import com.damekai.herblore.common.effect.ModHerbloreEffects;
-import com.damekai.herblore.common.item.ItemFlask;
+import com.damekai.herblore.common.flask.Flask;
+import com.damekai.herblore.common.flask.FlaskInstance;
+import com.damekai.herblore.common.flask.ModFlasks;
 import com.damekai.herblore.common.item.ItemReagent;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.RegistryObject;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class FlaskHelper
 {
-    public static CompoundNBT makeFlaskNBT(ItemReagent... reagents)
+    public static CompoundNBT makeFlaskInstanceNBT(ItemReagent... reagents)
     {
         CompoundNBT nbt = new CompoundNBT();
 
-        HerbloreEffect resultingEffect = null;
-        int resultingEffectPoints = 0;
+        Flask resultingFlask = null;
+        int resultingFlaskPoints = 0;
 
         ItemReagent firstReagent = reagents[0];
 
-        for (RegistryObject<HerbloreEffect> herbloreEffect : firstReagent.getHerbloreEffectPoints().keySet())
+        for (RegistryObject<Flask> flask : firstReagent.getFlaskPoints().keySet())
         {
             boolean sharedBetweenAllReagents = true;
-            int sumPoints = 0;
+            int sumPoints = firstReagent.getFlaskPoints().get(flask);
             for (int i = 1; i < reagents.length; i++)
             {
                 ItemReagent reagent = reagents[i];
-                if (!reagent.getHerbloreEffectPoints().containsKey(herbloreEffect))
+                if (!reagent.getFlaskPoints().containsKey(flask))
                 {
                     sharedBetweenAllReagents = false;
                     break;
                 }
                 else
                 {
-                    sumPoints += reagent.getHerbloreEffectPoints().get(herbloreEffect);
+                    sumPoints += reagent.getFlaskPoints().get(flask);
                 }
             }
-            if (sharedBetweenAllReagents && sumPoints > resultingEffectPoints)
+            if (sharedBetweenAllReagents && sumPoints > resultingFlaskPoints)
             {
-                resultingEffect = herbloreEffect.get();
-                resultingEffectPoints = sumPoints;
+                resultingFlask = flask.get();
+                resultingFlaskPoints = sumPoints;
             }
         }
 
-        HerbloreEffectInstance resultingEffectInstance;
-        if (resultingEffect != null)
+        FlaskInstance resultingFlaskInstance;
+        if (resultingFlask != null)
         {
-            resultingEffectInstance = new HerbloreEffectInstance(resultingEffect, resultingEffectPoints, 40); // TODO: Calculate duration.
+            resultingFlaskInstance = new FlaskInstance(resultingFlask, resultingFlaskPoints, 40); // TODO: Calculate duration.
         }
         else
         {
-            resultingEffectInstance = new HerbloreEffectInstance(ModHerbloreEffects.DEBUG_ALPHA.get(), 0, 0); // TODO: Put some empty effect thing here.
+            resultingFlaskInstance = new FlaskInstance(ModFlasks.DEBUG_AB.get(), 0, 0); // TODO: Put some empty Flask thing here.
         }
 
-        return resultingEffectInstance.write(new CompoundNBT());
+        return resultingFlaskInstance.write(new CompoundNBT());
     }
 
     // Modified version of PotionUtils.addPotionTooltip() from vanilla.
     @OnlyIn(Dist.CLIENT)
     public static void addFlaskTooltip(ItemStack stack, List<ITextComponent> lores)
     {
-        if (!stack.getOrCreateTag().contains("flask_effect"))
+        if (!stack.getOrCreateTag().contains("flask_instance"))
         {
             return;
         }
 
-        HerbloreEffectInstance herbloreEffectInstance = HerbloreEffectInstance.read(stack.getOrCreateTag().getCompound("flask_effect"));
+        FlaskInstance flaskInstance = FlaskInstance.read(stack.getOrCreateTag().getCompound("flask_instance"));
 
-        IFormattableTextComponent lore = new TranslationTextComponent(herbloreEffectInstance.getHerbloreEffect().getTranslationKey());
-        lore.appendString(" (");
-        lore.appendString(String.valueOf(herbloreEffectInstance.getPotency()));
-        lore.appendString(") : ");
-        lore.appendString(StringUtils.ticksToElapsedTime(herbloreEffectInstance.getDuration()));
-        lore.mergeStyle(TextFormatting.GREEN);
+        // Write potency and duration.
+        lores.add((new StringTextComponent(String.format("%d : %s", flaskInstance.getPotency(), StringUtils.ticksToElapsedTime(flaskInstance.getDuration())))).mergeStyle(TextFormatting.BLUE));
 
-        lores.add(lore);
+        // Write each FlaskEffect from this Flask.
+        flaskInstance.getFlask().getFlaskEffects().forEach(
+                (flaskEffect) -> lores.add((new TranslationTextComponent(flaskEffect.getTranslationKey()).mergeStyle(TextFormatting.GREEN))));
     }
 
     private static String intToNumerals(int value)
