@@ -3,6 +3,7 @@ package com.damekai.herblore.common.flask;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.FlaskEffect;
 import com.google.common.collect.ImmutableList;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -11,17 +12,24 @@ import java.util.stream.Collectors;
 public class Flask extends net.minecraftforge.registries.ForgeRegistryEntry<Flask>
 {
     private final String translationKey;
+    private final RegistryObject<Effect> guiRenderEffect;
     private final ImmutableList<RegistryObject<FlaskEffect>> flaskEffects;
 
-    public Flask(String translationName, RegistryObject<FlaskEffect>... flaskEffects)
+    public Flask(String translationName, RegistryObject<Effect> guiRenderEffect, RegistryObject<FlaskEffect>... flaskEffects)
     {
         translationKey = "flask." + Herblore.MOD_ID + "." + translationName;
+        this.guiRenderEffect = guiRenderEffect;
         this.flaskEffects = ImmutableList.copyOf(flaskEffects);
     }
 
     public String getTranslationKey()
     {
         return translationKey;
+    }
+
+    public Effect getGuiRenderEffect()
+    {
+        return guiRenderEffect.get();
     }
 
     public ImmutableList<FlaskEffect> getFlaskEffects()

@@ -22,5 +22,7 @@
     "flask_effect.herblore.debug_delta": "Debug Effect Delta",
     "flask_effect.herblore.debug_epsilon": "Debug Effect Epsilon",
 
-    "flask.herblore.debug_bonanza": "Flask of Debug Bonanza"
+    "flaskof.flask.herblore.debug_bonanza": "Debug Bonanza Flask",
+
+    "flask.herblore.debug_bonanza": "Debug Bonanza"
 }

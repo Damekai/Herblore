@@ -1,11 +1,13 @@
 package com.damekai.herblore.common;
 
+import com.damekai.herblore.client.ui.ActiveFlasksGui;
 import com.damekai.herblore.common.block.ModBlocks;
 import com.damekai.herblore.common.block.tile.ModTiles;
 import com.damekai.herblore.common.capability.CapabilityFlaskHandler;
 import com.damekai.herblore.common.capability.FlaskHandler;
 import com.damekai.herblore.common.data.FlaskRecipeProvider;
 import com.damekai.herblore.common.data.MilledReagentRecipeProvider;
+import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.effect.ModFlaskEffects;
 import com.damekai.herblore.common.flask.ModFlasks;
 import com.damekai.herblore.common.item.ModItems;
@@ -45,6 +47,8 @@ public class Herblore
         modBus.addListener(Herblore::onGatherData);
         modBus.addListener(ModRegistries::onNewRegistry);
 
+        //modBus.addListener(ActiveFlasksGui::onRenderGameOverlay);
+
         modBus.addGenericListener(IRecipeSerializer.class, Herblore::onRegisterRecipeSerializers);
 
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityFlaskHandler::onAttachCapabilities);
@@ -52,6 +56,7 @@ public class Herblore
         ModBlocks.BLOCKS.register(modBus);
         ModTiles.TILES.register(modBus);
         ModItems.ITEMS.register(modBus);
+        ModEffects.EFFECTS.register(modBus);
         ModFlaskEffects.FLASK_EFFECTS.register(modBus);
         ModFlasks.FLASKS.register(modBus);
 

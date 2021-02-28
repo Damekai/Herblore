@@ -4,6 +4,7 @@ import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.util.MutableInt;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 import java.util.*;
@@ -25,6 +26,7 @@ public class FlaskHandler implements IFlaskHandler
             activeFlaskInstances.put(flaskInstance, new MutableInt(flaskInstance.getDuration()));
             flaskInstance.getFlask().getFlaskEffects().forEach(
                     (flaskEffect) -> flaskEffect.onApply(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), flaskInstance.getDuration()));
+            livingEntity.addPotionEffect(new EffectInstance(flaskInstance.getFlask().getGuiRenderEffect(), flaskInstance.getDuration()));
         }
     }
 
@@ -47,6 +49,7 @@ public class FlaskHandler implements IFlaskHandler
                 flaskInstance.getFlask().getFlaskEffects().forEach(
                         (flaskEffect -> flaskEffect.onExpire(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.value)));
                 iter.remove();
+                livingEntity.removePotionEffect(flaskInstance.getFlask().getGuiRenderEffect()); // May be redundant, but here just in case.
             }
         }
     }
@@ -61,6 +64,7 @@ public class FlaskHandler implements IFlaskHandler
             {
                 flaskInstance.getFlask().getFlaskEffects().forEach(
                         (flaskEffect -> flaskEffect.onRemove(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.value)));
+                livingEntity.removePotionEffect(flaskInstance.getFlask().getGuiRenderEffect());
             }
         }
     }
@@ -75,6 +79,7 @@ public class FlaskHandler implements IFlaskHandler
 
             flaskInstance.getFlask().getFlaskEffects().forEach(
                     (flaskEffect -> flaskEffect.onRemove(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.value)));
+            livingEntity.removePotionEffect(flaskInstance.getFlask().getGuiRenderEffect());
         }
         activeFlaskInstances.clear();
     }

@@ -37,7 +37,7 @@ public class ItemFlask extends Item
         if (nbt.contains("flask_instance"))
         {
             Flask flask = FlaskInstance.read(nbt.getCompound("flask_instance")).getFlask();
-            return new TranslationTextComponent(flask.getTranslationKey());
+            return new TranslationTextComponent("flaskof." + flask.getTranslationKey());
         }
         return super.getDisplayName(stack);
     }
