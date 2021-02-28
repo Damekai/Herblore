@@ -7,13 +7,18 @@ import com.damekai.herblore.common.effect.FlaskEffect;
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.util.FlaskHelper;
+import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -27,7 +32,7 @@ public class ItemFlask extends Item
 {
     public ItemFlask()
     {
-        super(ModItems.defaultItemProperties());
+        super(ModItems.defaultItemProperties().maxStackSize(1));
     }
 
     @Override
@@ -43,30 +48,58 @@ public class ItemFlask extends Item
     }
 
     @Override
+    public int getUseDuration(ItemStack stack)
+    {
+        return 40;
+    }
+
+    @Override
+    public UseAction getUseAction(ItemStack stack)
+    {
+        return UseAction.DRINK;
+    }
+
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
     {
-        if (world.isRemote)
-        {
-            return ActionResult.resultPass(player.getHeldItem(hand));
-        }
+        player.setActiveHand(hand);
+        return ActionResult.resultSuccess(player.getHeldItem(hand));
+    }
 
-        CompoundNBT nbt = player.getHeldItem(hand).getOrCreateTag();
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity livingEntity)
+    {
+        CompoundNBT nbt = stack.getOrCreateTag();
 
         if (nbt.contains("flask_instance"))
         {
-            Herblore.LOGGER.debug(nbt.toString());
-
-            FlaskHandler flaskHandler = player.getCapability(CapabilityFlaskHandler.FLASK_HANDLER_CAPABILITY).orElse(null);
-            if (flaskHandler != null)
+            if (!world.isRemote) // Only apply to server-side capability.
             {
-                CompoundNBT flaskInstanceTag = nbt.getCompound("flask_instance");
-                flaskHandler.applyFlasks(player, FlaskInstance.read(flaskInstanceTag));
+                Herblore.LOGGER.debug(nbt.toString());
+
+                FlaskHandler flaskHandler = livingEntity.getCapability(CapabilityFlaskHandler.FLASK_HANDLER_CAPABILITY).orElse(null);
+                if (flaskHandler != null) {
+                    CompoundNBT flaskInstanceTag = nbt.getCompound("flask_instance");
+                    flaskHandler.applyFlasks(livingEntity, FlaskInstance.read(flaskInstanceTag));
+                }
             }
 
-            return ActionResult.resultSuccess(player.getHeldItem(hand));
-        }
+            if (nbt.contains("flask_doses"))
+            {
+                int doses = nbt.getInt("flask_doses");
+                if (doses == 1)
+                {
+                    return new ItemStack(ModItems.EMPTY_FLASK.get());
+                }
+                else
+                {
+                    nbt.putInt("flask_doses", doses - 1);
+                }
+            }
 
-        return ActionResult.resultPass(player.getHeldItem(hand));
+            return stack;
+        }
+        return stack;
     }
 
     @OnlyIn(Dist.CLIENT)

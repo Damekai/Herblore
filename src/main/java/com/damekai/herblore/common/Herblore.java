@@ -1,5 +1,6 @@
 package com.damekai.herblore.common;
 
+import com.damekai.herblore.client.ModItemPropertyGetters;
 import com.damekai.herblore.common.block.ModBlocks;
 import com.damekai.herblore.common.block.tile.ModTiles;
 import com.damekai.herblore.common.capability.CapabilityFlaskHandler;
@@ -20,6 +21,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -44,6 +46,8 @@ public class Herblore
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modBus.addListener(Herblore::onCommonSetup);
+        modBus.addListener(ModItemPropertyGetters::onClientSetup);
+
         modBus.addListener(Herblore::onGatherData);
         modBus.addListener(ModRegistries::onNewRegistry);
         modBus.addListener(ModItemColors::onLoadComplete);

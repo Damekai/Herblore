@@ -67,6 +67,11 @@ public class FlaskHelper
         return stack.getOrCreateTag().getInt("flask_color"); // Returns 0 if the flask_color key is not present.
     }
 
+    public static int getFlaskDoses(ItemStack stack)
+    {
+        return stack.getOrCreateTag().getInt("flask_doses");
+    }
+
     // Modified version of PotionUtils.addPotionTooltip() from vanilla.
     @OnlyIn(Dist.CLIENT)
     public static void addFlaskTooltip(ItemStack stack, List<ITextComponent> lores)
@@ -77,6 +82,10 @@ public class FlaskHelper
         }
 
         FlaskInstance flaskInstance = FlaskInstance.read(stack.getOrCreateTag().getCompound("flask_instance"));
+
+        // Write doses.
+        int doses = stack.getOrCreateTag().getInt("flask_doses");
+        lores.add(new StringTextComponent(doses + (doses == 1 ? " Dose" : " Doses")).mergeStyle(TextFormatting.BLUE));
 
         // Write potency and duration.
         lores.add((new StringTextComponent(String.format("%d : %s", flaskInstance.getPotency(), StringUtils.ticksToElapsedTime(flaskInstance.getDuration())))).mergeStyle(TextFormatting.BLUE));

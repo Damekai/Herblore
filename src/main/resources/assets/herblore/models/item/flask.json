@@ -3,5 +3,31 @@
   "textures": {
     "layer0": "herblore:item/flask_overlay_4",
     "layer1": "herblore:item/empty_flask"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "herblore:doses": 1.0
+      },
+      "model": "herblore:item/flask_1"
+    },
+    {
+      "predicate": {
+        "herblore:doses": 2.0
+      },
+      "model": "herblore:item/flask_2"
+    },
+    {
+      "predicate": {
+        "herblore:doses": 3.0
+      },
+      "model": "herblore:item/flask_3"
+    },
+    {
+      "predicate": {
+        "herblore:doses": 4.0
+      },
+      "model": "herblore:item/flask_4"
+    }
+  ]
 }

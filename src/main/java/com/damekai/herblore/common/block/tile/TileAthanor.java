@@ -61,6 +61,7 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
                     flaskStack = new ItemStack(ModItems.FLASK.get(), 1);
                     flaskStack.getOrCreateTag().put("flask_instance", flaskEffect);
                     flaskStack.getOrCreateTag().putInt("flask_color", FlaskInstance.read(flaskEffect).getFlask().getColor());
+                    flaskStack.getOrCreateTag().putInt("flask_doses", 4);
                 }
             }
         }
