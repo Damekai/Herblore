@@ -2,6 +2,7 @@ package com.damekai.herblore.common.block.tile;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.BlockAthanor;
+import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.util.FlaskHelper;
 import net.minecraft.block.BlockState;
@@ -59,6 +60,7 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
                     CompoundNBT flaskEffect = flaskStack.getOrCreateTag().getCompound("flask_instance").copy();
                     flaskStack = new ItemStack(ModItems.FLASK.get(), 1);
                     flaskStack.getOrCreateTag().put("flask_instance", flaskEffect);
+                    flaskStack.getOrCreateTag().putInt("flask_color", FlaskInstance.read(flaskEffect).getFlask().getColor());
                 }
             }
         }

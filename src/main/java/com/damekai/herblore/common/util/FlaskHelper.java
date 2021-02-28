@@ -62,6 +62,11 @@ public class FlaskHelper
         return resultingFlaskInstance.write(new CompoundNBT());
     }
 
+    public static int getFlaskColor(ItemStack stack)
+    {
+        return stack.getOrCreateTag().getInt("flask_color"); // Returns 0 if the flask_color key is not present.
+    }
+
     // Modified version of PotionUtils.addPotionTooltip() from vanilla.
     @OnlyIn(Dist.CLIENT)
     public static void addFlaskTooltip(ItemStack stack, List<ITextComponent> lores)
