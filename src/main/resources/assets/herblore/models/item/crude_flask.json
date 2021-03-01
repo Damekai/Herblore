@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "herblore:item/flask_overlay_4",
+    "layer0": "herblore:item/flask_overlay_crude",
     "layer1": "herblore:item/empty_flask"
   }
 }

@@ -1,6 +1,7 @@
 package com.damekai.herblore.common.recipe;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.item.ItemMilledReagent;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.item.ModItems;
@@ -9,6 +10,7 @@ import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -49,7 +51,9 @@ public class CrudeFlaskRecipe extends SpecialRecipe
         ItemStack crudeFlaskOutput = new ItemStack(ModItems.CRUDE_FLASK.get());
 
         ArrayList<ItemReagent> inputReagents = getInputReagents(inventory);
-        crudeFlaskOutput.getOrCreateTag().put("flask_instance", FlaskHelper.makeFlaskInstanceNBT(inputReagents.toArray(new ItemReagent[0])));
+        FlaskInstance flaskInstance = FlaskHelper.makeFlaskInstance(inputReagents.toArray(new ItemReagent[0]));
+        crudeFlaskOutput.getOrCreateTag().put("flask_instance", flaskInstance.write(new CompoundNBT()));
+        crudeFlaskOutput.getOrCreateTag().putInt("flask_color", flaskInstance.getFlask().getColor());
 
         Herblore.LOGGER.debug(crudeFlaskOutput.getOrCreateTag().toString());
 

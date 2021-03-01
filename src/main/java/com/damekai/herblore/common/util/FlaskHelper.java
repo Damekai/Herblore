@@ -16,10 +16,8 @@ import java.util.*;
 
 public class FlaskHelper
 {
-    public static CompoundNBT makeFlaskInstanceNBT(ItemReagent... reagents)
+    public static FlaskInstance makeFlaskInstance(ItemReagent... reagents)
     {
-        CompoundNBT nbt = new CompoundNBT();
-
         Flask resultingFlask = null;
         int resultingFlaskPoints = 0;
 
@@ -59,7 +57,7 @@ public class FlaskHelper
             resultingFlaskInstance = new FlaskInstance(ModFlasks.DEBUG_AB.get(), 0, 0); // TODO: Put some empty Flask thing here.
         }
 
-        return resultingFlaskInstance.write(new CompoundNBT());
+        return resultingFlaskInstance;
     }
 
     public static int getFlaskColor(ItemStack stack)
