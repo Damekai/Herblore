@@ -2,6 +2,7 @@
     "itemGroup.herblore": "Herblore",
 
     "item.herblore.empty_flask": "Empty Flask",
+    "item.herblore.flask_of_water": "Flask of Water",
     "item.herblore.crude_flask": "Crude Flask",
     "item.herblore.flask": "Flask",
 
@@ -13,6 +14,8 @@
     "item.herblore.reagent_b_milled": "Milled Reagent B",
     "item.herblore.reagent_c": "Reagent C",
     "item.herblore.reagent_c_milled": "Milled Reagent C",
+
+    "item.herblore.grimy_debug": "Grimy Debug",
 
     "block.herblore.athanor": "Athanor",
 

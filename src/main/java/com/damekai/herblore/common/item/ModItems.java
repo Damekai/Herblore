@@ -41,10 +41,17 @@ public class ModItems
             }}
     ));
 
-
     public static final RegistryObject<ItemMilledReagent> REAGENT_A_MILLED = ITEMS.register("reagent_a_milled", () -> new ItemMilledReagent(REAGENT_A));
     public static final RegistryObject<ItemMilledReagent> REAGENT_B_MILLED = ITEMS.register("reagent_b_milled", () -> new ItemMilledReagent(REAGENT_B));
     public static final RegistryObject<ItemMilledReagent> REAGENT_C_MILLED = ITEMS.register("reagent_c_milled", () -> new ItemMilledReagent(REAGENT_C));
+
+    public static final RegistryObject<ItemGrimyHerb> GRIMY_DEBUG = ITEMS.register("grimy_debug", () -> new ItemGrimyHerb(
+            new WeightedSet<RegistryObject<ItemReagent>>() {{
+                add(ModItems.REAGENT_A, 1);
+                add(ModItems.REAGENT_B, 1);
+                add(ModItems.REAGENT_C, 1);
+            }}
+    ));
 
     public static final RegistryObject<Item> EMPTY_FLASK = ITEMS.register("empty_flask", () -> new ItemEmptyFlask(defaultItemProperties()));
     public static final RegistryObject<Item> FLASK_OF_WATER = ITEMS.register("flask_of_water", () -> new Item(defaultItemProperties()));
