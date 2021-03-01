@@ -11,4 +11,6 @@ public class ModBlocks
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Herblore.MOD_ID);
 
     public static final RegistryObject<Block> ATHANOR = BLOCKS.register("athanor", BlockAthanor::new);
+
+    public static final RegistryObject<Block> PERENNIAL_PATCH_DEBUG = BLOCKS.register("perennial_patch_debug", BlockPerennialPatch::new);
 }
