@@ -40,7 +40,7 @@ public class CrudeFlaskRecipe extends SpecialRecipe
             return false; // Does not have exactly three reagents.
         }
 
-        return inputItems.contains(ModItems.EMPTY_FLASK.get()); // TODO: Change this to look for flask of water.
+        return inputItems.contains(ModItems.FLASK_OF_WATER.get());
     }
 
     @Override

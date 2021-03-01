@@ -20,7 +20,7 @@ This would create an aesthetically-named flask that provides the Health Regen ef
 
 ### Gathering Reagents
 
-Nothing special here. Reagents are just found in the world as blocks, or maybe as mob drops.
+Plant reagents can be found and gathered by traveling the world! Biome-typed Perennial Patches spawn in nearly every biome. Right-clicking the patch will harvest it, giving the harvester one or more biome-typed Grimy Herbs. [TENTATIVE IDEA: The picked patch will remain, and eventually, new herbs will grow back.] Grimy Herbs can be cleaned by right-clicking on a water source block with one in your hand, and will yield a weighted-random reagent from a set of biome-appropriate possibilities.
 
 ### Making flasks
 
