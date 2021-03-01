@@ -58,9 +58,9 @@ public class BlockAthanor extends Block
             double blockPosZ = pos.getZ();
 
             // Fire particle spawn.
-            double fireParticleSpawnX = blockPosX + 0.5d + nextDoubleInRange(rand, -0.1d, 0.1d);
-            double fireParticleSpawnY = blockPosY + 0.2d;
-            double fireParticleSpawnZ = blockPosZ + 0.5d + nextDoubleInRange(rand, -0.1d, 0.1d);
+            double fireParticleSpawnX = blockPosX + 0.5d + nextDoubleInRange(rand, -0.15d, 0.15d);
+            double fireParticleSpawnY = blockPosY + 0.3d;
+            double fireParticleSpawnZ = blockPosZ + 0.5d + nextDoubleInRange(rand, -0.15d, 0.15d);
             world.addParticle(ParticleTypes.FLAME, fireParticleSpawnX, fireParticleSpawnY, fireParticleSpawnZ, 0, 0.0075, 0);
 
             // Bubble particle spawn when this brew is finished.
@@ -70,7 +70,7 @@ public class BlockAthanor extends Block
                     world.playSound(blockPosX + 0.5d, blockPosY + 1d, blockPosZ + 0.5d, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 2.5f, 0.5f, false);
                 }
                 double bubbleParticleSpawnX = blockPosX + 0.5d + nextDoubleInRange(rand, -0.05d, 0.05d);
-                double bubbleParticleSpawnY = blockPosY + 1d + nextDoubleInRange(rand, -0.05, 0.1);
+                double bubbleParticleSpawnY = blockPosY + 1.2d + nextDoubleInRange(rand, -0.05, 0.1);
                 double bubbleParticleSpawnZ = blockPosZ + 0.5d + nextDoubleInRange(rand, -0.05d, 0.05d);
                 world.addParticle(ParticleTypes.BUBBLE_POP, bubbleParticleSpawnX, bubbleParticleSpawnY, bubbleParticleSpawnZ, 0, 0, 0);
             }
