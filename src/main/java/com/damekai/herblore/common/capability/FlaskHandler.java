@@ -41,13 +41,13 @@ public class FlaskHandler implements IFlaskHandler
             MutableInt durationRemaining = activeFlaskInstance.getValue();
 
             flaskInstance.getFlask().getFlaskEffects().forEach(
-                    (flaskEffect -> flaskEffect.onTick(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.value)));
-            durationRemaining.value--;
+                    (flaskEffect -> flaskEffect.onTick(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.get())));
+            durationRemaining.decrement();
 
-            if (durationRemaining.value == 0)
+            if (durationRemaining.get() == 0)
             {
                 flaskInstance.getFlask().getFlaskEffects().forEach(
-                        (flaskEffect -> flaskEffect.onExpire(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.value)));
+                        (flaskEffect -> flaskEffect.onExpire(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.get())));
                 iter.remove();
                 livingEntity.removePotionEffect(flaskInstance.getFlask().getGuiRenderEffect()); // May be redundant, but here just in case.
             }
@@ -63,7 +63,7 @@ public class FlaskHandler implements IFlaskHandler
             if (durationRemaining != null) // If the duration remaining is not null, there was a successful removal from the map.
             {
                 flaskInstance.getFlask().getFlaskEffects().forEach(
-                        (flaskEffect -> flaskEffect.onRemove(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.value)));
+                        (flaskEffect -> flaskEffect.onRemove(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.get())));
                 livingEntity.removePotionEffect(flaskInstance.getFlask().getGuiRenderEffect());
             }
         }
@@ -78,7 +78,7 @@ public class FlaskHandler implements IFlaskHandler
             MutableInt durationRemaining = activeFlaskInstance.getValue();
 
             flaskInstance.getFlask().getFlaskEffects().forEach(
-                    (flaskEffect -> flaskEffect.onRemove(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.value)));
+                    (flaskEffect -> flaskEffect.onRemove(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), durationRemaining.get())));
             livingEntity.removePotionEffect(flaskInstance.getFlask().getGuiRenderEffect());
         }
         activeFlaskInstances.clear();

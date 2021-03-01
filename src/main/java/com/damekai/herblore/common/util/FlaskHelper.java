@@ -23,21 +23,21 @@ public class FlaskHelper
 
         ItemReagent firstReagent = reagents[0];
 
-        for (RegistryObject<Flask> flask : firstReagent.getFlaskPoints().keySet())
+        for (RegistryObject<Flask> flask : firstReagent.getFlaskWeights().getElements())
         {
             boolean sharedBetweenAllReagents = true;
-            int sumPoints = firstReagent.getFlaskPoints().get(flask);
+            int sumPoints = firstReagent.getFlaskWeights().getWeight(flask);
             for (int i = 1; i < reagents.length; i++)
             {
                 ItemReagent reagent = reagents[i];
-                if (!reagent.getFlaskPoints().containsKey(flask))
+                if (!reagent.getFlaskWeights().contains(flask))
                 {
                     sharedBetweenAllReagents = false;
                     break;
                 }
                 else
                 {
-                    sumPoints += reagent.getFlaskPoints().get(flask);
+                    sumPoints += reagent.getFlaskWeights().getWeight(flask);
                 }
             }
             if (sharedBetweenAllReagents && sumPoints > resultingFlaskPoints)

@@ -6,6 +6,7 @@ import com.damekai.herblore.common.effect.FlaskEffect;
 import com.damekai.herblore.common.effect.ModFlaskEffects;
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.flask.ModFlasks;
+import com.damekai.herblore.common.util.WeightedSet;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -19,24 +20,24 @@ public class ModItems
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
     public static final RegistryObject<ItemReagent> REAGENT_A = ITEMS.register("reagent_a", () -> new ItemReagent(
-            new HashMap<RegistryObject<Flask>, Integer>() {{
-                put(ModFlasks.DEBUG_CDE, 2);
-                put(ModFlasks.DEBUG_BONANZA, 1);
+            new WeightedSet<RegistryObject<Flask>>() {{
+                add(ModFlasks.DEBUG_CDE, 2);
+                add(ModFlasks.DEBUG_BONANZA, 1);
             }}
             ));
 
     public static final RegistryObject<ItemReagent> REAGENT_B = ITEMS.register("reagent_b", () -> new ItemReagent(
-            new HashMap<RegistryObject<Flask>, Integer>() {{
-                put(ModFlasks.DEBUG_AB, 1);
-                put(ModFlasks.DEBUG_CDE, 1);
-                put(ModFlasks.DEBUG_BONANZA, 1);
+            new WeightedSet<RegistryObject<Flask>>() {{
+                add(ModFlasks.DEBUG_AB, 1);
+                add(ModFlasks.DEBUG_CDE, 1);
+                add(ModFlasks.DEBUG_BONANZA, 1);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> REAGENT_C = ITEMS.register("reagent_c", () -> new ItemReagent(
-            new HashMap<RegistryObject<Flask>, Integer>() {{
-                put(ModFlasks.DEBUG_AB, 1);
-                put(ModFlasks.DEBUG_BONANZA, 2);
+            new WeightedSet<RegistryObject<Flask>>() {{
+                add(ModFlasks.DEBUG_AB, 1);
+                add(ModFlasks.DEBUG_BONANZA, 2);
             }}
     ));
 
