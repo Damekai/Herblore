@@ -6,8 +6,6 @@ import com.damekai.herblore.common.block.ModBlocks;
 import com.damekai.herblore.common.block.tile.ModTiles;
 import com.damekai.herblore.common.capability.CapabilityFlaskHandler;
 import com.damekai.herblore.common.capability.FlaskHandler;
-import com.damekai.herblore.common.data.FlaskRecipeProvider;
-import com.damekai.herblore.common.data.MilledReagentRecipeProvider;
 import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.effect.ModFlaskEffects;
@@ -47,7 +45,7 @@ public class Herblore
         modBus.addListener(ModRenderTypeSetter::onClientSetup);
         modBus.addListener(ModItemPropertyGetters::onClientSetup);
 
-        modBus.addListener(Herblore::onGatherData);
+        modBus.addListener(ModRecipeProvider::onGatherData);
         modBus.addListener(ModRegistries::onNewRegistry);
         modBus.addListener(ModItemColors::onLoadComplete);
 
@@ -70,15 +68,6 @@ public class Herblore
     public static void onCommonSetup(FMLCommonSetupEvent event)
     {
         CapabilityFlaskHandler.register();
-    }
-
-    public static void onGatherData(GatherDataEvent event)
-    {
-        DataGenerator generator = event.getGenerator();
-
-        generator.addProvider(new MilledReagentRecipeProvider(generator));
-        generator.addProvider(new FlaskRecipeProvider(generator));
-        generator.addProvider(new ModRecipeProvider(generator));
     }
 
     public static void onRegisterRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event)

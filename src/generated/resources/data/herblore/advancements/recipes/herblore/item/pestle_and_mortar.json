@@ -2,26 +2,26 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "herblore:itemempty_flask"
+      "herblore:item/pestle_and_mortar"
     ]
   },
   "criteria": {
-    "has_planks": {
+    "has_wooden_rods": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:planks"
+            "tag": "forge:rods/wooden"
           }
         ]
       }
     },
-    "has_glass": {
+    "has_stone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:glass"
+            "tag": "forge:stone"
           }
         ]
       }
@@ -29,14 +29,14 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "herblore:itemempty_flask"
+        "recipe": "herblore:item/pestle_and_mortar"
       }
     }
   },
   "requirements": [
     [
-      "has_planks",
-      "has_glass",
+      "has_wooden_rods",
+      "has_stone",
       "has_the_recipe"
     ]
   ]

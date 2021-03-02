@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "herblore:milled_reagents/reagent_c_milled"
+      "herblore:milled_reagent/reagent_c_milled"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "herblore:milled_reagents/reagent_c_milled"
+        "recipe": "herblore:milled_reagent/reagent_c_milled"
       }
     }
   },

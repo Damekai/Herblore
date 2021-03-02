@@ -2,36 +2,26 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "herblore:itemathanor"
+      "herblore:item/empty_flask"
     ]
   },
   "criteria": {
-    "has_iron": {
+    "has_planks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/iron"
+            "tag": "minecraft:planks"
           }
         ]
       }
     },
-    "has_sandstone": {
+    "has_glass": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:sandstone"
-          }
-        ]
-      }
-    },
-    "has_coals": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "minecraft:coals"
+            "tag": "forge:glass"
           }
         ]
       }
@@ -39,15 +29,14 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "herblore:itemathanor"
+        "recipe": "herblore:item/empty_flask"
       }
     }
   },
   "requirements": [
     [
-      "has_iron",
-      "has_sandstone",
-      "has_coals",
+      "has_planks",
+      "has_glass",
       "has_the_recipe"
     ]
   ]
