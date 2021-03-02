@@ -7,6 +7,7 @@ import com.damekai.herblore.common.block.tile.ModTiles;
 import com.damekai.herblore.common.capability.CapabilityFlaskHandler;
 import com.damekai.herblore.common.capability.FlaskHandler;
 import com.damekai.herblore.common.data.ModRecipeProvider;
+import com.damekai.herblore.common.effect.FlaskEffectBounding;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.effect.ModFlaskEffects;
 import com.damekai.herblore.common.flask.ModFlasks;
@@ -63,6 +64,7 @@ public class Herblore
         ModFlasks.FLASKS.register(modBus);
 
         MinecraftForge.EVENT_BUS.addListener(FlaskHandler::onLivingUpdate);
+        MinecraftForge.EVENT_BUS.addListener(FlaskEffectBounding::onLivingJump);
     }
 
     public static void onCommonSetup(FMLCommonSetupEvent event)

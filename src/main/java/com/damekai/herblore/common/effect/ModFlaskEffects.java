@@ -15,4 +15,5 @@ public class ModFlaskEffects
     public static final RegistryObject<FlaskEffect> DEBUG_EPSILON = FLASK_EFFECTS.register("debug_epsilon", () -> new FlaskEffectDebug("debug_epsilon", "epsilon"));
 
     public static final RegistryObject<FlaskEffect> HEALTH_REGENERATION = FLASK_EFFECTS.register("health_regeneration", FlaskEffectHealthRegeneration::new);
+    public static final RegistryObject<FlaskEffect> BOUNDING = FLASK_EFFECTS.register("bounding", FlaskEffectBounding::new);
 }

@@ -50,7 +50,7 @@ public class FlaskHelper
         FlaskInstance resultingFlaskInstance;
         if (resultingFlask != null)
         {
-            resultingFlaskInstance = new FlaskInstance(resultingFlask, resultingFlaskPoints, 40); // TODO: Calculate duration.
+            resultingFlaskInstance = new FlaskInstance(resultingFlask, resultingFlaskPoints, 100); // TODO: Calculate duration.
         }
         else
         {

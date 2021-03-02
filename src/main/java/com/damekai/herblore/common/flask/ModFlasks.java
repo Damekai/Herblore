@@ -20,9 +20,12 @@ public class ModFlasks
             ModFlaskEffects.DEBUG_EPSILON));
 
     public static final RegistryObject<Flask> DEBUG_BONANZA = FLASKS.register("debug_bonanza", () -> new Flask("debug_bonanza", 0x6B20E8, ModEffects.DEBUG_BONANZA_RENDER,
-                    ModFlaskEffects.DEBUG_ALPHA,
-                    ModFlaskEffects.DEBUG_BETA,
-                    ModFlaskEffects.DEBUG_GAMMA,
-                    ModFlaskEffects.DEBUG_DELTA,
-                    ModFlaskEffects.DEBUG_EPSILON));
+            ModFlaskEffects.DEBUG_ALPHA,
+            ModFlaskEffects.DEBUG_BETA,
+            ModFlaskEffects.DEBUG_GAMMA,
+            ModFlaskEffects.DEBUG_DELTA,
+            ModFlaskEffects.DEBUG_EPSILON));
+
+    public static final RegistryObject<Flask> STRIDER = FLASKS.register("strider", () -> new Flask("strider", 0x52DE23, ModEffects.STRIDER_RENDER,
+            ModFlaskEffects.BOUNDING));
 }

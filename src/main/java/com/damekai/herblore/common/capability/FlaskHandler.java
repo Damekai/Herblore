@@ -1,5 +1,7 @@
 package com.damekai.herblore.common.capability;
 
+import com.damekai.herblore.common.effect.FlaskEffect;
+import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.util.MutableInt;
 import net.minecraft.entity.LivingEntity;
@@ -7,6 +9,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public class FlaskHandler implements IFlaskHandler
@@ -28,6 +31,27 @@ public class FlaskHandler implements IFlaskHandler
                     (flaskEffect) -> flaskEffect.onApply(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), flaskInstance.getDuration()));
             livingEntity.addPotionEffect(new EffectInstance(flaskInstance.getFlask().getGuiRenderEffect(), flaskInstance.getDuration()));
         }
+    }
+
+    public FlaskInstance getFlask(Flask flask)
+    {
+         return activeFlaskInstances.keySet().stream().filter((activeFlaskInstance) -> flask == activeFlaskInstance.getFlask()).findAny().orElse(null);
+    }
+
+    /**
+     *  Attempts to find a FlaskInstance of a Flask that has the desired FlaskEffect. If there are multiple
+     *  FlaskInstances with Flasks that have that FlaskEffect, then the FlaskInstance with the highest potency
+     *  is chosen.
+     *
+     * @param flaskEffect FlaskEffect to search for.
+     * @return The FlaskInstance with the highest potency that has a Flask with the desired FlaskEffect.
+     */
+    public FlaskInstance getFlaskWithEffect(FlaskEffect flaskEffect)
+    {
+        return activeFlaskInstances.keySet().stream()
+                .filter((activeFlaskInstance) -> activeFlaskInstance.getFlask().getFlaskEffects().contains(flaskEffect))
+                .max(Comparator.comparingInt(FlaskInstance::getPotency))
+                .orElse(null);
     }
 
     public void tickFlasks(LivingEntity livingEntity)
@@ -93,6 +117,12 @@ public class FlaskHandler implements IFlaskHandler
     public void deserializeNBT(CompoundNBT nbt)
     {
         // TODO
+    }
+
+    @Nullable
+    public static FlaskHandler getFlaskHandlerOf(LivingEntity livingEntity)
+    {
+        return livingEntity.getCapability(CapabilityFlaskHandler.FLASK_HANDLER_CAPABILITY).orElse(null);
     }
 
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event)

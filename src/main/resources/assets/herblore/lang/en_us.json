@@ -25,8 +25,11 @@
     "flask_effect.herblore.debug_gamma": "Debug Effect Gamma",
     "flask_effect.herblore.debug_delta": "Debug Effect Delta",
     "flask_effect.herblore.debug_epsilon": "Debug Effect Epsilon",
+    "flask_effect.herblore.bounding": "Bounding",
 
     "flaskof.flask.herblore.debug_bonanza": "Debug Bonanza Flask",
+    "flaskof.flask.herblore.strider": "Strider Flask",
 
-    "flask.herblore.debug_bonanza": "Debug Bonanza"
+    "flask.herblore.debug_bonanza": "Debug Bonanza",
+    "flask.herblore.strider": "Strider"
 }

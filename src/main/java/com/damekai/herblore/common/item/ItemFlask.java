@@ -73,15 +73,13 @@ public class ItemFlask extends Item
 
         if (nbt.contains("flask_instance"))
         {
-            if (!world.isRemote) // Only apply to server-side capability.
-            {
-                Herblore.LOGGER.debug(nbt.toString());
 
-                FlaskHandler flaskHandler = livingEntity.getCapability(CapabilityFlaskHandler.FLASK_HANDLER_CAPABILITY).orElse(null);
-                if (flaskHandler != null) {
-                    CompoundNBT flaskInstanceTag = nbt.getCompound("flask_instance");
-                    flaskHandler.applyFlasks(livingEntity, FlaskInstance.read(flaskInstanceTag));
-                }
+            Herblore.LOGGER.debug(nbt.toString());
+
+            FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(livingEntity);
+            if (flaskHandler != null) {
+                CompoundNBT flaskInstanceTag = nbt.getCompound("flask_instance");
+                flaskHandler.applyFlasks(livingEntity, FlaskInstance.read(flaskInstanceTag));
             }
 
             if (nbt.contains("flask_doses"))

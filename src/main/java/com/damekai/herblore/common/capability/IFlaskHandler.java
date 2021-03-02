@@ -1,11 +1,17 @@
 package com.damekai.herblore.common.capability;
 
+import com.damekai.herblore.common.effect.FlaskEffect;
+import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.flask.FlaskInstance;
 import net.minecraft.entity.LivingEntity;
 
 public interface IFlaskHandler
 {
     void applyFlasks(LivingEntity livingEntity, FlaskInstance... herbloreEffectInstances);
+
+    FlaskInstance getFlask(Flask flask);
+
+    FlaskInstance getFlaskWithEffect(FlaskEffect flaskEffect);
 
     void tickFlasks(LivingEntity livingEntity);
 
