@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "herblore",
+  "pattern": [
+    " A ",
+    " B ",
+    "BBB"
+  ],
+  "key": {
+    "A": {
+      "tag": "minecraft:planks"
+    },
+    "B": {
+      "tag": "forge:glass"
+    }
+  },
+  "result": {
+    "item": "herblore:empty_flask",
+    "count": 4
+  }
+}

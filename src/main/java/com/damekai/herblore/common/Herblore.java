@@ -8,6 +8,7 @@ import com.damekai.herblore.common.capability.CapabilityFlaskHandler;
 import com.damekai.herblore.common.capability.FlaskHandler;
 import com.damekai.herblore.common.data.FlaskRecipeProvider;
 import com.damekai.herblore.common.data.MilledReagentRecipeProvider;
+import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.effect.ModFlaskEffects;
 import com.damekai.herblore.common.flask.ModFlasks;
@@ -77,6 +78,7 @@ public class Herblore
 
         generator.addProvider(new MilledReagentRecipeProvider(generator));
         generator.addProvider(new FlaskRecipeProvider(generator));
+        generator.addProvider(new ModRecipeProvider(generator));
     }
 
     public static void onRegisterRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event)
