@@ -13,15 +13,14 @@ import com.google.common.collect.ImmutableList;
 import com.sun.org.apache.xpath.internal.operations.String;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -44,8 +43,33 @@ public class ItemReagent extends Item
     }
 
     @Override
+    public int getUseDuration(ItemStack stack)
+    {
+        return 40;
+    }
+
+    @Override
+    public UseAction getUseAction(ItemStack stack)
+    {
+        return UseAction.EAT;
+    }
+
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
     {
+        player.setActiveHand(hand);
+        return ActionResult.resultSuccess(player.getHeldItem(hand));
+    }
+
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity livingEntity)
+    {
+        if (!(livingEntity instanceof PlayerEntity))
+        {
+            return stack;
+        }
+        PlayerEntity player = (PlayerEntity) livingEntity;
+
         FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(player);
         if (flaskHandler != null)
         {
@@ -63,7 +87,8 @@ public class ItemReagent extends Item
             }
         }
 
-        return ActionResult.func_233538_a_(player.getHeldItem(hand), world.isRemote);
+        stack.shrink(1);
+        return stack;
     }
 
     public WeightedSet<RegistryObject<Flask>> getFlaskWeights()
@@ -93,7 +118,8 @@ public class ItemReagent extends Item
                 else
                 {
                     tooltip.add(new StringTextComponent("???")
-                            .mergeStyle(TextFormatting.GRAY));
+                            .mergeStyle(TextFormatting.GRAY)
+                            .mergeStyle(TextFormatting.ITALIC));
                 }
             }
         }
