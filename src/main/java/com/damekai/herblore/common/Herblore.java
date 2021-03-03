@@ -5,7 +5,9 @@ import com.damekai.herblore.client.ModRenderTypeSetter;
 import com.damekai.herblore.common.block.ModBlocks;
 import com.damekai.herblore.common.block.tile.ModTiles;
 import com.damekai.herblore.common.capability.CapabilityFlaskHandler;
+import com.damekai.herblore.common.capability.CapabilityHerbloreKnowledge;
 import com.damekai.herblore.common.capability.FlaskHandler;
+import com.damekai.herblore.common.capability.HerbloreKnowledge;
 import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.effect.FlaskEffectBounding;
 import com.damekai.herblore.common.effect.ModEffects;
@@ -13,6 +15,7 @@ import com.damekai.herblore.common.effect.ModFlaskEffects;
 import com.damekai.herblore.common.flask.ModFlasks;
 import com.damekai.herblore.common.item.ModItemColors;
 import com.damekai.herblore.common.item.ModItems;
+import com.damekai.herblore.common.network.HerblorePacketHandler;
 import com.damekai.herblore.common.recipe.CrudeFlaskRecipe;
 import com.damekai.herblore.common.world.ModFeatures;
 import net.minecraft.data.DataGenerator;
@@ -54,6 +57,7 @@ public class Herblore
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModFeatures::onBiomeLoading);
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityFlaskHandler::onAttachCapabilities);
+        MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityHerbloreKnowledge::onAttachCapabilities);
 
         ModBlocks.BLOCKS.register(modBus);
         ModTiles.TILES.register(modBus);
@@ -64,7 +68,10 @@ public class Herblore
         ModFlasks.FLASKS.register(modBus);
 
         MinecraftForge.EVENT_BUS.addListener(FlaskHandler::onLivingUpdate);
+        MinecraftForge.EVENT_BUS.addListener(HerbloreKnowledge::onPlayerLoggedIn);
         MinecraftForge.EVENT_BUS.addListener(FlaskEffectBounding::onLivingJump);
+
+        HerblorePacketHandler.registerPackets();
     }
 
     public static void onCommonSetup(FMLCommonSetupEvent event)

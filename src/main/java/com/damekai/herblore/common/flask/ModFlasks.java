@@ -3,6 +3,7 @@ package com.damekai.herblore.common.flask;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.effect.ModFlaskEffects;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -28,4 +29,10 @@ public class ModFlasks
 
     public static final RegistryObject<Flask> STRIDER = FLASKS.register("strider", () -> new Flask("strider", 0x52DE23, ModEffects.STRIDER_RENDER,
             ModFlaskEffects.BOUNDING));
+
+    public static Flask getFlaskFromRegistry(String name)
+    {
+        RegistryObject<Flask> match = FLASKS.getEntries().stream().filter((flaskSupplier) -> flaskSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
+        return match != null ? match.get() : null;
+    }
 }

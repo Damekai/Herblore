@@ -31,5 +31,7 @@
     "flaskof.flask.herblore.strider": "Strider Flask",
 
     "flask.herblore.debug_bonanza": "Debug Bonanza",
+    "flask.herblore.debug_ab": "Debug AB",
+    "flask.herblore.debug_cde": "Debug CDE",
     "flask.herblore.strider": "Strider"
 }

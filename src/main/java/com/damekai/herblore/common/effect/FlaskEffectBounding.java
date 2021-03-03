@@ -29,6 +29,7 @@ public class FlaskEffectBounding extends FlaskEffect
                         livingEntity.getMotion().getX() * (livingEntity.isSprinting() ? 1 : 3) * (bounding.getPotency() / 5d), // Compound current motion for every 5 potency. Tripled net effect if not sprinting.
                         livingEntity.getMotion().getY() * (bounding.getPotency() / 5d), // Compound current motion for every 5 potency.
                         livingEntity.getMotion().getZ() * (livingEntity.isSprinting() ? 1 : 3) * (bounding.getPotency() / 5d))); // Compound current motion for every 5 potency. Tripled net effect if not sprinting.
+                livingEntity.velocityChanged = true;
             }
         }
     }

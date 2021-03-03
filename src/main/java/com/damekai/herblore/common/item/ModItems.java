@@ -70,4 +70,9 @@ public class ModItems
                 .group(ModItemGroups.HERBLORE);
     }
 
+    public static Item getItemFromRegistry(String name)
+    {
+        RegistryObject<Item> match = ITEMS.getEntries().stream().filter((itemSupplier) -> itemSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
+        return match != null ? match.get() : null;
+    }
 }
