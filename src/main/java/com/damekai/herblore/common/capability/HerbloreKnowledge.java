@@ -18,10 +18,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class HerbloreKnowledge implements IHerbloreKnowledge
 {
@@ -72,26 +70,23 @@ public class HerbloreKnowledge implements IHerbloreKnowledge
         CompoundNBT nbt = new CompoundNBT();
 
         ListNBT reagentKnowledgeMapNbt = new ListNBT();
-        for (ItemReagent reagent : reagentKnowledge.keySet())
+        reagentKnowledge.keySet().forEach((reagent) ->
         {
             CompoundNBT reagentKnowledgeNbt = new CompoundNBT();
 
             reagentKnowledgeNbt.putString("reagent_name", reagent.getRegistryName().toString()); // "key"
 
             ListNBT flasksNbt = new ListNBT();
-            for (Flask flask : reagentKnowledge.get(reagent))
+            reagentKnowledge.get(reagent).forEach((flask) ->
             {
                 CompoundNBT flaskNbt = new CompoundNBT();
-
                 flaskNbt.putString("flask_name", flask.getRegistryName().toString());
                 flasksNbt.add(flaskNbt);
-            }
-
+            });
             reagentKnowledgeNbt.put("flasks", flasksNbt); // "value"
 
             reagentKnowledgeMapNbt.add(reagentKnowledgeNbt);
-        }
-
+        });
         nbt.put("reagent_knowledge", reagentKnowledgeMapNbt);
 
         return nbt;
@@ -99,33 +94,22 @@ public class HerbloreKnowledge implements IHerbloreKnowledge
 
     public void deserializeNBT(CompoundNBT nbt)
     {
-        ListNBT reagentKnowledgeMapNbt = nbt.getList("reagent_knowledge", Constants.NBT.TAG_COMPOUND);
-        for (INBT reagentKnowledgeInbt : reagentKnowledgeMapNbt)
-        {
-            CompoundNBT reagentKnowledgeNbt = (CompoundNBT) reagentKnowledgeInbt;
-
-            Item item = ModItems.getItemFromRegistry(reagentKnowledgeNbt.getString("reagent_name"));
-            if (item instanceof ItemReagent) // Also does null check, apparently.
-            {
-                ItemReagent reagent = (ItemReagent) item;
-
-                Collection<Flask> knownFlasks = new ArrayList<>();
-
-                ListNBT flasksNbt = reagentKnowledgeNbt.getList("flasks", Constants.NBT.TAG_COMPOUND);
-                for (INBT flaskInbt : flasksNbt)
+        nbt.getList("reagent_knowledge", Constants.NBT.TAG_COMPOUND)
+                .stream().map((inbt) -> (CompoundNBT) inbt) // Cast all elements to CompoundNBT.
+                .forEach((reagentKnowledgeNbt) ->
                 {
-                    CompoundNBT flaskNbt = (CompoundNBT) flaskInbt;
-
-                    Flask flask = ModFlasks.getFlaskFromRegistry(flaskNbt.getString("flask_name"));
-                    if (flask != null)
+                    Item item = ModItems.getItemFromRegistry(reagentKnowledgeNbt.getString("reagent_name"));
+                    if (item instanceof ItemReagent)
                     {
-                        knownFlasks.add(flask);
-                    }
-                }
+                        ItemReagent reagent = (ItemReagent) item;
 
-                reagentKnowledge.put(reagent, knownFlasks);
-            }
-        }
+                         reagentKnowledge.put(reagent, reagentKnowledgeNbt.getList("flasks", Constants.NBT.TAG_COMPOUND)
+                                 .stream().map((inbt) -> (CompoundNBT) inbt) // Cast all elements to CompoundNBT.
+                                 .map((flaskNbt) -> ModFlasks.getFlaskFromRegistry(flaskNbt.getString("flask_name"))) // Convert to Flasks using registry.
+                                 .filter(Objects::nonNull) // Filter out null entries.
+                                 .collect(Collectors.toList())); // Transform to collection.
+                    }
+                });
     }
 
     public static void syncKnowledgeFromServer(CompoundNBT nbt, PlayerEntity playerEntity)
