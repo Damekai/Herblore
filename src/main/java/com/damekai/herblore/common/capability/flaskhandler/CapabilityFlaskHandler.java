@@ -1,4 +1,4 @@
-package com.damekai.herblore.common.capability;
+package com.damekai.herblore.common.capability.flaskhandler;
 
 import com.damekai.herblore.common.Herblore;
 import net.minecraft.entity.Entity;
@@ -9,21 +9,21 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 
-public class CapabilityHerbloreKnowledge
+public class CapabilityFlaskHandler
 {
-    @CapabilityInject(HerbloreKnowledge.class)
-    public static Capability<HerbloreKnowledge> HERBLORE_KNOWLEDGE_CAPABILITY = null;
+    @CapabilityInject(FlaskHandler.class)
+    public static Capability<FlaskHandler> FLASK_HANDLER_CAPABILITY = null;
 
     public static void register()
     {
-        CapabilityManager.INSTANCE.register(HerbloreKnowledge.class, new HerbloreKnowledgeStorage(), HerbloreKnowledge::new);
+        CapabilityManager.INSTANCE.register(FlaskHandler.class, new FlaskHandlerStorage(), FlaskHandler::new);
     }
 
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event)
     {
-        if (event.getObject() instanceof PlayerEntity)
+        if (!event.getObject().getEntityWorld().isRemote && event.getObject() instanceof PlayerEntity)
         {
-            event.addCapability(new ResourceLocation(Herblore.MOD_ID, "herblore_knowledge_capability"), new HerbloreKnowledgeProvider());
+            event.addCapability(new ResourceLocation(Herblore.MOD_ID, "flask_handler_capability"), new FlaskHandlerProvider());
         }
     }
 }

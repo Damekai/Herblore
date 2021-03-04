@@ -1,11 +1,9 @@
-package com.damekai.herblore.common.effect;
+package com.damekai.herblore.common.flaskeffect;
 
-import com.damekai.herblore.common.Herblore;
-import com.damekai.herblore.common.capability.FlaskHandler;
+import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
 import com.damekai.herblore.common.flask.FlaskInstance;
-import com.damekai.herblore.common.flask.ModFlasks;
+import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public class FlaskEffectBounding extends FlaskEffect

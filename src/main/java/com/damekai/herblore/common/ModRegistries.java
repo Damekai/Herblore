@@ -1,6 +1,6 @@
 package com.damekai.herblore.common;
 
-import com.damekai.herblore.common.effect.FlaskEffect;
+import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
 import com.damekai.herblore.common.flask.Flask;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;

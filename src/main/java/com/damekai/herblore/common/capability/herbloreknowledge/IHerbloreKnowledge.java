@@ -1,4 +1,4 @@
-package com.damekai.herblore.common.capability;
+package com.damekai.herblore.common.capability.herbloreknowledge;
 
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.item.ItemReagent;

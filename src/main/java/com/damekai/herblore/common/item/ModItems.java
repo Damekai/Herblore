@@ -2,8 +2,6 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.ModBlocks;
-import com.damekai.herblore.common.effect.FlaskEffect;
-import com.damekai.herblore.common.effect.ModFlaskEffects;
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.flask.ModFlasks;
 import com.damekai.herblore.common.util.WeightedSet;
@@ -12,8 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.HashMap;
 
 public class ModItems
 {

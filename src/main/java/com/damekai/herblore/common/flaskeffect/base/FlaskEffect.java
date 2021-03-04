@@ -1,6 +1,7 @@
-package com.damekai.herblore.common.effect;
+package com.damekai.herblore.common.flaskeffect.base;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.flaskeffect.ModFlaskEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;

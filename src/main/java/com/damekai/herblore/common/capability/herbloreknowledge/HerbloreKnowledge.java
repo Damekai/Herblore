@@ -1,6 +1,5 @@
-package com.damekai.herblore.common.capability;
+package com.damekai.herblore.common.capability.herbloreknowledge;
 
-import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.flask.ModFlasks;
 import com.damekai.herblore.common.item.ItemReagent;
@@ -11,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerEvent;

@@ -1,6 +1,7 @@
-package com.damekai.herblore.common.effect;
+package com.damekai.herblore.common.flaskeffect;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.flaskeffect.base.TickingFlaskEffect;
 import net.minecraft.entity.LivingEntity;
 
 public class FlaskEffectDebug extends TickingFlaskEffect

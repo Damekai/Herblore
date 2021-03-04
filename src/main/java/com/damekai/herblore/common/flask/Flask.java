@@ -1,8 +1,8 @@
 package com.damekai.herblore.common.flask;
 
 import com.damekai.herblore.common.Herblore;
-import com.damekai.herblore.common.effect.FlaskEffect;
-import com.damekai.herblore.common.effect.TickingFlaskEffect;
+import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
+import com.damekai.herblore.common.flaskeffect.base.TickingFlaskEffect;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;

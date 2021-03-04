@@ -1,4 +1,4 @@
-package com.damekai.herblore.common.effect;
+package com.damekai.herblore.common.flaskeffect.base;
 
 import com.damekai.herblore.common.Herblore;
 import com.google.common.collect.ImmutableList;
@@ -88,7 +88,7 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
 
     protected static class AttributePotencyFactor
     {
-        protected interface ModifierAmount { float get(AttributeFlaskEffect flaskAttributeEffect, LivingEntity livingEntity, int potency, int durationFull, int durationRemaining); }
+        public interface ModifierAmount { float get(AttributeFlaskEffect flaskAttributeEffect, LivingEntity livingEntity, int potency, int durationFull, int durationRemaining); }
 
         private final Attribute attribute;
         private final AttributeModifier.Operation operation;

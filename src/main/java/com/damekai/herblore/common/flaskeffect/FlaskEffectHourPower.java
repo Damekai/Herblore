@@ -1,5 +1,6 @@
-package com.damekai.herblore.common.effect;
+package com.damekai.herblore.common.flaskeffect;
 
+import com.damekai.herblore.common.flaskeffect.base.AttributeFlaskEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -14,7 +15,7 @@ public class FlaskEffectHourPower extends AttributeFlaskEffect
     {
         super("hour_power",
                 uuid,
-                100, // TODO: Abstract this to "FlaskTickingEffect" class.
+                100,
                 new AttributePotencyFactor(Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION, FlaskEffectHourPower::calculateDamageModifierAmount));
 
         this.primeTime = primeTime;

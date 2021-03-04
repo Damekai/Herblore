@@ -1,6 +1,6 @@
 package com.damekai.herblore.common.network;
 
-import com.damekai.herblore.common.capability.HerbloreKnowledge;
+import com.damekai.herblore.common.capability.herbloreknowledge.HerbloreKnowledge;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;

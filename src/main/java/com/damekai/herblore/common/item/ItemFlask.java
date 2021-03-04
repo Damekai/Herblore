@@ -1,24 +1,19 @@
 package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
-import com.damekai.herblore.common.capability.CapabilityFlaskHandler;
-import com.damekai.herblore.common.capability.FlaskHandler;
-import com.damekai.herblore.common.effect.FlaskEffect;
+import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.util.FlaskHelper;
-import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;

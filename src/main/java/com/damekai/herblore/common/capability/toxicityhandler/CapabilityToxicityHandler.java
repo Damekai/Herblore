@@ -1,4 +1,4 @@
-package com.damekai.herblore.common.capability;
+package com.damekai.herblore.common.capability.toxicityhandler;
 
 import com.damekai.herblore.common.Herblore;
 import net.minecraft.entity.Entity;

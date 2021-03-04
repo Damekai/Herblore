@@ -1,16 +1,11 @@
 package com.damekai.herblore.common.item;
 
-import com.damekai.herblore.common.Herblore;
-import com.damekai.herblore.common.capability.CapabilityFlaskHandler;
-import com.damekai.herblore.common.capability.FlaskHandler;
-import com.damekai.herblore.common.capability.HerbloreKnowledge;
-import com.damekai.herblore.common.effect.FlaskEffect;
+import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
+import com.damekai.herblore.common.capability.herbloreknowledge.HerbloreKnowledge;
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.flask.FlaskInstance;
-import com.damekai.herblore.common.util.FlaskHelper;
 import com.damekai.herblore.common.util.WeightedSet;
 import com.google.common.collect.ImmutableList;
-import com.sun.org.apache.xpath.internal.operations.String;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -27,10 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ItemReagent extends Item
 {

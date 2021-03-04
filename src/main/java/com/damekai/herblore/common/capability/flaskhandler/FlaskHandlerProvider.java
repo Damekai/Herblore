@@ -1,5 +1,7 @@
-package com.damekai.herblore.common.capability;
+package com.damekai.herblore.common.capability.flaskhandler;
 
+import com.damekai.herblore.common.capability.flaskhandler.CapabilityFlaskHandler;
+import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -9,9 +11,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ToxicityHandlerProvider implements ICapabilitySerializable<CompoundNBT>
+public class FlaskHandlerProvider implements ICapabilitySerializable<CompoundNBT>
 {
-    private final ToxicityHandler instance = new ToxicityHandler();
+    private final FlaskHandler instance = new FlaskHandler();
 
     public CompoundNBT serializeNBT()
     {
@@ -28,7 +30,7 @@ public class ToxicityHandlerProvider implements ICapabilitySerializable<Compound
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
     {
-        if (cap == CapabilityToxicityHandler.TOXICITY_HANDLER_CAPABILITY)
+        if (cap == CapabilityFlaskHandler.FLASK_HANDLER_CAPABILITY)
         {
             return LazyOptional.of(() -> (T) this.instance);
         }

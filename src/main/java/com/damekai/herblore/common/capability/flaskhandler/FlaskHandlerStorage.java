@@ -1,4 +1,4 @@
-package com.damekai.herblore.common.capability;
+package com.damekai.herblore.common.capability.flaskhandler;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;

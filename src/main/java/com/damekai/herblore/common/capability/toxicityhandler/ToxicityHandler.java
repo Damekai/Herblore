@@ -1,14 +1,11 @@
-package com.damekai.herblore.common.capability;
+package com.damekai.herblore.common.capability.toxicityhandler;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.ModEffects;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingEvent;
 

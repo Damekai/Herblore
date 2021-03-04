@@ -1,6 +1,7 @@
-package com.damekai.herblore.common.capability;
+package com.damekai.herblore.common.capability.flaskhandler;
 
-import com.damekai.herblore.common.effect.FlaskEffect;
+import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
+import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.util.MutableInt;

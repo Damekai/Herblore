@@ -2,8 +2,7 @@ package com.damekai.herblore.common.flask;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.ModEffects;
-import com.damekai.herblore.common.effect.ModFlaskEffects;
-import net.minecraft.item.Item;
+import com.damekai.herblore.common.flaskeffect.ModFlaskEffects;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 

@@ -1,6 +1,8 @@
-package com.damekai.herblore.common.effect;
+package com.damekai.herblore.common.flaskeffect;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.flaskeffect.*;
+import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
