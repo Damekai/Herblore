@@ -53,6 +53,7 @@ public class Herblore
         modBus.addGenericListener(IRecipeSerializer.class, Herblore::onRegisterRecipeSerializers);
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModFeatures::onBiomeLoading);
+
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityFlaskHandler::onAttachCapabilities);
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityToxicityHandler::onAttachCapabilities);
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityHerbloreKnowledge::onAttachCapabilities);
@@ -68,6 +69,7 @@ public class Herblore
         MinecraftForge.EVENT_BUS.addListener(FlaskHandler::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(ToxicityHandler::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(HerbloreKnowledge::onPlayerLoggedIn);
+
         MinecraftForge.EVENT_BUS.addListener(FlaskEffectBounding::onLivingJump);
 
         HerblorePacketHandler.registerPackets();
@@ -76,6 +78,8 @@ public class Herblore
     public static void onCommonSetup(FMLCommonSetupEvent event)
     {
         CapabilityFlaskHandler.register();
+        CapabilityHerbloreKnowledge.register();
+        CapabilityToxicityHandler.register();
     }
 
     public static void onRegisterRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event)
