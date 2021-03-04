@@ -15,4 +15,7 @@ public class ModEffects
 
     public static final RegistryObject<Effect> DEBUG_BONANZA_RENDER = EFFECTS.register("debug_bonanza", () -> new GuiFlaskEffect(ModFlasks.DEBUG_BONANZA));
     public static final RegistryObject<Effect> STRIDER_RENDER = EFFECTS.register("strider", () -> new GuiFlaskEffect(ModFlasks.STRIDER));
+
+    public static final RegistryObject<Effect> HIGH_NOON_RENDER = EFFECTS.register("high_noon", () -> new GuiFlaskEffect(ModFlasks.HIGH_NOON));
+    public static final RegistryObject<Effect> WITCHING_HOUR_RENDER = EFFECTS.register("witching_hour", () -> new GuiFlaskEffect(ModFlasks.WITCHING_HOUR));
 }

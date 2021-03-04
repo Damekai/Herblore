@@ -28,12 +28,18 @@
     "flask_effect.herblore.debug_delta": "Debug Effect Delta",
     "flask_effect.herblore.debug_epsilon": "Debug Effect Epsilon",
     "flask_effect.herblore.bounding": "Bounding",
+    "flask_effect.herblore.hour_power_noon": "Hour Power - Noon",
+    "flask_effect.herblore.hour_power_midnight": "Hour Power - Midnight",
 
-    "flaskof.flask.herblore.debug_bonanza": "Debug Bonanza Flask",
-    "flaskof.flask.herblore.strider": "Strider Flask",
+    "flaskof.flask.herblore.debug_bonanza": "Debug Bonanza",
+    "flaskof.flask.herblore.strider": "Strider",
+    "flaskof.flask.herblore.high_noon": "High Noon",
+    "flaskof.flask.herblore.witching_hour": "Witching Hour",
 
     "flask.herblore.debug_bonanza": "Debug Bonanza",
     "flask.herblore.debug_ab": "Debug AB",
     "flask.herblore.debug_cde": "Debug CDE",
-    "flask.herblore.strider": "Strider"
+    "flask.herblore.strider": "Strider",
+    "flask.herblore.high_noon": "High Noon",
+    "flask.herblore.witching_hour": "Witching Hour"
 }

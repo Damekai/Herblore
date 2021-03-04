@@ -30,6 +30,11 @@ public class ModFlasks
     public static final RegistryObject<Flask> STRIDER = FLASKS.register("strider", () -> new Flask("strider", 0x52DE23, ModEffects.STRIDER_RENDER,
             ModFlaskEffects.BOUNDING));
 
+    public static final RegistryObject<Flask> HIGH_NOON = FLASKS.register("high_noon", () -> new Flask("high_noon", 0xF5F2CD, ModEffects.HIGH_NOON_RENDER,
+            ModFlaskEffects.HOUR_POWER_NOON));
+    public static final RegistryObject<Flask> WITCHING_HOUR = FLASKS.register("witching_hour", () -> new Flask("witching_hour", 0x27055E, ModEffects.WITCHING_HOUR_RENDER,
+            ModFlaskEffects.HOUR_POWER_MIDNIGHT));
+
     public static Flask getFlaskFromRegistry(String name)
     {
         RegistryObject<Flask> match = FLASKS.getEntries().stream().filter((flaskSupplier) -> flaskSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
