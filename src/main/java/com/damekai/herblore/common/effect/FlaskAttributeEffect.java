@@ -14,16 +14,14 @@ import java.util.function.Supplier;
 public abstract class FlaskAttributeEffect extends FlaskEffect
 {
     private final UUID uuid;
-    private final AttributeModifier.Operation operation;
     private final int attributesUpdateFrequency; // After this many ticks, the attribute will be "updated" (removed and reapplied, with fresh attribute modification amount calculation).
     private final ImmutableList<AttributePotencyFactor> attributePotencyFactors;
 
-    protected FlaskAttributeEffect(String translationName, UUID uuid, AttributeModifier.Operation operation, int attributesUpdateFrequency, AttributePotencyFactor... attributePotencyFactors)
+    protected FlaskAttributeEffect(String translationName, UUID uuid, int attributesUpdateFrequency, AttributePotencyFactor... attributePotencyFactors)
     {
         super(translationName);
 
         this.uuid = uuid;
-        this.operation = operation;
         this.attributesUpdateFrequency = attributesUpdateFrequency;
         this.attributePotencyFactors = ImmutableList.copyOf(attributePotencyFactors);
     }
@@ -75,7 +73,7 @@ public abstract class FlaskAttributeEffect extends FlaskEffect
                 AttributeModifier attributeModifier = new AttributeModifier(uuid,
                         this::getTranslationKey,
                         attributePotencyFactor.amount.get(this, livingEntity, potency, durationFull, durationRemaining),
-                        operation);
+                        attributePotencyFactor.operation);
                 modifiableAttributeInstance.applyPersistentModifier(attributeModifier);
 
                 Herblore.LOGGER.debug("Applied modifier: " + attributeModifier.toString());
@@ -101,11 +99,13 @@ public abstract class FlaskAttributeEffect extends FlaskEffect
         protected interface ModifierAmount { float get(FlaskAttributeEffect flaskAttributeEffect, LivingEntity livingEntity, int potency, int durationFull, int durationRemaining); }
 
         private final Attribute attribute;
+        private final AttributeModifier.Operation operation;
         private final ModifierAmount amount;
 
-        public AttributePotencyFactor(Attribute attribute, ModifierAmount amount)
+        public AttributePotencyFactor(Attribute attribute, AttributeModifier.Operation operation, ModifierAmount amount)
         {
             this.attribute = attribute;
+            this.operation = operation;
             this.amount = amount;
         }
     }

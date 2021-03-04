@@ -17,9 +17,8 @@ public class FlaskEffectHourPower extends FlaskAttributeEffect
     {
         super("hour_power",
                 uuid,
-                AttributeModifier.Operation.ADDITION,
                 100, // TODO: Abstract this to "FlaskTickingEffect" class.
-                new AttributePotencyFactor(Attributes.ATTACK_DAMAGE, FlaskEffectHourPower::calculateDamageModifierAmount));
+                new AttributePotencyFactor(Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION, FlaskEffectHourPower::calculateDamageModifierAmount));
 
         this.primeTime = primeTime;
     }
