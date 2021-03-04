@@ -4,15 +4,23 @@ import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.ModEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 import javax.annotation.Nullable;
 
 public class ToxicityHandler implements IToxicityHandler
 {
+    private static final int MAX_TOXICITY = 50;
+    private static final int MAX_TOXICITY_TIER = 5;
     private static final int TOXICITY_DECAY_RATE = 60; // Number of ticks required for toxicity to decrease by 1.
+    private static final int CRITICAL_THRESHOLD = 40;
+    private static final float HUNGER_EXHAUSTION_PER_TOXICITY = 0.01f; // In testing, a value of 0.01f requires eating a steak every ~8 sec (accounting for saturation) to maintain a full hunger bar.
 
     private int toxicity;
     private int toxicityTier;
@@ -28,14 +36,14 @@ public class ToxicityHandler implements IToxicityHandler
     @Override
     public void addToxicity(LivingEntity livingEntity, int amount)
     {
-        toxicity += amount;
+        toxicity = Math.min(toxicity + amount, MAX_TOXICITY);
         onToxicityChange(livingEntity);
     }
 
     @Override
     public void removeToxicity(LivingEntity livingEntity, int amount)
     {
-        toxicity -= amount;
+        toxicity = Math.max(0, toxicity - amount);
         onToxicityChange(livingEntity);
     }
 
@@ -62,12 +70,18 @@ public class ToxicityHandler implements IToxicityHandler
 
     public CompoundNBT serializeNBT()
     {
-        return new CompoundNBT(); // TODO
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putInt("toxicity", toxicity);
+        nbt.putInt("toxicity_tier", toxicityTier);
+        nbt.putInt("ticks_since_last_decay", ticksSinceLastDecay);
+        return nbt;
     }
 
     public void deserializeNBT(CompoundNBT nbt)
     {
-        // TODO
+        toxicity = nbt.getInt("toxicity");
+        toxicityTier = nbt.getInt("toxicity_tier");
+        ticksSinceLastDecay = nbt.getInt("ticks_since_last_decay");
     }
 
     /**
@@ -75,7 +89,7 @@ public class ToxicityHandler implements IToxicityHandler
      */
     private boolean updateToxicityTier()
     {
-        int updatedToxicityTier = toxicity == 0 ? 0 : toxicity / 10 + 1;
+        int updatedToxicityTier = toxicity == 0 ? 0 : Math.min(toxicity / (CRITICAL_THRESHOLD / 4) + 1, MAX_TOXICITY_TIER);
         if (toxicityTier != updatedToxicityTier)
         {
             toxicityTier = updatedToxicityTier;
@@ -100,6 +114,20 @@ public class ToxicityHandler implements IToxicityHandler
                 livingEntity.addPotionEffect(new EffectInstance(ModEffects.TOXICITY_RENDER.get(), Integer.MAX_VALUE, toxicityTier - 1, false, false));
             }
         }
+    }
+
+    private void tickToxicity(LivingEntity livingEntity)
+    {
+        if (livingEntity instanceof PlayerEntity)
+        {
+            PlayerEntity playerEntity = (PlayerEntity) livingEntity;
+            playerEntity.addExhaustion(toxicity * HUNGER_EXHAUSTION_PER_TOXICITY);
+        }
+        if (toxicity >= CRITICAL_THRESHOLD && livingEntity.getHealth() > 1f)
+        {
+            livingEntity.attackEntityFrom(DamageSource.MAGIC, 1f);
+        }
+        tickToxicityDecay(livingEntity);
     }
 
     private void tickToxicityDecay(LivingEntity livingEntity)
@@ -130,7 +158,7 @@ public class ToxicityHandler implements IToxicityHandler
         ToxicityHandler toxicityHandler = getToxicityHandlerOf(livingEntity);
         if (toxicityHandler != null)
         {
-            toxicityHandler.tickToxicityDecay(livingEntity);
+            toxicityHandler.tickToxicity(livingEntity);
         }
     }
 }
