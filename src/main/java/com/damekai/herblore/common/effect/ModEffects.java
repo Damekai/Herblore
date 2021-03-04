@@ -11,6 +11,8 @@ public class ModEffects
 {
     public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, Herblore.MOD_ID);
 
+    public static RegistryObject<Effect> TOXICITY_RENDER = EFFECTS.register("toxicity", GuiToxicityEffect::new);
+
     public static final RegistryObject<Effect> DEBUG_BONANZA_RENDER = EFFECTS.register("debug_bonanza", () -> new GuiFlaskEffect(ModFlasks.DEBUG_BONANZA));
     public static final RegistryObject<Effect> STRIDER_RENDER = EFFECTS.register("strider", () -> new GuiFlaskEffect(ModFlasks.STRIDER));
 }

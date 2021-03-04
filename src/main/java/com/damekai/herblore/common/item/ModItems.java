@@ -36,8 +36,8 @@ public class ModItems
 
     public static final RegistryObject<ItemReagent> REAGENT_C = ITEMS.register("reagent_c", () -> new ItemReagent(
             new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.DEBUG_AB, 1);
-                add(ModFlasks.STRIDER, 3);
+                add(ModFlasks.DEBUG_AB, 9);
+                add(ModFlasks.STRIDER, 9);
             }}
     ));
 

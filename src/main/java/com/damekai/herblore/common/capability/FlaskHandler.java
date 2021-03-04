@@ -24,12 +24,22 @@ public class FlaskHandler implements IFlaskHandler
 
     public void applyFlasks(LivingEntity livingEntity, FlaskInstance... flaskInstances)
     {
+        int toxicityAdded = 0;
         for (FlaskInstance flaskInstance : flaskInstances)
         {
             activeFlaskInstances.put(flaskInstance, new MutableInt(flaskInstance.getDuration()));
             flaskInstance.getFlask().getFlaskEffects().forEach(
                     (flaskEffect) -> flaskEffect.onApply(livingEntity, flaskInstance.getPotency(), flaskInstance.getDuration(), flaskInstance.getDuration()));
+
+            toxicityAdded += flaskInstance.getPotency();
+
             livingEntity.addPotionEffect(new EffectInstance(flaskInstance.getFlask().getGuiRenderEffect(), flaskInstance.getDuration()));
+        }
+
+        ToxicityHandler toxicityHandler = ToxicityHandler.getToxicityHandlerOf(livingEntity);
+        if (toxicityHandler != null)
+        {
+            toxicityHandler.addToxicity(livingEntity, toxicityAdded);
         }
     }
 
