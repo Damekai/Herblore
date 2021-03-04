@@ -2,19 +2,16 @@ package com.damekai.herblore.common.effect;
 
 import net.minecraft.entity.LivingEntity;
 
-public class FlaskEffectHealthRegeneration extends FlaskEffect
+public class FlaskEffectHealthRegeneration extends TickingFlaskEffect
 {
     public FlaskEffectHealthRegeneration()
     {
-        super("health_regeneration");
+        super("health_regeneration", 5);
     }
 
     @Override
-    public void onTick(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    protected void tick(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
     {
-        if (durationRemaining % 5 == 0)
-        {
-            livingEntity.heal(1);
-        }
+        livingEntity.heal(1);
     }
 }

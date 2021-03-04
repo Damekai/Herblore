@@ -2,6 +2,7 @@ package com.damekai.herblore.common.flask;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.FlaskEffect;
+import com.damekai.herblore.common.effect.TickingFlaskEffect;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
@@ -44,6 +45,16 @@ public class Flask extends net.minecraftforge.registries.ForgeRegistryEntry<Flas
         return ImmutableList.copyOf(
                 flaskEffects.stream()
                         .map(RegistryObject::get)
+                        .collect(Collectors.toList()));
+    }
+
+    public ImmutableList<TickingFlaskEffect> getTickingFlaskEffects()
+    {
+        return ImmutableList.copyOf(
+                flaskEffects.stream()
+                        .map(RegistryObject::get)
+                        .filter((flaskEffect) -> flaskEffect instanceof TickingFlaskEffect)
+                        .map((flaskEffect) -> (TickingFlaskEffect) flaskEffect)
                         .collect(Collectors.toList()));
     }
 

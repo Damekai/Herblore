@@ -20,11 +20,6 @@ public abstract class FlaskEffect extends ForgeRegistryEntry<FlaskEffect>
 
     }
 
-    public void onTick(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
-    {
-
-    }
-
     public void onExpire(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
     {
 

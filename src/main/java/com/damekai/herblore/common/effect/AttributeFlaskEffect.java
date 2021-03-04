@@ -9,20 +9,17 @@ import net.minecraft.entity.ai.attributes.AttributeModifierManager;
 import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 
 import java.util.UUID;
-import java.util.function.Supplier;
 
-public abstract class FlaskAttributeEffect extends FlaskEffect
+public abstract class AttributeFlaskEffect extends TickingFlaskEffect
 {
     private final UUID uuid;
-    private final int attributesUpdateFrequency; // After this many ticks, the attribute will be "updated" (removed and reapplied, with fresh attribute modification amount calculation).
     private final ImmutableList<AttributePotencyFactor> attributePotencyFactors;
 
-    protected FlaskAttributeEffect(String translationName, UUID uuid, int attributesUpdateFrequency, AttributePotencyFactor... attributePotencyFactors)
+    protected AttributeFlaskEffect(String translationName, UUID uuid, int attributesUpdateFrequency, AttributePotencyFactor... attributePotencyFactors)
     {
-        super(translationName);
+        super(translationName, attributesUpdateFrequency);
 
         this.uuid = uuid;
-        this.attributesUpdateFrequency = attributesUpdateFrequency;
         this.attributePotencyFactors = ImmutableList.copyOf(attributePotencyFactors);
     }
 
@@ -32,17 +29,6 @@ public abstract class FlaskAttributeEffect extends FlaskEffect
         super.onApply(livingEntity, potency, durationFull, durationRemaining);
 
         applyAttributesModifiers(livingEntity, potency, durationFull, durationRemaining);
-    }
-
-    @Override
-    public void onTick(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
-    {
-        super.onTick(livingEntity, potency, durationFull, durationRemaining);
-
-        if (durationRemaining % attributesUpdateFrequency == 0)
-        {
-            applyAttributesModifiers(livingEntity, potency, durationFull, durationRemaining); // Application function removes, then applies.
-        }
     }
 
     @Override
@@ -59,6 +45,12 @@ public abstract class FlaskAttributeEffect extends FlaskEffect
         super.onRemove(livingEntity, potency, durationFull, durationRemaining);
 
         removeAttributesModifiers(livingEntity, potency, durationFull, durationRemaining);
+    }
+
+    @Override
+    protected void tick(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    {
+        applyAttributesModifiers(livingEntity, potency, durationFull, durationRemaining); // Application function removes, then applies.
     }
 
     private void applyAttributesModifiers(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
@@ -96,7 +88,7 @@ public abstract class FlaskAttributeEffect extends FlaskEffect
 
     protected static class AttributePotencyFactor
     {
-        protected interface ModifierAmount { float get(FlaskAttributeEffect flaskAttributeEffect, LivingEntity livingEntity, int potency, int durationFull, int durationRemaining); }
+        protected interface ModifierAmount { float get(AttributeFlaskEffect flaskAttributeEffect, LivingEntity livingEntity, int potency, int durationFull, int durationRemaining); }
 
         private final Attribute attribute;
         private final AttributeModifier.Operation operation;

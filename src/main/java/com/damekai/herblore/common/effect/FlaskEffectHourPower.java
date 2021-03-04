@@ -1,15 +1,12 @@
 package com.damekai.herblore.common.effect;
 
-import com.damekai.herblore.common.capability.FlaskHandler;
-import com.damekai.herblore.common.flask.FlaskInstance;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 import java.util.UUID;
 
-public class FlaskEffectHourPower extends FlaskAttributeEffect
+public class FlaskEffectHourPower extends AttributeFlaskEffect
 {
     private final int primeTime; // Time at which this effect is most powerful.
 
@@ -23,7 +20,7 @@ public class FlaskEffectHourPower extends FlaskAttributeEffect
         this.primeTime = primeTime;
     }
 
-    private static float calculateDamageModifierAmount(FlaskAttributeEffect flaskAttributeEffect, LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    private static float calculateDamageModifierAmount(AttributeFlaskEffect flaskAttributeEffect, LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
     {
         if (flaskAttributeEffect instanceof FlaskEffectHourPower)
         {
