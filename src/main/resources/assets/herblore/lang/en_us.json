@@ -20,6 +20,8 @@
     "block.herblore.athanor": "Athanor",
     "block.herblore.perennial_patch_debug": "Debug Perennial Patch",
 
+    "effect.herblore.toxicity": "Toxicity",
+
     "flask_effect.herblore.debug_alpha": "Debug Effect Alpha",
     "flask_effect.herblore.debug_beta": "Debug Effect Beta",
     "flask_effect.herblore.debug_gamma": "Debug Effect Gamma",
