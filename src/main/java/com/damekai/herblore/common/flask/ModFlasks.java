@@ -33,9 +33,9 @@ public class ModFlasks
             ModFlaskEffects.FIRE_EATER));
 
     public static final RegistryObject<Flask> HIGH_NOON = FLASKS.register("high_noon", () -> new Flask("high_noon", 0xFDFBD3, ModEffects.HIGH_NOON_RENDER,
-            ModFlaskEffects.HOUR_POWER_NOON));
+            ModFlaskEffects.POWER_HOUR_NOON));
     public static final RegistryObject<Flask> WITCHING_HOUR = FLASKS.register("witching_hour", () -> new Flask("witching_hour", 0x27055E, ModEffects.WITCHING_HOUR_RENDER,
-            ModFlaskEffects.HOUR_POWER_MIDNIGHT));
+            ModFlaskEffects.POWER_HOUR_MIDNIGHT));
 
     public static final RegistryObject<Flask> DREDGE = FLASKS.register("dredge", () -> new Flask("dredge", 0x6B4A46, ModEffects.DREDGE_RENDER,
             ModFlaskEffects.SUBTERRANIAN));

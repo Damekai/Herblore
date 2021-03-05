@@ -28,8 +28,8 @@
     "flask_effect.herblore.debug_delta": "Debug Effect Delta",
     "flask_effect.herblore.debug_epsilon": "Debug Effect Epsilon",
     "flask_effect.herblore.bounding": "Bounding",
-    "flask_effect.herblore.hour_power_noon": "Hour Power: Noon",
-    "flask_effect.herblore.hour_power_midnight": "Hour Power: Midnight",
+    "flask_effect.herblore.power_hour_noon": "Power Hour: Noon",
+    "flask_effect.herblore.power_hour_midnight": "Power Hour: Midnight",
     "flask_effect.herblore.subterranean": "Subterranean",
     "flask_effect.herblore.fire_eater": "Fire Eater",
 
