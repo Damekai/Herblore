@@ -24,13 +24,13 @@ public class ModItems
 
     public static final RegistryObject<ItemReagent> REAGENT_B = ITEMS.register("reagent_b", () -> new ItemReagent(
             new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.HIGH_NOON, 7);
+                add(ModFlasks.QUENCH, 1);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> REAGENT_C = ITEMS.register("reagent_c", () -> new ItemReagent(
             new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.DREDGE, 5);
+                add(ModFlasks.QUENCH, 5);
             }}
     ));
 
