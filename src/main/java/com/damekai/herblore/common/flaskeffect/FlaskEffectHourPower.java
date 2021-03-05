@@ -11,9 +11,9 @@ public class FlaskEffectHourPower extends AttributeFlaskEffect
 {
     private final int primeTime; // Time at which this effect is most powerful.
 
-    public FlaskEffectHourPower(int primeTime, UUID uuid)
+    public FlaskEffectHourPower(String translationName, int primeTime, UUID uuid)
     {
-        super("hour_power", uuid, 100,
+        super(translationName, uuid, 100,
                 new AttributePotencyFactor(Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION, FlaskEffectHourPower::calculateDamageModifierAmount));
 
         this.primeTime = primeTime;
