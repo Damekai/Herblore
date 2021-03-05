@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:milled_reagent/milled_wildbloom"
+    ]
+  },
+  "criteria": {
+    "has_wildbloom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:wildbloom"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:milled_reagent/milled_wildbloom"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_wildbloom",
+      "has_the_recipe"
+    ]
+  ]
+}

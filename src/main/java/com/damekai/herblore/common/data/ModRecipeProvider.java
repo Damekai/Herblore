@@ -42,26 +42,75 @@ public class ModRecipeProvider extends RecipeProvider
 
     private void registerMilledReagents(Consumer<IFinishedRecipe> consumer, String folder)
     {
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.REAGENT_A_MILLED.get())
-                .addIngredient(ModItems.PESTLE_AND_MORTAR.get())
-                .addIngredient(ModItems.REAGENT_A.get())
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_PEACEBLOOM::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.PEACEBLOOM::get)
                 .setGroup("herblore")
-                .addCriterion("has_iron_ingot", hasItem(Tags.Items.INGOTS_IRON))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "reagent_a_milled"));
+                .addCriterion("has_peacebloom", hasItem(ModItems.PEACEBLOOM::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_peacebloom"));
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.REAGENT_B_MILLED.get())
-                .addIngredient(ModItems.PESTLE_AND_MORTAR.get())
-                .addIngredient(ModItems.REAGENT_B.get())
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_SILVERLEAF::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.SILVERLEAF::get)
                 .setGroup("herblore")
-                .addCriterion("has_iron_ingot", hasItem(Tags.Items.INGOTS_IRON))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "reagent_b_milled"));
+                .addCriterion("has_silverleaf", hasItem(ModItems.SILVERLEAF::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_silverleaf"));
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.REAGENT_C_MILLED.get())
-                .addIngredient(ModItems.PESTLE_AND_MORTAR.get())
-                .addIngredient(ModItems.REAGENT_C.get())
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_EARTHROOT::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.EARTHROOT::get)
                 .setGroup("herblore")
-                .addCriterion("has_iron_ingot", hasItem(Tags.Items.INGOTS_IRON))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "reagent_c_milled"));
+                .addCriterion("has_earthroot", hasItem(ModItems.EARTHROOT::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_earthroot"));
+
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_MAGEROYAL::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.MAGEROYAL::get)
+                .setGroup("herblore")
+                .addCriterion("has_mageroyal", hasItem(ModItems.MAGEROYAL::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_mageroyal"));
+
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_BRIARTHORN::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.BRIARTHORN::get)
+                .setGroup("herblore")
+                .addCriterion("has_briarthorn", hasItem(ModItems.BRIARTHORN::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_briarthorn"));
+
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_WILDBLOOM::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.WILDBLOOM::get)
+                .setGroup("herblore")
+                .addCriterion("has_wildbloom", hasItem(ModItems.WILDBLOOM::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_wildbloom"));
+
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_FADELEAF::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.FADELEAF::get)
+                .setGroup("herblore")
+                .addCriterion("has_fadeleaf", hasItem(ModItems.FADELEAF::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_fadeleaf"));
+
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_GOLDTHORN::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.GOLDTHORN::get)
+                .setGroup("herblore")
+                .addCriterion("has_goldthorn", hasItem(ModItems.GOLDTHORN::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_goldthorn"));
+
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_SUNGRASS::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.SUNGRASS::get)
+                .setGroup("herblore")
+                .addCriterion("has_sungrass", hasItem(ModItems.SUNGRASS::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_sungrass"));
+
+        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MILLED_DREAMFOIL::get)
+                .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
+                .addIngredient(ModItems.DREAMFOIL::get)
+                .setGroup("herblore")
+                .addCriterion("has_dreamfoil", hasItem(ModItems.DREAMFOIL::get))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_dreamfoil"));
     }
 
     private void registerMiscItems(Consumer<IFinishedRecipe> consumer, String folder)

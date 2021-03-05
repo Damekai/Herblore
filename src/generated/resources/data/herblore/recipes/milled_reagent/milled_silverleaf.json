@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "herblore",
+  "ingredients": [
+    {
+      "item": "herblore:pestle_and_mortar"
+    },
+    {
+      "item": "herblore:silverleaf"
+    }
+  ],
+  "result": {
+    "item": "herblore:milled_silverleaf"
+  }
+}

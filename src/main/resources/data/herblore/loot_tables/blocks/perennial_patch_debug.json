@@ -19,7 +19,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:grimy_debug"
+          "name": "herblore:grimy_herb"
         }
       ]
     }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:milled_reagent/milled_peacebloom"
+    ]
+  },
+  "criteria": {
+    "has_peacebloom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:peacebloom"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:milled_reagent/milled_peacebloom"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_peacebloom",
+      "has_the_recipe"
+    ]
+  ]
+}

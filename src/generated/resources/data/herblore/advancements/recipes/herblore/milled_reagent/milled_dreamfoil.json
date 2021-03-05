@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:milled_reagent/milled_dreamfoil"
+    ]
+  },
+  "criteria": {
+    "has_dreamfoil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:dreamfoil"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:milled_reagent/milled_dreamfoil"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dreamfoil",
+      "has_the_recipe"
+    ]
+  ]
+}
