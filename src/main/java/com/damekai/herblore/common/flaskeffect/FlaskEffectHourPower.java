@@ -13,9 +13,7 @@ public class FlaskEffectHourPower extends AttributeFlaskEffect
 
     public FlaskEffectHourPower(int primeTime, UUID uuid)
     {
-        super("hour_power",
-                uuid,
-                100,
+        super("hour_power", uuid, 100,
                 new AttributePotencyFactor(Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION, FlaskEffectHourPower::calculateDamageModifierAmount));
 
         this.primeTime = primeTime;

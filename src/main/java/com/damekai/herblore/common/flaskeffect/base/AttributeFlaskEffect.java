@@ -82,6 +82,7 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
             if (modifiableAttributeInstance != null)
             {
                 modifiableAttributeInstance.removeModifier(uuid);
+                Herblore.LOGGER.debug("Removed modifier: uuid=" + uuid.toString());
             }
         });
     }

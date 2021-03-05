@@ -24,4 +24,6 @@ public class ModFlaskEffects
 
     public static final RegistryObject<FlaskEffect> HOUR_POWER_NOON = FLASK_EFFECTS.register("hour_power_noon", () -> new FlaskEffectHourPower(6000, UUID.fromString("d6baf902-b953-447f-bcaa-d9618c7474e8")));
     public static final RegistryObject<FlaskEffect> HOUR_POWER_MIDNIGHT = FLASK_EFFECTS.register("hour_power_midnight", () -> new FlaskEffectHourPower(18000, UUID.fromString("b7bff02f-54f4-4589-8917-956c669e376a")));
+
+    public static final RegistryObject<FlaskEffect> SUBTERRANIAN = FLASK_EFFECTS.register("subterranian", FlaskEffectSubterranean::new);
 }

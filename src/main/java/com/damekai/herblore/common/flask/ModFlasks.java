@@ -34,6 +34,9 @@ public class ModFlasks
     public static final RegistryObject<Flask> WITCHING_HOUR = FLASKS.register("witching_hour", () -> new Flask("witching_hour", 0x27055E, ModEffects.WITCHING_HOUR_RENDER,
             ModFlaskEffects.HOUR_POWER_MIDNIGHT));
 
+    public static final RegistryObject<Flask> DREDGE = FLASKS.register("dredge", () -> new Flask("dredge", 0x6B4A46, ModEffects.DREDGE_RENDER,
+            ModFlaskEffects.SUBTERRANIAN));
+
     public static Flask getFlaskFromRegistry(String name)
     {
         RegistryObject<Flask> match = FLASKS.getEntries().stream().filter((flaskSupplier) -> flaskSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
