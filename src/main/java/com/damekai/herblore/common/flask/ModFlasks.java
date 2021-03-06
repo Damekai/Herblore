@@ -38,7 +38,10 @@ public class ModFlasks
             ModFlaskEffects.POWER_HOUR_MIDNIGHT));
 
     public static final RegistryObject<Flask> DREDGE = FLASKS.register("dredge", () -> new Flask("dredge", 0x6B4A46, ModEffects.DREDGE_RENDER,
-            ModFlaskEffects.SUBTERRANIAN));
+            ModFlaskEffects.SUBTERRANEAN));
+
+    public static final RegistryObject<Flask> PENANCE = FLASKS.register("penance", () -> new Flask("penance", 0x9E0313, ModEffects.PENANCE_RENDER,
+            ModFlaskEffects.BLOOD_PACT));
 
     public static Flask getFlaskFromRegistry(String name)
     {

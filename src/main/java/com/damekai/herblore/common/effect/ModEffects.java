@@ -23,4 +23,6 @@ public class ModEffects
     public static final RegistryObject<Effect> WITCHING_HOUR_RENDER = EFFECTS.register("witching_hour", () -> new GuiFlaskEffect(ModFlasks.WITCHING_HOUR));
 
     public static final RegistryObject<Effect> DREDGE_RENDER = EFFECTS.register("dredge", () -> new GuiFlaskEffect(ModFlasks.DREDGE));
+
+    public static final RegistryObject<Effect> PENANCE_RENDER = EFFECTS.register("penance", () -> new GuiFlaskEffect(ModFlasks.PENANCE));
 }

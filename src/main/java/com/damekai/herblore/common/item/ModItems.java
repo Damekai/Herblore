@@ -68,21 +68,19 @@ public class ModItems
 
     public static final RegistryObject<ItemReagent> GOLDTHORN = ITEMS.register("goldthorn", () -> new ItemReagent(
             new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.HIGH_NOON, 1);
-                add(ModFlasks.QUENCH, 1);
-                add(ModFlasks.STRIDER, 1);
+                add(ModFlasks.PENANCE, 2);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> SUNGRASS = ITEMS.register("sungrass", () -> new ItemReagent(
             new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.HIGH_NOON, 3);
+                add(ModFlasks.PENANCE, 2);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> DREAMFOIL = ITEMS.register("dreamfoil", () -> new ItemReagent(
             new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.WITCHING_HOUR, 3);
+                add(ModFlasks.PENANCE, 1);
             }}
     ));
 

@@ -26,5 +26,7 @@ public class ModFlaskEffects
     public static final RegistryObject<FlaskEffect> POWER_HOUR_NOON = FLASK_EFFECTS.register("power_hour_noon", () -> new FlaskEffectPowerHour("power_hour_noon", 6000, UUID.fromString("d6baf902-b953-447f-bcaa-d9618c7474e8")));
     public static final RegistryObject<FlaskEffect> POWER_HOUR_MIDNIGHT = FLASK_EFFECTS.register("power_hour_midnight", () -> new FlaskEffectPowerHour("power_hour_midnight", 18000, UUID.fromString("b7bff02f-54f4-4589-8917-956c669e376a")));
 
-    public static final RegistryObject<FlaskEffect> SUBTERRANIAN = FLASK_EFFECTS.register("subterranean", FlaskEffectSubterranean::new);
+    public static final RegistryObject<FlaskEffect> SUBTERRANEAN = FLASK_EFFECTS.register("subterranean", FlaskEffectSubterranean::new);
+
+    public static final RegistryObject<FlaskEffect> BLOOD_PACT = FLASK_EFFECTS.register("blood_pact", FlaskEffectBloodPact::new);
 }

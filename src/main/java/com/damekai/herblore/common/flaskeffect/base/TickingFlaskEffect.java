@@ -5,7 +5,7 @@ import net.minecraft.entity.LivingEntity;
 
 public abstract class TickingFlaskEffect extends DurationFlaskEffect
 {
-    private final int tickRate;
+    protected final int tickRate;
 
     public TickingFlaskEffect(String translationName, int tickRate)
     {

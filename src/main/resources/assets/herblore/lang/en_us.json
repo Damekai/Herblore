@@ -48,6 +48,7 @@
     "flask_effect.herblore.power_hour_midnight": "Power Hour: Midnight",
     "flask_effect.herblore.subterranean": "Subterranean",
     "flask_effect.herblore.fire_eater": "Fire Eater",
+    "flask_effect.herblore.blood_pact": "Blood Pact",
 
     "flaskof.flask.herblore.debug_bonanza": "Debug Bonanza",
 
@@ -56,6 +57,7 @@
     "flaskof.flask.herblore.witching_hour": "Witching Hour",
     "flaskof.flask.herblore.dredge": "Dredge",
     "flaskof.flask.herblore.quench": "Quench",
+    "flaskof.flask.herblore.penance": "Penance",
 
     "flask.herblore.debug_bonanza": "Debug Bonanza",
     "flask.herblore.debug_ab": "Debug AB",
@@ -65,5 +67,6 @@
     "flask.herblore.high_noon": "High Noon",
     "flask.herblore.witching_hour": "Witching Hour",
     "flask.herblore.dredge": "Dredge",
-    "flask.herblore.quench": "Quench"
+    "flask.herblore.quench": "Quench",
+    "flask.herblore.penance": "Penance"
 }
