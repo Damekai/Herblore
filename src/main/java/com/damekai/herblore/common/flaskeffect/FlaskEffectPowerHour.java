@@ -1,5 +1,6 @@
 package com.damekai.herblore.common.flaskeffect;
 
+import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.flaskeffect.base.AttributeFlaskEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -19,7 +20,7 @@ public class FlaskEffectPowerHour extends AttributeFlaskEffect
         this.primeTime = primeTime;
     }
 
-    private static float calculateDamageModifierAmount(AttributeFlaskEffect flaskAttributeEffect, LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    private static float calculateDamageModifierAmount(AttributeFlaskEffect flaskAttributeEffect, FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
         if (flaskAttributeEffect instanceof FlaskEffectPowerHour)
         {
@@ -39,7 +40,7 @@ public class FlaskEffectPowerHour extends AttributeFlaskEffect
                 distanceFromPrimeTime = Math.min(24000 - Math.abs(currentTime - powerhour.primeTime), Math.abs(currentTime - powerhour.primeTime));
             }
 
-            return potency * (1 - (distanceFromPrimeTime / 12000f)) / 2f; // For example, if it's prime time and the potency is 5, the attack damage boost is 2.5.
+            return flaskInstance.getPotency() * (1 - (distanceFromPrimeTime / 12000f)) / 2f; // For example, if it's prime time and the potency is 5, the attack damage boost is 2.5.
         }
         return 0;
     }

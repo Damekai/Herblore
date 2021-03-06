@@ -74,7 +74,7 @@ public class ItemFlask extends Item
             FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(livingEntity);
             if (flaskHandler != null) {
                 CompoundNBT flaskInstanceTag = nbt.getCompound("flask_instance");
-                flaskHandler.applyFlasks(livingEntity, FlaskInstance.read(flaskInstanceTag));
+                flaskHandler.applyFlask(FlaskInstance.read(flaskInstanceTag), livingEntity);
             }
 
             if (nbt.contains("flask_doses"))

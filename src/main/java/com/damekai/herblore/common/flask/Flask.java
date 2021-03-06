@@ -1,6 +1,8 @@
 package com.damekai.herblore.common.flask;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.flaskeffect.base.ApplicableFlaskEffect;
+import com.damekai.herblore.common.flaskeffect.base.DurationFlaskEffect;
 import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
 import com.damekai.herblore.common.flaskeffect.base.TickingFlaskEffect;
 import com.google.common.collect.ImmutableList;
@@ -8,6 +10,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 
+import javax.annotation.Nullable;
 import java.util.stream.Collectors;
 
 public class Flask extends net.minecraftforge.registries.ForgeRegistryEntry<Flask>
@@ -17,7 +20,7 @@ public class Flask extends net.minecraftforge.registries.ForgeRegistryEntry<Flas
     private final RegistryObject<Effect> guiRenderEffect;
     private final ImmutableList<RegistryObject<FlaskEffect>> flaskEffects;
 
-    public Flask(String translationName, int color, RegistryObject<Effect> guiRenderEffect, RegistryObject<FlaskEffect>... flaskEffects)
+    public Flask(String translationName, int color, @Nullable RegistryObject<Effect> guiRenderEffect, RegistryObject<FlaskEffect>... flaskEffects)
     {
         translationKey = "flask." + Herblore.MOD_ID + "." + translationName;
         this.color = color;
@@ -37,7 +40,7 @@ public class Flask extends net.minecraftforge.registries.ForgeRegistryEntry<Flas
 
     public Effect getGuiRenderEffect()
     {
-        return guiRenderEffect.get();
+        return guiRenderEffect != null ? guiRenderEffect.get() : null;
     }
 
     public ImmutableList<FlaskEffect> getFlaskEffects()
@@ -45,6 +48,26 @@ public class Flask extends net.minecraftforge.registries.ForgeRegistryEntry<Flas
         return ImmutableList.copyOf(
                 flaskEffects.stream()
                         .map(RegistryObject::get)
+                        .collect(Collectors.toList()));
+    }
+
+    public ImmutableList<ApplicableFlaskEffect> getApplicableFlaskEffects()
+    {
+        return ImmutableList.copyOf(
+                flaskEffects.stream()
+                        .map(RegistryObject::get)
+                        .filter((flaskEffect) -> flaskEffect instanceof ApplicableFlaskEffect)
+                        .map((flaskEffect) -> (ApplicableFlaskEffect) flaskEffect)
+                        .collect(Collectors.toList()));
+    }
+
+    public ImmutableList<DurationFlaskEffect> getDurationFlaskEffects()
+    {
+        return ImmutableList.copyOf(
+                flaskEffects.stream()
+                        .map(RegistryObject::get)
+                        .filter((flaskEffect) -> flaskEffect instanceof DurationFlaskEffect)
+                        .map((flaskEffect) -> (DurationFlaskEffect) flaskEffect)
                         .collect(Collectors.toList()));
     }
 

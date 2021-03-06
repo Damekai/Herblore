@@ -1,8 +1,9 @@
 package com.damekai.herblore.common.flaskeffect.base;
 
+import com.damekai.herblore.common.flask.FlaskInstance;
 import net.minecraft.entity.LivingEntity;
 
-public abstract class TickingFlaskEffect extends FlaskEffect
+public abstract class TickingFlaskEffect extends DurationFlaskEffect
 {
     private final int tickRate;
 
@@ -13,13 +14,14 @@ public abstract class TickingFlaskEffect extends FlaskEffect
         this.tickRate = tickRate;
     }
 
-    public final void onTick(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    public final void onTick(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
-        if (durationRemaining % tickRate == 0)
+        if (flaskInstance.getDurationRemaining() % tickRate == 0)
         {
-            this.tick(livingEntity, potency, durationFull, durationRemaining);
+            // Space for debug code.
+            this.tick(flaskInstance, livingEntity);
         }
     }
 
-    protected abstract void tick(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining);
+    protected abstract void tick(FlaskInstance flaskInstance, LivingEntity livingEntity);
 }

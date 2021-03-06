@@ -1,6 +1,7 @@
 package com.damekai.herblore.common.flaskeffect;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.flaskeffect.base.TickingFlaskEffect;
 import net.minecraft.entity.LivingEntity;
 
@@ -15,25 +16,25 @@ public class FlaskEffectDebug extends TickingFlaskEffect
     }
 
     @Override
-    public void onApply(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    protected void apply(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
         Herblore.LOGGER.debug("Applying \"" + debugTag + "\" debug effect to " + livingEntity.getName().getString());
     }
 
     @Override
-    public void onExpire(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    protected void expire(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
         Herblore.LOGGER.debug("Expired \"" + debugTag + "\" debug effect from " + livingEntity.getName().getString());
     }
 
     @Override
-    public void onRemove(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    protected void remove(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
         Herblore.LOGGER.debug("Removed \"" + debugTag + "\" debug effect from " + livingEntity.getName().getString());
     }
 
     @Override
-    protected void tick(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    protected void tick(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
         Herblore.LOGGER.debug("Ticking \"" + debugTag + "\" debug effect on " + livingEntity.getName().getString());
     }

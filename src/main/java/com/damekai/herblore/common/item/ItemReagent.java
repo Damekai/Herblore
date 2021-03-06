@@ -67,7 +67,7 @@ public class ItemReagent extends Item
         {
             RegistryObject<Flask> flaskSupplier = flaskWeights.getWeightedRandomEntry();
             Flask flask = flaskSupplier.get();
-            flaskHandler.applyFlasks(player, new FlaskInstance(flask, flaskWeights.getWeight(flaskSupplier), 100));
+            flaskHandler.applyFlask(new FlaskInstance(flask, flaskWeights.getWeight(flaskSupplier), 100), player);
 
             if (!world.isRemote)
             {

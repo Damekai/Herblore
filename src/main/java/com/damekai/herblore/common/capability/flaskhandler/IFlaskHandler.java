@@ -7,15 +7,13 @@ import net.minecraft.entity.LivingEntity;
 
 public interface IFlaskHandler
 {
-    void applyFlasks(LivingEntity livingEntity, FlaskInstance... herbloreEffectInstances);
+    void applyFlask(FlaskInstance flaskInstance, LivingEntity livingEntity);
 
     FlaskInstance getFlask(Flask flask);
 
     FlaskInstance getFlaskWithEffect(FlaskEffect flaskEffect);
 
-    void tickFlasks(LivingEntity livingEntity);
-
-    void removeFlasks(LivingEntity livingEntity, FlaskInstance... herbloreEffectInstances);
+    void removeFlask(FlaskInstance flaskInstance, LivingEntity livingEntity);
 
     void removeAllFlasks(LivingEntity livingEntity);
 

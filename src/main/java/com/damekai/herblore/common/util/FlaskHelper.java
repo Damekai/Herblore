@@ -85,7 +85,7 @@ public class FlaskHelper
         lores.add(new StringTextComponent(doses + (doses == 1 ? " Dose" : " Doses")).mergeStyle(TextFormatting.BLUE));
 
         // Write potency and duration.
-        lores.add((new StringTextComponent(String.format("Potency %d (%s)", flaskInstance.getPotency(), StringUtils.ticksToElapsedTime(flaskInstance.getDuration())))).mergeStyle(TextFormatting.BLUE));
+        lores.add((new StringTextComponent(String.format("Potency %d (%s)", flaskInstance.getPotency(), StringUtils.ticksToElapsedTime(flaskInstance.getDurationFull())))).mergeStyle(TextFormatting.BLUE));
 
         // Write each FlaskEffect from this Flask.
         flaskInstance.getFlask().getFlaskEffects().forEach(

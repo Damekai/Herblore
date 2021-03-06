@@ -1,6 +1,7 @@
 package com.damekai.herblore.common.flaskeffect.base;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.flask.FlaskInstance;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -24,36 +25,30 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
     }
 
     @Override
-    public void onApply(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    protected void apply(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
-        super.onApply(livingEntity, potency, durationFull, durationRemaining);
-
-        applyAttributesModifiers(livingEntity, potency, durationFull, durationRemaining);
+        applyAttributesModifiers(flaskInstance, livingEntity);
     }
 
     @Override
-    public void onExpire(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    protected void expire(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
-        super.onExpire(livingEntity, potency, durationFull, durationRemaining);
-
-        removeAttributesModifiers(livingEntity, potency, durationFull, durationRemaining);
+        removeAttributesModifiers(flaskInstance, livingEntity);
     }
 
     @Override
-    public void onRemove(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    protected void remove(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
-        super.onRemove(livingEntity, potency, durationFull, durationRemaining);
-
-        removeAttributesModifiers(livingEntity, potency, durationFull, durationRemaining);
+        removeAttributesModifiers(flaskInstance, livingEntity);
     }
 
     @Override
-    protected void tick(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    protected void tick(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
-        applyAttributesModifiers(livingEntity, potency, durationFull, durationRemaining); // Application function removes, then applies.
+        applyAttributesModifiers(flaskInstance, livingEntity); // Application function removes, then applies.
     }
 
-    private void applyAttributesModifiers(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    private void applyAttributesModifiers(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
         AttributeModifierManager attributeModifierManager = livingEntity.getAttributeManager();
         attributePotencyFactors.forEach((attributePotencyFactor) ->
@@ -64,7 +59,7 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
                 modifiableAttributeInstance.removeModifier(uuid);
                 AttributeModifier attributeModifier = new AttributeModifier(uuid,
                         this::getTranslationKey,
-                        attributePotencyFactor.amount.get(this, livingEntity, potency, durationFull, durationRemaining),
+                        attributePotencyFactor.amount.get(this, flaskInstance, livingEntity),
                         attributePotencyFactor.operation);
                 modifiableAttributeInstance.applyPersistentModifier(attributeModifier);
 
@@ -73,7 +68,7 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
         });
     }
 
-    private void removeAttributesModifiers(LivingEntity livingEntity, int potency, int durationFull, int durationRemaining)
+    private void removeAttributesModifiers(FlaskInstance flaskInstance, LivingEntity livingEntity)
     {
         AttributeModifierManager attributeModifierManager = livingEntity.getAttributeManager();
         attributePotencyFactors.forEach((attributePotencyFactor) ->
@@ -89,7 +84,7 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
 
     protected static class AttributePotencyFactor
     {
-        public interface ModifierAmount { float get(AttributeFlaskEffect flaskAttributeEffect, LivingEntity livingEntity, int potency, int durationFull, int durationRemaining); }
+        public interface ModifierAmount { float get(AttributeFlaskEffect attributeFlaskEffect, FlaskInstance flaskInstance, LivingEntity livingEntity); }
 
         private final Attribute attribute;
         private final AttributeModifier.Operation operation;
