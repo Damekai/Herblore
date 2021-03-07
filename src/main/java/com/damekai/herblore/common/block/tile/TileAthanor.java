@@ -2,22 +2,15 @@ package com.damekai.herblore.common.block.tile;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.BlockAthanor;
-import com.damekai.herblore.common.flask.FlaskInstance;
 import com.damekai.herblore.common.item.ModItems;
-import com.damekai.herblore.common.util.FlaskHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ActionResultType;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.fml.common.Mod;
 
 public class TileAthanor extends TileEntity implements ITickableTileEntity
 {
@@ -57,11 +50,11 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
                     setStage(3);
 
                     // Copy NBT list of effects from crude flask to completed flask.
-                    CompoundNBT flaskEffect = flaskStack.getOrCreateTag().getCompound("flask_instance").copy();
-                    int flaskColor = flaskStack.getOrCreateTag().getInt("flask_color");
+                    CompoundNBT flaskEffect = flaskStack.getOrCreateTag().getCompound("flask_effect_instance").copy();
+                    int flaskColor = flaskStack.getOrCreateTag().getInt("flask_effect_color");
                     flaskStack = new ItemStack(ModItems.FLASK.get(), 1);
-                    flaskStack.getOrCreateTag().put("flask_instance", flaskEffect);
-                    flaskStack.getOrCreateTag().putInt("flask_color", flaskColor);
+                    flaskStack.getOrCreateTag().put("flask_effect_instance", flaskEffect);
+                    flaskStack.getOrCreateTag().putInt("flask_effect_color", flaskColor);
                     flaskStack.getOrCreateTag().putInt("flask_doses", 4);
                 }
             }

@@ -1,20 +1,17 @@
 package com.damekai.herblore.common.capability.flaskhandler;
 
-import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
-import com.damekai.herblore.common.flask.Flask;
-import com.damekai.herblore.common.flask.FlaskInstance;
+import com.damekai.herblore.common.flask.base.FlaskEffect;
+import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import net.minecraft.entity.LivingEntity;
 
 public interface IFlaskHandler
 {
-    void applyFlask(FlaskInstance flaskInstance, LivingEntity livingEntity);
+    void applyFlaskEffectInstance(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity);
 
-    FlaskInstance getFlask(Flask flask);
+    FlaskEffectInstance getFlaskEffectInstance(FlaskEffect flaskEffect);
 
-    FlaskInstance getFlaskWithEffect(FlaskEffect flaskEffect);
+    void removeFlaskEffectInstance(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity);
 
-    void removeFlask(FlaskInstance flaskInstance, LivingEntity livingEntity);
-
-    void removeAllFlasks(LivingEntity livingEntity);
+    void removeAllFlaskEffectInstances(LivingEntity livingEntity);
 
 }

@@ -1,6 +1,6 @@
 package com.damekai.herblore.common.effect;
 
-import com.damekai.herblore.common.flask.Flask;
+import com.damekai.herblore.common.flask.base.FlaskEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
@@ -17,30 +17,30 @@ import javax.annotation.Nullable;
  */
 public class GuiFlaskEffect extends Effect
 {
-    private final RegistryObject<Flask> flask;
+    private final RegistryObject<FlaskEffect> flaskEffect;
 
-    protected GuiFlaskEffect(RegistryObject<Flask> flask)
+    protected GuiFlaskEffect(RegistryObject<FlaskEffect> flaskEffect)
     {
         super(EffectType.BENEFICIAL, 0);
 
-        this.flask = flask;
+        this.flaskEffect = flaskEffect;
     }
 
     @Override
     public ITextComponent getDisplayName()
     {
-        return new TranslationTextComponent(flask.get().getTranslationKey());
+        return new TranslationTextComponent(flaskEffect.get().getTranslationKey());
     }
 
     @Override
     public String getName()
     {
-        return flask.get().getTranslationKey();
+        return flaskEffect.get().getTranslationKey();
     }
 
     @Override
-    public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) { }
+    public void performEffect(LivingEntity livingEntity, int amplifier) { }
 
     @Override
-    public void affectEntity(@Nullable Entity source, @Nullable Entity indirectSource, LivingEntity entityLivingBaseIn, int amplifier, double health) { }
+    public void affectEntity(@Nullable Entity source, @Nullable Entity indirectSource, LivingEntity livingEntity, int amplifier, double health) { }
 }

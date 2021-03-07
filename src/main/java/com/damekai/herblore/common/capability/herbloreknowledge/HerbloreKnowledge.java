@@ -1,7 +1,7 @@
 package com.damekai.herblore.common.capability.herbloreknowledge;
 
-import com.damekai.herblore.common.flask.Flask;
-import com.damekai.herblore.common.flask.ModFlasks;
+import com.damekai.herblore.common.flask.ModFlaskEffects;
+import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class HerbloreKnowledge implements IHerbloreKnowledge
 {
-    private final Map<ItemReagent, Collection<Flask>> reagentKnowledge;
+    private final Map<ItemReagent, Collection<FlaskEffect>> reagentKnowledge;
 
     public HerbloreKnowledge()
     {
@@ -30,7 +30,7 @@ public class HerbloreKnowledge implements IHerbloreKnowledge
 
     @Override
     @Nullable
-    public ImmutableList<Flask> getKnownFlasks(ItemReagent reagent)
+    public ImmutableList<FlaskEffect> getKnownFlaskEffects(ItemReagent reagent)
     {
         if (!reagentKnowledge.containsKey(reagent))
         {
@@ -40,17 +40,17 @@ public class HerbloreKnowledge implements IHerbloreKnowledge
     }
 
     @Override
-    public void setFlaskKnown(PlayerEntity playerEntity, ItemReagent reagent, Flask flask)
+    public void setFlaskEffectKnown(PlayerEntity playerEntity, ItemReagent reagent, FlaskEffect flaskEffect)
     {
         if (!reagentKnowledge.containsKey(reagent))
         {
-            Collection<Flask> knownFlasks = new ArrayList<>();
-            knownFlasks.add(flask);
+            Collection<FlaskEffect> knownFlasks = new ArrayList<>();
+            knownFlasks.add(flaskEffect);
             reagentKnowledge.put(reagent, knownFlasks);
         }
-        else if (!reagentKnowledge.get(reagent).contains(flask))
+        else if (!reagentKnowledge.get(reagent).contains(flaskEffect))
         {
-            reagentKnowledge.get(reagent).add(flask);
+            reagentKnowledge.get(reagent).add(flaskEffect);
         }
         else
         {
@@ -78,10 +78,10 @@ public class HerbloreKnowledge implements IHerbloreKnowledge
             reagentKnowledge.get(reagent).forEach((flask) ->
             {
                 CompoundNBT flaskNbt = new CompoundNBT();
-                flaskNbt.putString("flask_name", flask.getRegistryName().toString());
+                flaskNbt.putString("flask_effect_name", flask.getRegistryName().toString());
                 flasksNbt.add(flaskNbt);
             });
-            reagentKnowledgeNbt.put("flasks", flasksNbt); // "value"
+            reagentKnowledgeNbt.put("flask_effects", flasksNbt); // "value"
 
             reagentKnowledgeMapNbt.add(reagentKnowledgeNbt);
         });
@@ -101,9 +101,9 @@ public class HerbloreKnowledge implements IHerbloreKnowledge
                     {
                         ItemReagent reagent = (ItemReagent) item;
 
-                         reagentKnowledge.put(reagent, reagentKnowledgeNbt.getList("flasks", Constants.NBT.TAG_COMPOUND)
+                         reagentKnowledge.put(reagent, reagentKnowledgeNbt.getList("flask_effects", Constants.NBT.TAG_COMPOUND)
                                  .stream().map((inbt) -> (CompoundNBT) inbt) // Cast all elements to CompoundNBT.
-                                 .map((flaskNbt) -> ModFlasks.getFlaskFromRegistry(flaskNbt.getString("flask_name"))) // Convert to Flasks using registry.
+                                 .map((flaskNbt) -> ModFlaskEffects.getFlaskEffectFromRegistry(flaskNbt.getString("flask_effect_name"))) // Convert to Flask Effects using registry.
                                  .filter(Objects::nonNull) // Filter out null entries.
                                  .collect(Collectors.toList())); // Transform to collection.
                     }

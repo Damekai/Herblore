@@ -1,13 +1,11 @@
 package com.damekai.herblore.common.capability.flaskhandler;
 
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
-import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
-import com.damekai.herblore.common.flask.Flask;
-import com.damekai.herblore.common.flask.FlaskInstance;
-import com.damekai.herblore.common.util.MutableInt;
+import com.damekai.herblore.common.flask.base.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -17,126 +15,156 @@ import java.util.*;
 
 public class FlaskHandler implements IFlaskHandler
 {
-    /* A map of all currently active Flask Instances. */
-    private final List<FlaskInstance> activeFlaskInstances;
+    /* A map of all currently active Flask Effect Instances. */
+    private final List<FlaskEffectInstance> activeFlaskEffectInstances;
 
     public FlaskHandler()
     {
-        activeFlaskInstances = new ArrayList<>();
+        activeFlaskEffectInstances = new ArrayList<>();
     }
 
-    public void applyFlask(FlaskInstance flaskInstance, LivingEntity livingEntity)
+    public void applyFlaskEffectInstance(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        activeFlaskInstances.add(flaskInstance);
+        activeFlaskEffectInstances.add(flaskEffectInstance);
 
         // Always add toxicity first so that it shows up first in the GUI (most of the time, at least; can't control vanilla).
         ToxicityHandler toxicityHandler = ToxicityHandler.getToxicityHandlerOf(livingEntity);
         if (toxicityHandler != null)
         {
-            toxicityHandler.addToxicity(livingEntity, flaskInstance.getPotency());
+            toxicityHandler.addToxicity(livingEntity, flaskEffectInstance.getPotency());
         }
 
-        // Call onApply on each Applicable Flask.
-        flaskInstance.getFlask().getApplicableFlaskEffects().forEach((applicableFlaskEffect) -> applicableFlaskEffect.onApply(flaskInstance, livingEntity));
+        FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
+
+        // Call onApply if the Flask Effect is applicable.
+        if (flaskEffect instanceof ApplicableFlaskEffect)
+        {
+            ((ApplicableFlaskEffect) flaskEffect).onApply(flaskEffectInstance, livingEntity);
+        }
 
         // Add the GUI Effect, if there is one.
-        if (flaskInstance.getFlask().getGuiRenderEffect() != null)
+        Effect guiEffect = flaskEffect.getGuiEffect();
+        if (guiEffect != null)
         {
-            livingEntity.addPotionEffect(new EffectInstance(flaskInstance.getFlask().getGuiRenderEffect(), flaskInstance.getDurationFull()));
+            livingEntity.addPotionEffect(new EffectInstance(guiEffect, flaskEffectInstance.getDurationFull()));
         }
-    }
-
-    public FlaskInstance getFlask(Flask flask)
-    {
-         return activeFlaskInstances.stream().filter((activeFlaskInstance) -> flask == activeFlaskInstance.getFlask()).findAny().orElse(null);
     }
 
     /**
-     *  Attempts to find a FlaskInstance of a Flask that has the desired FlaskEffect. If there are multiple
-     *  FlaskInstances with Flasks that have that FlaskEffect, then the FlaskInstance with the highest potency
+     *  Attempts to find a Flask Effect Instance that has the desired Flask Effect. If there are multiple
+     *  Flask Effect Instances that have that Flask Effect, then the Flask Effect Instance with the highest potency
      *  is chosen.
      *
-     * @param flaskEffect FlaskEffect to search for.
-     * @return The FlaskInstance with the highest potency that has a Flask with the desired FlaskEffect.
+     * @param flaskEffect Flask Effect to search for.
+     * @return The Flask Effect Instance with the highest potency that has the desired Flask Effect.
      */
-    public FlaskInstance getFlaskWithEffect(FlaskEffect flaskEffect)
+    public FlaskEffectInstance getFlaskEffectInstance(FlaskEffect flaskEffect)
     {
-        return activeFlaskInstances.stream()
-                .filter((activeFlaskInstance) -> activeFlaskInstance.getFlask().getFlaskEffects().contains(flaskEffect))
-                .max(Comparator.comparingInt(FlaskInstance::getPotency))
+        return activeFlaskEffectInstances.stream()
+                .filter((activeFlaskEffectInstance) -> activeFlaskEffectInstance.getFlaskEffect() == flaskEffect)
+                .max(Comparator.comparingInt(FlaskEffectInstance::getPotency))
                 .orElse(null);
     }
 
-    private void tickFlasks(LivingEntity livingEntity)
+    private void tickFlaskEffectInstances(LivingEntity livingEntity)
     {
-        Iterator<FlaskInstance> iter = activeFlaskInstances.iterator(); // Use iterator for in-place removal.
+        Iterator<FlaskEffectInstance> iter = activeFlaskEffectInstances.iterator(); // Use iterator for in-place removal.
         while (iter.hasNext())
         {
-            FlaskInstance flaskInstance = iter.next();
+            FlaskEffectInstance flaskEffectInstance = iter.next();
+            FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
 
-            // Tick the Tickable Flask Effects.
-            flaskInstance.getFlask().getTickingFlaskEffects().forEach((tickingFlaskEffect) -> tickingFlaskEffect.onTick(flaskInstance, livingEntity));
-
-            // Decrement the duration remaining on the FlaskInstance, and handle the case of Flask expiry.
-            if (flaskInstance.decrementDuration())
+            // Call onTick if the Flask Effect is tickable.
+            if (flaskEffect instanceof TickingFlaskEffect)
             {
-                // Handle expiry for Duration Flask Effects (also includes Tickable Flask Effects).
-                flaskInstance.getFlask().getDurationFlaskEffects().forEach((durationFlaskEffect) -> durationFlaskEffect.onExpire(flaskInstance, livingEntity));
+                ((TickingFlaskEffect) flaskEffect).onTick(flaskEffectInstance, livingEntity);
+            }
+
+            // Decrement the duration remaining on the FlaskInstance, and handle the case of expiry for Duration Flask Effects.
+            if (flaskEffectInstance.decrementDuration())
+            {
+                // Handle expiry for Duration Flask Effects (also includes Ticking Flask Effects).
+                if (flaskEffect instanceof DurationFlaskEffect)
+                {
+                    ((DurationFlaskEffect) flaskEffect).onExpire(flaskEffectInstance, livingEntity);
+                }
 
                 // Remove from list of active flasks.
                 iter.remove();
 
                 // Remove effect from GUI, which may or may not be redundant, but is here just in case.
-                livingEntity.removePotionEffect(flaskInstance.getFlask().getGuiRenderEffect()); //
+                Effect guiEffect = flaskEffect.getGuiEffect();
+                if (guiEffect != null)
+                {
+                    livingEntity.removePotionEffect(guiEffect);
+                }
             }
         }
     }
 
-    public void removeFlask(FlaskInstance flaskInstance, LivingEntity livingEntity)
+    public void removeFlaskEffectInstance(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        if (activeFlaskInstances.remove(flaskInstance))
+        if (activeFlaskEffectInstances.remove(flaskEffectInstance))
         {
-            // Handle removal for Duration Flask Effects (also includes Tickable Flask Effects).
-            flaskInstance.getFlask().getDurationFlaskEffects().forEach((durationFlaskEffect) -> durationFlaskEffect.onRemove(flaskInstance, livingEntity));
+            FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
+
+            // Handle removal for Duration Flask Effects (also includes Ticking Flask Effects).
+            if (flaskEffect instanceof DurationFlaskEffect)
+            {
+                ((DurationFlaskEffect) flaskEffect).onRemove(flaskEffectInstance, livingEntity);
+            }
 
             // Remove effect from GUI.
-            livingEntity.removePotionEffect(flaskInstance.getFlask().getGuiRenderEffect());
+            Effect guiEffect = flaskEffect.getGuiEffect();
+            if (guiEffect != null)
+            {
+                livingEntity.removePotionEffect(guiEffect);
+            }
         }
     }
 
-    public void removeAllFlasks(LivingEntity livingEntity)
+    public void removeAllFlaskEffectInstances(LivingEntity livingEntity)
     {
-        activeFlaskInstances.forEach(
-                (flaskInstance) ->
+        activeFlaskEffectInstances.forEach(
+                (flaskEffectInstance) ->
                 {
-                    // Handle removal for Duration Flask Effects (also includes Tickable Flask Effects).
-                    flaskInstance.getFlask().getDurationFlaskEffects().forEach((durationFlaskEffect) -> durationFlaskEffect.onRemove(flaskInstance, livingEntity));
+                    FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
+
+                    // Handle removal for Duration Flask Effects (also includes Ticking Flask Effects).
+                    if (flaskEffect instanceof DurationFlaskEffect)
+                    {
+                        ((DurationFlaskEffect) flaskEffect).onRemove(flaskEffectInstance, livingEntity);
+                    }
 
                     // Remove effect from GUI.
-                    livingEntity.removePotionEffect(flaskInstance.getFlask().getGuiRenderEffect());
+                    Effect guiEffect = flaskEffect.getGuiEffect();
+                    if (guiEffect != null)
+                    {
+                        livingEntity.removePotionEffect(guiEffect);
+                    }
                 }
         );
-        activeFlaskInstances.clear();
+        activeFlaskEffectInstances.clear();
     }
 
 
     public CompoundNBT serializeNBT()
     {
         ListNBT nbtList = new ListNBT();
-        activeFlaskInstances.forEach((flaskInstance) -> nbtList.add(flaskInstance.write(new CompoundNBT())));
+        activeFlaskEffectInstances.forEach((flaskInstance) -> nbtList.add(flaskInstance.write(new CompoundNBT())));
 
         CompoundNBT nbt = new CompoundNBT();
-        nbt.put("active_flask_instances", nbtList);
+        nbt.put("active_flask_effect_instances", nbtList);
 
         return nbt;
     }
 
     public void deserializeNBT(CompoundNBT nbt)
     {
-        if (nbt.contains("active_flask_instances"))
+        if (nbt.contains("active_flask_effect_instances"))
         {
-            ListNBT nbtList = nbt.getList("active_flask_instances", Constants.NBT.TAG_COMPOUND);
-            nbtList.forEach((inbt) -> activeFlaskInstances.add(FlaskInstance.read((CompoundNBT) inbt)));
+            ListNBT nbtList = nbt.getList("active_flask_effect_instances", Constants.NBT.TAG_COMPOUND);
+            nbtList.forEach((inbt) -> activeFlaskEffectInstances.add(FlaskEffectInstance.read((CompoundNBT) inbt)));
         }
     }
 
@@ -152,7 +180,7 @@ public class FlaskHandler implements IFlaskHandler
         FlaskHandler flaskHandler = getFlaskHandlerOf(livingEntity);
         if (flaskHandler != null)
         {
-            flaskHandler.tickFlasks(livingEntity);
+            flaskHandler.tickFlaskEffectInstances(livingEntity);
         }
     }
 }

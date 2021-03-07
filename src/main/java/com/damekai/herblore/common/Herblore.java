@@ -11,11 +11,10 @@ import com.damekai.herblore.common.capability.herbloreknowledge.HerbloreKnowledg
 import com.damekai.herblore.common.capability.toxicityhandler.CapabilityToxicityHandler;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
 import com.damekai.herblore.common.data.ModRecipeProvider;
-import com.damekai.herblore.common.flaskeffect.FlaskEffectBounding;
+import com.damekai.herblore.common.flask.FlaskEffectStrider;
 import com.damekai.herblore.common.effect.ModEffects;
-import com.damekai.herblore.common.flaskeffect.FlaskEffectFireEater;
-import com.damekai.herblore.common.flaskeffect.ModFlaskEffects;
-import com.damekai.herblore.common.flask.ModFlasks;
+import com.damekai.herblore.common.flask.FlaskEffectQuench;
+import com.damekai.herblore.common.flask.ModFlaskEffects;
 import com.damekai.herblore.common.item.ModItemColors;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
@@ -68,14 +67,13 @@ public class Herblore
         ModFeatures.FEATURES.register(modBus);
         ModEffects.EFFECTS.register(modBus);
         ModFlaskEffects.FLASK_EFFECTS.register(modBus);
-        ModFlasks.FLASKS.register(modBus);
 
         MinecraftForge.EVENT_BUS.addListener(FlaskHandler::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(ToxicityHandler::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(HerbloreKnowledge::onPlayerLoggedIn);
 
-        MinecraftForge.EVENT_BUS.addListener(FlaskEffectBounding::onLivingJump);
-        MinecraftForge.EVENT_BUS.addListener(FlaskEffectFireEater::onLivingDamage);
+        MinecraftForge.EVENT_BUS.addListener(FlaskEffectStrider::onLivingJump);
+        MinecraftForge.EVENT_BUS.addListener(FlaskEffectQuench::onLivingDamage);
 
         HerblorePacketHandler.registerPackets();
     }

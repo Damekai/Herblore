@@ -1,15 +1,13 @@
-package com.damekai.herblore.common.flask;
+package com.damekai.herblore.common.flask.base;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class FlaskInstance
+public class FlaskEffectInstance
 {
-    private final Flask flask;
+    private final FlaskEffect flaskEffect;
     private final int potency;
     private final int durationFull;
     private int durationRemaining;
@@ -18,18 +16,18 @@ public class FlaskInstance
     /**
      * Used for Flasks with no duration.
      */
-    public FlaskInstance(Flask flask, int potency)
+    public FlaskEffectInstance(FlaskEffect flaskEffect, int potency)
     {
-        this.flask = flask;
+        this.flaskEffect = flaskEffect;
         this.potency = potency;
         this.durationFull = 0;
         this.durationRemaining = 0;
         this.tag = null;
     }
 
-    public FlaskInstance(Flask flask, int potency, int duration)
+    public FlaskEffectInstance(FlaskEffect flaskEffect, int potency, int duration)
     {
-        this.flask = flask;
+        this.flaskEffect = flaskEffect;
         this.potency = potency;
         this.durationFull = duration;
         this.durationRemaining = duration;
@@ -39,18 +37,18 @@ public class FlaskInstance
     /**
      * Private constructor for use when deserializing. Includes parameter for remaining duration and serialized data.
      */
-    private FlaskInstance(Flask flask, int potency, int durationFull, int durationRemaining, CompoundNBT tag)
+    private FlaskEffectInstance(FlaskEffect flaskEffect, int potency, int durationFull, int durationRemaining, CompoundNBT tag)
     {
-        this.flask = flask;
+        this.flaskEffect = flaskEffect;
         this.potency = potency;
         this.durationFull = durationFull;
         this.durationRemaining = durationRemaining;
         this.tag = tag;
     }
 
-    public Flask getFlask()
+    public FlaskEffect getFlaskEffect()
     {
-        return flask;
+        return flaskEffect;
     }
 
     public int getPotency()
@@ -89,7 +87,7 @@ public class FlaskInstance
 
     public CompoundNBT write(CompoundNBT nbt)
     {
-        nbt.putString("flask", flask.getRegistryName().toString());
+        nbt.putString("flask_effect", flaskEffect.getRegistryName().toString());
         nbt.putInt("potency", potency);
         nbt.putInt("duration_full", durationFull);
         nbt.putInt("duration_remaining", durationRemaining);
@@ -101,10 +99,10 @@ public class FlaskInstance
         return nbt;
     }
 
-    public static FlaskInstance read(CompoundNBT nbt)
+    public static FlaskEffectInstance read(CompoundNBT nbt)
     {
-        return new FlaskInstance(
-                Flask.getFlaskFromRegistry(new ResourceLocation(nbt.getString("flask"))),
+        return new FlaskEffectInstance(
+                FlaskEffect.getFlaskEffectFromRegistry(new ResourceLocation(nbt.getString("flask_effect"))),
                 nbt.getInt("potency"),
                 nbt.getInt("duration_full"),
                 nbt.getInt("duration_remaining"),

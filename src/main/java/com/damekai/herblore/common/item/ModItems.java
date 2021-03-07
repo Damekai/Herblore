@@ -2,13 +2,12 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.ModBlocks;
-import com.damekai.herblore.common.flask.Flask;
-import com.damekai.herblore.common.flask.ModFlasks;
+import com.damekai.herblore.common.flask.ModFlaskEffects;
+import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.util.WeightedSet;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -17,70 +16,70 @@ public class ModItems
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
     public static final RegistryObject<ItemReagent> PEACEBLOOM = ITEMS.register("peacebloom", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.STRIDER, 2);
-                add(ModFlasks.QUENCH, 1);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.STRIDER, 2);
+                add(ModFlaskEffects.QUENCH, 1);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> SILVERLEAF = ITEMS.register("silverleaf", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.HIGH_NOON, 1);
-                add(ModFlasks.QUENCH, 1);
-                add(ModFlasks.DREDGE, 1);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.HIGH_NOON, 1);
+                add(ModFlaskEffects.QUENCH, 1);
+                add(ModFlaskEffects.DREDGE, 1);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> EARTHROOT = ITEMS.register("earthroot", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.DREDGE, 2);
-                add(ModFlasks.QUENCH, 1);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.DREDGE, 2);
+                add(ModFlaskEffects.QUENCH, 1);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MAGEROYAL = ITEMS.register("mageroyal", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.WITCHING_HOUR, 2);
-                add(ModFlasks.HIGH_NOON, 1);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.WITCHING_HOUR, 2);
+                add(ModFlaskEffects.HIGH_NOON, 1);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> BRIARTHORN = ITEMS.register("briarthorn", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.STRIDER, 1);
-                add(ModFlasks.QUENCH, 2);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.STRIDER, 1);
+                add(ModFlaskEffects.QUENCH, 2);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> WILDBLOOM = ITEMS.register("wildbloom", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.HIGH_NOON, 1);
-                add(ModFlasks.STRIDER, 2);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.HIGH_NOON, 1);
+                add(ModFlaskEffects.STRIDER, 2);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> FADELEAF = ITEMS.register("fadeleaf", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.WITCHING_HOUR, 1);
-                add(ModFlasks.QUENCH, 2);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.WITCHING_HOUR, 1);
+                add(ModFlaskEffects.QUENCH, 2);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> GOLDTHORN = ITEMS.register("goldthorn", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.PENANCE, 2);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.PENANCE, 2);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> SUNGRASS = ITEMS.register("sungrass", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.PENANCE, 2);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.PENANCE, 2);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> DREAMFOIL = ITEMS.register("dreamfoil", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<Flask>>() {{
-                add(ModFlasks.PENANCE, 1);
+            new WeightedSet<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.PENANCE, 1);
             }}
     ));
 

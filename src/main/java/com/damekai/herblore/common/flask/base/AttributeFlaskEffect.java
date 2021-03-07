@@ -1,7 +1,6 @@
-package com.damekai.herblore.common.flaskeffect.base;
+package com.damekai.herblore.common.flask.base;
 
 import com.damekai.herblore.common.Herblore;
-import com.damekai.herblore.common.flask.FlaskInstance;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
@@ -16,39 +15,39 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
     private final UUID uuid;
     private final ImmutableList<AttributePotencyFactor> attributePotencyFactors;
 
-    protected AttributeFlaskEffect(String translationName, UUID uuid, int attributesUpdateFrequency, AttributePotencyFactor... attributePotencyFactors)
+    protected AttributeFlaskEffect(FlaskEffect.Properties properties, UUID uuid, int attributesUpdateFrequency, AttributePotencyFactor... attributePotencyFactors)
     {
-        super(translationName, attributesUpdateFrequency);
+        super(properties, attributesUpdateFrequency);
 
         this.uuid = uuid;
         this.attributePotencyFactors = ImmutableList.copyOf(attributePotencyFactors);
     }
 
     @Override
-    protected void apply(FlaskInstance flaskInstance, LivingEntity livingEntity)
+    protected void apply(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        applyAttributesModifiers(flaskInstance, livingEntity);
+        applyAttributesModifiers(flaskEffectInstance, livingEntity);
     }
 
     @Override
-    protected void expire(FlaskInstance flaskInstance, LivingEntity livingEntity)
+    protected void expire(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        removeAttributesModifiers(flaskInstance, livingEntity);
+        removeAttributesModifiers(flaskEffectInstance, livingEntity);
     }
 
     @Override
-    protected void remove(FlaskInstance flaskInstance, LivingEntity livingEntity)
+    protected void remove(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        removeAttributesModifiers(flaskInstance, livingEntity);
+        removeAttributesModifiers(flaskEffectInstance, livingEntity);
     }
 
     @Override
-    protected void tick(FlaskInstance flaskInstance, LivingEntity livingEntity)
+    protected void tick(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        applyAttributesModifiers(flaskInstance, livingEntity); // Application function removes, then applies.
+        applyAttributesModifiers(flaskEffectInstance, livingEntity); // Application function removes, then applies.
     }
 
-    private void applyAttributesModifiers(FlaskInstance flaskInstance, LivingEntity livingEntity)
+    private void applyAttributesModifiers(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
         AttributeModifierManager attributeModifierManager = livingEntity.getAttributeManager();
         attributePotencyFactors.forEach((attributePotencyFactor) ->
@@ -59,7 +58,7 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
                 modifiableAttributeInstance.removeModifier(uuid);
                 AttributeModifier attributeModifier = new AttributeModifier(uuid,
                         this::getTranslationKey,
-                        attributePotencyFactor.amount.get(this, flaskInstance, livingEntity),
+                        attributePotencyFactor.amount.get(this, flaskEffectInstance, livingEntity),
                         attributePotencyFactor.operation);
                 modifiableAttributeInstance.applyPersistentModifier(attributeModifier);
 
@@ -68,7 +67,7 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
         });
     }
 
-    private void removeAttributesModifiers(FlaskInstance flaskInstance, LivingEntity livingEntity)
+    private void removeAttributesModifiers(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
         AttributeModifierManager attributeModifierManager = livingEntity.getAttributeManager();
         attributePotencyFactors.forEach((attributePotencyFactor) ->
@@ -84,7 +83,7 @@ public abstract class AttributeFlaskEffect extends TickingFlaskEffect
 
     protected static class AttributePotencyFactor
     {
-        public interface ModifierAmount { float get(AttributeFlaskEffect attributeFlaskEffect, FlaskInstance flaskInstance, LivingEntity livingEntity); }
+        public interface ModifierAmount { float get(AttributeFlaskEffect attributeFlaskEffect, FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity); }
 
         private final Attribute attribute;
         private final AttributeModifier.Operation operation;

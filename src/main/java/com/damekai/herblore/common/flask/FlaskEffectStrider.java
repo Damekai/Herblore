@@ -1,16 +1,16 @@
-package com.damekai.herblore.common.flaskeffect;
+package com.damekai.herblore.common.flask;
 
 import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
-import com.damekai.herblore.common.flask.FlaskInstance;
-import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
+import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
+import com.damekai.herblore.common.flask.base.FlaskEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
-public class FlaskEffectBounding extends FlaskEffect
+public class FlaskEffectStrider extends FlaskEffect
 {
-    public FlaskEffectBounding()
+    public FlaskEffectStrider(FlaskEffect.Properties properties)
     {
-        super("bounding");
+        super(properties);
     }
 
     public static void onLivingJump(LivingEvent.LivingJumpEvent event)
@@ -20,7 +20,7 @@ public class FlaskEffectBounding extends FlaskEffect
         FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(livingEntity);
         if (flaskHandler != null)
         {
-            FlaskInstance bounding = flaskHandler.getFlaskWithEffect(ModFlaskEffects.BOUNDING.get());
+            FlaskEffectInstance bounding = flaskHandler.getFlaskEffectInstance(ModFlaskEffects.STRIDER.get());
             if (bounding != null)
             {
                 livingEntity.setMotion(livingEntity.getMotion().add(

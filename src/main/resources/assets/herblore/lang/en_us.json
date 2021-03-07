@@ -37,36 +37,11 @@
 
     "effect.herblore.toxicity": "Toxicity",
 
-    "flask_effect.herblore.debug_alpha": "Debug Effect Alpha",
-    "flask_effect.herblore.debug_beta": "Debug Effect Beta",
-    "flask_effect.herblore.debug_gamma": "Debug Effect Gamma",
-    "flask_effect.herblore.debug_delta": "Debug Effect Delta",
-    "flask_effect.herblore.debug_epsilon": "Debug Effect Epsilon",
-
-    "flask_effect.herblore.bounding": "Bounding",
-    "flask_effect.herblore.power_hour_noon": "Power Hour: Noon",
-    "flask_effect.herblore.power_hour_midnight": "Power Hour: Midnight",
-    "flask_effect.herblore.subterranean": "Subterranean",
-    "flask_effect.herblore.fire_eater": "Fire Eater",
-    "flask_effect.herblore.blood_pact": "Blood Pact",
-
-    "flaskof.flask.herblore.debug_bonanza": "Debug Bonanza",
-
-    "flaskof.flask.herblore.strider": "Strider",
-    "flaskof.flask.herblore.high_noon": "High Noon",
-    "flaskof.flask.herblore.witching_hour": "Witching Hour",
-    "flaskof.flask.herblore.dredge": "Dredge",
-    "flaskof.flask.herblore.quench": "Quench",
-    "flaskof.flask.herblore.penance": "Penance",
-
-    "flask.herblore.debug_bonanza": "Debug Bonanza",
-    "flask.herblore.debug_ab": "Debug AB",
-    "flask.herblore.debug_cde": "Debug CDE",
-
-    "flask.herblore.strider": "Strider",
-    "flask.herblore.high_noon": "High Noon",
-    "flask.herblore.witching_hour": "Witching Hour",
-    "flask.herblore.dredge": "Dredge",
-    "flask.herblore.quench": "Quench",
-    "flask.herblore.penance": "Penance"
+    "flask_effect.herblore.debug_alpha": "Debug Alpha",
+    "flask_effect.herblore.strider": "Strider",
+    "flask_effect.herblore.high_noon": "High Noon",
+    "flask_effect.herblore.witching_hour": "Witching Hour",
+    "flask_effect.herblore.dredge": "Dredge",
+    "flask_effect.herblore.quench": "Quench",
+    "flask_effect.herblore.penance": "Penance"
 }

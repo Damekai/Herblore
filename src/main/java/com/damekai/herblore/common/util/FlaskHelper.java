@@ -1,11 +1,10 @@
 package com.damekai.herblore.common.util;
 
-import com.damekai.herblore.common.flask.Flask;
-import com.damekai.herblore.common.flask.FlaskInstance;
-import com.damekai.herblore.common.flask.ModFlasks;
+import com.damekai.herblore.common.flask.ModFlaskEffects;
+import com.damekai.herblore.common.flask.base.FlaskEffect;
+import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import com.damekai.herblore.common.item.ItemReagent;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,53 +15,53 @@ import java.util.*;
 
 public class FlaskHelper
 {
-    public static FlaskInstance makeFlaskInstance(ItemReagent... reagents)
+    public static FlaskEffectInstance makeFlaskEffectInstance(ItemReagent... reagents)
     {
-        Flask resultingFlask = null;
-        int resultingFlaskPoints = 0;
+        FlaskEffect resultingFlaskEffect = null;
+        int resultingFlaskEffectPoints = 0;
 
         ItemReagent firstReagent = reagents[0];
 
-        for (RegistryObject<Flask> flask : firstReagent.getFlaskWeights().getElements())
+        for (RegistryObject<FlaskEffect> flaskEffect : firstReagent.getFlaskEffectWeights().getElements())
         {
             boolean sharedBetweenAllReagents = true;
-            int sumPoints = firstReagent.getFlaskWeights().getWeight(flask);
+            int sumPoints = firstReagent.getFlaskEffectWeights().getWeight(flaskEffect);
             for (int i = 1; i < reagents.length; i++)
             {
                 ItemReagent reagent = reagents[i];
-                if (!reagent.getFlaskWeights().contains(flask))
+                if (!reagent.getFlaskEffectWeights().contains(flaskEffect))
                 {
                     sharedBetweenAllReagents = false;
                     break;
                 }
                 else
                 {
-                    sumPoints += reagent.getFlaskWeights().getWeight(flask);
+                    sumPoints += reagent.getFlaskEffectWeights().getWeight(flaskEffect);
                 }
             }
-            if (sharedBetweenAllReagents && sumPoints > resultingFlaskPoints)
+            if (sharedBetweenAllReagents && sumPoints > resultingFlaskEffectPoints)
             {
-                resultingFlask = flask.get();
-                resultingFlaskPoints = sumPoints;
+                resultingFlaskEffect = flaskEffect.get();
+                resultingFlaskEffectPoints = sumPoints;
             }
         }
 
-        FlaskInstance resultingFlaskInstance;
-        if (resultingFlask != null)
+        FlaskEffectInstance resultingFlaskEffectInstance;
+        if (resultingFlaskEffect != null)
         {
-            resultingFlaskInstance = new FlaskInstance(resultingFlask, resultingFlaskPoints, 100); // TODO: Calculate duration.
+            resultingFlaskEffectInstance = new FlaskEffectInstance(resultingFlaskEffect, resultingFlaskEffectPoints, 100); // TODO: Calculate duration.
         }
         else
         {
-            resultingFlaskInstance = new FlaskInstance(ModFlasks.DEBUG_AB.get(), 0, 0); // TODO: Put some empty Flask thing here.
+            resultingFlaskEffectInstance = new FlaskEffectInstance(ModFlaskEffects.DEBUG_ALPHA.get(), 0, 0); // TODO: Put some empty Flask thing here.
         }
 
-        return resultingFlaskInstance;
+        return resultingFlaskEffectInstance;
     }
 
     public static int getFlaskColor(ItemStack stack)
     {
-        return stack.getOrCreateTag().getInt("flask_color"); // Returns 0 if the flask_color key is not present.
+        return stack.getOrCreateTag().getInt("flask_effect_color"); // Returns 0 if the flask_effect_color key is not present.
     }
 
     public static int getFlaskDoses(ItemStack stack)
@@ -73,72 +72,18 @@ public class FlaskHelper
     @OnlyIn(Dist.CLIENT)
     public static void addFlaskTooltip(ItemStack stack, List<ITextComponent> lores)
     {
-        if (!stack.getOrCreateTag().contains("flask_instance"))
+        if (!stack.getOrCreateTag().contains("flask_effect_instance"))
         {
             return;
         }
 
-        FlaskInstance flaskInstance = FlaskInstance.read(stack.getOrCreateTag().getCompound("flask_instance"));
+        FlaskEffectInstance flaskEffectInstance = FlaskEffectInstance.read(stack.getOrCreateTag().getCompound("flask_effect_instance"));
 
         // Write doses.
         int doses = stack.getOrCreateTag().getInt("flask_doses");
         lores.add(new StringTextComponent(doses + (doses == 1 ? " Dose" : " Doses")).mergeStyle(TextFormatting.BLUE));
 
         // Write potency and duration.
-        lores.add((new StringTextComponent(String.format("Potency %d (%s)", flaskInstance.getPotency(), StringUtils.ticksToElapsedTime(flaskInstance.getDurationFull())))).mergeStyle(TextFormatting.BLUE));
-
-        // Write each FlaskEffect from this Flask.
-        flaskInstance.getFlask().getFlaskEffects().forEach(
-                (flaskEffect) -> lores.add((new TranslationTextComponent(flaskEffect.getTranslationKey()).mergeStyle(TextFormatting.GREEN))));
-    }
-
-    private static String intToNumerals(int value)
-    {
-        StringBuilder numeralBuilder = new StringBuilder();
-
-        while (value != 0)
-        {
-            if (value >= 10)
-            {
-                for (int i = 0; i < value / 10; i++)
-                {
-                    numeralBuilder.append("X");
-                }
-                value %= 10;
-            }
-            else if (value >= 5)
-            {
-                if (value < 9)
-                {
-                    for (int i = 0; i < value / 5; i++)
-                    {
-                        numeralBuilder.append("I");
-                    }
-                    value %= 5;
-                }
-                else
-                {
-                    numeralBuilder.append("IX");
-                    value = 0;
-                }
-            }
-            else if (value >= 1)
-            {
-                if (value < 4)
-                {
-                    for (int i = 0; i < value; i++)
-                    {
-                        numeralBuilder.append("I");
-                    }
-                }
-                else
-                {
-                    numeralBuilder.append("IV");
-                }
-                value = 0;
-            }
-        }
-
-        return numeralBuilder.toString();
+        lores.add((new StringTextComponent(String.format("Potency %d (%s)", flaskEffectInstance.getPotency(), StringUtils.ticksToElapsedTime(flaskEffectInstance.getDurationFull())))).mergeStyle(TextFormatting.BLUE));
     }
 }

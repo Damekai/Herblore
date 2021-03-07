@@ -2,8 +2,8 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
 import com.damekai.herblore.common.capability.herbloreknowledge.HerbloreKnowledge;
-import com.damekai.herblore.common.flask.Flask;
-import com.damekai.herblore.common.flask.FlaskInstance;
+import com.damekai.herblore.common.flask.base.FlaskEffect;
+import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import com.damekai.herblore.common.util.WeightedSet;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.Minecraft;
@@ -26,12 +26,12 @@ import java.util.List;
 
 public class ItemReagent extends Item
 {
-    private final WeightedSet<RegistryObject<Flask>> flaskWeights;
+    private final WeightedSet<RegistryObject<FlaskEffect>> flaskEffectWeights;
 
-    public ItemReagent(WeightedSet<RegistryObject<Flask>> flaskWeights)
+    public ItemReagent(WeightedSet<RegistryObject<FlaskEffect>> flaskEffectWeights)
     {
         super(ModItems.defaultItemProperties());
-        this.flaskWeights = flaskWeights;
+        this.flaskEffectWeights = flaskEffectWeights;
     }
 
     @Override
@@ -65,16 +65,16 @@ public class ItemReagent extends Item
         FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(player);
         if (flaskHandler != null)
         {
-            RegistryObject<Flask> flaskSupplier = flaskWeights.getWeightedRandomEntry();
-            Flask flask = flaskSupplier.get();
-            flaskHandler.applyFlask(new FlaskInstance(flask, flaskWeights.getWeight(flaskSupplier), 100), player);
+            RegistryObject<FlaskEffect> flaskEffectSupplier = flaskEffectWeights.getWeightedRandomEntry();
+            FlaskEffect flaskEffect = flaskEffectSupplier.get();
+            flaskHandler.applyFlaskEffectInstance(new FlaskEffectInstance(flaskEffect, flaskEffectWeights.getWeight(flaskEffectSupplier), 100), player);
 
             if (!world.isRemote)
             {
                 HerbloreKnowledge herbloreKnowledge = HerbloreKnowledge.getHerbloreKnowledgeOf(player);
                 if (herbloreKnowledge != null)
                 {
-                    herbloreKnowledge.setFlaskKnown(player, this, flask);
+                    herbloreKnowledge.setFlaskEffectKnown(player, this, flaskEffect);
                 }
             }
         }
@@ -83,9 +83,9 @@ public class ItemReagent extends Item
         return stack;
     }
 
-    public WeightedSet<RegistryObject<Flask>> getFlaskWeights()
+    public WeightedSet<RegistryObject<FlaskEffect>> getFlaskEffectWeights()
     {
-        return flaskWeights;
+        return flaskEffectWeights;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -97,14 +97,14 @@ public class ItemReagent extends Item
         HerbloreKnowledge herbloreKnowledge = HerbloreKnowledge.getHerbloreKnowledgeOf(Minecraft.getInstance().player);
         if (herbloreKnowledge != null)
         {
-            ImmutableList<Flask> knownFlasks = herbloreKnowledge.getKnownFlasks(this);
-            for (RegistryObject<Flask> flaskSupplier : flaskWeights.getElements())
+            ImmutableList<FlaskEffect> knownFlaskEffects = herbloreKnowledge.getKnownFlaskEffects(this);
+            for (RegistryObject<FlaskEffect> flaskEffectSupplier : flaskEffectWeights.getElements())
             {
-                Flask flask = flaskSupplier.get();
-                if (knownFlasks != null && knownFlasks.contains(flask))
+                FlaskEffect flaskEffect = flaskEffectSupplier.get();
+                if (knownFlaskEffects != null && knownFlaskEffects.contains(flaskEffect))
                 {
-                    tooltip.add(new TranslationTextComponent(flask.getTranslationKey())
-                            .appendString(" " + flaskWeights.getWeight(flaskSupplier))
+                    tooltip.add(new TranslationTextComponent(flaskEffect.getTranslationKey())
+                            .appendString(" " + flaskEffectWeights.getWeight(flaskEffectSupplier))
                             .mergeStyle(TextFormatting.GREEN));
                 }
                 else

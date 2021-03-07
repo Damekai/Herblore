@@ -1,7 +1,7 @@
 package com.damekai.herblore.common.recipe;
 
 import com.damekai.herblore.common.Herblore;
-import com.damekai.herblore.common.flask.FlaskInstance;
+import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import com.damekai.herblore.common.item.ItemMilledReagent;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.item.ModItems;
@@ -51,9 +51,9 @@ public class CrudeFlaskRecipe extends SpecialRecipe
         ItemStack crudeFlaskOutput = new ItemStack(ModItems.CRUDE_FLASK.get());
 
         ArrayList<ItemReagent> inputReagents = getInputReagents(inventory);
-        FlaskInstance flaskInstance = FlaskHelper.makeFlaskInstance(inputReagents.toArray(new ItemReagent[0]));
-        crudeFlaskOutput.getOrCreateTag().put("flask_instance", flaskInstance.write(new CompoundNBT()));
-        crudeFlaskOutput.getOrCreateTag().putInt("flask_color", flaskInstance.getFlask().getColor());
+        FlaskEffectInstance flaskEffectInstance = FlaskHelper.makeFlaskEffectInstance(inputReagents.toArray(new ItemReagent[0]));
+        crudeFlaskOutput.getOrCreateTag().put("flask_effect_instance", flaskEffectInstance.write(new CompoundNBT()));
+        crudeFlaskOutput.getOrCreateTag().putInt("flask_effect_color", flaskEffectInstance.getFlaskEffect().getColor());
 
         Herblore.LOGGER.debug(crudeFlaskOutput.getOrCreateTag().toString());
 

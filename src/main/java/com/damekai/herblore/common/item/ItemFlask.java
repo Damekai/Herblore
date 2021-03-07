@@ -2,8 +2,8 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
-import com.damekai.herblore.common.flask.Flask;
-import com.damekai.herblore.common.flask.FlaskInstance;
+import com.damekai.herblore.common.flask.base.FlaskEffect;
+import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import com.damekai.herblore.common.util.FlaskHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -15,6 +15,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -34,10 +35,10 @@ public class ItemFlask extends Item
     public ITextComponent getDisplayName(ItemStack stack)
     {
         CompoundNBT nbt = stack.getOrCreateTag();
-        if (nbt.contains("flask_instance"))
+        if (nbt.contains("flask_effect_instance"))
         {
-            Flask flask = FlaskInstance.read(nbt.getCompound("flask_instance")).getFlask();
-            return new TranslationTextComponent("flaskof." + flask.getTranslationKey());
+            FlaskEffect flaskEffect = FlaskEffectInstance.read(nbt.getCompound("flask_effect_instance")).getFlaskEffect();
+            return new TranslationTextComponent(flaskEffect.getTranslationKey()).mergeStyle(TextFormatting.GREEN);
         }
         return super.getDisplayName(stack);
     }
@@ -66,15 +67,15 @@ public class ItemFlask extends Item
     {
         CompoundNBT nbt = stack.getOrCreateTag();
 
-        if (nbt.contains("flask_instance"))
+        if (nbt.contains("flask_effect_instance"))
         {
 
             Herblore.LOGGER.debug(nbt.toString());
 
             FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(livingEntity);
             if (flaskHandler != null) {
-                CompoundNBT flaskInstanceTag = nbt.getCompound("flask_instance");
-                flaskHandler.applyFlask(FlaskInstance.read(flaskInstanceTag), livingEntity);
+                CompoundNBT flaskEffectInstanceTag = nbt.getCompound("flask_effect_instance");
+                flaskHandler.applyFlaskEffectInstance(FlaskEffectInstance.read(flaskEffectInstanceTag), livingEntity);
             }
 
             if (nbt.contains("flask_doses"))

@@ -1,17 +1,15 @@
-package com.damekai.herblore.common.flaskeffect;
+package com.damekai.herblore.common.flask;
 
 import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
-import com.damekai.herblore.common.effect.ModEffects;
-import com.damekai.herblore.common.flask.FlaskInstance;
-import com.damekai.herblore.common.flaskeffect.base.FlaskEffect;
+import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
+import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
-public class FlaskEffectFireEater extends FlaskEffect
+public class FlaskEffectQuench extends FlaskEffect
 {
     private static final ImmutableList<String> PREVENTABLE_DAMAGE_TYPES = ImmutableList.of(
             DamageSource.IN_FIRE.damageType,
@@ -19,9 +17,9 @@ public class FlaskEffectFireEater extends FlaskEffect
             DamageSource.LAVA.damageType
     );
 
-    public FlaskEffectFireEater()
+    public FlaskEffectQuench(FlaskEffect.Properties properties)
     {
-        super("fire_eater");
+        super(properties);
     }
 
     public static void onLivingDamage(LivingDamageEvent event)
@@ -39,7 +37,7 @@ public class FlaskEffectFireEater extends FlaskEffect
                     FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(playerEntity);
                     if (flaskHandler != null)
                     {
-                        FlaskInstance fireEater = flaskHandler.getFlaskWithEffect(ModFlaskEffects.FIRE_EATER.get());
+                        FlaskEffectInstance fireEater = flaskHandler.getFlaskEffectInstance(ModFlaskEffects.QUENCH.get());
                         if (fireEater != null)
                         {
                             playerEntity.addExhaustion(event.getAmount() * 5f / fireEater.getPotency()); // Higher potencies cause less exhaustion.
