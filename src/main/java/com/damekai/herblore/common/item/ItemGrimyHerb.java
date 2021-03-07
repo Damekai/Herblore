@@ -18,9 +18,9 @@ import net.minecraftforge.fml.RegistryObject;
 
 public class ItemGrimyHerb extends Item
 {
-    private final WeightedSet<RegistryObject<ItemReagent>> outputs;
+    private final WeightedSet<RegistryObject<Item>> outputs;
 
-    public ItemGrimyHerb(WeightedSet<RegistryObject<ItemReagent>> outputs)
+    public ItemGrimyHerb(WeightedSet<RegistryObject<Item>> outputs)
     {
         super(ModItems.defaultItemProperties());
 
@@ -55,7 +55,7 @@ public class ItemGrimyHerb extends Item
         return ActionResult.resultPass(stack);
     }
 
-    public WeightedSet<RegistryObject<ItemReagent>> getOutputs()
+    public WeightedSet<RegistryObject<Item>> getOutputs()
     {
         return outputs;
     }

@@ -23,6 +23,7 @@ import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Random;
 
 public class ItemReagent extends Item
 {
@@ -32,6 +33,14 @@ public class ItemReagent extends Item
     {
         super(ModItems.defaultItemProperties());
         this.flaskEffectWeights = flaskEffectWeights;
+    }
+
+    @Override
+    public ItemStack getDefaultInstance()
+    {
+        ItemStack stack = super.getDefaultInstance();
+        stack.getOrCreateTag().putInt("potency", -1);
+        return stack;
     }
 
     @Override
@@ -97,21 +106,19 @@ public class ItemReagent extends Item
         HerbloreKnowledge herbloreKnowledge = HerbloreKnowledge.getHerbloreKnowledgeOf(Minecraft.getInstance().player);
         if (herbloreKnowledge != null)
         {
+            tooltip.add(new TranslationTextComponent("Potency").appendString(" " + stack.getOrCreateTag().getInt("potency")).mergeStyle(TextFormatting.BLUE));
+
             ImmutableList<FlaskEffect> knownFlaskEffects = herbloreKnowledge.getKnownFlaskEffects(this);
             for (RegistryObject<FlaskEffect> flaskEffectSupplier : flaskEffectWeights.getElements())
             {
                 FlaskEffect flaskEffect = flaskEffectSupplier.get();
                 if (knownFlaskEffects != null && knownFlaskEffects.contains(flaskEffect))
                 {
-                    tooltip.add(new TranslationTextComponent(flaskEffect.getTranslationKey())
-                            .appendString(" " + flaskEffectWeights.getWeight(flaskEffectSupplier))
-                            .mergeStyle(TextFormatting.GREEN));
+                    tooltip.add(new TranslationTextComponent(flaskEffect.getTranslationKey()).mergeStyle(TextFormatting.GREEN));
                 }
                 else
                 {
-                    tooltip.add(new StringTextComponent("???")
-                            .mergeStyle(TextFormatting.GRAY)
-                            .mergeStyle(TextFormatting.ITALIC));
+                    tooltip.add(new StringTextComponent("???").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
                 }
             }
         }

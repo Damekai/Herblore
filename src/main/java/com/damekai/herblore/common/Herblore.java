@@ -10,6 +10,7 @@ import com.damekai.herblore.common.capability.herbloreknowledge.CapabilityHerblo
 import com.damekai.herblore.common.capability.herbloreknowledge.HerbloreKnowledge;
 import com.damekai.herblore.common.capability.toxicityhandler.CapabilityToxicityHandler;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
+import com.damekai.herblore.common.data.ModLootModifiers;
 import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.flask.FlaskEffectStrider;
 import com.damekai.herblore.common.effect.ModEffects;
@@ -19,6 +20,7 @@ import com.damekai.herblore.common.item.ModItemColors;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
 import com.damekai.herblore.common.recipe.CrudeFlaskRecipe;
+import com.damekai.herblore.common.recipe.MilledReagentRecipe;
 import com.damekai.herblore.common.world.ModFeatures;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -67,6 +69,7 @@ public class Herblore
         ModFeatures.FEATURES.register(modBus);
         ModEffects.EFFECTS.register(modBus);
         ModFlaskEffects.FLASK_EFFECTS.register(modBus);
+        ModLootModifiers.LOOT_MODIFIERS.register(modBus);
 
         MinecraftForge.EVENT_BUS.addListener(FlaskHandler::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(ToxicityHandler::onLivingUpdate);
@@ -89,5 +92,6 @@ public class Herblore
     {
         IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
         registry.register(CrudeFlaskRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Herblore.MOD_ID, "crude_flask")));
+        registry.register(MilledReagentRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Herblore.MOD_ID, "milled_reagent")));
     }
 }

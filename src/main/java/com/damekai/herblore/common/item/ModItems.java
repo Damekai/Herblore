@@ -15,14 +15,14 @@ public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
-    public static final RegistryObject<ItemReagent> PEACEBLOOM = ITEMS.register("peacebloom", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_PEACEBLOOM = ITEMS.register("milled_peacebloom", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.STRIDER, 2);
                 add(ModFlaskEffects.QUENCH, 1);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> SILVERLEAF = ITEMS.register("silverleaf", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_SILVERLEAF = ITEMS.register("milled_silverleaf", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.HIGH_NOON, 1);
                 add(ModFlaskEffects.QUENCH, 1);
@@ -30,72 +30,72 @@ public class ModItems
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> EARTHROOT = ITEMS.register("earthroot", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_EARTHROOT = ITEMS.register("milled_earthroot", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.DREDGE, 2);
                 add(ModFlaskEffects.QUENCH, 1);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> MAGEROYAL = ITEMS.register("mageroyal", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_MAGEROYAL = ITEMS.register("milled_mageroyal", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.WITCHING_HOUR, 2);
                 add(ModFlaskEffects.HIGH_NOON, 1);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> BRIARTHORN = ITEMS.register("briarthorn", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_BRIARTHORN = ITEMS.register("milled_briarthorn", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.STRIDER, 1);
                 add(ModFlaskEffects.QUENCH, 2);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> WILDBLOOM = ITEMS.register("wildbloom", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_WILDBLOOM = ITEMS.register("milled_wildbloom", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.HIGH_NOON, 1);
                 add(ModFlaskEffects.STRIDER, 2);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> FADELEAF = ITEMS.register("fadeleaf", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_FADELEAF = ITEMS.register("milled_fadeleaf", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.WITCHING_HOUR, 1);
                 add(ModFlaskEffects.QUENCH, 2);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> GOLDTHORN = ITEMS.register("goldthorn", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_GOLDTHORN = ITEMS.register("milled_goldthorn", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.PENANCE, 2);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> SUNGRASS = ITEMS.register("sungrass", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_SUNGRASS = ITEMS.register("milled_sungrass", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.PENANCE, 2);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> DREAMFOIL = ITEMS.register("dreamfoil", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MILLED_DREAMFOIL = ITEMS.register("milled_dreamfoil", () -> new ItemReagent(
             new WeightedSet<RegistryObject<FlaskEffect>>() {{
                 add(ModFlaskEffects.PENANCE, 1);
             }}
     ));
 
-    public static final RegistryObject<ItemMilledReagent> MILLED_PEACEBLOOM = ITEMS.register("milled_peacebloom", () -> new ItemMilledReagent(PEACEBLOOM));
-    public static final RegistryObject<ItemMilledReagent> MILLED_SILVERLEAF = ITEMS.register("milled_silverleaf", () -> new ItemMilledReagent(SILVERLEAF));
-    public static final RegistryObject<ItemMilledReagent> MILLED_EARTHROOT = ITEMS.register("milled_earthroot", () -> new ItemMilledReagent(EARTHROOT));
-    public static final RegistryObject<ItemMilledReagent> MILLED_MAGEROYAL = ITEMS.register("milled_mageroyal", () -> new ItemMilledReagent(MAGEROYAL));
-    public static final RegistryObject<ItemMilledReagent> MILLED_BRIARTHORN = ITEMS.register("milled_briarthorn", () -> new ItemMilledReagent(BRIARTHORN));
-    public static final RegistryObject<ItemMilledReagent> MILLED_WILDBLOOM = ITEMS.register("milled_wildbloom", () -> new ItemMilledReagent(WILDBLOOM));
-    public static final RegistryObject<ItemMilledReagent> MILLED_FADELEAF = ITEMS.register("milled_fadeleaf", () -> new ItemMilledReagent(FADELEAF));
-    public static final RegistryObject<ItemMilledReagent> MILLED_GOLDTHORN = ITEMS.register("milled_goldthorn", () -> new ItemMilledReagent(GOLDTHORN));
-    public static final RegistryObject<ItemMilledReagent> MILLED_SUNGRASS = ITEMS.register("milled_sungrass", () -> new ItemMilledReagent(SUNGRASS));
-    public static final RegistryObject<ItemMilledReagent> MILLED_DREAMFOIL = ITEMS.register("milled_dreamfoil", () -> new ItemMilledReagent(DREAMFOIL));
+    public static final RegistryObject<Item> PEACEBLOOM = ITEMS.register("peacebloom", () -> new ItemRawReagent(MILLED_PEACEBLOOM, 1, 10));
+    public static final RegistryObject<Item> SILVERLEAF = ITEMS.register("silverleaf", () -> new ItemRawReagent(MILLED_SILVERLEAF, 1, 10));
+    public static final RegistryObject<Item> EARTHROOT = ITEMS.register("earthroot", () -> new ItemRawReagent(MILLED_EARTHROOT, 1, 10));
+    public static final RegistryObject<Item> MAGEROYAL = ITEMS.register("mageroyal", () -> new ItemRawReagent(MILLED_MAGEROYAL, 1, 10));
+    public static final RegistryObject<Item> BRIARTHORN = ITEMS.register("briarthorn", () -> new ItemRawReagent(MILLED_BRIARTHORN, 1, 10));
+    public static final RegistryObject<Item> WILDBLOOM = ITEMS.register("wildbloom", () -> new ItemRawReagent(MILLED_WILDBLOOM, 1, 10));
+    public static final RegistryObject<Item> FADELEAF = ITEMS.register("fadeleaf", () -> new ItemRawReagent(MILLED_FADELEAF, 1, 10));
+    public static final RegistryObject<Item> GOLDTHORN = ITEMS.register("goldthorn", () -> new ItemRawReagent(MILLED_GOLDTHORN, 1, 10));
+    public static final RegistryObject<Item> SUNGRASS = ITEMS.register("sungrass", () -> new ItemRawReagent(MILLED_SUNGRASS, 1, 10));
+    public static final RegistryObject<Item> DREAMFOIL = ITEMS.register("dreamfoil", () -> new ItemRawReagent(MILLED_DREAMFOIL, 1, 10));
 
     public static final RegistryObject<ItemGrimyHerb> GRIMY_HERB = ITEMS.register("grimy_herb", () -> new ItemGrimyHerb(
-            new WeightedSet<RegistryObject<ItemReagent>>() {{
+            new WeightedSet<RegistryObject<Item>>() {{
                 add(ModItems.PEACEBLOOM, 1);
                 add(ModItems.SILVERLEAF, 1);
                 add(ModItems.EARTHROOT, 1);

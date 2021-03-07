@@ -3,6 +3,7 @@ package com.damekai.herblore.common.data;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.recipe.CrudeFlaskRecipe;
+import com.damekai.herblore.common.recipe.MilledReagentRecipe;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -25,7 +26,7 @@ public class ModRecipeProvider extends RecipeProvider
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
     {
         registerCrudeFlask(consumer, "crude_flask/");
-        registerMilledReagents(consumer, "milled_reagent/");
+        registerMilledReagent(consumer, "milled_reagent/");
         registerMiscItems(consumer, "item/");
     }
 
@@ -38,6 +39,11 @@ public class ModRecipeProvider extends RecipeProvider
     private void registerCrudeFlask(Consumer<IFinishedRecipe> consumer, String folder)
     {
         CustomRecipeBuilder.customRecipe(CrudeFlaskRecipe.SERIALIZER).build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "crude_flask").toString());
+    }
+
+    private void registerMilledReagent(Consumer<IFinishedRecipe> consumer, String folder)
+    {
+        CustomRecipeBuilder.customRecipe(MilledReagentRecipe.SERIALIZER).build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_reagent").toString());
     }
 
     private void registerMilledReagents(Consumer<IFinishedRecipe> consumer, String folder)

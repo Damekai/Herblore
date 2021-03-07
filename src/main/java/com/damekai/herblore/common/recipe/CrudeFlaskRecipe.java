@@ -2,7 +2,6 @@ package com.damekai.herblore.common.recipe;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
-import com.damekai.herblore.common.item.ItemMilledReagent;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.util.FlaskHelper;
@@ -98,9 +97,9 @@ public class CrudeFlaskRecipe extends SpecialRecipe
         for (int i = 0; i < inventory.getSizeInventory(); i++)
         {
             ItemStack inputStack = inventory.getStackInSlot(i);
-            if (inputStack != ItemStack.EMPTY && inputStack.getItem() instanceof ItemMilledReagent)
+            if (inputStack != ItemStack.EMPTY && inputStack.getItem() instanceof ItemReagent)
             {
-                inputReagents.add(((ItemMilledReagent)inputStack.getItem()).getBaseReagent().get());
+                inputReagents.add((ItemReagent) inputStack.getItem());
             }
         }
         return inputReagents;
