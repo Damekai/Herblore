@@ -11,75 +11,77 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
+
 public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
     public static final RegistryObject<ItemReagent> MILLED_PEACEBLOOM = ITEMS.register("milled_peacebloom", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.STRIDER, 2);
-                add(ModFlaskEffects.QUENCH, 1);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.STRIDER);
+                add(ModFlaskEffects.QUENCH);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MILLED_SILVERLEAF = ITEMS.register("milled_silverleaf", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.HIGH_NOON, 1);
-                add(ModFlaskEffects.QUENCH, 1);
-                add(ModFlaskEffects.DREDGE, 1);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.HIGH_NOON);
+                add(ModFlaskEffects.QUENCH);
+                add(ModFlaskEffects.DREDGE);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MILLED_EARTHROOT = ITEMS.register("milled_earthroot", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.DREDGE, 2);
-                add(ModFlaskEffects.QUENCH, 1);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.DREDGE);
+                add(ModFlaskEffects.QUENCH);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MILLED_MAGEROYAL = ITEMS.register("milled_mageroyal", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.WITCHING_HOUR, 2);
-                add(ModFlaskEffects.HIGH_NOON, 1);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.WITCHING_HOUR);
+                add(ModFlaskEffects.HIGH_NOON);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MILLED_BRIARTHORN = ITEMS.register("milled_briarthorn", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.STRIDER, 1);
-                add(ModFlaskEffects.QUENCH, 2);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.STRIDER);
+                add(ModFlaskEffects.QUENCH);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MILLED_WILDBLOOM = ITEMS.register("milled_wildbloom", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.HIGH_NOON, 1);
-                add(ModFlaskEffects.STRIDER, 2);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.HIGH_NOON);
+                add(ModFlaskEffects.STRIDER);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MILLED_FADELEAF = ITEMS.register("milled_fadeleaf", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.WITCHING_HOUR, 1);
-                add(ModFlaskEffects.QUENCH, 2);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.WITCHING_HOUR);
+                add(ModFlaskEffects.QUENCH);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MILLED_GOLDTHORN = ITEMS.register("milled_goldthorn", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.PENANCE, 2);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.PENANCE);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MILLED_SUNGRASS = ITEMS.register("milled_sungrass", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.PENANCE, 2);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.PENANCE);
             }}
     ));
 
     public static final RegistryObject<ItemReagent> MILLED_DREAMFOIL = ITEMS.register("milled_dreamfoil", () -> new ItemReagent(
-            new WeightedSet<RegistryObject<FlaskEffect>>() {{
-                add(ModFlaskEffects.PENANCE, 1);
+            new ArrayList<RegistryObject<FlaskEffect>>() {{
+                add(ModFlaskEffects.PENANCE);
             }}
     ));
 

@@ -5,6 +5,7 @@ import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.util.FlaskHelper;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,7 +36,7 @@ public class CrudeFlaskRecipe extends SpecialRecipe
             return false; // Has duplicate reagents or more than four inputs.
         }
 
-        ArrayList<ItemReagent> inputReagents = getInputReagents(inventory);
+        ArrayList<ItemStack> inputReagents = getInputReagents(inventory);
         if (inputReagents.size() != 3)
         {
             return false; // Does not have exactly three reagents.
@@ -49,8 +50,8 @@ public class CrudeFlaskRecipe extends SpecialRecipe
     {
         ItemStack crudeFlaskOutput = new ItemStack(ModItems.CRUDE_FLASK.get());
 
-        ArrayList<ItemReagent> inputReagents = getInputReagents(inventory);
-        FlaskEffectInstance flaskEffectInstance = FlaskHelper.makeFlaskEffectInstance(inputReagents.toArray(new ItemReagent[0]));
+        ImmutableList<ItemStack> inputReagents = ImmutableList.copyOf(getInputReagents(inventory));
+        FlaskEffectInstance flaskEffectInstance = FlaskHelper.makeFlaskEffectInstance(inputReagents);
         crudeFlaskOutput.getOrCreateTag().put("flask_effect_instance", flaskEffectInstance.write(new CompoundNBT()));
         crudeFlaskOutput.getOrCreateTag().putInt("flask_effect_color", flaskEffectInstance.getFlaskEffect().getColor());
 
@@ -91,15 +92,15 @@ public class CrudeFlaskRecipe extends SpecialRecipe
         return inputItems;
     }
 
-    private ArrayList<ItemReagent> getInputReagents(CraftingInventory inventory)
+    private ArrayList<ItemStack> getInputReagents(CraftingInventory inventory)
     {
-        ArrayList<ItemReagent> inputReagents = new ArrayList<>();
+        ArrayList<ItemStack> inputReagents = new ArrayList<>();
         for (int i = 0; i < inventory.getSizeInventory(); i++)
         {
             ItemStack inputStack = inventory.getStackInSlot(i);
             if (inputStack != ItemStack.EMPTY && inputStack.getItem() instanceof ItemReagent)
             {
-                inputReagents.add((ItemReagent) inputStack.getItem());
+                inputReagents.add(inputStack);
             }
         }
         return inputReagents;

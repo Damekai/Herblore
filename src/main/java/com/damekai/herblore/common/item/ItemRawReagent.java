@@ -27,7 +27,7 @@ public class ItemRawReagent extends Item
         return outputReagent;
     }
 
-    public ItemStack getInstanceWithRandomPotency()
+    public ItemStack getInstanceWithRandomPotency() // TODO: Use weighted set to set probabilities for different potencies (i.e. make higher potencies rarer).
     {
         ItemStack result = new ItemStack(this);
         result.getOrCreateTag().putInt("potency", minPotency + RANDOM.nextInt(maxPotency - minPotency + 1));

@@ -27,19 +27,21 @@ import java.util.Random;
 
 public class ItemReagent extends Item
 {
-    private final WeightedSet<RegistryObject<FlaskEffect>> flaskEffectWeights;
+    private static final Random RANDOM = new Random();
 
-    public ItemReagent(WeightedSet<RegistryObject<FlaskEffect>> flaskEffectWeights)
+    private final List<RegistryObject<FlaskEffect>> flaskEffects;
+
+    public ItemReagent(List<RegistryObject<FlaskEffect>> flaskEffects)
     {
         super(ModItems.defaultItemProperties());
-        this.flaskEffectWeights = flaskEffectWeights;
+        this.flaskEffects = flaskEffects;
     }
 
     @Override
     public ItemStack getDefaultInstance()
     {
         ItemStack stack = super.getDefaultInstance();
-        stack.getOrCreateTag().putInt("potency", -1);
+        stack.getOrCreateTag().putInt("potency", 0);
         return stack;
     }
 
@@ -74,9 +76,9 @@ public class ItemReagent extends Item
         FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(player);
         if (flaskHandler != null)
         {
-            RegistryObject<FlaskEffect> flaskEffectSupplier = flaskEffectWeights.getWeightedRandomEntry();
+            RegistryObject<FlaskEffect> flaskEffectSupplier = flaskEffects.get(RANDOM.nextInt(flaskEffects.size()));
             FlaskEffect flaskEffect = flaskEffectSupplier.get();
-            flaskHandler.applyFlaskEffectInstance(new FlaskEffectInstance(flaskEffect, flaskEffectWeights.getWeight(flaskEffectSupplier), 100), player);
+            flaskHandler.applyFlaskEffectInstance(new FlaskEffectInstance(flaskEffect, stack.getOrCreateTag().getInt("potency"), 100), player);
 
             if (!world.isRemote)
             {
@@ -92,9 +94,9 @@ public class ItemReagent extends Item
         return stack;
     }
 
-    public WeightedSet<RegistryObject<FlaskEffect>> getFlaskEffectWeights()
+    public List<RegistryObject<FlaskEffect>> getFlaskEffects()
     {
-        return flaskEffectWeights;
+        return flaskEffects;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -109,7 +111,7 @@ public class ItemReagent extends Item
             tooltip.add(new TranslationTextComponent("Potency").appendString(" " + stack.getOrCreateTag().getInt("potency")).mergeStyle(TextFormatting.BLUE));
 
             ImmutableList<FlaskEffect> knownFlaskEffects = herbloreKnowledge.getKnownFlaskEffects(this);
-            for (RegistryObject<FlaskEffect> flaskEffectSupplier : flaskEffectWeights.getElements())
+            flaskEffects.forEach((flaskEffectSupplier) ->
             {
                 FlaskEffect flaskEffect = flaskEffectSupplier.get();
                 if (knownFlaskEffects != null && knownFlaskEffects.contains(flaskEffect))
@@ -120,7 +122,7 @@ public class ItemReagent extends Item
                 {
                     tooltip.add(new StringTextComponent("???").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
                 }
-            }
+            });
         }
     }
 }

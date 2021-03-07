@@ -4,6 +4,7 @@ import com.damekai.herblore.common.flask.ModFlaskEffects;
 import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import com.damekai.herblore.common.item.ItemReagent;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.*;
@@ -12,51 +13,46 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class FlaskHelper
 {
-    public static FlaskEffectInstance makeFlaskEffectInstance(ItemReagent... reagents)
+    public static FlaskEffectInstance makeFlaskEffectInstance(ImmutableList<ItemStack> reagents)
     {
-        FlaskEffect resultingFlaskEffect = null;
-        int resultingFlaskEffectPoints = 0;
-
-        ItemReagent firstReagent = reagents[0];
-
-        for (RegistryObject<FlaskEffect> flaskEffect : firstReagent.getFlaskEffectWeights().getElements())
-        {
-            boolean sharedBetweenAllReagents = true;
-            int sumPoints = firstReagent.getFlaskEffectWeights().getWeight(flaskEffect);
-            for (int i = 1; i < reagents.length; i++)
-            {
-                ItemReagent reagent = reagents[i];
-                if (!reagent.getFlaskEffectWeights().contains(flaskEffect))
+        // Attempt to find a shared Flask Effect by generating a map that counts the number of times that Flask Effect shows up between all reagents.
+        Map<FlaskEffect, MutableInt> effectCounts = new HashMap<>();
+        reagents.forEach((reagent) ->
+                ((ItemReagent) reagent.getItem()).getFlaskEffects().forEach((flaskEffectSupplier) ->
                 {
-                    sharedBetweenAllReagents = false;
-                    break;
-                }
-                else
-                {
-                    sumPoints += reagent.getFlaskEffectWeights().getWeight(flaskEffect);
-                }
-            }
-            if (sharedBetweenAllReagents && sumPoints > resultingFlaskEffectPoints)
-            {
-                resultingFlaskEffect = flaskEffect.get();
-                resultingFlaskEffectPoints = sumPoints;
-            }
-        }
+                    FlaskEffect flaskEffect = flaskEffectSupplier.get();
+                    if (effectCounts.containsKey(flaskEffect))
+                    {
+                        effectCounts.get(flaskEffect).increment();
+                    }
+                    else
+                    {
+                        effectCounts.put(flaskEffect, new MutableInt(1));
+                    }
+                }));
 
-        FlaskEffectInstance resultingFlaskEffectInstance;
-        if (resultingFlaskEffect != null)
+        // Filter out the shared effect, and if there is one, return an instance of it.
+        Map.Entry<FlaskEffect, MutableInt> resultEntry = effectCounts.entrySet().stream()
+                .filter((effectCount) -> effectCount.getValue().get() == reagents.size())
+                .findAny()
+                .orElse(null);
+        if (resultEntry != null)
         {
-            resultingFlaskEffectInstance = new FlaskEffectInstance(resultingFlaskEffect, resultingFlaskEffectPoints, 100); // TODO: Calculate duration.
+            int potency = (int) Math.round(reagents.stream()
+                    .mapToInt((reagent) -> reagent.getOrCreateTag().getInt("potency"))
+                    .average()
+                    .orElse(0));
+
+            return new FlaskEffectInstance(resultEntry.getKey(), potency, 1200); // TODO: Calculate duration.
         }
         else
         {
-            resultingFlaskEffectInstance = new FlaskEffectInstance(ModFlaskEffects.DEBUG_ALPHA.get(), 0, 0); // TODO: Put some empty Flask thing here.
+            return new FlaskEffectInstance(ModFlaskEffects.DEBUG_ALPHA.get(), 0, 0);
         }
-
-        return resultingFlaskEffectInstance;
     }
 
     public static int getFlaskColor(ItemStack stack)
