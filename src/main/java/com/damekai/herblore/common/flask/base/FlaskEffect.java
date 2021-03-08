@@ -2,6 +2,7 @@ package com.damekai.herblore.common.flask.base;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.flask.ModFlaskEffects;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
@@ -73,5 +74,29 @@ public abstract class FlaskEffect extends ForgeRegistryEntry<FlaskEffect>
             this.guiEffect = guiEffect;
             return this;
         }
+    }
+
+    /**
+     * Implies that a Flask Effect has functionality when it is applied.
+     */
+    public interface IApplicable
+    {
+        void onApply(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity);
+    }
+
+    /**
+     * Implies that a Flask Effect has functionality every tick.
+     */
+    public interface ITickable
+    {
+        void onTick(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity);
+    }
+
+    /**
+     * Implies that a Flask Effect has functionality when it expires.
+     */
+    public interface IExpirable
+    {
+        void onExpire(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity);
     }
 }

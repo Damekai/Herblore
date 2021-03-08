@@ -2,21 +2,21 @@ package com.damekai.herblore.common.flask;
 
 import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
-import com.damekai.herblore.common.flask.base.TickingFlaskEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
 
-public class FlaskEffectPenance extends TickingFlaskEffect
+public class FlaskEffectPenance extends FlaskEffect implements FlaskEffect.IApplicable, FlaskEffect.ITickable
 {
     private static final float HEALTH_RESTORED_PER_POTENCY = 2f;
 
+
     public FlaskEffectPenance(FlaskEffect.Properties properties)
     {
-        super(properties, 20);
+        super(properties);
     }
 
     @Override
-    protected void apply(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
+    public void onApply(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
         float prehealHealth = livingEntity.getHealth();
         livingEntity.heal(flaskEffectInstance.getPotency() * HEALTH_RESTORED_PER_POTENCY);
@@ -26,15 +26,14 @@ public class FlaskEffectPenance extends TickingFlaskEffect
     }
 
     @Override
-    protected void expire(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity) { }
-
-    @Override
-    protected void remove(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity) { }
-
-    @Override
-    protected void tick(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
+    public void onTick(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
+        if (flaskEffectInstance.getDurationRemaining() % (flaskEffectInstance.getDurationFull() / 10) != 0) // Divide the damage over ten damage instances.
+        {
+            return;
+        }
+
         float penalty = flaskEffectInstance.getOrCreateTag().getFloat("penance_penalty");
-        livingEntity.attackEntityFrom(DamageSource.MAGIC, penalty * tickRate / (float) flaskEffectInstance.getDurationFull());
+        livingEntity.attackEntityFrom(DamageSource.MAGIC, penalty * (float) (flaskEffectInstance.getDurationFull() / 10) / (float) flaskEffectInstance.getDurationFull());
     }
 }

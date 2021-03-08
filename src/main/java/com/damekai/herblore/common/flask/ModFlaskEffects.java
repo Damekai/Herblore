@@ -23,7 +23,7 @@ public class ModFlaskEffects
     public static final RegistryObject<FlaskEffect> WITCHING_HOUR = FLASK_EFFECTS.register("witching_hour", () -> new FlaskEffectPowerHour(new FlaskEffect.Properties().translationName("witching_hour").color(0x27055E).guiEffect(ModEffects.WITCHING_HOUR_RENDER),
             18000, UUID.fromString("b7bff02f-54f4-4589-8917-956c669e376a")));
 
-    public static final RegistryObject<FlaskEffect> DREDGE = FLASK_EFFECTS.register("dredge", () -> new FlaskEffectDredge(new FlaskEffect.Properties().translationName("dredge").color(0x6B4A46).guiEffect(ModEffects.DREDGE_RENDER)));
+    public static final RegistryObject<FlaskEffect> DREDGE = FLASK_EFFECTS.register("dredge", () -> new FlaskEffectDredge(new FlaskEffect.Properties().translationName("dredge").color(0x6B4A46).guiEffect(ModEffects.DREDGE_RENDER), 20));
 
     public static final RegistryObject<FlaskEffect> PENANCE = FLASK_EFFECTS.register("penance", () -> new FlaskEffectPenance(new FlaskEffect.Properties().translationName("penance").color(0x9E0313).guiEffect(ModEffects.PENANCE_RENDER)));
 

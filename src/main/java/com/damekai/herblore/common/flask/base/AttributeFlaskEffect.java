@@ -10,41 +10,43 @@ import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 
 import java.util.UUID;
 
-public abstract class AttributeFlaskEffect extends TickingFlaskEffect
+public abstract class AttributeFlaskEffect extends FlaskEffect implements FlaskEffect.IApplicable, FlaskEffect.ITickable, FlaskEffect.IExpirable
 {
     private final UUID uuid;
+    private final int updateFrequency;
     private final ImmutableList<AttributePotencyFactor> attributePotencyFactors;
 
-    protected AttributeFlaskEffect(FlaskEffect.Properties properties, UUID uuid, int attributesUpdateFrequency, AttributePotencyFactor... attributePotencyFactors)
+    protected AttributeFlaskEffect(FlaskEffect.Properties properties, UUID uuid, int updateFrequency, AttributePotencyFactor... attributePotencyFactors)
     {
-        super(properties, attributesUpdateFrequency);
+        super(properties);
 
         this.uuid = uuid;
+        this.updateFrequency = updateFrequency;
         this.attributePotencyFactors = ImmutableList.copyOf(attributePotencyFactors);
     }
 
     @Override
-    protected void apply(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
+    public void onApply(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
         applyAttributesModifiers(flaskEffectInstance, livingEntity);
     }
 
     @Override
-    protected void expire(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
+    public void onTick(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        removeAttributesModifiers(flaskEffectInstance, livingEntity);
-    }
+        if (flaskEffectInstance.getDurationRemaining() % updateFrequency != 0)
+        {
+            return;
+        }
 
-    @Override
-    protected void remove(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
-    {
-        removeAttributesModifiers(flaskEffectInstance, livingEntity);
-    }
-
-    @Override
-    protected void tick(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
-    {
         applyAttributesModifiers(flaskEffectInstance, livingEntity); // Application function removes, then applies.
+    }
+
+
+    @Override
+    public void onExpire(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
+    {
+        removeAttributesModifiers(flaskEffectInstance, livingEntity);
     }
 
     private void applyAttributesModifiers(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)

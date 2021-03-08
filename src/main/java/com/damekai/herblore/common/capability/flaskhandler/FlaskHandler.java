@@ -37,9 +37,9 @@ public class FlaskHandler implements IFlaskHandler
         FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
 
         // Call onApply if the Flask Effect is applicable.
-        if (flaskEffect instanceof ApplicableFlaskEffect)
+        if (flaskEffect instanceof FlaskEffect.IApplicable)
         {
-            ((ApplicableFlaskEffect) flaskEffect).onApply(flaskEffectInstance, livingEntity);
+            ((FlaskEffect.IApplicable) flaskEffect).onApply(flaskEffectInstance, livingEntity);
         }
 
         // Add the GUI Effect, if there is one.
@@ -75,18 +75,18 @@ public class FlaskHandler implements IFlaskHandler
             FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
 
             // Call onTick if the Flask Effect is tickable.
-            if (flaskEffect instanceof TickingFlaskEffect)
+            if (flaskEffect instanceof FlaskEffect.ITickable)
             {
-                ((TickingFlaskEffect) flaskEffect).onTick(flaskEffectInstance, livingEntity);
+                ((FlaskEffect.ITickable) flaskEffect).onTick(flaskEffectInstance, livingEntity);
             }
 
-            // Decrement the duration remaining on the FlaskInstance, and handle the case of expiry for Duration Flask Effects.
+            // Decrement the duration remaining on the Flask Instance, and handle the case of expiry for Expirable Flask Effects.
             if (flaskEffectInstance.decrementDuration())
             {
-                // Handle expiry for Duration Flask Effects (also includes Ticking Flask Effects).
-                if (flaskEffect instanceof DurationFlaskEffect)
+                // Handle expiry for Expirable Flask Effects.
+                if (flaskEffect instanceof FlaskEffect.IExpirable)
                 {
-                    ((DurationFlaskEffect) flaskEffect).onExpire(flaskEffectInstance, livingEntity);
+                    ((FlaskEffect.IExpirable) flaskEffect).onExpire(flaskEffectInstance, livingEntity);
                 }
 
                 // Remove from list of active flasks.
@@ -108,10 +108,10 @@ public class FlaskHandler implements IFlaskHandler
         {
             FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
 
-            // Handle removal for Duration Flask Effects (also includes Ticking Flask Effects).
-            if (flaskEffect instanceof DurationFlaskEffect)
+            // Handle removal for Expirable Flask Effects.
+            if (flaskEffect instanceof FlaskEffect.IExpirable)
             {
-                ((DurationFlaskEffect) flaskEffect).onRemove(flaskEffectInstance, livingEntity);
+                ((FlaskEffect.IExpirable) flaskEffect).onExpire(flaskEffectInstance, livingEntity);
             }
 
             // Remove effect from GUI.
@@ -130,10 +130,10 @@ public class FlaskHandler implements IFlaskHandler
                 {
                     FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
 
-                    // Handle removal for Duration Flask Effects (also includes Ticking Flask Effects).
-                    if (flaskEffect instanceof DurationFlaskEffect)
+                    // Handle removal for Expirable Flask Effects.
+                    if (flaskEffect instanceof FlaskEffect.IExpirable)
                     {
-                        ((DurationFlaskEffect) flaskEffect).onRemove(flaskEffectInstance, livingEntity);
+                        ((FlaskEffect.IExpirable) flaskEffect).onExpire(flaskEffectInstance, livingEntity);
                     }
 
                     // Remove effect from GUI.
