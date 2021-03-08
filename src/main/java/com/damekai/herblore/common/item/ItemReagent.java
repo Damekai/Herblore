@@ -4,6 +4,7 @@ import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
 import com.damekai.herblore.common.capability.herbloreknowledge.HerbloreKnowledge;
 import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
+import com.damekai.herblore.common.util.ProbabilitySet;
 import com.damekai.herblore.common.util.WeightedSet;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.Minecraft;
@@ -29,16 +30,14 @@ public class ItemReagent extends Item
 {
     private static final Random RANDOM = new Random();
 
-    private final int minPotency;
-    private final int maxPotency;
+    private final ProbabilitySet<Integer> potencyProbabilities;
     private final List<RegistryObject<FlaskEffect>> flaskEffects;
 
-    public ItemReagent(int minPotency, int maxPotency, List<RegistryObject<FlaskEffect>> flaskEffects)
+    public ItemReagent(ProbabilitySet<Integer> potencyProbabilities, List<RegistryObject<FlaskEffect>> flaskEffects)
     {
         super(ModItems.defaultItemProperties());
 
-        this.minPotency = minPotency;
-        this.maxPotency = maxPotency;
+        this.potencyProbabilities = potencyProbabilities;
         this.flaskEffects = flaskEffects;
     }
 
@@ -50,10 +49,10 @@ public class ItemReagent extends Item
         return stack;
     }
 
-    public ItemStack getInstanceWithRandomPotency() // TODO: Use weighted set to set probabilities for different potencies (i.e. make higher potencies rarer).
+    public ItemStack getInstanceWithRandomPotency()
     {
         ItemStack result = new ItemStack(this);
-        result.getOrCreateTag().putInt("potency", minPotency + RANDOM.nextInt(maxPotency - minPotency + 1));
+        result.getOrCreateTag().putInt("potency", potencyProbabilities.roll());
         return result;
     }
 
