@@ -12,6 +12,7 @@ import com.damekai.herblore.common.capability.toxicityhandler.CapabilityToxicity
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
 import com.damekai.herblore.common.data.ModLootModifiers;
 import com.damekai.herblore.common.data.ModRecipeProvider;
+import com.damekai.herblore.common.flask.FlaskEffectComet;
 import com.damekai.herblore.common.flask.FlaskEffectStrider;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.flask.FlaskEffectQuench;
@@ -76,6 +77,7 @@ public class Herblore
 
         MinecraftForge.EVENT_BUS.addListener(FlaskEffectStrider::onLivingJump);
         MinecraftForge.EVENT_BUS.addListener(FlaskEffectQuench::onLivingDamage);
+        MinecraftForge.EVENT_BUS.addListener(FlaskEffectComet::onLivingDamage);
 
         HerblorePacketHandler.registerPackets();
     }

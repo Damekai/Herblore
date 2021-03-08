@@ -27,6 +27,8 @@ public class ModFlaskEffects
 
     public static final RegistryObject<FlaskEffect> PENANCE = FLASK_EFFECTS.register("penance", () -> new FlaskEffectPenance(new FlaskEffect.Properties().translationName("penance").color(0x9E0313).guiEffect(ModEffects.PENANCE_RENDER)));
 
+    public static final RegistryObject<FlaskEffect> COMET = FLASK_EFFECTS.register("comet", () -> new FlaskEffectComet(new FlaskEffect.Properties().translationName("comet").color(0xACF5EF).guiEffect(ModEffects.COMET_RENDER)));
+
     public static FlaskEffect getFlaskEffectFromRegistry(String name)
     {
         RegistryObject<FlaskEffect> match = FLASK_EFFECTS.getEntries().stream().filter((flaskEffectSupplier) -> flaskEffectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);

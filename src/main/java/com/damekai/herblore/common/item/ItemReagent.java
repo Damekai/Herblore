@@ -45,7 +45,7 @@ public class ItemReagent extends Item
     public ItemStack getDefaultInstance()
     {
         ItemStack stack = super.getDefaultInstance();
-        stack.getOrCreateTag().putInt("potency", 0);
+        stack.getOrCreateTag().putInt("potency", 10);
         return stack;
     }
 

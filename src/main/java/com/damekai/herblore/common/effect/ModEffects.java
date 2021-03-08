@@ -25,4 +25,6 @@ public class ModEffects
     public static final RegistryObject<Effect> DREDGE_RENDER = EFFECTS.register("dredge", () -> new GuiFlaskEffect(ModFlaskEffects.DREDGE));
 
     public static final RegistryObject<Effect> PENANCE_RENDER = EFFECTS.register("penance", () -> new GuiFlaskEffect(ModFlaskEffects.PENANCE));
+
+    public static final RegistryObject<Effect> COMET_RENDER = EFFECTS.register("comet", () -> new GuiFlaskEffect(ModFlaskEffects.COMET));
 }
