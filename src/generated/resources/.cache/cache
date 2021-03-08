@@ -1,8 +1,5 @@
 54aebbd0e42845abd0b01dd309dfca9fd6fc2296 data/herblore/advancements/recipes/herblore/item/athanor.json
 cac0d1ff5c1c187b7ea909f84e59fabebcd9f5d0 data/herblore/advancements/recipes/herblore/item/empty_flask.json
-c50fa7ce6647b9c6c13b96f6561eaa6e684db24f data/herblore/advancements/recipes/herblore/item/pestle_and_mortar.json
 f07a757a493221a833d5ddfff6508a81c77a102b data/herblore/recipes/crude_flask/crude_flask.json
 438490b7735f0bd6b4377d2379811b0bea4205a3 data/herblore/recipes/item/athanor.json
 8f1b5ab29dbe8232986afb7e0faebee6bea001d5 data/herblore/recipes/item/empty_flask.json
-8426fbe43f026f08217fe59d96bafa48c2810780 data/herblore/recipes/item/pestle_and_mortar.json
-3520e965c3bdfe0730c3c22fd7add44e3b673211 data/herblore/recipes/milled_reagent/milled_reagent.json

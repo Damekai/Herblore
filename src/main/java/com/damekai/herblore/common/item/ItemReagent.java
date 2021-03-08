@@ -29,11 +29,16 @@ public class ItemReagent extends Item
 {
     private static final Random RANDOM = new Random();
 
+    private final int minPotency;
+    private final int maxPotency;
     private final List<RegistryObject<FlaskEffect>> flaskEffects;
 
-    public ItemReagent(List<RegistryObject<FlaskEffect>> flaskEffects)
+    public ItemReagent(int minPotency, int maxPotency, List<RegistryObject<FlaskEffect>> flaskEffects)
     {
         super(ModItems.defaultItemProperties());
+
+        this.minPotency = minPotency;
+        this.maxPotency = maxPotency;
         this.flaskEffects = flaskEffects;
     }
 
@@ -43,6 +48,13 @@ public class ItemReagent extends Item
         ItemStack stack = super.getDefaultInstance();
         stack.getOrCreateTag().putInt("potency", 0);
         return stack;
+    }
+
+    public ItemStack getInstanceWithRandomPotency() // TODO: Use weighted set to set probabilities for different potencies (i.e. make higher potencies rarer).
+    {
+        ItemStack result = new ItemStack(this);
+        result.getOrCreateTag().putInt("potency", minPotency + RANDOM.nextInt(maxPotency - minPotency + 1));
+        return result;
     }
 
     @Override

@@ -1,15 +1,13 @@
 package com.damekai.herblore.common.data;
 
-import com.damekai.herblore.common.item.ItemRawReagent;
+import com.damekai.herblore.common.item.ItemReagent;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootConditionType;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraftforge.common.loot.LootModifier;
 
 import javax.annotation.Nonnull;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ReagentLootModifier extends LootModifier
 {
@@ -31,13 +29,13 @@ public class ReagentLootModifier extends LootModifier
         {
             ItemStack drop = generatedDrops.remove();
 
-            if (drop.getItem() instanceof ItemRawReagent)
+            if (drop.getItem() instanceof ItemReagent)
             {
-                ItemRawReagent rawReagent = (ItemRawReagent) drop.getItem();
+                ItemReagent reagent = (ItemReagent) drop.getItem();
 
                 for (int i = 0; i < drop.getCount(); i++)
                 {
-                    modifiedDrops.add(rawReagent.getInstanceWithRandomPotency());
+                    modifiedDrops.add(reagent.getInstanceWithRandomPotency());
                 }
             }
             else

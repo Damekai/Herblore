@@ -20,7 +20,6 @@ import com.damekai.herblore.common.item.ModItemColors;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
 import com.damekai.herblore.common.recipe.CrudeFlaskRecipe;
-import com.damekai.herblore.common.recipe.MilledReagentRecipe;
 import com.damekai.herblore.common.world.ModFeatures;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -92,6 +91,5 @@ public class Herblore
     {
         IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
         registry.register(CrudeFlaskRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Herblore.MOD_ID, "crude_flask")));
-        registry.register(MilledReagentRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Herblore.MOD_ID, "milled_reagent")));
     }
 }
