@@ -45,7 +45,7 @@ public class ItemReagent extends Item
     public ItemStack getDefaultInstance()
     {
         ItemStack stack = super.getDefaultInstance();
-        stack.getOrCreateTag().putInt("potency", 10);
+        stack.getOrCreateTag().putInt("potency", 0);
         return stack;
     }
 
@@ -89,7 +89,7 @@ public class ItemReagent extends Item
         {
             RegistryObject<FlaskEffect> flaskEffectSupplier = flaskEffects.get(RANDOM.nextInt(flaskEffects.size()));
             FlaskEffect flaskEffect = flaskEffectSupplier.get();
-            flaskHandler.applyFlaskEffectInstance(new FlaskEffectInstance(flaskEffect, stack.getOrCreateTag().getInt("potency"), 100), player);
+            flaskHandler.applyFlaskEffectInstance(new FlaskEffectInstance(flaskEffect, stack.getOrCreateTag().getInt("potency"), 200), player);
 
             if (!world.isRemote)
             {

@@ -35,4 +35,6 @@ public class ModEffects
     public static final RegistryObject<Effect> RUBBLE_RENDER = EFFECTS.register("rubble", () -> new GuiFlaskEffect(ModFlaskEffects.RUBBLE));
 
     public static final RegistryObject<Effect> NOMAD_RENDER = EFFECTS.register("nomad", () -> new GuiFlaskEffect(ModFlaskEffects.NOMAD));
+
+    public static final RegistryObject<Effect> FLEET_RENDER = EFFECTS.register("fleet", () -> new GuiFlaskEffect(ModFlaskEffects.FLEET));
 }

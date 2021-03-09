@@ -52,6 +52,9 @@ public class ModFlaskEffects
     public static final RegistryObject<FlaskEffect> NOMAD = FLASK_EFFECTS.register("nomad", () -> new FlaskEffectNomad(new FlaskEffect.Properties().translationName("nomad").color(0xD99B0B).guiEffect(ModEffects.NOMAD_RENDER),
             UUID.fromString("da140e6b-25a3-40ae-85d6-e72bdb1dda71")));
 
+    public static final RegistryObject<FlaskEffect> FLEET = FLASK_EFFECTS.register("fleet", () -> new FlaskEffectFleet(new FlaskEffect.Properties().translationName("fleet").color(0xF7F80C).guiEffect(ModEffects.FLEET_RENDER),
+            UUID.fromString("98f25338-e60e-472d-9e24-4ad3bbaa5f67")));
+
     public static FlaskEffect getFlaskEffectFromRegistry(String name)
     {
         RegistryObject<FlaskEffect> match = FLASK_EFFECTS.getEntries().stream().filter((flaskEffectSupplier) -> flaskEffectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
