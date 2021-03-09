@@ -49,6 +49,9 @@ public class ModFlaskEffects
                     .add(Blocks.COBBLESTONE)
                     .build()));
 
+    public static final RegistryObject<FlaskEffect> NOMAD = FLASK_EFFECTS.register("nomad", () -> new FlaskEffectNomad(new FlaskEffect.Properties().translationName("nomad").color(0xD99B0B).guiEffect(ModEffects.NOMAD_RENDER),
+            UUID.fromString("da140e6b-25a3-40ae-85d6-e72bdb1dda71")));
+
     public static FlaskEffect getFlaskEffectFromRegistry(String name)
     {
         RegistryObject<FlaskEffect> match = FLASK_EFFECTS.getEntries().stream().filter((flaskEffectSupplier) -> flaskEffectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);

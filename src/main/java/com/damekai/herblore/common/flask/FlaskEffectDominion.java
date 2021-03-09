@@ -26,11 +26,11 @@ public class FlaskEffectDominion extends AttributeFlaskEffect
     }
 
 
-    private static float calculateAttackSpeedModifierAmount(AttributeFlaskEffect flaskAttributeEffect, FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
+    private static float calculateAttackSpeedModifierAmount(AttributeFlaskEffect attributeFlaskEffect, FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        if (flaskAttributeEffect instanceof FlaskEffectDominion)
+        if (attributeFlaskEffect instanceof FlaskEffectDominion)
         {
-            FlaskEffectDominion dominion = (FlaskEffectDominion) flaskAttributeEffect;
+            FlaskEffectDominion dominion = (FlaskEffectDominion) attributeFlaskEffect;
 
             if (dominion.dominionBlocks.contains(livingEntity.getEntityWorld().getBlockState(livingEntity.getPosition().offset(Direction.DOWN, 1)).getBlock()))
             {

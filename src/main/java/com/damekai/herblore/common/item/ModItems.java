@@ -102,7 +102,7 @@ public class ModItems
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
-                add(ModFlaskEffects.VERDURE);
+                add(ModFlaskEffects.NOMAD);
             }}
     ));
 

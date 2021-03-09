@@ -21,11 +21,11 @@ public class FlaskEffectPowerHour extends AttributeFlaskEffect
         this.primeTime = primeTime;
     }
 
-    private static float calculateDamageModifierAmount(AttributeFlaskEffect flaskAttributeEffect, FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
+    private static float calculateDamageModifierAmount(AttributeFlaskEffect attributeFlaskEffect, FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        if (flaskAttributeEffect instanceof FlaskEffectPowerHour)
+        if (attributeFlaskEffect instanceof FlaskEffectPowerHour)
         {
-            FlaskEffectPowerHour powerhour = (FlaskEffectPowerHour) flaskAttributeEffect;
+            FlaskEffectPowerHour powerhour = (FlaskEffectPowerHour) attributeFlaskEffect;
             long currentTime = livingEntity.getEntityWorld().getDayTime();
 
             long distanceFromPrimeTime; // Circular nature of time, linear nature of Minecraft time. Both need to be accounted for.

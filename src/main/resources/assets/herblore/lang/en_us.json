@@ -36,6 +36,7 @@
     "flask_effect.herblore.comet": "Comet",
     "flask_effect.herblore.haptic": "Haptic",
     "flask_effect.herblore.verdure": "Verdure",
-    "flask_effect.herblore.rubble": "Rubble"
+    "flask_effect.herblore.rubble": "Rubble",
+    "flask_effect.herblore.nomad": "Nomad"
 
 }
