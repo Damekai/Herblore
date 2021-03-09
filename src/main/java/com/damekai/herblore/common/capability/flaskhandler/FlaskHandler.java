@@ -1,5 +1,6 @@
 package com.damekai.herblore.common.capability.flaskhandler;
 
+import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
 import com.damekai.herblore.common.flask.base.*;
 import net.minecraft.entity.LivingEntity;
@@ -25,6 +26,16 @@ public class FlaskHandler implements IFlaskHandler
 
     public void applyFlaskEffectInstance(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
+        FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
+
+        // If there is a Flask Effect Instance with this Flask Effect already, expire it.
+        FlaskEffectInstance existingInstance = getFlaskEffectInstance(flaskEffect);
+        if (existingInstance != null)
+        {
+            removeFlaskEffectInstance(existingInstance, livingEntity);
+        }
+
+        // Add Flask Effect Instance to list of active Instances.
         activeFlaskEffectInstances.add(flaskEffectInstance);
 
         // Always add toxicity first so that it shows up first in the GUI (most of the time, at least; can't control vanilla).
@@ -33,8 +44,6 @@ public class FlaskHandler implements IFlaskHandler
         {
             toxicityHandler.addToxicity(livingEntity, flaskEffectInstance.getPotency());
         }
-
-        FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
 
         // Call onApply if the Flask Effect is applicable.
         if (flaskEffect instanceof FlaskEffect.IApplicable)
@@ -50,19 +59,11 @@ public class FlaskHandler implements IFlaskHandler
         }
     }
 
-    /**
-     *  Attempts to find a Flask Effect Instance that has the desired Flask Effect. If there are multiple
-     *  Flask Effect Instances that have that Flask Effect, then the Flask Effect Instance with the highest potency
-     *  is chosen.
-     *
-     * @param flaskEffect Flask Effect to search for.
-     * @return The Flask Effect Instance with the highest potency that has the desired Flask Effect.
-     */
     public FlaskEffectInstance getFlaskEffectInstance(FlaskEffect flaskEffect)
     {
         return activeFlaskEffectInstances.stream()
                 .filter((activeFlaskEffectInstance) -> activeFlaskEffectInstance.getFlaskEffect() == flaskEffect)
-                .max(Comparator.comparingInt(FlaskEffectInstance::getPotency))
+                .findAny()
                 .orElse(null);
     }
 
