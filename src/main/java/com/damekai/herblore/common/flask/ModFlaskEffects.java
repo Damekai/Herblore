@@ -3,6 +3,7 @@ package com.damekai.herblore.common.flask;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.flask.base.FlaskEffect;
+import net.minecraft.block.Blocks;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -30,6 +31,9 @@ public class ModFlaskEffects
     public static final RegistryObject<FlaskEffect> COMET = FLASK_EFFECTS.register("comet", () -> new FlaskEffectComet(new FlaskEffect.Properties().translationName("comet").color(0xACF5EF).guiEffect(ModEffects.COMET_RENDER)));
 
     public static final RegistryObject<FlaskEffect> HAPTIC = FLASK_EFFECTS.register("haptic", () -> new FlaskEffectHaptic(new FlaskEffect.Properties().translationName("haptic").color(0xF75AFA).guiEffect(ModEffects.HAPTIC_RENDER)));
+
+    public static final RegistryObject<FlaskEffect> VERDURE = FLASK_EFFECTS.register("verdure", () -> new FlaskEffectDominion(new FlaskEffect.Properties().translationName("verdure").color(0x089C33).guiEffect(ModEffects.VERDURE_RENDER),
+            UUID.fromString("db641c15-704d-44aa-90be-aa2df654aff5"), Blocks.GRASS_BLOCK));
 
     public static FlaskEffect getFlaskEffectFromRegistry(String name)
     {

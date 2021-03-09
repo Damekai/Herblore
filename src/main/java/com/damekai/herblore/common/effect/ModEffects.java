@@ -29,4 +29,6 @@ public class ModEffects
     public static final RegistryObject<Effect> COMET_RENDER = EFFECTS.register("comet", () -> new GuiFlaskEffect(ModFlaskEffects.COMET));
 
     public static final RegistryObject<Effect> HAPTIC_RENDER = EFFECTS.register("haptic", () -> new GuiFlaskEffect(ModFlaskEffects.HAPTIC));
+
+    public static final RegistryObject<Effect> VERDURE_RENDER = EFFECTS.register("verdure", () -> new GuiFlaskEffect(ModFlaskEffects.VERDURE));
 }
