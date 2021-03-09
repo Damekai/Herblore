@@ -3,7 +3,10 @@ package com.damekai.herblore.common.flask;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.flask.base.FlaskEffect;
+import com.google.common.collect.ImmutableList;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -33,7 +36,18 @@ public class ModFlaskEffects
     public static final RegistryObject<FlaskEffect> HAPTIC = FLASK_EFFECTS.register("haptic", () -> new FlaskEffectHaptic(new FlaskEffect.Properties().translationName("haptic").color(0xF75AFA).guiEffect(ModEffects.HAPTIC_RENDER)));
 
     public static final RegistryObject<FlaskEffect> VERDURE = FLASK_EFFECTS.register("verdure", () -> new FlaskEffectDominion(new FlaskEffect.Properties().translationName("verdure").color(0x089C33).guiEffect(ModEffects.VERDURE_RENDER),
-            UUID.fromString("db641c15-704d-44aa-90be-aa2df654aff5"), Blocks.GRASS_BLOCK));
+            UUID.fromString("db641c15-704d-44aa-90be-aa2df654aff5"),
+            new ImmutableList.Builder<Block>()
+                    .add(Blocks.GRASS_BLOCK)
+                    .add(Blocks.DIRT)
+                    .build()));
+
+    public static final RegistryObject<FlaskEffect> RUBBLE = FLASK_EFFECTS.register("rubble", () -> new FlaskEffectDominion(new FlaskEffect.Properties().translationName("rubble").color(0x7A746B).guiEffect(ModEffects.RUBBLE_RENDER),
+            UUID.fromString("757d4083-3c6a-4ffc-94c7-5ea5ad59039c"),
+            new ImmutableList.Builder<Block>()
+                    .add(Blocks.STONE)
+                    .add(Blocks.COBBLESTONE)
+                    .build()));
 
     public static FlaskEffect getFlaskEffectFromRegistry(String name)
     {
