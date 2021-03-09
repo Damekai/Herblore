@@ -19,17 +19,6 @@
     "item.herblore.sungrass": "Sungrass",
     "item.herblore.dreamfoil": "Dreamfoil",
 
-    "item.herblore.milled_peacebloom": "Milled Peacebloom",
-    "item.herblore.milled_silverleaf": "Milled Silverleaf",
-    "item.herblore.milled_earthroot": "Milled Earthroot",
-    "item.herblore.milled_mageroyal": "Milled Mageroyal",
-    "item.herblore.milled_briarthorn": "Milled Briarthorn",
-    "item.herblore.milled_wildbloom": "Milled Wildbloom",
-    "item.herblore.milled_fadeleaf": "Milled Fadeleaf",
-    "item.herblore.milled_goldthorn": "Milled Goldthorn",
-    "item.herblore.milled_sungrass": "Milled Sungrass",
-    "item.herblore.milled_dreamfoil": "Milled Dreamfoil",
-
     "item.herblore.grimy_herb": "Grimy Herb",
 
     "block.herblore.athanor": "Athanor",
@@ -43,5 +32,8 @@
     "flask_effect.herblore.witching_hour": "Witching Hour",
     "flask_effect.herblore.dredge": "Dredge",
     "flask_effect.herblore.quench": "Quench",
-    "flask_effect.herblore.penance": "Penance"
+    "flask_effect.herblore.penance": "Penance",
+    "flask_effect.herblore.comet": "Comet",
+    "flask_effect.herblore.haptic": "Haptic"
+
 }
