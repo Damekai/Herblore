@@ -9,6 +9,6 @@ public class ModRenderTypeSetter
 {
     public static void onClientSetup(FMLClientSetupEvent event)
     {
-        RenderTypeLookup.setRenderLayer(ModBlocks.PERENNIAL_PATCH_DEBUG.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.PERENNIAL_PATCH.get(), RenderType.getCutout());
     }
 }

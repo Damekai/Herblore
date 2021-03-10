@@ -12,5 +12,5 @@ public class ModBlocks
 
     public static final RegistryObject<Block> ATHANOR = BLOCKS.register("athanor", BlockAthanor::new);
 
-    public static final RegistryObject<Block> PERENNIAL_PATCH_DEBUG = BLOCKS.register("perennial_patch_debug", BlockPerennialPatch::new);
+    public static final RegistryObject<Block> PERENNIAL_PATCH = BLOCKS.register("perennial_patch", BlockPerennialPatch::new);
 }

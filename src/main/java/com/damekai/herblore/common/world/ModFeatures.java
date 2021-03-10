@@ -20,7 +20,7 @@ public class ModFeatures
 {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Herblore.MOD_ID);
 
-    public static final RegistryObject<Feature<NoFeatureConfig>> PERENNIAL_PATCH = FEATURES.register("perennial_patch", () -> new FeaturePerennialPatch(NoFeatureConfig.field_236558_a_.stable(), ModBlocks.PERENNIAL_PATCH_DEBUG));
+    public static final RegistryObject<Feature<NoFeatureConfig>> PERENNIAL_PATCH = FEATURES.register("perennial_patch", () -> new FeaturePerennialPatch(NoFeatureConfig.field_236558_a_.stable(), ModBlocks.PERENNIAL_PATCH));
 
     public static final Supplier<ConfiguredFeature<?, ?>> PERENNIAL_PATCH_CONFIG = () -> PERENNIAL_PATCH.get()
             .withConfiguration(NoFeatureConfig.NO_FEATURE_CONFIG)
