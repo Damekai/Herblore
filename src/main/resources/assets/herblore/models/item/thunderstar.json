@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "herblore:item/wildbloom"
+        "layer0": "herblore:item/thunderstar"
     }
 }

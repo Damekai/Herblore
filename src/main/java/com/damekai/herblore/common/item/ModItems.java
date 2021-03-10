@@ -18,90 +18,112 @@ public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
-    public static final RegistryObject<ItemReagent> PEACEBLOOM = ITEMS.register("peacebloom", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> WINDY_LICHEN = ITEMS.register("windy_lichen", () -> new ItemReagent(
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
+                add(ModFlaskEffects.NOMAD);
                 add(ModFlaskEffects.STRIDER);
-                add(ModFlaskEffects.QUENCH);
+                add(ModFlaskEffects.FLEET);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> SILVERLEAF = ITEMS.register("silverleaf", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> SUNSPECKLE = ITEMS.register("sunspeckle", () -> new ItemReagent(
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
                 add(ModFlaskEffects.HIGH_NOON);
-                add(ModFlaskEffects.QUENCH);
-                add(ModFlaskEffects.DREDGE);
-            }}
-    ));
-
-    public static final RegistryObject<ItemReagent> EARTHROOT = ITEMS.register("earthroot", () -> new ItemReagent(
-            ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
-            new ArrayList<RegistryObject<FlaskEffect>>()
-            {{
-                add(ModFlaskEffects.DREDGE);
+                add(ModFlaskEffects.VERDURE);
                 add(ModFlaskEffects.QUENCH);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> MAGEROYAL = ITEMS.register("mageroyal", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> MOONSPECKLE = ITEMS.register("moonspeckle", () -> new ItemReagent(
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
                 add(ModFlaskEffects.WITCHING_HOUR);
-                add(ModFlaskEffects.HIGH_NOON);
+                add(ModFlaskEffects.COMET);
+                add(ModFlaskEffects.RUBBLE);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> BRIARTHORN = ITEMS.register("briarthorn", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> STONESTEM = ITEMS.register("stonestem", () -> new ItemReagent(
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
-                add(ModFlaskEffects.STRIDER);
-                add(ModFlaskEffects.QUENCH);
+                add(ModFlaskEffects.RUBBLE);
+                add(ModFlaskEffects.HAPTIC);
+                add(ModFlaskEffects.COMET);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> WILDBLOOM = ITEMS.register("wildbloom", () -> new ItemReagent(
-            ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
-            new ArrayList<RegistryObject<FlaskEffect>>()
-            {{
-                add(ModFlaskEffects.HIGH_NOON);
-                add(ModFlaskEffects.STRIDER);
-            }}
-    ));
-
-    public static final RegistryObject<ItemReagent> FADELEAF = ITEMS.register("fadeleaf", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> WILLOW_WORT = ITEMS.register("willow_wort", () -> new ItemReagent(
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
                 add(ModFlaskEffects.WITCHING_HOUR);
                 add(ModFlaskEffects.QUENCH);
+                add(ModFlaskEffects.FLEET);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> GOLDTHORN = ITEMS.register("goldthorn", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> RUMBLEROOT = ITEMS.register("rumbleroot", () -> new ItemReagent(
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
+                add(ModFlaskEffects.RUBBLE);
+                add(ModFlaskEffects.VERDURE);
+                add(ModFlaskEffects.FLEET);
+            }}
+    ));
+
+    public static final RegistryObject<ItemReagent> PHANTOM_FROND = ITEMS.register("phantom_frond", () -> new ItemReagent(
+            ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
+            new ArrayList<RegistryObject<FlaskEffect>>()
+            {{
+                add(ModFlaskEffects.WITCHING_HOUR);
+                add(ModFlaskEffects.PENANCE);
+                add(ModFlaskEffects.HAPTIC);
+            }}
+    ));
+
+    public static final RegistryObject<ItemReagent> BREEZEBLOOM = ITEMS.register("breezebloom", () -> new ItemReagent(
+            ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
+            new ArrayList<RegistryObject<FlaskEffect>>()
+            {{
+                add(ModFlaskEffects.NOMAD);
+                add(ModFlaskEffects.VERDURE);
+                add(ModFlaskEffects.STRIDER);
+            }}
+    ));
+
+    public static final RegistryObject<ItemReagent> DESERTS_THIRST = ITEMS.register("deserts_thirst", () -> new ItemReagent(
+            ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
+            new ArrayList<RegistryObject<FlaskEffect>>()
+            {{
+                add(ModFlaskEffects.HIGH_NOON);
+                add(ModFlaskEffects.QUENCH);
                 add(ModFlaskEffects.PENANCE);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> SUNGRASS = ITEMS.register("sungrass", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> THUNDERSTAR = ITEMS.register("thunderstar", () -> new ItemReagent(
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
-                add(ModFlaskEffects.PENANCE);
+                add(ModFlaskEffects.HAPTIC);
+                add(ModFlaskEffects.COMET);
+                add(ModFlaskEffects.NOMAD);
             }}
     ));
 
-    public static final RegistryObject<ItemReagent> DREAMFOIL = ITEMS.register("dreamfoil", () -> new ItemReagent(
+    public static final RegistryObject<ItemReagent> SUNSTRIDERS_SIN = ITEMS.register("sunstriders_sin", () -> new ItemReagent(
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
+                add(ModFlaskEffects.HIGH_NOON);
+                add(ModFlaskEffects.STRIDER);
                 add(ModFlaskEffects.PENANCE);
             }}
     ));

@@ -11,7 +11,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:peacebloom"
+          "name": "herblore:windy_lichen"
         },
         {
           "type": "minecraft:item",
@@ -20,7 +20,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:silverleaf"
+          "name": "herblore:sunspeckle"
         },
         {
           "type": "minecraft:item",
@@ -29,7 +29,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:earthroot"
+          "name": "herblore:moonspeckle"
         },
         {
           "type": "minecraft:item",
@@ -38,7 +38,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:mageroyal"
+          "name": "herblore:stonestem"
         },
         {
           "type": "minecraft:item",
@@ -47,7 +47,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:briarthorn"
+          "name": "herblore:willow_wort"
         },
         {
           "type": "minecraft:item",
@@ -56,7 +56,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:wildbloom"
+          "name": "herblore:rumbleroot"
         },
         {
           "type": "minecraft:item",
@@ -65,7 +65,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:fadeleaf"
+          "name": "herblore:phantom_frond"
         },
         {
           "type": "minecraft:item",
@@ -74,7 +74,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:goldthorn"
+          "name": "herblore:breezebloom"
         },
         {
           "type": "minecraft:item",
@@ -83,7 +83,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:sungrass"
+          "name": "herblore:deserts_thirst"
         },
         {
           "type": "minecraft:item",
@@ -92,7 +92,16 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:dreamfoil"
+          "name": "herblore:thunderstar"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "herblore:sunstriders_sin"
         }
       ]
     }

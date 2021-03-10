@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "herblore:item/dreamfoil"
+        "layer0": "herblore:item/deserts_thirst"
     }
 }

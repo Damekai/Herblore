@@ -41,7 +41,7 @@ public class FlaskEffectPowerHour extends AttributeFlaskEffect
                 distanceFromPrimeTime = Math.min(24000 - Math.abs(currentTime - powerhour.primeTime), Math.abs(currentTime - powerhour.primeTime));
             }
 
-            return flaskEffectInstance.getPotency() * (1 - (distanceFromPrimeTime / 12000f)) / 2f; // For example, if it's prime time and the potency is 5, the attack damage boost is 2.5.
+            return flaskEffectInstance.getPotency() * (1 - (distanceFromPrimeTime / 12000f)); // For example, if it's prime time and the potency is 10, the attack damage boost is 10.
         }
         return 0;
     }
