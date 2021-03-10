@@ -42,14 +42,7 @@ public class PacketSyncKnowledge
     {
         return (nbt, context) ->
         {
-            context.get().enqueueWork(() ->
-            {
-                PlayerEntity player = Minecraft.getInstance().player;
-                if (player != null)
-                {
-                    HerbloreKnowledge.syncKnowledgeFromServer(nbt, player);
-                }
-            });
+            context.get().enqueueWork(() -> HerbloreKnowledge.syncKnowledgeFromServer(nbt));
             context.get().setPacketHandled(true);
         };
     }

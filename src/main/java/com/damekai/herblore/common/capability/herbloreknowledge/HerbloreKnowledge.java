@@ -7,11 +7,14 @@ import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
 import com.google.common.collect.ImmutableList;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -111,9 +114,10 @@ public class HerbloreKnowledge implements IHerbloreKnowledge
                 });
     }
 
-    public static void syncKnowledgeFromServer(CompoundNBT nbt, PlayerEntity playerEntity)
+    @OnlyIn(Dist.CLIENT)
+    public static void syncKnowledgeFromServer(CompoundNBT nbt)
     {
-        HerbloreKnowledge knowledge = getHerbloreKnowledgeOf(playerEntity);
+        HerbloreKnowledge knowledge = getHerbloreKnowledgeOf(Minecraft.getInstance().player);
         if (knowledge != null)
         {
             knowledge.deserializeNBT(nbt);
