@@ -13,14 +13,21 @@ import javax.annotation.Nullable;
 public abstract class FlaskEffect extends ForgeRegistryEntry<FlaskEffect>
 {
     private final String translationKey;
+    private final int baseDuation;
     private final int color;
     private final RegistryObject<Effect> guiEffect;
 
     public FlaskEffect(FlaskEffect.Properties properties)
     {
         translationKey = properties.translationKey;
+        baseDuation = properties.baseDuration;
         color = properties.color;
         guiEffect = properties.guiEffect;
+    }
+
+    public int getBaseDuation()
+    {
+        return baseDuation;
     }
 
     public int getColor()
@@ -54,12 +61,19 @@ public abstract class FlaskEffect extends ForgeRegistryEntry<FlaskEffect>
     public static final class Properties
     {
         private String translationKey = "no_translation_key";
+        private int baseDuration;
         private int color;
         private RegistryObject<Effect> guiEffect;
 
         public FlaskEffect.Properties translationName(String translationName)
         {
             translationKey = "flask_effect." + Herblore.MOD_ID + "." + translationName;
+            return this;
+        }
+
+        public FlaskEffect.Properties baseDuration(int baseDuration)
+        {
+            this.baseDuration = baseDuration;
             return this;
         }
 

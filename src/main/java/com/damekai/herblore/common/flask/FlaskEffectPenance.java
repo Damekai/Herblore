@@ -8,7 +8,7 @@ import net.minecraft.util.DamageSource;
 public class FlaskEffectPenance extends FlaskEffect implements FlaskEffect.IApplicable, FlaskEffect.ITickable, FlaskEffect.IExpirable
 {
     private static final float HEALTH_RESTORED_PER_POTENCY = 2f;
-    private static final int DAMAGE_OCCURENCES = 10;
+    private static final int DAMAGE_OCCURENCES = 5;
 
 
     public FlaskEffectPenance(FlaskEffect.Properties properties)
@@ -31,7 +31,7 @@ public class FlaskEffectPenance extends FlaskEffect implements FlaskEffect.IAppl
     @Override
     public void onTick(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
     {
-        if (flaskEffectInstance.getDurationRemaining() % (flaskEffectInstance.getDurationFull() / DAMAGE_OCCURENCES) != 0) // Divide the damage over ten damage instances.
+        if (flaskEffectInstance.getDurationRemaining() == flaskEffectInstance.getDurationFull() || flaskEffectInstance.getDurationRemaining() % (flaskEffectInstance.getDurationFull() / DAMAGE_OCCURENCES) != 0) // Divide the damage over five damage instances.
         {
             return;
         }

@@ -86,7 +86,7 @@ public class ModItems
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
-                add(ModFlaskEffects.COMET);
+                add(ModFlaskEffects.PENANCE);
             }}
     ));
 
@@ -94,7 +94,7 @@ public class ModItems
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
-                add(ModFlaskEffects.COMET);
+                add(ModFlaskEffects.PENANCE);
             }}
     ));
 
@@ -102,7 +102,7 @@ public class ModItems
             ReagentPotencyProbabilitySets.WILD_REAGENT_POTENCY_PROBABILITIES,
             new ArrayList<RegistryObject<FlaskEffect>>()
             {{
-                add(ModFlaskEffects.FLEET);
+                add(ModFlaskEffects.PENANCE);
             }}
     ));
 

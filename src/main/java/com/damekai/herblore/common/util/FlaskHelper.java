@@ -47,11 +47,12 @@ public class FlaskHelper
                     .average()
                     .orElse(0));
 
-            return new FlaskEffectInstance(resultEntry.getKey(), potency, 1200); // TODO: Calculate duration.
+            FlaskEffect flaskEffect = resultEntry.getKey();
+            return new FlaskEffectInstance(flaskEffect, potency, flaskEffect.getBaseDuation()); // TODO: Design a more interesting way to determine the duration of a Flask.
         }
         else
         {
-            return new FlaskEffectInstance(ModFlaskEffects.DEBUG_ALPHA.get(), 0, 0);
+            return new FlaskEffectInstance(ModFlaskEffects.DEBUG_ALPHA.get(), 0, 0); // TODO: Change this to a "None" Flask Effect.
         }
     }
 
