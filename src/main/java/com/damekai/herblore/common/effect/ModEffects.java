@@ -37,4 +37,11 @@ public class ModEffects
     public static final RegistryObject<Effect> NOMAD_RENDER = EFFECTS.register("nomad", () -> new GuiFlaskEffect(ModFlaskEffects.NOMAD));
 
     public static final RegistryObject<Effect> FLEET_RENDER = EFFECTS.register("fleet", () -> new GuiFlaskEffect(ModFlaskEffects.FLEET));
+
+    public static Effect getEffectFromRegistry(String name)
+    {
+        RegistryObject<Effect> match = EFFECTS.getEntries().stream().filter((effectSupplier) -> effectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
+        return match != null ? match.get() : null;
+    }
+
 }

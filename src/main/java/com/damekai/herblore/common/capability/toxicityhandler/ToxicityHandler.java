@@ -2,12 +2,16 @@ package com.damekai.herblore.common.capability.toxicityhandler;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.ModEffects;
+import com.damekai.herblore.common.flask.ModFlaskEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
+import net.minecraftforge.eventbus.api.Event;
 
 import javax.annotation.Nullable;
 
@@ -156,6 +160,23 @@ public class ToxicityHandler implements IToxicityHandler
         if (toxicityHandler != null)
         {
             toxicityHandler.tickToxicity(livingEntity);
+        }
+    }
+
+    public static void onPotionApplicable(PotionEvent.PotionApplicableEvent event)
+    {
+        // Cause significant toxicity damage to the player if they attempt to drink a vanilla potion while their toxicity levels are above 0.
+
+        if (ModEffects.getEffectFromRegistry(event.getPotionEffect().getPotion().getRegistryName().toString()) == null) // Check whether or not the Effect is a GUI Effect from this mod.
+        {
+            LivingEntity livingEntity = event.getEntityLiving();
+
+            ToxicityHandler toxicityHandler = getToxicityHandlerOf(livingEntity);
+            if (toxicityHandler != null && toxicityHandler.getToxicity() > 0)
+            {
+                toxicityHandler.setToxicity(livingEntity, MAX_TOXICITY);
+                event.setResult(Event.Result.DENY);
+            }
         }
     }
 }
