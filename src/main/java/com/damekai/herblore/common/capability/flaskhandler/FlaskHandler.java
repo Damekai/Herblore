@@ -28,6 +28,11 @@ public class FlaskHandler implements IFlaskHandler
     {
         FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
 
+        if (flaskEffect == null) // In the case of a ruined flask.
+        {
+            return;
+        }
+
         // If there is a Flask Effect Instance with this Flask Effect already, expire it.
         FlaskEffectInstance existingInstance = getFlaskEffectInstance(flaskEffect);
         if (existingInstance != null)

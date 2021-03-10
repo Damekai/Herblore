@@ -11,6 +11,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 
 public class TileAthanor extends TileEntity implements ITickableTileEntity
 {
@@ -46,7 +48,6 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
             {
                 if (flaskStack.getItem() != ModItems.FLASK.get())
                 {
-                    Herblore.LOGGER.debug("Flask finished.");
                     setStage(3);
 
                     // Copy NBT list of effects from crude flask to completed flask.
@@ -63,6 +64,11 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
 
     public ActionResultType attemptUse(BlockState blockState, PlayerEntity player, ItemStack stack)
     {
+        if (world == null)
+        {
+            return ActionResultType.FAIL;
+        }
+
         switch (stage)
         {
             case 0:
@@ -73,7 +79,7 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
                     {
                         stack.damageItem(1, player, (p) -> p.sendBreakAnimation(p.getActiveHand()));
                     }
-                    Herblore.LOGGER.debug("Athanor ignited.");
+                    world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1f, 1f);
                     return ActionResultType.SUCCESS;
                 }
                 break;
@@ -84,7 +90,7 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
                     setStage(2);
                     flaskStack = stack.copy();
                     stack.setCount(stack.getCount() - 1);
-                    Herblore.LOGGER.debug("Crude flask placed onto athanor.");
+                    world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.AMBIENT, 1f, 1f);
                     return ActionResultType.SUCCESS;
                 }
                 break;
@@ -95,7 +101,7 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
                 player.addItemStackToInventory(flaskStack);
                 flaskStack = ItemStack.EMPTY;
                 currentProgressTicks = 0;
-                Herblore.LOGGER.debug("Flask removed.");
+                world.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.AMBIENT, 1f, 1f);
                 return ActionResultType.SUCCESS;
 
             default:
@@ -112,13 +118,16 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
 
     private boolean isFlaskFinished()
     {
-        return currentProgressTicks >= 100; // TODO: Dynamic value, perhaps based on the crude flask?
+        return currentProgressTicks >= 300; // TODO: Dynamic value, perhaps based on the crude flask?
     }
 
     private void setStage(int newStage)
     {
-        stage = newStage;
-        world.setBlockState(pos, world.getBlockState(pos).with(BlockAthanor.STAGE, stage));
+        if (world != null)
+        {
+            stage = newStage;
+            world.setBlockState(pos, world.getBlockState(pos).with(BlockAthanor.STAGE, stage));
+        }
     }
 
     @Override

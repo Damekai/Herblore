@@ -38,6 +38,10 @@ public class ItemFlask extends Item
         if (nbt.contains("flask_effect_instance"))
         {
             FlaskEffect flaskEffect = FlaskEffectInstance.read(nbt.getCompound("flask_effect_instance")).getFlaskEffect();
+            if (flaskEffect == null)
+            {
+                return new TranslationTextComponent("ruined_flask"); // TODO: Make this a bit more... robust.
+            }
             return new TranslationTextComponent(flaskEffect.getTranslationKey()).mergeStyle(TextFormatting.GREEN);
         }
         return super.getDisplayName(stack);
