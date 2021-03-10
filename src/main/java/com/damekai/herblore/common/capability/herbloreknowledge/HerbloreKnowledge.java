@@ -1,5 +1,6 @@
 package com.damekai.herblore.common.capability.herbloreknowledge;
 
+import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.flask.ModFlaskEffects;
 import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.item.ItemReagent;
@@ -140,6 +141,39 @@ public class HerbloreKnowledge implements IHerbloreKnowledge
                 HerblorePacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEntity), herbloreKnowledge.serializeNBT());
             }
 
+        }
+    }
+
+    public static void onPlayerClone(PlayerEvent.Clone event)
+    {
+        PlayerEntity clone = event.getPlayer();
+        if (clone instanceof ServerPlayerEntity)
+        {
+            if (event.isWasDeath())
+            {
+                HerbloreKnowledge oldHerbloreKnowledge = getHerbloreKnowledgeOf(event.getOriginal());
+                if (oldHerbloreKnowledge != null)
+                {
+                    HerbloreKnowledge newHerbloreKnowledge = getHerbloreKnowledgeOf(clone);
+                    if (newHerbloreKnowledge != null)
+                    {
+                        newHerbloreKnowledge.deserializeNBT(oldHerbloreKnowledge.serializeNBT()); // Carry over from old to new.
+                    }
+                }
+            }
+        }
+    }
+
+    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event)
+    {
+        PlayerEntity playerEntity = event.getPlayer();
+        if (playerEntity instanceof ServerPlayerEntity)
+        {
+            HerbloreKnowledge herbloreKnowledge = getHerbloreKnowledgeOf(playerEntity);
+            if (herbloreKnowledge != null)
+            {
+                HerblorePacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) playerEntity), herbloreKnowledge.serializeNBT());
+            }
         }
     }
 }
