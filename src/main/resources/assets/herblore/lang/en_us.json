@@ -6,8 +6,6 @@
     "item.herblore.crude_flask": "Crude Flask",
     "item.herblore.flask": "Flask",
 
-    "item.herblore.pestle_and_mortar": "Pestle and Mortar",
-
     "item.herblore.peacebloom": "Peacebloom",
     "item.herblore.silverleaf": "Silverleaf",
     "item.herblore.earthroot": "Earthroot",
@@ -18,8 +16,6 @@
     "item.herblore.goldthorn": "Goldthorn",
     "item.herblore.sungrass": "Sungrass",
     "item.herblore.dreamfoil": "Dreamfoil",
-
-    "item.herblore.grimy_herb": "Grimy Herb",
 
     "block.herblore.athanor": "Athanor",
     "block.herblore.perennial_patch": "Perennial Patch",
