@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:item/pureed_berries"
+    ]
+  },
+  "criteria": {
+    "has_pestle_and_mortar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:pestle_and_mortar"
+          }
+        ]
+      }
+    },
+    "has_sweet_berries": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:sweet_berries"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:item/pureed_berries"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pestle_and_mortar",
+      "has_sweet_berries",
+      "has_the_recipe"
+    ]
+  ]
+}

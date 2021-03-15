@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:item/ender_dust"
+    ]
+  },
+  "criteria": {
+    "has_pestle_and_mortar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:pestle_and_mortar"
+          }
+        ]
+      }
+    },
+    "has_ender_pearls": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ender_pearls"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:item/ender_dust"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_pestle_and_mortar",
+      "has_ender_pearls",
+      "has_the_recipe"
+    ]
+  ]
+}
