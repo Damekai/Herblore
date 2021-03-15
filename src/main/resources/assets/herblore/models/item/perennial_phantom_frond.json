@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "herblore:item/phantom_frond",
+    "layer1": "herblore:item/reagent_overlay_perennial"
+  }
+}

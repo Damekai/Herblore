@@ -17,43 +17,15 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class FlaskHelper
 {
-    public static FlaskEffectInstance makeFlaskEffectInstance(ImmutableList<ItemStack> reagents)
+    public static FlaskEffectInstance makeFlaskEffectInstance(ItemReagent reagent)
     {
-        // Attempt to find a shared Flask Effect by generating a map that counts the number of times that Flask Effect shows up between all reagents.
-        Map<FlaskEffect, MutableInt> effectCounts = new HashMap<>();
-        reagents.forEach((reagent) ->
-                ((ItemReagent) reagent.getItem()).getFlaskEffects().forEach((flaskEffectSupplier) ->
-                {
-                    FlaskEffect flaskEffect = flaskEffectSupplier.get();
-                    if (effectCounts.containsKey(flaskEffect))
-                    {
-                        effectCounts.get(flaskEffect).increment();
-                    }
-                    else
-                    {
-                        effectCounts.put(flaskEffect, new MutableInt(1));
-                    }
-                }));
-
-        // Filter out the shared effect, and if there is one, return an instance of it.
-        Map.Entry<FlaskEffect, MutableInt> resultEntry = effectCounts.entrySet().stream()
-                .filter((effectCount) -> effectCount.getValue().get() == reagents.size())
-                .findAny()
-                .orElse(null);
-        if (resultEntry != null)
+        if (reagent == null)
         {
-            int potency = (int) Math.round(reagents.stream()
-                    .mapToInt((reagent) -> reagent.getOrCreateTag().getInt("potency"))
-                    .average()
-                    .orElse(0));
+            return new FlaskEffectInstance(ModFlaskEffects.DEBUG_ALPHA.get(), 0, 0);
+        }
 
-            FlaskEffect flaskEffect = resultEntry.getKey();
-            return new FlaskEffectInstance(flaskEffect, potency, flaskEffect.getBaseDuation()); // TODO: Design a more interesting way to determine the duration of a Flask.
-        }
-        else
-        {
-            return new FlaskEffectInstance(ModFlaskEffects.DEBUG_ALPHA.get(), 0, 0); // TODO: Change this to a "None" Flask Effect.
-        }
+        FlaskEffect flaskEffect = reagent.getFlaskEffect().get();
+        return new FlaskEffectInstance(flaskEffect, reagent.getPotency(), flaskEffect.getBaseDuation());
     }
 
     public static int getFlaskColor(ItemStack stack)

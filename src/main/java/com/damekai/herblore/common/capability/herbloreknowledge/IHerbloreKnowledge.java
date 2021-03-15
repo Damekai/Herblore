@@ -7,7 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public interface IHerbloreKnowledge
 {
-    ImmutableList<FlaskEffect> getKnownFlaskEffects(ItemReagent reagent);
+    boolean isReagentKnown(ItemReagent reagent);
 
-    void setFlaskEffectKnown(PlayerEntity playerEntity, ItemReagent reagent, FlaskEffect flaskEffect);
+    void setReagentKnown(PlayerEntity playerEntity, ItemReagent reagent);
 }

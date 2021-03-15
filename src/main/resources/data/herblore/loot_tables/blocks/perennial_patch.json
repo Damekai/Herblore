@@ -11,7 +11,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:windy_lichen"
+          "name": "herblore:perennial_windy_lichen"
         },
         {
           "type": "minecraft:item",
@@ -20,7 +20,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:sunspeckle"
+          "name": "herblore:perennial_sunspeckle"
         },
         {
           "type": "minecraft:item",
@@ -29,7 +29,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:moonspeckle"
+          "name": "herblore:perennial_moonspeckle"
         },
         {
           "type": "minecraft:item",
@@ -38,7 +38,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:stonestem"
+          "name": "herblore:perennial_stonestem"
         },
         {
           "type": "minecraft:item",
@@ -47,7 +47,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:willow_wort"
+          "name": "herblore:perennial_willow_wort"
         },
         {
           "type": "minecraft:item",
@@ -56,7 +56,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:rumbleroot"
+          "name": "herblore:perennial_rumbleroot"
         },
         {
           "type": "minecraft:item",
@@ -65,7 +65,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:phantom_frond"
+          "name": "herblore:perennial_phantom_frond"
         },
         {
           "type": "minecraft:item",
@@ -74,7 +74,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:breezebloom"
+          "name": "herblore:perennial_breezebloom"
         },
         {
           "type": "minecraft:item",
@@ -83,7 +83,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:deserts_thirst"
+          "name": "herblore:perennial_deserts_thirst"
         },
         {
           "type": "minecraft:item",
@@ -92,7 +92,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:thunderstar"
+          "name": "herblore:perennial_thunderstar"
         },
         {
           "type": "minecraft:item",
@@ -101,7 +101,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "herblore:sunstriders_sin"
+          "name": "herblore:perennial_sunstriders_sin"
         }
       ]
     }

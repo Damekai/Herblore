@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "herblore:item/deserts_thirst",
+    "layer1": "herblore:item/reagent_overlay_concentrated"
+  }
+}

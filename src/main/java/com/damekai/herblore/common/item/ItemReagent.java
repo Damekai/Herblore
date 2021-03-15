@@ -4,9 +4,6 @@ import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
 import com.damekai.herblore.common.capability.herbloreknowledge.HerbloreKnowledge;
 import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
-import com.damekai.herblore.common.util.ProbabilitySet;
-import com.damekai.herblore.common.util.WeightedSet;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -20,40 +17,23 @@ import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.RegistryObject;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Random;
+import java.util.function.Supplier;
 
 public class ItemReagent extends Item
 {
-    private static final Random RANDOM = new Random();
+    private final int potency;
+    private final Supplier<FlaskEffect> flaskEffect;
 
-    private final ProbabilitySet<Integer> potencyProbabilities;
-    private final List<RegistryObject<FlaskEffect>> flaskEffects;
-
-    public ItemReagent(ProbabilitySet<Integer> potencyProbabilities, List<RegistryObject<FlaskEffect>> flaskEffects)
+    public ItemReagent(int potency, Supplier<FlaskEffect> flaskEffect)
     {
         super(ModItems.defaultItemProperties());
 
-        this.potencyProbabilities = potencyProbabilities;
-        this.flaskEffects = flaskEffects;
-    }
-
-    @Override
-    public ItemStack getDefaultInstance()
-    {
-        ItemStack stack = super.getDefaultInstance();
-        stack.getOrCreateTag().putInt("potency", 0);
-        return stack;
-    }
-
-    public ItemStack getInstanceWithRandomPotency()
-    {
-        ItemStack result = new ItemStack(this);
-        result.getOrCreateTag().putInt("potency", potencyProbabilities.roll());
-        return result;
+        this.potency = potency;
+        this.flaskEffect = flaskEffect;
     }
 
     @Override
@@ -62,12 +42,14 @@ public class ItemReagent extends Item
         return 40;
     }
 
+    @Nonnull
     @Override
     public UseAction getUseAction(ItemStack stack)
     {
         return UseAction.EAT;
     }
 
+    @Nonnull
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
     {
@@ -75,6 +57,7 @@ public class ItemReagent extends Item
         return ActionResult.resultSuccess(player.getHeldItem(hand));
     }
 
+    @Nonnull
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity livingEntity)
     {
@@ -87,16 +70,14 @@ public class ItemReagent extends Item
         FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(player);
         if (flaskHandler != null)
         {
-            RegistryObject<FlaskEffect> flaskEffectSupplier = flaskEffects.get(RANDOM.nextInt(flaskEffects.size()));
-            FlaskEffect flaskEffect = flaskEffectSupplier.get();
-            flaskHandler.applyFlaskEffectInstance(new FlaskEffectInstance(flaskEffect, stack.getOrCreateTag().getInt("potency"), 200), player);
+            flaskHandler.applyFlaskEffectInstance(new FlaskEffectInstance(flaskEffect.get(), potency, 200), player);
 
             if (!world.isRemote)
             {
                 HerbloreKnowledge herbloreKnowledge = HerbloreKnowledge.getHerbloreKnowledgeOf(player);
                 if (herbloreKnowledge != null)
                 {
-                    herbloreKnowledge.setFlaskEffectKnown(player, this, flaskEffect);
+                    herbloreKnowledge.setReagentKnown(player, this);
                 }
             }
         }
@@ -105,9 +86,14 @@ public class ItemReagent extends Item
         return stack;
     }
 
-    public List<RegistryObject<FlaskEffect>> getFlaskEffects()
+    public int getPotency()
     {
-        return flaskEffects;
+        return potency;
+    }
+
+    public Supplier<FlaskEffect> getFlaskEffect()
+    {
+        return flaskEffect;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -119,21 +105,16 @@ public class ItemReagent extends Item
         HerbloreKnowledge herbloreKnowledge = HerbloreKnowledge.getHerbloreKnowledgeOf(Minecraft.getInstance().player);
         if (herbloreKnowledge != null)
         {
-            tooltip.add(new TranslationTextComponent("Potency").appendString(" " + stack.getOrCreateTag().getInt("potency")).mergeStyle(TextFormatting.BLUE));
+            tooltip.add(new TranslationTextComponent("Potency").appendString(" " + potency).mergeStyle(TextFormatting.BLUE));
 
-            ImmutableList<FlaskEffect> knownFlaskEffects = herbloreKnowledge.getKnownFlaskEffects(this);
-            flaskEffects.forEach((flaskEffectSupplier) ->
+            if (herbloreKnowledge.isReagentKnown(this))
             {
-                FlaskEffect flaskEffect = flaskEffectSupplier.get();
-                if (knownFlaskEffects != null && knownFlaskEffects.contains(flaskEffect))
-                {
-                    tooltip.add(new TranslationTextComponent(flaskEffect.getTranslationKey()).mergeStyle(TextFormatting.GREEN));
-                }
-                else
-                {
-                    tooltip.add(new StringTextComponent("???").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
-                }
-            });
+                tooltip.add(new TranslationTextComponent(flaskEffect.get().getTranslationKey()).mergeStyle(TextFormatting.GREEN));
+            }
+            else
+            {
+                tooltip.add(new StringTextComponent("???").mergeStyle(TextFormatting.GRAY).mergeStyle(TextFormatting.ITALIC));
+            }
         }
     }
 }

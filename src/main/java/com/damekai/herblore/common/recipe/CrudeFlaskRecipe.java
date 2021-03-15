@@ -2,6 +2,7 @@ package com.damekai.herblore.common.recipe;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
+import com.damekai.herblore.common.item.ItemCatalyst;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.util.FlaskHelper;
@@ -13,7 +14,9 @@ import net.minecraft.item.crafting.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.Tags;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,30 +31,36 @@ public class CrudeFlaskRecipe extends SpecialRecipe
     }
 
     @Override
-    public boolean matches(CraftingInventory inventory, World world)
+    public boolean matches(@Nonnull CraftingInventory inventory, @Nonnull World world) // TODO: Clean this up.
     {
-        ArrayList<Item> inputItems = getInputItems(inventory);
-        if (!hasUniqueInputItems(inputItems) || inputItems.size() != 4)
+        ArrayList<Item> inputs = getInputItems(inventory);
+        if (!hasUniqueInputItems(inputs) || inputs.size() != 4)
         {
             return false; // Has duplicate reagents or more than four inputs.
         }
 
-        ArrayList<ItemStack> inputReagents = getInputReagents(inventory);
-        if (inputReagents.size() != 3)
+        ItemReagent reagent = getReagent(inventory);
+        if (reagent == null)
         {
-            return false; // Does not have exactly three reagents.
+            return false; // Does not have a reagent.
         }
 
-        return inputItems.contains(ModItems.FLASK_OF_WATER.get());
+        ArrayList<ItemCatalyst> catalysts = getCatalysts(inventory);
+        if (catalysts.size() != 2)
+        {
+            return false; // Does not have exactly two catalysts.
+        }
+
+        return inputs.contains(ModItems.FLASK_OF_WATER.get());
     }
 
+    @Nonnull
     @Override
-    public ItemStack getCraftingResult(CraftingInventory inventory)
+    public ItemStack getCraftingResult(@Nonnull CraftingInventory inventory)
     {
         ItemStack crudeFlaskOutput = new ItemStack(ModItems.CRUDE_FLASK.get());
 
-        ImmutableList<ItemStack> inputReagents = ImmutableList.copyOf(getInputReagents(inventory));
-        FlaskEffectInstance flaskEffectInstance = FlaskHelper.makeFlaskEffectInstance(inputReagents);
+        FlaskEffectInstance flaskEffectInstance = FlaskHelper.makeFlaskEffectInstance(getReagent(inventory));
         crudeFlaskOutput.getOrCreateTag().put("flask_effect_instance", flaskEffectInstance.write(new CompoundNBT()));
         crudeFlaskOutput.getOrCreateTag().putInt("flask_effect_color", flaskEffectInstance.getFlaskEffect().getColor());
 
@@ -66,12 +75,14 @@ public class CrudeFlaskRecipe extends SpecialRecipe
         return width >= 2 && height >= 2;
     }
 
+    @Nonnull
     @Override
     public ItemStack getRecipeOutput()
     {
         return new ItemStack(ModItems.CRUDE_FLASK.get());
     }
 
+    @Nonnull
     @Override
     public IRecipeSerializer<?> getSerializer()
     {
@@ -92,18 +103,31 @@ public class CrudeFlaskRecipe extends SpecialRecipe
         return inputItems;
     }
 
-    private ArrayList<ItemStack> getInputReagents(CraftingInventory inventory)
+    private ItemReagent getReagent(CraftingInventory inventory)
     {
-        ArrayList<ItemStack> inputReagents = new ArrayList<>();
         for (int i = 0; i < inventory.getSizeInventory(); i++)
         {
-            ItemStack inputStack = inventory.getStackInSlot(i);
-            if (inputStack != ItemStack.EMPTY && inputStack.getItem() instanceof ItemReagent)
+            ItemStack stack = inventory.getStackInSlot(i);
+            if (stack.getItem() instanceof ItemReagent)
             {
-                inputReagents.add(inputStack);
+                return (ItemReagent) stack.getItem();
             }
         }
-        return inputReagents;
+        return null;
+    }
+
+    private ArrayList<ItemCatalyst> getCatalysts(CraftingInventory inventory)
+    {
+        ArrayList<ItemCatalyst> catalysts = new ArrayList<>();
+        for (int i = 0; i < inventory.getSizeInventory(); i++)
+        {
+            ItemStack stack = inventory.getStackInSlot(i);
+            if (stack.getItem() instanceof ItemCatalyst)
+            {
+                catalysts.add((ItemCatalyst) stack.getItem());
+            }
+        }
+        return catalysts;
     }
 
     private boolean hasUniqueInputItems(ArrayList<Item> inputs)

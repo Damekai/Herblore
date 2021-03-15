@@ -10,7 +10,6 @@ import com.damekai.herblore.common.capability.herbloreknowledge.CapabilityHerblo
 import com.damekai.herblore.common.capability.herbloreknowledge.HerbloreKnowledge;
 import com.damekai.herblore.common.capability.toxicityhandler.CapabilityToxicityHandler;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
-import com.damekai.herblore.common.data.ModLootModifiers;
 import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.flask.*;
 import com.damekai.herblore.common.effect.ModEffects;
@@ -66,7 +65,6 @@ public class Herblore
         ModFeatures.FEATURES.register(modBus);
         ModEffects.EFFECTS.register(modBus);
         ModFlaskEffects.FLASK_EFFECTS.register(modBus);
-        ModLootModifiers.LOOT_MODIFIERS.register(modBus);
 
         MinecraftForge.EVENT_BUS.addListener(FlaskHandler::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(ToxicityHandler::onLivingUpdate);

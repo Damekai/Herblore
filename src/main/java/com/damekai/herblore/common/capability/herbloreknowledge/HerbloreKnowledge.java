@@ -25,45 +25,29 @@ import java.util.stream.Collectors;
 
 public class HerbloreKnowledge implements IHerbloreKnowledge
 {
-    private final Map<ItemReagent, Collection<FlaskEffect>> reagentKnowledge;
+    private final List<ItemReagent> reagentKnowledge;
 
     public HerbloreKnowledge()
     {
-        reagentKnowledge = new HashMap<>();
+        reagentKnowledge = new ArrayList<>();
     }
 
     @Override
-    @Nullable
-    public ImmutableList<FlaskEffect> getKnownFlaskEffects(ItemReagent reagent)
+    public boolean isReagentKnown(ItemReagent reagent)
     {
-        if (!reagentKnowledge.containsKey(reagent))
-        {
-            return null;
-        }
-        return ImmutableList.copyOf(reagentKnowledge.get(reagent));
+        return reagentKnowledge.contains(reagent);
     }
 
     @Override
-    public void setFlaskEffectKnown(PlayerEntity playerEntity, ItemReagent reagent, FlaskEffect flaskEffect)
+    public void setReagentKnown(PlayerEntity playerEntity, ItemReagent reagent)
     {
-        if (!reagentKnowledge.containsKey(reagent))
+        if (!reagentKnowledge.contains(reagent))
         {
-            Collection<FlaskEffect> knownFlasks = new ArrayList<>();
-            knownFlasks.add(flaskEffect);
-            reagentKnowledge.put(reagent, knownFlasks);
-        }
-        else if (!reagentKnowledge.get(reagent).contains(flaskEffect))
-        {
-            reagentKnowledge.get(reagent).add(flaskEffect);
-        }
-        else
-        {
-            return; // No update to map required, so no packet needs to be sent.
-        }
-
-        if (playerEntity instanceof ServerPlayerEntity)
-        {
-            HerblorePacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity)playerEntity), serializeNBT());
+            reagentKnowledge.add(reagent);
+            if (playerEntity instanceof ServerPlayerEntity)
+            {
+                HerblorePacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity)playerEntity), serializeNBT());
+            }
         }
     }
 
@@ -71,47 +55,27 @@ public class HerbloreKnowledge implements IHerbloreKnowledge
     {
         CompoundNBT nbt = new CompoundNBT();
 
-        ListNBT reagentKnowledgeMapNbt = new ListNBT();
-        reagentKnowledge.keySet().forEach((reagent) ->
+        ListNBT reagentKnowledgeNbt = new ListNBT();
+        reagentKnowledge.forEach((reagent) ->
         {
-            CompoundNBT reagentKnowledgeNbt = new CompoundNBT();
-
-            reagentKnowledgeNbt.putString("reagent_name", reagent.getRegistryName().toString()); // "key"
-
-            ListNBT flasksNbt = new ListNBT();
-            reagentKnowledge.get(reagent).forEach((flask) ->
-            {
-                CompoundNBT flaskNbt = new CompoundNBT();
-                flaskNbt.putString("flask_effect_name", flask.getRegistryName().toString());
-                flasksNbt.add(flaskNbt);
-            });
-            reagentKnowledgeNbt.put("flask_effects", flasksNbt); // "value"
-
-            reagentKnowledgeMapNbt.add(reagentKnowledgeNbt);
+            CompoundNBT nbtReagent = new CompoundNBT();
+            nbtReagent.putString("reagent_registry_name", reagent.getRegistryName().toString());
+            reagentKnowledgeNbt.add(nbtReagent);
         });
-        nbt.put("reagent_knowledge", reagentKnowledgeMapNbt);
+
+        nbt.put("reagent_knowledge", reagentKnowledgeNbt);
 
         return nbt;
     }
 
     public void deserializeNBT(CompoundNBT nbt)
     {
-        nbt.getList("reagent_knowledge", Constants.NBT.TAG_COMPOUND)
-                .stream().map((inbt) -> (CompoundNBT) inbt) // Cast all elements to CompoundNBT.
-                .forEach((reagentKnowledgeNbt) ->
-                {
-                    Item item = ModItems.getItemFromRegistry(reagentKnowledgeNbt.getString("reagent_name"));
-                    if (item instanceof ItemReagent)
-                    {
-                        ItemReagent reagent = (ItemReagent) item;
-
-                         reagentKnowledge.put(reagent, reagentKnowledgeNbt.getList("flask_effects", Constants.NBT.TAG_COMPOUND)
-                                 .stream().map((inbt) -> (CompoundNBT) inbt) // Cast all elements to CompoundNBT.
-                                 .map((flaskNbt) -> ModFlaskEffects.getFlaskEffectFromRegistry(flaskNbt.getString("flask_effect_name"))) // Convert to Flask Effects using registry.
-                                 .filter(Objects::nonNull) // Filter out null entries.
-                                 .collect(Collectors.toList())); // Transform to collection.
-                    }
-                });
+        reagentKnowledge.clear(); // Start fresh for deserialization.
+        reagentKnowledge.addAll(
+                nbt.getList("reagent_knowledge", Constants.NBT.TAG_COMPOUND)
+                        .stream()
+                        .map((inbt) -> (ItemReagent) ModItems.getItemFromRegistry(((CompoundNBT) inbt).getString("reagent_registry_name")))
+                        .collect(Collectors.toList()));
     }
 
     @OnlyIn(Dist.CLIENT)
