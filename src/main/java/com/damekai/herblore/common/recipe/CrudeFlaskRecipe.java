@@ -2,6 +2,7 @@ package com.damekai.herblore.common.recipe;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
+import com.damekai.herblore.common.flask.perk.base.FlaskPerk;
 import com.damekai.herblore.common.item.ItemCatalyst;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.item.ModItems;
@@ -12,14 +13,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CrudeFlaskRecipe extends SpecialRecipe
 {
@@ -61,6 +63,20 @@ public class CrudeFlaskRecipe extends SpecialRecipe
         ItemStack crudeFlaskOutput = new ItemStack(ModItems.CRUDE_FLASK.get());
 
         FlaskEffectInstance flaskEffectInstance = FlaskHelper.makeFlaskEffectInstance(getReagent(inventory));
+
+        ListNBT nbtFlaskPerks = new ListNBT();
+        nbtFlaskPerks.addAll(
+                getCatalysts(inventory)
+                        .stream()
+                        .map((catalyst) ->
+                        {
+                            CompoundNBT nbtFlaskPerk = new CompoundNBT();
+                            nbtFlaskPerk.putString("flask_perk", catalyst.getFlaskPerk().getRegistryName().toString());
+                            return nbtFlaskPerk;
+                        })
+                        .collect(Collectors.toList()));
+
+        crudeFlaskOutput.getOrCreateTag().put("flask_perks", nbtFlaskPerks);
         crudeFlaskOutput.getOrCreateTag().put("flask_effect_instance", flaskEffectInstance.write(new CompoundNBT()));
         crudeFlaskOutput.getOrCreateTag().putInt("flask_effect_color", flaskEffectInstance.getFlaskEffect().getColor());
 

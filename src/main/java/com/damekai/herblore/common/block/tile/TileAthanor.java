@@ -8,11 +8,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraftforge.common.util.Constants;
 
 public class TileAthanor extends TileEntity implements ITickableTileEntity
 {
@@ -50,11 +52,13 @@ public class TileAthanor extends TileEntity implements ITickableTileEntity
                 {
                     setStage(3);
 
-                    // Copy NBT list of effects from crude flask to completed flask.
-                    CompoundNBT flaskEffect = flaskStack.getOrCreateTag().getCompound("flask_effect_instance").copy();
+                    // Copy NBT from crude flask to completed flask.
+                    CompoundNBT nbtFlaskEffectInstance = flaskStack.getOrCreateTag().getCompound("flask_effect_instance").copy();
+                    ListNBT nbtFlaskPerks = flaskStack.getOrCreateTag().getList("flask_perks", Constants.NBT.TAG_COMPOUND);
                     int flaskColor = flaskStack.getOrCreateTag().getInt("flask_effect_color");
                     flaskStack = new ItemStack(ModItems.FLASK.get(), 1);
-                    flaskStack.getOrCreateTag().put("flask_effect_instance", flaskEffect);
+                    flaskStack.getOrCreateTag().put("flask_effect_instance", nbtFlaskEffectInstance);
+                    flaskStack.getOrCreateTag().put("flask_perks", nbtFlaskPerks);
                     flaskStack.getOrCreateTag().putInt("flask_effect_color", flaskColor);
                     flaskStack.getOrCreateTag().putInt("flask_doses", 4);
                 }

@@ -13,6 +13,7 @@ import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
 import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.flask.*;
 import com.damekai.herblore.common.effect.ModEffects;
+import com.damekai.herblore.common.flask.perk.ModFlaskPerks;
 import com.damekai.herblore.common.item.ModItemColors;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
@@ -65,6 +66,7 @@ public class Herblore
         ModFeatures.FEATURES.register(modBus);
         ModEffects.EFFECTS.register(modBus);
         ModFlaskEffects.FLASK_EFFECTS.register(modBus);
+        ModFlaskPerks.FLASK_PERKS.register(modBus);
 
         MinecraftForge.EVENT_BUS.addListener(FlaskHandler::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(ToxicityHandler::onLivingUpdate);

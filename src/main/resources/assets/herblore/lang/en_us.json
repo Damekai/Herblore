@@ -96,6 +96,17 @@
     "flask_effect.herblore.verdure": "Verdure",
     "flask_effect.herblore.rubble": "Rubble",
     "flask_effect.herblore.nomad": "Nomad",
-    "flask_effect.herblore.fleet": "Fleet"
+    "flask_effect.herblore.fleet": "Fleet",
+
+    "flask_perk.herblore.add_duration_small": "Duration +0:10",
+    "flask_perk.herblore.add_duration_medium": "Duration +0:20",
+    "flask_perk.herblore.add_duration_large": "Duration +0:30",
+    "flask_perk.herblore.multiply_duration_small": "Duration +20%",
+    "flask_perk.herblore.multiply_duration_large": "Duration +20%",
+    "flask_perk.herblore.heal_small": "Heal 0.5 HP per Potency",
+    "flask_perk.herblore.heal_large": "Heal 1 HP per Potency",
+    "flask_perk.herblore.night_vision": "Night Vision 0:10",
+    "flask_perk.herblore.invisibility": "Invisibility 0:05",
+    "flask_perk.herblore.absorption": "Absorption 4 HP 0:10"
 
 }

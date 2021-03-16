@@ -9,7 +9,7 @@ public class FlaskEffectInstance
 {
     private final FlaskEffect flaskEffect;
     private final int potency;
-    private final int durationFull;
+    private int durationFull;
     private int durationRemaining;
     private CompoundNBT tag;
 
@@ -54,6 +54,15 @@ public class FlaskEffectInstance
     public int getPotency()
     {
         return potency;
+    }
+
+    /**
+     * Sets both the full and remaining duration to the specified value.
+     */
+    public void setDuration(int duration)
+    {
+        durationFull = duration;
+        durationRemaining = duration;
     }
 
     public int getDurationFull()

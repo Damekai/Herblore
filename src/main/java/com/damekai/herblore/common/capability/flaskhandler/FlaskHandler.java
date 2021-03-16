@@ -3,6 +3,7 @@ package com.damekai.herblore.common.capability.flaskhandler;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
 import com.damekai.herblore.common.flask.base.*;
+import com.damekai.herblore.common.flask.perk.base.FlaskPerk;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -24,11 +25,11 @@ public class FlaskHandler implements IFlaskHandler
         activeFlaskEffectInstances = new ArrayList<>();
     }
 
-    public void applyFlaskEffectInstance(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
+    public void applyFlaskEffectInstance(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity, FlaskPerk... flaskPerks)
     {
         FlaskEffect flaskEffect = flaskEffectInstance.getFlaskEffect();
 
-        if (flaskEffect == null) // In the case of a ruined flask.
+        if (flaskEffect == null) // In the case of an untagged flask.
         {
             return;
         }
@@ -38,6 +39,12 @@ public class FlaskHandler implements IFlaskHandler
         if (existingInstance != null)
         {
             removeFlaskEffectInstance(existingInstance, livingEntity);
+        }
+
+        // Apply perks onto the Flask Effect Instance before applying it.
+        for (FlaskPerk flaskPerk : flaskPerks)
+        {
+            flaskPerk.applyPerk(flaskEffectInstance, livingEntity);
         }
 
         // Add Flask Effect Instance to list of active Instances.

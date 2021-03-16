@@ -3,13 +3,18 @@ package com.damekai.herblore.common.util;
 import com.damekai.herblore.common.flask.ModFlaskEffects;
 import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
+import com.damekai.herblore.common.flask.perk.ModFlaskPerks;
+import com.damekai.herblore.common.flask.perk.base.FlaskPerk;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.*;
@@ -54,5 +59,19 @@ public class FlaskHelper
 
         // Write potency and duration.
         lores.add((new StringTextComponent(String.format("Potency %d (%s)", flaskEffectInstance.getPotency(), StringUtils.ticksToElapsedTime(flaskEffectInstance.getDurationFull())))).mergeStyle(TextFormatting.BLUE));
+
+        // Write perks.
+        if (stack.getOrCreateTag().contains("flask_perks"))
+        {
+            ListNBT flaskPerks = stack.getOrCreateTag().getList("flask_perks", Constants.NBT.TAG_COMPOUND);
+            flaskPerks.forEach((inbt) ->
+            {
+                FlaskPerk flaskPerk = ModFlaskPerks.getFlaskPerkFromRegistry(((CompoundNBT) inbt).getString("flask_perk"));
+                if (flaskPerk != null)
+                {
+                    lores.add(new TranslationTextComponent(flaskPerk.getTranslationKey()).mergeStyle(TextFormatting.ITALIC).mergeStyle(TextFormatting.GRAY));
+                }
+            });
+        }
     }
 }

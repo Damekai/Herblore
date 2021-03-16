@@ -3,6 +3,7 @@ package com.damekai.herblore.common.item;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.ModBlocks;
 import com.damekai.herblore.common.flask.ModFlaskEffects;
+import com.damekai.herblore.common.flask.perk.ModFlaskPerks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -13,16 +14,16 @@ public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
-    public static final RegistryObject<Item> MARROW = ITEMS.register("marrow", () -> new ItemCatalyst(defaultItemProperties()));
-    public static final RegistryObject<Item> POWDERY_SINEW = ITEMS.register("powdery_sinew", () -> new ItemCatalyst(defaultItemProperties()));
-    public static final RegistryObject<Item> ENDER_DUST = ITEMS.register("ender_dust", () -> new ItemCatalyst(defaultItemProperties()));
-    public static final RegistryObject<Item> SPIDER_GRIT = ITEMS.register("spider_grit", () -> new ItemCatalyst(defaultItemProperties()));
-    public static final RegistryObject<Item> EERIE_MUCOUS = ITEMS.register("eerie_mucous", () -> new ItemCatalyst(defaultItemProperties()));
-    public static final RegistryObject<Item> POPPY_EXTRACT = ITEMS.register("poppy_extract", () -> new ItemCatalyst(defaultItemProperties()));
-    public static final RegistryObject<Item> CRUSHED_PUMPKIN_SEEDS = ITEMS.register("crushed_pumpkin_seeds", () -> new ItemCatalyst(defaultItemProperties()));
-    public static final RegistryObject<Item> PUREED_BERRIES = ITEMS.register("pureed_berries", () -> new ItemCatalyst(defaultItemProperties()));
-    public static final RegistryObject<Item> COCOA_FLOUR = ITEMS.register("cocoa_flour", () -> new ItemCatalyst(defaultItemProperties()));
-    public static final RegistryObject<Item> KELP_POWDER = ITEMS.register("kelp_powder", () -> new ItemCatalyst(defaultItemProperties()));
+    public static final RegistryObject<Item> MARROW = ITEMS.register("marrow", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.HEAL_LARGE));
+    public static final RegistryObject<Item> POWDERY_SINEW = ITEMS.register("powdery_sinew", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.ADD_DURATION_SMALL));
+    public static final RegistryObject<Item> ENDER_DUST = ITEMS.register("ender_dust", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.MULTIPLY_DURATION_LARGE));
+    public static final RegistryObject<Item> SPIDER_GRIT = ITEMS.register("spider_grit", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.NIGHT_VISION));
+    public static final RegistryObject<Item> EERIE_MUCOUS = ITEMS.register("eerie_mucous", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.INVISIBILITY));
+    public static final RegistryObject<Item> POPPY_EXTRACT = ITEMS.register("poppy_extract", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.ABSORPTION));
+    public static final RegistryObject<Item> CRUSHED_PUMPKIN_SEEDS = ITEMS.register("crushed_pumpkin_seeds", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.ADD_DURATION_MEDIUM));
+    public static final RegistryObject<Item> PUREED_BERRIES = ITEMS.register("pureed_berries", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.HEAL_SMALL));
+    public static final RegistryObject<Item> COCOA_FLOUR = ITEMS.register("cocoa_flour", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.ADD_DURATION_LARGE));
+    public static final RegistryObject<Item> KELP_POWDER = ITEMS.register("kelp_powder", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.MULTIPLY_DURATION_SMALL));
 
     public static final RegistryObject<ItemReagent> PERENNIAL_WINDY_LICHEN = ITEMS.register("perennial_windy_lichen", () -> new ItemReagent(1, ModFlaskEffects.STRIDER));
     public static final RegistryObject<ItemReagent> MILLED_WINDY_LICHEN = ITEMS.register("milled_windy_lichen", () -> new ItemReagent(2, ModFlaskEffects.STRIDER));
