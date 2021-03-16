@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:reagents/alchemical/alchemical_willow_wort"
+    ]
+  },
+  "criteria": {
+    "has_refined_willow_wort": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:refined_willow_wort"
+          }
+        ]
+      }
+    },
+    "has_popped_chorus_fruit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:popped_chorus_fruit"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:reagents/alchemical/alchemical_willow_wort"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_refined_willow_wort",
+      "has_popped_chorus_fruit",
+      "has_the_recipe"
+    ]
+  ]
+}

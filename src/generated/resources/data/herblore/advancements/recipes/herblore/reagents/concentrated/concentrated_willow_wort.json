@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:reagents/concentrated/concentrated_willow_wort"
+    ]
+  },
+  "criteria": {
+    "has_milled_willow_wort": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:milled_willow_wort"
+          }
+        ]
+      }
+    },
+    "has_sunflower_oil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:sunflower_oil"
+          }
+        ]
+      }
+    },
+    "has_snowball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:snowball"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:reagents/concentrated/concentrated_willow_wort"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_milled_willow_wort",
+      "has_sunflower_oil",
+      "has_snowball",
+      "has_the_recipe"
+    ]
+  ]
+}

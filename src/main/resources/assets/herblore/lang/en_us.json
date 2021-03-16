@@ -8,6 +8,9 @@
 
     "item.herblore.pestle_and_mortar": "Pestle and Mortar",
 
+    "item.herblore.sunflower_oil": "Sunflower Oil",
+    "item.herblore.fermenting_paste": "Fermenting Paste",
+
     "item.herblore.marrow": "Marrow",
     "item.herblore.powdery_sinew": "Powdery Sinew",
     "item.herblore.ender_dust": "Ender Dust",
@@ -101,7 +104,7 @@
     "flask_perk.herblore.add_duration_small": "Duration +0:10",
     "flask_perk.herblore.add_duration_medium": "Duration +0:20",
     "flask_perk.herblore.add_duration_large": "Duration +0:30",
-    "flask_perk.herblore.multiply_duration_small": "Duration +20%",
+    "flask_perk.herblore.multiply_duration_small": "Duration +10%",
     "flask_perk.herblore.multiply_duration_large": "Duration +20%",
     "flask_perk.herblore.heal_small": "Heal 0.5 HP per Potency",
     "flask_perk.herblore.heal_large": "Heal 1 HP per Potency",

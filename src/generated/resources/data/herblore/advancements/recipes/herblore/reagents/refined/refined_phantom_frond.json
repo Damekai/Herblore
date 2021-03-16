@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:reagents/refined/refined_phantom_frond"
+    ]
+  },
+  "criteria": {
+    "has_concentrated_phantom_frond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:concentrated_phantom_frond"
+          }
+        ]
+      }
+    },
+    "has_magma_cream": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:magma_cream"
+          }
+        ]
+      }
+    },
+    "has_fermenting_paste": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:fermenting_paste"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:reagents/refined/refined_phantom_frond"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_concentrated_phantom_frond",
+      "has_magma_cream",
+      "has_fermenting_paste",
+      "has_the_recipe"
+    ]
+  ]
+}

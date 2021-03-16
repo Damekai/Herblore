@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:reagents/alchemical/alchemical_deserts_thirst"
+    ]
+  },
+  "criteria": {
+    "has_refined_deserts_thirst": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:refined_deserts_thirst"
+          }
+        ]
+      }
+    },
+    "has_popped_chorus_fruit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:popped_chorus_fruit"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:reagents/alchemical/alchemical_deserts_thirst"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_refined_deserts_thirst",
+      "has_popped_chorus_fruit",
+      "has_the_recipe"
+    ]
+  ]
+}

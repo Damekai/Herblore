@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:reagents/alchemical/alchemical_phantom_frond"
+    ]
+  },
+  "criteria": {
+    "has_refined_phantom_frond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:refined_phantom_frond"
+          }
+        ]
+      }
+    },
+    "has_popped_chorus_fruit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:popped_chorus_fruit"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:reagents/alchemical/alchemical_phantom_frond"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_refined_phantom_frond",
+      "has_popped_chorus_fruit",
+      "has_the_recipe"
+    ]
+  ]
+}
