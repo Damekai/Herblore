@@ -1,39 +1,41 @@
 package com.damekai.herblore.common.flask;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.capability.flaskhandler.FlaskHandler;
 import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
-public class FlaskEffectDredge extends FlaskEffect implements FlaskEffect.ITickable
+public class FlaskEffectDredge extends FlaskEffect
 {
-    private static final int SEA_LEVEL = 62;
-    private static final int LEEWAY = 10; // "Leeway" given to grant a higher effect, since I'm forced to use a vanilla EffectInstance.
+    private static final float SEA_LEVEL = 62;
+    private static final float MAX_BREAK_SPEED_MULTIPLIER_BONUS_PER_POTENCY = 0.8f;
 
-    private final int tickRate;
-
-    protected FlaskEffectDredge(FlaskEffect.Properties properties, int tickRate)
+    protected FlaskEffectDredge(FlaskEffect.Properties properties)
     {
         super(properties);
-        this.tickRate = tickRate;
     }
 
-    @Override
-    public void onTick(FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)
+    public static void onBreakSpeed(PlayerEvent.BreakSpeed event)
     {
-        if (flaskEffectInstance.getDurationRemaining() % tickRate != 0)
-        {
-            return;
-        }
+        PlayerEntity playerEntity = event.getPlayer();
 
-        int layer = livingEntity.getPosition().getY() - LEEWAY;
-        int amplifier = Math.round(flaskEffectInstance.getPotency() * (1f - layer / (float) SEA_LEVEL) / 2f) - 1; // Maximum effect at layers 10 and below. Amplifier will be equal to the half the potency (rounded to nearest int) minus 1 at that point.
-        if (amplifier >= 0)
+        FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(playerEntity);
+        if (flaskHandler != null)
         {
-            Herblore.LOGGER.debug("Applying Subterranean with amplifier of " + amplifier);
-            livingEntity.addPotionEffect(new EffectInstance(Effects.HASTE, 20, amplifier, false, false, false));
+            FlaskEffectInstance dredge = flaskHandler.getFlaskEffectInstance(ModFlaskEffects.DREDGE.get());
+            if (dredge != null)
+            {
+                float breakSpeedMultiplier = (1f + (MAX_BREAK_SPEED_MULTIPLIER_BONUS_PER_POTENCY * dredge.getPotency())) * (1f - (float) Math.min(playerEntity.getPosY(), SEA_LEVEL) / SEA_LEVEL);
+
+                Herblore.LOGGER.debug(breakSpeedMultiplier);
+                Herblore.LOGGER.debug(event.getOriginalSpeed());
+                event.setNewSpeed(event.getOriginalSpeed() * breakSpeedMultiplier);
+            }
         }
     }
 }

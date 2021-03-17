@@ -78,6 +78,7 @@ public class Herblore
         MinecraftForge.EVENT_BUS.addListener(FlaskEffectQuench::onLivingDamage);
         MinecraftForge.EVENT_BUS.addListener(FlaskEffectComet::onLivingDamage);
         MinecraftForge.EVENT_BUS.addListener(FlaskEffectHaptic::onLivingDamage);
+        MinecraftForge.EVENT_BUS.addListener(FlaskEffectDredge::onBreakSpeed);
 
         HerblorePacketHandler.registerPackets();
     }
