@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:reagents/milled/milled_slakemoss"
+    ]
+  },
+  "criteria": {
+    "has_perennial_slakemoss": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:perennial_slakemoss"
+          }
+        ]
+      }
+    },
+    "has_pestle_and_mortar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:pestle_and_mortar"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:reagents/milled/milled_slakemoss"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_perennial_slakemoss",
+      "has_pestle_and_mortar",
+      "has_the_recipe"
+    ]
+  ]
+}
