@@ -70,7 +70,6 @@ public class Herblore
 
         MinecraftForge.EVENT_BUS.addListener(FlaskHandler::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(ToxicityHandler::onLivingUpdate);
-        MinecraftForge.EVENT_BUS.addListener(ToxicityHandler::onPotionApplicable);
         MinecraftForge.EVENT_BUS.addListener(HerbloreKnowledge::onPlayerLoggedIn);
         MinecraftForge.EVENT_BUS.addListener(HerbloreKnowledge::onPlayerClone);
         MinecraftForge.EVENT_BUS.addListener(HerbloreKnowledge::onPlayerRespawn);

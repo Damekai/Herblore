@@ -160,21 +160,4 @@ public class ToxicityHandler implements IToxicityHandler
             toxicityHandler.tickToxicity(livingEntity);
         }
     }
-
-    public static void onPotionApplicable(PotionEvent.PotionApplicableEvent event)
-    {
-        // Cause significant toxicity damage to the player if they attempt to drink a vanilla potion while their toxicity levels are above 0.
-
-        if (ModEffects.getEffectFromRegistry(event.getPotionEffect().getPotion().getRegistryName().toString()) == null) // Check whether or not the Effect is a GUI Effect from this mod.
-        {
-            LivingEntity livingEntity = event.getEntityLiving();
-
-            ToxicityHandler toxicityHandler = getToxicityHandlerOf(livingEntity);
-            if (toxicityHandler != null && toxicityHandler.getToxicity() > 0)
-            {
-                toxicityHandler.setToxicity(livingEntity, MAX_TOXICITY);
-                event.setResult(Event.Result.DENY);
-            }
-        }
-    }
 }
