@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "herblore",
+  "ingredients": [
+    {
+      "item": "herblore:perennial_willow_wort"
+    }
+  ],
+  "result": {
+    "item": "herblore:willow_wort_seeds"
+  }
+}

@@ -1,6 +1,7 @@
 package com.damekai.herblore.common.util;
 
 import com.damekai.herblore.common.item.ItemReagent;
+import com.damekai.herblore.common.item.ItemReagentSeeds;
 import com.damekai.herblore.common.item.ModItems;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -9,6 +10,7 @@ import net.minecraftforge.fml.RegistryObject;
 public class ReagentDatabase
 {
     public static final ReagentData WINDY_LICHEN = new ReagentData("windy_lichen",
+            ModItems.WINDY_LICHEN_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_WINDY_LICHEN)
                     .put(2, ModItems.MILLED_WINDY_LICHEN)
@@ -18,6 +20,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData SUNSPECKLE = new ReagentData("sunspeckle",
+            ModItems.SUNSPECKLE_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_SUNSPECKLE)
                     .put(2, ModItems.MILLED_SUNSPECKLE)
@@ -27,6 +30,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData MOONSPECKLE = new ReagentData("moonspeckle",
+            ModItems.MOONSPECKLE_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_MOONSPECKLE)
                     .put(2, ModItems.MILLED_MOONSPECKLE)
@@ -36,6 +40,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData STONESTEM = new ReagentData("stonestem",
+            ModItems.STONESTEM_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_STONESTEM)
                     .put(2, ModItems.MILLED_STONESTEM)
@@ -45,6 +50,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData WILLOW_WORT = new ReagentData("willow_wort",
+            ModItems.WILLOW_WORT_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_WILLOW_WORT)
                     .put(2, ModItems.MILLED_WILLOW_WORT)
@@ -54,6 +60,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData RUMBLEROOT = new ReagentData("rumbleroot",
+            ModItems.RUMBLEROOT_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_RUMBLEROOT)
                     .put(2, ModItems.MILLED_RUMBLEROOT)
@@ -63,6 +70,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData PHANTOM_FROND = new ReagentData("phantom_frond",
+            ModItems.PHANTOM_FROND_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_PHANTOM_FROND)
                     .put(2, ModItems.MILLED_PHANTOM_FROND)
@@ -72,6 +80,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData BREEZEBLOOM = new ReagentData("breezebloom",
+            ModItems.BREEZEBLOOM_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_BREEZEBLOOM)
                     .put(2, ModItems.MILLED_BREEZEBLOOM)
@@ -81,6 +90,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData DESERTS_THIRST = new ReagentData("deserts_thirst",
+            ModItems.DESERTS_THIRST_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_DESERTS_THIRST)
                     .put(2, ModItems.MILLED_DESERTS_THIRST)
@@ -90,6 +100,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData THUNDERSTAR = new ReagentData("thunderstar",
+            ModItems.THUNDERSTAR_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_THUNDERSTAR)
                     .put(2, ModItems.MILLED_THUNDERSTAR)
@@ -99,6 +110,7 @@ public class ReagentDatabase
                     .build());
 
     public static final ReagentData SUNSTRIDERS_SIN = new ReagentData("sunstriders_sin",
+            ModItems.SUNSTRIDERS_SIN_SEEDS,
             new ImmutableMap.Builder<Integer, RegistryObject<ItemReagent>>()
                     .put(1, ModItems.PERENNIAL_SUNSTRIDERS_SIN)
                     .put(2, ModItems.MILLED_SUNSTRIDERS_SIN)
@@ -126,11 +138,13 @@ public class ReagentDatabase
     public static class ReagentData
     {
         public final String name;
+        public final RegistryObject<ItemReagentSeeds> seeds;
         public final ImmutableMap<Integer, RegistryObject<ItemReagent>> tiers;
 
-        public ReagentData(String name, ImmutableMap<Integer, RegistryObject<ItemReagent>> tiers)
+        public ReagentData(String name, RegistryObject<ItemReagentSeeds> seeds, ImmutableMap<Integer, RegistryObject<ItemReagent>> tiers)
         {
             this.name = name;
+            this.seeds = seeds;
             this.tiers = tiers;
         }
     }

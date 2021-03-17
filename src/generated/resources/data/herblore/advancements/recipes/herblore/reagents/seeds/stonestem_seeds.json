@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:reagents/seeds/stonestem_seeds"
+    ]
+  },
+  "criteria": {
+    "has_perennial_stonestem": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:perennial_stonestem"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:reagents/seeds/stonestem_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_perennial_stonestem",
+      "has_the_recipe"
+    ]
+  ]
+}

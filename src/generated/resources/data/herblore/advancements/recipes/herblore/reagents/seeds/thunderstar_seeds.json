@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:reagents/seeds/thunderstar_seeds"
+    ]
+  },
+  "criteria": {
+    "has_perennial_thunderstar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:perennial_thunderstar"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:reagents/seeds/thunderstar_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_perennial_thunderstar",
+      "has_the_recipe"
+    ]
+  ]
+}

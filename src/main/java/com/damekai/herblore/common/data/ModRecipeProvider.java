@@ -28,6 +28,7 @@ public class ModRecipeProvider extends RecipeProvider
         registerCrudeFlask(consumer, "crude_flask/");
         registerMiscItems(consumer, "item/");
         registerCatalysts(consumer, "catalysts/");
+        registerSeeds(consumer, "reagents/seeds/");
         registerMilledReagents(consumer, "reagents/milled/");
         registerConcentratedReagents(consumer, "reagents/concentrated/");
         registerRefinedReagents(consumer, "reagents/refined/");
@@ -43,6 +44,22 @@ public class ModRecipeProvider extends RecipeProvider
     private void registerCrudeFlask(Consumer<IFinishedRecipe> consumer, String folder)
     {
         CustomRecipeBuilder.customRecipe(CrudeFlaskRecipe.SERIALIZER).build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "crude_flask").toString());
+    }
+
+    private void registerSeeds(Consumer<IFinishedRecipe> consumer, String folder)
+    {
+        for (ReagentDatabase.ReagentData reagent : ReagentDatabase.REAGENT_DATA)
+        {
+            String name = reagent.name;
+            IItemProvider perennial = reagent.tiers.get(1)::get;
+            IItemProvider seeds = reagent.seeds::get;
+
+            ShapelessRecipeBuilder.shapelessRecipe(seeds) // To seeds of this reagent.
+                    .addIngredient(perennial) // From tier 1 of this reagent.
+                    .setGroup("herblore")
+                    .addCriterion("has_perennial_" + name, hasItem(perennial))
+                    .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + name + "_seeds"));
+        }
     }
 
     private void registerMilledReagents(Consumer<IFinishedRecipe> consumer, String folder)
