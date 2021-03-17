@@ -2,14 +2,12 @@ package com.damekai.herblore.common.capability.toxicityhandler;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.effect.ModEffects;
-import com.damekai.herblore.common.flask.ModFlaskEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.Event;
 
@@ -17,10 +15,10 @@ import javax.annotation.Nullable;
 
 public class ToxicityHandler implements IToxicityHandler
 {
-    private static final int MAX_TOXICITY = 50;
+    private static final int MAX_TOXICITY = 25;
     private static final int MAX_TOXICITY_TIER = 5;
-    private static final int TOXICITY_DECAY_RATE = 60; // Number of ticks required for toxicity to decrease by 1.
-    private static final int CRITICAL_THRESHOLD = 40;
+    private static final int TOXICITY_DECAY_RATE = 100; // Number of ticks required for toxicity to decrease by 1.
+    private static final int CRITICAL_THRESHOLD = 20;
     private static final float HUNGER_EXHAUSTION_PER_TOXICITY = 0.01f; // In testing, a value of 0.01f requires eating a steak every ~8 sec (accounting for saturation) to maintain a full hunger bar.
 
     private int toxicity;
