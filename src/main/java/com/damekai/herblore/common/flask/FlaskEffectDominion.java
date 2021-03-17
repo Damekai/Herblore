@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class FlaskEffectDominion extends AttributeFlaskEffect
 {
-    private static final float ATTACK_SPEED_PER_POTENCY = 0.5f;
+    private static final float ATTACK_SPEED_PER_POTENCY = 1f;
 
     private final ImmutableList<Block> dominionBlocks;
 

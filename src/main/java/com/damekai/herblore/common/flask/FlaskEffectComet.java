@@ -15,7 +15,8 @@ import java.util.List;
 
 public class FlaskEffectComet extends FlaskEffect
 {
-    private static final int RADIUS_PER_POTENCY = 1;
+    private static final float PERCENT_DAMAGE_PREVENTED_PER_POTENCY = 0.2f;
+    private static final int RADIUS_PER_POTENCY = 2;
 
     public FlaskEffectComet(Properties properties)
     {
@@ -36,19 +37,31 @@ public class FlaskEffectComet extends FlaskEffect
 
                 if (comet != null)
                 {
+                    int potency = comet.getPotency();
+
+                    // Prevent the approproate amount of damage.
+                    float initialAmount = event.getAmount();
+                    float damagePrevented = initialAmount * PERCENT_DAMAGE_PREVENTED_PER_POTENCY * potency;
+
+                    event.setAmount(initialAmount - damagePrevented);
+
+                    // Cause damage to all entities in radius.
                     World world = livingEntity.getEntityWorld();
 
                     List<MobEntity> mobsInRange = world.getEntitiesWithinAABB(MobEntity.class, new AxisAlignedBB(
-                            livingEntity.getPosX() - RADIUS_PER_POTENCY * comet.getPotency(),
+                            livingEntity.getPosX() - RADIUS_PER_POTENCY * potency,
                             livingEntity.getPosY() - 1,
-                            livingEntity.getPosZ() - RADIUS_PER_POTENCY * comet.getPotency(),
-                            livingEntity.getPosX() + RADIUS_PER_POTENCY * comet.getPotency(),
+                            livingEntity.getPosZ() - RADIUS_PER_POTENCY * potency,
+                            livingEntity.getPosX() + RADIUS_PER_POTENCY * potency,
                             livingEntity.getPosY() + 1,
-                            livingEntity.getPosZ() + RADIUS_PER_POTENCY * comet.getPotency()));
+                            livingEntity.getPosZ() + RADIUS_PER_POTENCY * potency));
 
-                    mobsInRange.forEach((mob) -> mob.attackEntityFrom(DamageSource.causeMobDamage(livingEntity), event.getAmount()));
+                    mobsInRange.forEach((mob) -> mob.attackEntityFrom(DamageSource.causeMobDamage(livingEntity), damagePrevented));
 
-                    event.setCanceled(true);
+                    if (event.getAmount() <= 0f)
+                    {
+                        event.setCanceled(true);
+                    }
                 }
             }
         }

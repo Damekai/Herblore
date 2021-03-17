@@ -10,7 +10,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 public class FlaskEffectHaptic extends FlaskEffect
 {
-    private static final float KNOCKBACK_PER_POTENCY = 0.35f;
+    private static final float KNOCKBACK_PER_POTENCY = 0.7f;
 
     public FlaskEffectHaptic(Properties properties)
     {

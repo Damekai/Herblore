@@ -17,9 +17,9 @@ import java.util.UUID;
 
 public class FlaskEffectNomad extends AttributeFlaskEffect
 {
-    private static final float MOVEMENT_SPEED_PER_POTENCY = 0.125f;
+    private static final float MOVEMENT_SPEED_PER_POTENCY = 0.25f;
     private static final int BASE_RADIUS = 20;
-    private static final int RADIUS_REDUCTION_PER_POTENCY = 1;
+    private static final int RADIUS_REDUCTION_PER_POTENCY = 2;
 
     protected FlaskEffectNomad(Properties properties, UUID uuid)
     {

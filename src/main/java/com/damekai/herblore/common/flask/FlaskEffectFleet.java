@@ -16,12 +16,12 @@ import java.util.UUID;
 
 public class FlaskEffectFleet extends AttributeFlaskEffect
 {
-    private static final float POTENCY_FACTOR = 0.05f;
+    private static final float POTENCY_FACTOR = 0.1f;
     private static final float MOB_COUNT_FACTOR = 0.5f;
     private static final int MAX_MOB_COUNT_CONTRIBUTION = 5; // Maximum benefit is reached when this number of mobs are within the radius. More mobs than this value do not increase the benefit further.
 
-    private static final int BASE_RADIUS = 10;
-    private static final int RADIUS_INCREASE_PER_POTENCY = 1;
+    private static final int BASE_RADIUS = 15;
+    private static final int RADIUS_INCREASE_PER_POTENCY = 2;
 
     protected FlaskEffectFleet(FlaskEffect.Properties properties, UUID uuid)
     {

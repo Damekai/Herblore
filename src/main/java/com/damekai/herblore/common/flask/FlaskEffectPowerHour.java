@@ -11,6 +11,8 @@ import java.util.UUID;
 
 public class FlaskEffectPowerHour extends AttributeFlaskEffect
 {
+    private static final float MAX_ATTACK_DAMAGE_BOOST_PER_POTENCY = 1.5f;
+
     private final int primeTime; // Time at which this effect is most powerful.
 
     public FlaskEffectPowerHour(FlaskEffect.Properties properties, int primeTime, UUID uuid)
@@ -41,7 +43,7 @@ public class FlaskEffectPowerHour extends AttributeFlaskEffect
                 distanceFromPrimeTime = Math.min(24000 - Math.abs(currentTime - powerhour.primeTime), Math.abs(currentTime - powerhour.primeTime));
             }
 
-            return flaskEffectInstance.getPotency() * (1 - (distanceFromPrimeTime / 12000f)); // For example, if it's prime time and the potency is 10, the attack damage boost is 10.
+            return MAX_ATTACK_DAMAGE_BOOST_PER_POTENCY * flaskEffectInstance.getPotency() * (1 - (distanceFromPrimeTime / 12000f));
         }
         return 0;
     }

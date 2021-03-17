@@ -7,7 +7,7 @@ import net.minecraft.util.DamageSource;
 
 public class FlaskEffectPenance extends FlaskEffect implements FlaskEffect.IApplicable, FlaskEffect.ITickable, FlaskEffect.IExpirable
 {
-    private static final float HEALTH_RESTORED_PER_POTENCY = 2f;
+    private static final float HEALTH_RESTORED_PER_POTENCY = 4f;
     private static final int DAMAGE_OCCURENCES = 5;
 
 
