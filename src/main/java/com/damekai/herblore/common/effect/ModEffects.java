@@ -38,6 +38,8 @@ public class ModEffects
 
     public static final RegistryObject<Effect> FLEET_RENDER = EFFECTS.register("fleet", () -> new GuiFlaskEffect(ModFlaskEffects.FLEET));
 
+    public static final RegistryObject<Effect> VIGOR_RENDER = EFFECTS.register("vigor", () -> new GuiFlaskEffect(ModFlaskEffects.VIGOR));
+
     public static Effect getEffectFromRegistry(String name)
     {
         RegistryObject<Effect> match = EFFECTS.getEntries().stream().filter((effectSupplier) -> effectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);

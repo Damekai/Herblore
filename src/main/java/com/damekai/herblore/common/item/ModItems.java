@@ -92,6 +92,12 @@ public class ModItems
                     .seeds(ModBlocks.SUNSTRIDERS_SIN_CROP)
                     .tiers(1, 5));
 
+    public static final Reagent SLAKEMOSS = new Reagent(
+            new Reagent.Initializer(ITEMS, "slakemoss")
+                    .flaskEffect(ModFlaskEffects.VIGOR)
+                    .seeds(ModBlocks.SLAKEMOSS_CROP)
+                    .tiers(1, 5));
+
     public static final RegistryObject<Item> EMPTY_FLASK = ITEMS.register("empty_flask", () -> new ItemEmptyFlask(defaultItemProperties()));
     public static final RegistryObject<Item> FLASK_OF_WATER = ITEMS.register("flask_of_water", () -> new Item(defaultItemProperties()));
     public static final RegistryObject<Item> CRUDE_FLASK = ITEMS.register("crude_flask", () -> new Item(defaultItemProperties()));

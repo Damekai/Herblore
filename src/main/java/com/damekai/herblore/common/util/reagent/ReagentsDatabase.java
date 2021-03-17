@@ -16,5 +16,6 @@ public class ReagentsDatabase
             .add(ModItems.BREEZEBLOOM)
             .add(ModItems.DESERTS_THIRST)
             .add(ModItems.THUNDERSTAR)
+            .add(ModItems.SUNSTRIDERS_SIN)
             .build();
 }

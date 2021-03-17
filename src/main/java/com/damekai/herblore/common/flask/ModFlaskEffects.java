@@ -55,6 +55,8 @@ public class ModFlaskEffects
     public static final RegistryObject<FlaskEffect> FLEET = FLASK_EFFECTS.register("fleet", () -> new FlaskEffectFleet(new FlaskEffect.Properties().translationName("fleet").baseDuration(1200).color(0xF7F80C).guiEffect(ModEffects.FLEET_RENDER),
             UUID.fromString("98f25338-e60e-472d-9e24-4ad3bbaa5f67")));
 
+    public static final RegistryObject<FlaskEffect> VIGOR = FLASK_EFFECTS.register("vigor", () -> new FlaskEffectVigor(new FlaskEffect.Properties().translationName("vigor").baseDuration(600).color(0xE8420E).guiEffect(ModEffects.VIGOR_RENDER)));
+
     public static FlaskEffect getFlaskEffectFromRegistry(String name)
     {
         RegistryObject<FlaskEffect> match = FLASK_EFFECTS.getEntries().stream().filter((flaskEffectSupplier) -> flaskEffectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
