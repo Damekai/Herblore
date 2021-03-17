@@ -5,12 +5,13 @@ import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import net.minecraft.entity.LivingEntity;
 
-public class FlaskEffectVigor extends FlaskEffect implements FlaskEffect.IApplicable, FlaskEffect.ITickable, FlaskEffect.IExpirable
+public class FlaskEffectRigor extends FlaskEffect implements FlaskEffect.IApplicable, FlaskEffect.ITickable, FlaskEffect.IExpirable
 {
-    private static final float ABSORPTION_PER_POTENCY = 4;
+    private static final float ABSORPTION_PER_POTENCY = 4f;
+    private static final float HEALTH_COST_PER_ABSORPTION = 0.25f;
     private static final int FREQUENCY = 200; // Every 10 seconds.
 
-    public FlaskEffectVigor(Properties properties)
+    public FlaskEffectRigor(Properties properties)
     {
         super(properties);
     }
@@ -38,13 +39,21 @@ public class FlaskEffectVigor extends FlaskEffect implements FlaskEffect.IApplic
 
     private void setAbsorption(int potency, LivingEntity livingEntity)
     {
-        float currentAbsorption = livingEntity.getAbsorptionAmount();
-        float flaskAbsorption = potency * ABSORPTION_PER_POTENCY;
+        float absorptionAddition = (potency * ABSORPTION_PER_POTENCY) - livingEntity.getAbsorptionAmount();
+        float healthCost = absorptionAddition * HEALTH_COST_PER_ABSORPTION;
+
+        // Scale down absorption addition and health cost if the health cost cannot be paid. Leaves the player with at least 1 health (half a heart).
+        if (livingEntity.getHealth() - healthCost < 1f)
+        {
+            healthCost = livingEntity.getHealth() - 1f; // Set the cost to be all but the last point of health.
+            absorptionAddition = healthCost / HEALTH_COST_PER_ABSORPTION;
+        }
 
         // Only add enough absorption to bring the LivingEntity up to what this flask can provide.
-        if (currentAbsorption < flaskAbsorption)
+        if (absorptionAddition > 0f && livingEntity.getHealth() > healthCost)
         {
-            livingEntity.setAbsorptionAmount(flaskAbsorption);
+            livingEntity.setHealth(livingEntity.getHealth() - healthCost);
+            livingEntity.setAbsorptionAmount(livingEntity.getAbsorptionAmount() + absorptionAddition);
         }
     }
 }

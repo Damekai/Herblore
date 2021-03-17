@@ -94,7 +94,7 @@ public class ModItems
 
     public static final Reagent SLAKEMOSS = new Reagent(
             new Reagent.Initializer(ITEMS, "slakemoss")
-                    .flaskEffect(ModFlaskEffects.VIGOR)
+                    .flaskEffect(ModFlaskEffects.RIGOR)
                     .seeds(ModBlocks.SLAKEMOSS_CROP)
                     .tiers(1, 5));
 

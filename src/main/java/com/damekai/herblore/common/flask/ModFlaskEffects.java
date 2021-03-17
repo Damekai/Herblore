@@ -6,7 +6,6 @@ import com.damekai.herblore.common.flask.base.FlaskEffect;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -55,7 +54,7 @@ public class ModFlaskEffects
     public static final RegistryObject<FlaskEffect> FLEET = FLASK_EFFECTS.register("fleet", () -> new FlaskEffectFleet(new FlaskEffect.Properties().translationName("fleet").baseDuration(1200).color(0xF7F80C).guiEffect(ModEffects.FLEET_RENDER),
             UUID.fromString("98f25338-e60e-472d-9e24-4ad3bbaa5f67")));
 
-    public static final RegistryObject<FlaskEffect> VIGOR = FLASK_EFFECTS.register("vigor", () -> new FlaskEffectVigor(new FlaskEffect.Properties().translationName("vigor").baseDuration(600).color(0xE8420E).guiEffect(ModEffects.VIGOR_RENDER)));
+    public static final RegistryObject<FlaskEffect> RIGOR = FLASK_EFFECTS.register("rigor", () -> new FlaskEffectRigor(new FlaskEffect.Properties().translationName("rigor").baseDuration(600).color(0xE8420E).guiEffect(ModEffects.RIGOR_RENDER)));
 
     public static FlaskEffect getFlaskEffectFromRegistry(String name)
     {

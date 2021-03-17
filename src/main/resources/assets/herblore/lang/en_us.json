@@ -124,6 +124,7 @@
     "flask_effect.herblore.rubble": "Rubble",
     "flask_effect.herblore.nomad": "Nomad",
     "flask_effect.herblore.fleet": "Fleet",
+    "flask_effect.herblore.rigor": "Rigor",
 
     "flask_perk.herblore.add_duration_small": "Duration +0:10",
     "flask_perk.herblore.add_duration_medium": "Duration +0:20",
