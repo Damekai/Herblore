@@ -3,7 +3,8 @@ package com.damekai.herblore.common.data;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.recipe.CrudeFlaskRecipe;
-import com.damekai.herblore.common.util.ReagentDatabase;
+import com.damekai.herblore.common.util.reagent.Reagent;
+import com.damekai.herblore.common.util.reagent.ReagentsDatabase;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -12,6 +13,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import org.lwjgl.system.CallbackI;
 
 import java.util.function.Consumer;
 
@@ -48,11 +50,16 @@ public class ModRecipeProvider extends RecipeProvider
 
     private void registerSeeds(Consumer<IFinishedRecipe> consumer, String folder)
     {
-        for (ReagentDatabase.ReagentData reagent : ReagentDatabase.REAGENT_DATA)
+        for (Reagent reagent : ReagentsDatabase.REAGENTS)
         {
-            String name = reagent.name;
-            IItemProvider perennial = reagent.tiers.get(1)::get;
-            IItemProvider seeds = reagent.seeds::get;
+            if (reagent.getSeeds() == null || !reagent.getTiers().containsKey(1)) // Ensure seeds and perennial both exist.
+            {
+                continue;
+            }
+
+            String name = reagent.getName();
+            IItemProvider perennial = reagent.getTiers().get(1)::get;
+            IItemProvider seeds = reagent.getSeeds()::get;
 
             ShapelessRecipeBuilder.shapelessRecipe(seeds) // To seeds of this reagent.
                     .addIngredient(perennial) // From tier 1 of this reagent.
@@ -64,20 +71,25 @@ public class ModRecipeProvider extends RecipeProvider
 
     private void registerMilledReagents(Consumer<IFinishedRecipe> consumer, String folder)
     {
-        for (ReagentDatabase.ReagentData reagent : ReagentDatabase.REAGENT_DATA)
+        for (Reagent reagent : ReagentsDatabase.REAGENTS)
         {
-            String name = reagent.name;
-            IItemProvider previousTier = reagent.tiers.get(1)::get;
-            IItemProvider nextTier = reagent.tiers.get(2)::get;
+            if (!reagent.getTiers().containsKey(1) || !reagent.getTiers().containsKey(2)) // Ensure perennial and milled both exist.
+            {
+                continue;
+            }
 
-            ShapedRecipeBuilder.shapedRecipe(nextTier) // To tier 2 of this reagent.
-                    .key('A', previousTier) // From tier 1 of this reagent.
+            String name = reagent.getName();
+            IItemProvider perennial = reagent.getTiers().get(1)::get;
+            IItemProvider milled = reagent.getTiers().get(2)::get;
+
+            ShapedRecipeBuilder.shapedRecipe(milled) // To tier 2 of this reagent.
+                    .key('A', perennial) // From tier 1 of this reagent.
                     .key('B', ModItems.PESTLE_AND_MORTAR::get)
                     .patternLine(" A ")
                     .patternLine("ABA")
                     .patternLine(" A ")
                     .setGroup("herblore")
-                    .addCriterion("has_perennial_" + name, hasItem(previousTier))
+                    .addCriterion("has_perennial_" + name, hasItem(perennial))
                     .addCriterion("has_pestle_and_mortar", hasItem(ModItems.PESTLE_AND_MORTAR::get))
                     .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "milled_" + name));
         }
@@ -85,21 +97,26 @@ public class ModRecipeProvider extends RecipeProvider
 
     private void registerConcentratedReagents(Consumer<IFinishedRecipe> consumer, String folder)
     {
-        for (ReagentDatabase.ReagentData reagent : ReagentDatabase.REAGENT_DATA)
+        for (Reagent reagent : ReagentsDatabase.REAGENTS)
         {
-            String name = reagent.name;
-            IItemProvider previousTier = reagent.tiers.get(2)::get;
-            IItemProvider nextTier = reagent.tiers.get(3)::get;
+            if (!reagent.getTiers().containsKey(2) || !reagent.getTiers().containsKey(3)) // Ensure milled and concentrated both exist.
+            {
+                continue;
+            }
 
-            ShapedRecipeBuilder.shapedRecipe(nextTier) // To tier 3 of this reagent.
-                    .key('A', previousTier) // From tier 2 of this reagent.
+            String name = reagent.getName();
+            IItemProvider milled = reagent.getTiers().get(2)::get;
+            IItemProvider concentrated = reagent.getTiers().get(3)::get;
+
+            ShapedRecipeBuilder.shapedRecipe(concentrated) // To tier 3 of this reagent.
+                    .key('A', milled) // From tier 2 of this reagent.
                     .key('B', ModItems.SUNFLOWER_OIL::get)
                     .key('C', Items.SNOWBALL)
                     .patternLine("CAC")
                     .patternLine("ABA")
                     .patternLine("CAC")
                     .setGroup("herblore")
-                    .addCriterion("has_milled_" + name, hasItem(previousTier))
+                    .addCriterion("has_milled_" + name, hasItem(milled))
                     .addCriterion("has_sunflower_oil", hasItem(ModItems.SUNFLOWER_OIL::get))
                     .addCriterion("has_snowball", hasItem(Items.SNOWBALL))
                     .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "concentrated_" + name));
@@ -108,21 +125,26 @@ public class ModRecipeProvider extends RecipeProvider
 
     private void registerRefinedReagents(Consumer<IFinishedRecipe> consumer, String folder)
     {
-        for (ReagentDatabase.ReagentData reagent : ReagentDatabase.REAGENT_DATA)
+        for (Reagent reagent : ReagentsDatabase.REAGENTS)
         {
-            String name = reagent.name;
-            IItemProvider previousTier = reagent.tiers.get(3)::get;
-            IItemProvider nextTier = reagent.tiers.get(4)::get;
+            if (!reagent.getTiers().containsKey(3) || !reagent.getTiers().containsKey(4)) // Ensure concentrated and refined both exist.
+            {
+                continue;
+            }
 
-            ShapedRecipeBuilder.shapedRecipe(nextTier) // To tier 4 of this reagent.
-                    .key('A', previousTier) // From tier 3 of this reagent.
+            String name = reagent.getName();
+            IItemProvider concentrated = reagent.getTiers().get(3)::get;
+            IItemProvider refined = reagent.getTiers().get(4)::get;
+
+            ShapedRecipeBuilder.shapedRecipe(refined) // To tier 4 of this reagent.
+                    .key('A', concentrated) // From tier 3 of this reagent.
                     .key('B', Items.MAGMA_CREAM)
                     .key('C', ModItems.FERMENTING_PASTE::get)
                     .patternLine("CAC")
                     .patternLine("ABA")
                     .patternLine("CAC")
                     .setGroup("herblore")
-                    .addCriterion("has_concentrated_" + name, hasItem(previousTier))
+                    .addCriterion("has_concentrated_" + name, hasItem(concentrated))
                     .addCriterion("has_magma_cream", hasItem(Items.MAGMA_CREAM))
                     .addCriterion("has_fermenting_paste", hasItem(ModItems.FERMENTING_PASTE::get))
                     .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "refined_" + name));
@@ -131,20 +153,25 @@ public class ModRecipeProvider extends RecipeProvider
 
     private void registerAlchemicalReagents(Consumer<IFinishedRecipe> consumer, String folder)
     {
-        for (ReagentDatabase.ReagentData reagent : ReagentDatabase.REAGENT_DATA)
+        for (Reagent reagent : ReagentsDatabase.REAGENTS)
         {
-            String name = reagent.name;
-            IItemProvider previousTier = reagent.tiers.get(4)::get;
-            IItemProvider nextTier = reagent.tiers.get(5)::get;
+            if (!reagent.getTiers().containsKey(4) || !reagent.getTiers().containsKey(5)) // Ensure refined and alchemical both exist.
+            {
+                continue;
+            }
 
-            ShapedRecipeBuilder.shapedRecipe(nextTier) // To tier 5 of this reagent.
-                    .key('A', previousTier) // From tier 4 of this reagent.
+            String name = reagent.getName();
+            IItemProvider refined = reagent.getTiers().get(4)::get;
+            IItemProvider alchemical = reagent.getTiers().get(5)::get;
+
+            ShapedRecipeBuilder.shapedRecipe(alchemical) // To tier 5 of this reagent.
+                    .key('A', refined) // From tier 4 of this reagent.
                     .key('B', Items.POPPED_CHORUS_FRUIT)
                     .patternLine("BAB")
                     .patternLine("ABA")
                     .patternLine("BAB")
                     .setGroup("herblore")
-                    .addCriterion("has_refined_" + name, hasItem(previousTier))
+                    .addCriterion("has_refined_" + name, hasItem(refined))
                     .addCriterion("has_popped_chorus_fruit", hasItem(Items.POPPED_CHORUS_FRUIT))
                     .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "alchemical_" + name));
         }
