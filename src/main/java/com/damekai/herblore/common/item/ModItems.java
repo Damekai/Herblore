@@ -25,66 +25,77 @@ public class ModItems
     public static final RegistryObject<Item> COCOA_FLOUR = ITEMS.register("cocoa_flour", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.ADD_DURATION_LARGE));
     public static final RegistryObject<Item> KELP_POWDER = ITEMS.register("kelp_powder", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.MULTIPLY_DURATION_SMALL));
 
+    public static final RegistryObject<ItemReagentSeeds> WINDY_LICHEN_SEEDS = ITEMS.register("windy_lichen_seeds", () -> new ItemReagentSeeds(ModBlocks.WINDY_LICHEN_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_WINDY_LICHEN = ITEMS.register("perennial_windy_lichen", () -> new ItemReagent(1, ModFlaskEffects.STRIDER));
     public static final RegistryObject<ItemReagent> MILLED_WINDY_LICHEN = ITEMS.register("milled_windy_lichen", () -> new ItemReagent(2, ModFlaskEffects.STRIDER));
     public static final RegistryObject<ItemReagent> CONCENTRATED_WINDY_LICHEN = ITEMS.register("concentrated_windy_lichen", () -> new ItemReagent(3, ModFlaskEffects.STRIDER));
     public static final RegistryObject<ItemReagent> REFINED_WINDY_LICHEN = ITEMS.register("refined_windy_lichen", () -> new ItemReagent(4, ModFlaskEffects.STRIDER));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_WINDY_LICHEN = ITEMS.register("alchemical_windy_lichen", () -> new ItemReagent(5, ModFlaskEffects.STRIDER));
 
+    public static final RegistryObject<ItemReagentSeeds> SUNSPECKLE_SEEDS = ITEMS.register("sunspeckle_seeds", () -> new ItemReagentSeeds(ModBlocks.SUNSPECKLE_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_SUNSPECKLE = ITEMS.register("perennial_sunspeckle", () -> new ItemReagent(1, ModFlaskEffects.HIGH_NOON));
     public static final RegistryObject<ItemReagent> MILLED_SUNSPECKLE = ITEMS.register("milled_sunspeckle", () -> new ItemReagent(2, ModFlaskEffects.HIGH_NOON));
     public static final RegistryObject<ItemReagent> CONCENTRATED_SUNSPECKLE = ITEMS.register("concentrated_sunspeckle", () -> new ItemReagent(3, ModFlaskEffects.HIGH_NOON));
     public static final RegistryObject<ItemReagent> REFINED_SUNSPECKLE = ITEMS.register("refined_sunspeckle", () -> new ItemReagent(4, ModFlaskEffects.HIGH_NOON));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_SUNSPECKLE = ITEMS.register("alchemical_sunspeckle", () -> new ItemReagent(5, ModFlaskEffects.HIGH_NOON));
 
+    public static final RegistryObject<ItemReagentSeeds> MOONSPECKLE_SEEDS = ITEMS.register("moonspeckle_seeds", () -> new ItemReagentSeeds(ModBlocks.MOONSPECKLE_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_MOONSPECKLE = ITEMS.register("perennial_moonspeckle", () -> new ItemReagent(1, ModFlaskEffects.WITCHING_HOUR));
     public static final RegistryObject<ItemReagent> MILLED_MOONSPECKLE = ITEMS.register("milled_moonspeckle", () -> new ItemReagent(2, ModFlaskEffects.WITCHING_HOUR));
     public static final RegistryObject<ItemReagent> CONCENTRATED_MOONSPECKLE = ITEMS.register("concentrated_moonspeckle", () -> new ItemReagent(3, ModFlaskEffects.WITCHING_HOUR));
     public static final RegistryObject<ItemReagent> REFINED_MOONSPECKLE = ITEMS.register("refined_moonspeckle", () -> new ItemReagent(4, ModFlaskEffects.WITCHING_HOUR));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_MOONSPECKLE = ITEMS.register("alchemical_moonspeckle", () -> new ItemReagent(5, ModFlaskEffects.WITCHING_HOUR));
 
+    public static final RegistryObject<ItemReagentSeeds> STONESTEM_SEEDS = ITEMS.register("stonestem_seeds", () -> new ItemReagentSeeds(ModBlocks.STONESTEM_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_STONESTEM = ITEMS.register("perennial_stonestem", () -> new ItemReagent(1, ModFlaskEffects.RUBBLE));
     public static final RegistryObject<ItemReagent> MILLED_STONESTEM = ITEMS.register("milled_stonestem", () -> new ItemReagent(2, ModFlaskEffects.RUBBLE));
     public static final RegistryObject<ItemReagent> CONCENTRATED_STONESTEM = ITEMS.register("concentrated_stonestem", () -> new ItemReagent(3, ModFlaskEffects.RUBBLE));
     public static final RegistryObject<ItemReagent> REFINED_STONESTEM = ITEMS.register("refined_stonestem", () -> new ItemReagent(4, ModFlaskEffects.RUBBLE));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_STONESTEM = ITEMS.register("alchemical_stonestem", () -> new ItemReagent(5, ModFlaskEffects.RUBBLE));
 
+    public static final RegistryObject<ItemReagentSeeds> WILLOW_WORT_SEEDS = ITEMS.register("willow_wort_seeds", () -> new ItemReagentSeeds(ModBlocks.WILLOW_WORT_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_WILLOW_WORT = ITEMS.register("perennial_willow_wort", () -> new ItemReagent(1, ModFlaskEffects.QUENCH));
     public static final RegistryObject<ItemReagent> MILLED_WILLOW_WORT = ITEMS.register("milled_willow_wort", () -> new ItemReagent(2, ModFlaskEffects.QUENCH));
     public static final RegistryObject<ItemReagent> CONCENTRATED_WILLOW_WORT = ITEMS.register("concentrated_willow_wort", () -> new ItemReagent(3, ModFlaskEffects.QUENCH));
     public static final RegistryObject<ItemReagent> REFINED_WILLOW_WORT = ITEMS.register("refined_willow_wort", () -> new ItemReagent(4, ModFlaskEffects.QUENCH));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_WILLOW_WORT = ITEMS.register("alchemical_willow_wort", () -> new ItemReagent(5, ModFlaskEffects.QUENCH));
 
+    public static final RegistryObject<ItemReagentSeeds> RUMBLEROOT_SEEDS = ITEMS.register("rumbleroot_seeds", () -> new ItemReagentSeeds(ModBlocks.RUMBLEROOT_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_RUMBLEROOT = ITEMS.register("perennial_rumbleroot", () -> new ItemReagent(1, ModFlaskEffects.HAPTIC));
     public static final RegistryObject<ItemReagent> MILLED_RUMBLEROOT = ITEMS.register("milled_rumbleroot", () -> new ItemReagent(2, ModFlaskEffects.HAPTIC));
     public static final RegistryObject<ItemReagent> CONCENTRATED_RUMBLEROOT = ITEMS.register("concentrated_rumbleroot", () -> new ItemReagent(3, ModFlaskEffects.HAPTIC));
     public static final RegistryObject<ItemReagent> REFINED_RUMBLEROOT = ITEMS.register("refined_rumbleroot", () -> new ItemReagent(4, ModFlaskEffects.HAPTIC));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_RUMBLEROOT = ITEMS.register("alchemical_rumbleroot", () -> new ItemReagent(5, ModFlaskEffects.HAPTIC));
 
+    public static final RegistryObject<ItemReagentSeeds> PHANTOM_FROND_SEEDS = ITEMS.register("phantom_frond_seeds", () -> new ItemReagentSeeds(ModBlocks.PHANTOM_FROND_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_PHANTOM_FROND = ITEMS.register("perennial_phantom_frond", () -> new ItemReagent(1, ModFlaskEffects.FLEET));
     public static final RegistryObject<ItemReagent> MILLED_PHANTOM_FROND = ITEMS.register("milled_phantom_frond", () -> new ItemReagent(2, ModFlaskEffects.FLEET));
     public static final RegistryObject<ItemReagent> CONCENTRATED_PHANTOM_FROND = ITEMS.register("concentrated_phantom_frond", () -> new ItemReagent(3, ModFlaskEffects.FLEET));
     public static final RegistryObject<ItemReagent> REFINED_PHANTOM_FROND = ITEMS.register("refined_phantom_frond", () -> new ItemReagent(4, ModFlaskEffects.FLEET));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_PHANTOM_FROND = ITEMS.register("alchemical_phantom_frond", () -> new ItemReagent(5, ModFlaskEffects.FLEET));
 
+    public static final RegistryObject<ItemReagentSeeds> BREEZEBLOOM_SEEDS = ITEMS.register("breezebloom_seeds", () -> new ItemReagentSeeds(ModBlocks.BREEZEBLOOM_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_BREEZEBLOOM = ITEMS.register("perennial_breezebloom", () -> new ItemReagent(1, ModFlaskEffects.VERDURE));
     public static final RegistryObject<ItemReagent> MILLED_BREEZEBLOOM = ITEMS.register("milled_breezebloom", () -> new ItemReagent(2, ModFlaskEffects.VERDURE));
     public static final RegistryObject<ItemReagent> CONCENTRATED_BREEZEBLOOM = ITEMS.register("concentrated_breezebloom", () -> new ItemReagent(3, ModFlaskEffects.VERDURE));
     public static final RegistryObject<ItemReagent> REFINED_BREEZEBLOOM = ITEMS.register("refined_breezebloom", () -> new ItemReagent(4, ModFlaskEffects.VERDURE));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_BREEZEBLOOM = ITEMS.register("alchemical_breezebloom", () -> new ItemReagent(5, ModFlaskEffects.VERDURE));
 
+    public static final RegistryObject<ItemReagentSeeds> DESERTS_THIRST_SEEDS = ITEMS.register("deserts_thirst_seeds", () -> new ItemReagentSeeds(ModBlocks.DESERTS_THIRST_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_DESERTS_THIRST = ITEMS.register("perennial_deserts_thirst", () -> new ItemReagent(1, ModFlaskEffects.NOMAD));
     public static final RegistryObject<ItemReagent> MILLED_DESERTS_THIRST = ITEMS.register("milled_deserts_thirst", () -> new ItemReagent(2, ModFlaskEffects.NOMAD));
     public static final RegistryObject<ItemReagent> CONCENTRATED_DESERTS_THIRST = ITEMS.register("concentrated_deserts_thirst", () -> new ItemReagent(3, ModFlaskEffects.NOMAD));
     public static final RegistryObject<ItemReagent> REFINED_DESERTS_THIRST = ITEMS.register("refined_deserts_thirst", () -> new ItemReagent(4, ModFlaskEffects.NOMAD));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_DESERTS_THIRST = ITEMS.register("alchemical_deserts_thirst", () -> new ItemReagent(5, ModFlaskEffects.NOMAD));
 
+    public static final RegistryObject<ItemReagentSeeds> THUNDERSTAR_SEEDS = ITEMS.register("thunderstar_seeds", () -> new ItemReagentSeeds(ModBlocks.THUNDERSTAR_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_THUNDERSTAR = ITEMS.register("perennial_thunderstar", () -> new ItemReagent(1, ModFlaskEffects.COMET));
     public static final RegistryObject<ItemReagent> MILLED_THUNDERSTAR = ITEMS.register("milled_thunderstar", () -> new ItemReagent(2, ModFlaskEffects.COMET));
     public static final RegistryObject<ItemReagent> CONCENTRATED_THUNDERSTAR = ITEMS.register("concentrated_thunderstar", () -> new ItemReagent(3, ModFlaskEffects.COMET));
     public static final RegistryObject<ItemReagent> REFINED_THUNDERSTAR = ITEMS.register("refined_thunderstar", () -> new ItemReagent(4, ModFlaskEffects.COMET));
     public static final RegistryObject<ItemReagent> ALCHEMICAL_THUNDERSTAR = ITEMS.register("alchemical_thunderstar", () -> new ItemReagent(5, ModFlaskEffects.COMET));
 
+    public static final RegistryObject<ItemReagentSeeds> SUNSTRIDERS_SIN_SEEDS = ITEMS.register("sunstriders_sin_seeds", () -> new ItemReagentSeeds(ModBlocks.SUNSTRIDERS_SIN_CROP.get()));
     public static final RegistryObject<ItemReagent> PERENNIAL_SUNSTRIDERS_SIN = ITEMS.register("perennial_sunstriders_sin", () -> new ItemReagent(1, ModFlaskEffects.PENANCE));
     public static final RegistryObject<ItemReagent> MILLED_SUNSTRIDERS_SIN = ITEMS.register("milled_sunstriders_sin", () -> new ItemReagent(2, ModFlaskEffects.PENANCE));
     public static final RegistryObject<ItemReagent> CONCENTRATED_SUNSTRIDERS_SIN = ITEMS.register("concentrated_sunstriders_sin", () -> new ItemReagent(3, ModFlaskEffects.PENANCE));
