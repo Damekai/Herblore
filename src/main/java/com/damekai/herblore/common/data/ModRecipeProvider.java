@@ -189,7 +189,7 @@ public class ModRecipeProvider extends RecipeProvider
 
         ShapelessRecipeBuilder.shapelessRecipe(ModItems.POWDERY_SINEW::get)
                 .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
-                .addIngredient(Tags.Items.BONES)
+                .addIngredient(Items.ROTTEN_FLESH)
                 .setGroup("herblore")
                 .addCriterion("has_pestle_and_mortar", hasItem(ModItems.PESTLE_AND_MORTAR::get))
                 .addCriterion("has_rotten_flesh", hasItem(Items.ROTTEN_FLESH))
@@ -197,7 +197,7 @@ public class ModRecipeProvider extends RecipeProvider
 
         ShapelessRecipeBuilder.shapelessRecipe(ModItems.ENDER_DUST::get)
                 .addIngredient(ModItems.PESTLE_AND_MORTAR::get)
-                .addIngredient(Tags.Items.BONES)
+                .addIngredient(Tags.Items.ENDER_PEARLS)
                 .setGroup("herblore")
                 .addCriterion("has_pestle_and_mortar", hasItem(ModItems.PESTLE_AND_MORTAR::get))
                 .addCriterion("has_ender_pearls", hasItem(Tags.Items.ENDER_PEARLS))
