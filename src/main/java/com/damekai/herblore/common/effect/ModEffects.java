@@ -40,6 +40,8 @@ public class ModEffects
 
     public static final RegistryObject<Effect> RIGOR_RENDER = EFFECTS.register("rigor", () -> new GuiFlaskEffect(ModFlaskEffects.RIGOR));
 
+    public static final RegistryObject<Effect> FALLARBOR_RENDER = EFFECTS.register("fallarbor", () -> new GuiFlaskEffect(ModFlaskEffects.FALLARBOR));
+
     public static Effect getEffectFromRegistry(String name)
     {
         RegistryObject<Effect> match = EFFECTS.getEntries().stream().filter((effectSupplier) -> effectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);

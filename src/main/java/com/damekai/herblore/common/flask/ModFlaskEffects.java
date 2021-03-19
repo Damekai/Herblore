@@ -56,6 +56,8 @@ public class ModFlaskEffects
 
     public static final RegistryObject<FlaskEffect> RIGOR = FLASK_EFFECTS.register("rigor", () -> new FlaskEffectRigor(new FlaskEffect.Properties().translationName("rigor").baseDuration(600).color(0xE8420E).guiEffect(ModEffects.RIGOR_RENDER)));
 
+    public static final RegistryObject<FlaskEffect> FALLARBOR = FLASK_EFFECTS.register("fallarbor", () -> new FlaskEffectFallarbor(new FlaskEffect.Properties().translationName("fallarbor").baseDuration(1200).color(0x164706).guiEffect(ModEffects.FALLARBOR_RENDER)));
+
     public static FlaskEffect getFlaskEffectFromRegistry(String name)
     {
         RegistryObject<FlaskEffect> match = FLASK_EFFECTS.getEntries().stream().filter((flaskEffectSupplier) -> flaskEffectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
