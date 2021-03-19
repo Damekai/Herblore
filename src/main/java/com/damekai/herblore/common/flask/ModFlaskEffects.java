@@ -58,6 +58,9 @@ public class ModFlaskEffects
 
     public static final RegistryObject<FlaskEffect> FALLARBOR = FLASK_EFFECTS.register("fallarbor", () -> new FlaskEffectFallarbor(new FlaskEffect.Properties().translationName("fallarbor").baseDuration(1200).color(0x164706).guiEffect(ModEffects.FALLARBOR_RENDER)));
 
+    public static final RegistryObject<FlaskEffect> AMBIT = FLASK_EFFECTS.register("ambit", () -> new FlaskEffectAmbit(new FlaskEffect.Properties().translationName("ambit").baseDuration(1200).color(0x7A0069).guiEffect(ModEffects.AMBIT_RENDER),
+            UUID.fromString("d5c45518-e921-4193-a5c2-dd1274524b47")));
+
     public static FlaskEffect getFlaskEffectFromRegistry(String name)
     {
         RegistryObject<FlaskEffect> match = FLASK_EFFECTS.getEntries().stream().filter((flaskEffectSupplier) -> flaskEffectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);

@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierManager;
 import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public abstract class AttributeFlaskEffect extends FlaskEffect implements FlaskEffect.IApplicable, FlaskEffect.ITickable, FlaskEffect.IExpirable
 {
@@ -54,7 +55,7 @@ public abstract class AttributeFlaskEffect extends FlaskEffect implements FlaskE
         AttributeModifierManager attributeModifierManager = livingEntity.getAttributeManager();
         attributePotencyFactors.forEach((attributePotencyFactor) ->
         {
-            ModifiableAttributeInstance modifiableAttributeInstance = attributeModifierManager.createInstanceIfAbsent(attributePotencyFactor.attribute);
+            ModifiableAttributeInstance modifiableAttributeInstance = attributeModifierManager.createInstanceIfAbsent(attributePotencyFactor.attribute.get());
             if (modifiableAttributeInstance != null)
             {
                 modifiableAttributeInstance.removeModifier(uuid);
@@ -74,7 +75,7 @@ public abstract class AttributeFlaskEffect extends FlaskEffect implements FlaskE
         AttributeModifierManager attributeModifierManager = livingEntity.getAttributeManager();
         attributePotencyFactors.forEach((attributePotencyFactor) ->
         {
-            ModifiableAttributeInstance modifiableAttributeInstance = attributeModifierManager.createInstanceIfAbsent(attributePotencyFactor.attribute);
+            ModifiableAttributeInstance modifiableAttributeInstance = attributeModifierManager.createInstanceIfAbsent(attributePotencyFactor.attribute.get());
             if (modifiableAttributeInstance != null)
             {
                 modifiableAttributeInstance.removeModifier(uuid);
@@ -87,11 +88,11 @@ public abstract class AttributeFlaskEffect extends FlaskEffect implements FlaskE
     {
         public interface ModifierAmount { float get(AttributeFlaskEffect attributeFlaskEffect, FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity); }
 
-        private final Attribute attribute;
+        private final Supplier<Attribute> attribute;
         private final AttributeModifier.Operation operation;
         private final ModifierAmount amount;
 
-        public AttributePotencyFactor(Attribute attribute, AttributeModifier.Operation operation, ModifierAmount amount)
+        public AttributePotencyFactor(Supplier<Attribute> attribute, AttributeModifier.Operation operation, ModifierAmount amount)
         {
             this.attribute = attribute;
             this.operation = operation;

@@ -42,6 +42,8 @@ public class ModEffects
 
     public static final RegistryObject<Effect> FALLARBOR_RENDER = EFFECTS.register("fallarbor", () -> new GuiFlaskEffect(ModFlaskEffects.FALLARBOR));
 
+    public static final RegistryObject<Effect> AMBIT_RENDER = EFFECTS.register("ambit", () -> new GuiFlaskEffect(ModFlaskEffects.AMBIT));
+
     public static Effect getEffectFromRegistry(String name)
     {
         RegistryObject<Effect> match = EFFECTS.getEntries().stream().filter((effectSupplier) -> effectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);

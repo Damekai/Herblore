@@ -18,7 +18,7 @@ public class FlaskEffectPowerHour extends AttributeFlaskEffect
     public FlaskEffectPowerHour(FlaskEffect.Properties properties, int primeTime, UUID uuid)
     {
         super(properties, uuid, 100,
-                new AttributePotencyFactor(Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION, FlaskEffectPowerHour::calculateDamageModifierAmount));
+                new AttributePotencyFactor(() -> Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION, FlaskEffectPowerHour::calculateDamageModifierAmount));
 
         this.primeTime = primeTime;
     }

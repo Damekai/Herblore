@@ -24,7 +24,7 @@ public class FlaskEffectNomad extends AttributeFlaskEffect
     protected FlaskEffectNomad(Properties properties, UUID uuid)
     {
         super(properties, uuid, 10,
-                new AttributePotencyFactor(Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.MULTIPLY_TOTAL, FlaskEffectNomad::calculateMovementSpeedModifierAmount));
+                new AttributePotencyFactor(() -> Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.MULTIPLY_TOTAL, FlaskEffectNomad::calculateMovementSpeedModifierAmount));
     }
 
     private static float calculateMovementSpeedModifierAmount(AttributeFlaskEffect attributeFlaskEffect, FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)

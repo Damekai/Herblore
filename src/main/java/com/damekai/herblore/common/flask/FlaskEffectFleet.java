@@ -26,7 +26,7 @@ public class FlaskEffectFleet extends AttributeFlaskEffect
     protected FlaskEffectFleet(FlaskEffect.Properties properties, UUID uuid)
     {
         super(properties, uuid, 10,
-                new AttributeFlaskEffect.AttributePotencyFactor(Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.MULTIPLY_TOTAL, FlaskEffectFleet::calculateMovementSpeedModifierAmount));
+                new AttributeFlaskEffect.AttributePotencyFactor(() -> Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.MULTIPLY_TOTAL, FlaskEffectFleet::calculateMovementSpeedModifierAmount));
     }
 
     private static float calculateMovementSpeedModifierAmount(AttributeFlaskEffect attributeFlaskEffect, FlaskEffectInstance flaskEffectInstance, LivingEntity livingEntity)

@@ -20,7 +20,7 @@ public class FlaskEffectDominion extends AttributeFlaskEffect
     public FlaskEffectDominion(Properties properties, UUID uuid, ImmutableList<Block> dominionBlocks)
     {
         super(properties, uuid, 10,
-                new AttributePotencyFactor(Attributes.ATTACK_SPEED, AttributeModifier.Operation.ADDITION, FlaskEffectDominion::calculateAttackSpeedModifierAmount));
+                new AttributePotencyFactor(() -> Attributes.ATTACK_SPEED, AttributeModifier.Operation.ADDITION, FlaskEffectDominion::calculateAttackSpeedModifierAmount));
 
         this.dominionBlocks = dominionBlocks;
     }
