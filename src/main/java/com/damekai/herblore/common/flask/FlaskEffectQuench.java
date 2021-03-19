@@ -8,6 +8,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
 
 public class FlaskEffectQuench extends FlaskEffect
 {
@@ -21,6 +23,11 @@ public class FlaskEffectQuench extends FlaskEffect
 
     public static void onLivingDamage(LivingDamageEvent event)
     {
+        if (EffectiveSide.get() == LogicalSide.CLIENT)
+        {
+            return;
+        }
+
         if (event.getSource().isFireDamage())
         {
             LivingEntity livingEntity = event.getEntityLiving();

@@ -10,6 +10,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
 
 import java.util.List;
 
@@ -25,6 +27,11 @@ public class FlaskEffectComet extends FlaskEffect
 
     public static void onLivingDamage(LivingDamageEvent event)
     {
+        if (EffectiveSide.get() == LogicalSide.CLIENT)
+        {
+            return;
+        }
+
         LivingEntity livingEntity = event.getEntityLiving();
 
         if (event.getSource().damageType.equals(DamageSource.FALL.damageType))

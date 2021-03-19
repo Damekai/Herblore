@@ -7,6 +7,8 @@ import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
 
 public class FlaskEffectHaptic extends FlaskEffect
 {
@@ -19,6 +21,11 @@ public class FlaskEffectHaptic extends FlaskEffect
 
     public static void onLivingDamage(LivingDamageEvent event)
     {
+        if (EffectiveSide.get() == LogicalSide.CLIENT)
+        {
+            return;
+        }
+
         LivingEntity livingEntity = event.getEntityLiving();
 
         if (event.getSource().getImmediateSource() instanceof LivingEntity)

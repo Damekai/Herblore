@@ -76,6 +76,11 @@ public class ItemFlask extends Item
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity livingEntity)
     {
+        if (world.isRemote)
+        {
+            return stack;
+        }
+
         CompoundNBT nbt = stack.getOrCreateTag();
 
         if (nbt.contains("flask_effect_instance"))

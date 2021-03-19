@@ -6,6 +6,8 @@ import com.damekai.herblore.common.flask.base.FlaskEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
 
 public class FlaskEffectStrider extends FlaskEffect
 {
@@ -19,6 +21,11 @@ public class FlaskEffectStrider extends FlaskEffect
 
     public static void onLivingJump(LivingEvent.LivingJumpEvent event)
     {
+        if (EffectiveSide.get() == LogicalSide.CLIENT)
+        {
+            return;
+        }
+
         LivingEntity livingEntity = event.getEntityLiving();
 
         FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(livingEntity);
@@ -35,12 +42,6 @@ public class FlaskEffectStrider extends FlaskEffect
                         currentMotion.getX() * horizontalVelocityMultiplier,
                         currentMotion.getY() * verticalVelocityMultiplier,
                         currentMotion.getZ() * horizontalVelocityMultiplier);
-
-                /*livingEntity.setMotion(livingEntity.getMotion().add(
-                        livingEntity.getMotion().getX() * (livingEntity.isSprinting() ? 1 : 3) * (strider.getPotency() / 2.5d), // Compound current motion for every 2.5 potency. Tripled net effect if not sprinting.
-                        livingEntity.getMotion().getY() * (strider.getPotency() / 2.5d), // Compound current motion for every 2.5 potency.
-                        livingEntity.getMotion().getZ() * (livingEntity.isSprinting() ? 1 : 3) * (strider.getPotency() / 2.5d))); // Compound current motion for every 2.5 potency. Tripled net effect if not sprinting.
-                */
 
                 livingEntity.velocityChanged = true;
             }

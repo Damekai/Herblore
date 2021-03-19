@@ -21,7 +21,7 @@ public class CapabilityFlaskHandler
 
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event)
     {
-        if (!event.getObject().getEntityWorld().isRemote && event.getObject() instanceof PlayerEntity)
+        if (event.getObject() instanceof PlayerEntity)
         {
             event.addCapability(new ResourceLocation(Herblore.MOD_ID, "flask_handler_capability"), new FlaskHandlerProvider());
         }

@@ -61,6 +61,11 @@ public class ItemReagent extends Item
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity livingEntity)
     {
+        if (world.isRemote)
+        {
+            return stack;
+        }
+
         if (!(livingEntity instanceof PlayerEntity))
         {
             return stack;
@@ -72,13 +77,10 @@ public class ItemReagent extends Item
         {
             flaskHandler.applyFlaskEffectInstance(new FlaskEffectInstance(flaskEffect.get(), potency, 200), player);
 
-            if (!world.isRemote)
+            HerbloreKnowledge herbloreKnowledge = HerbloreKnowledge.getHerbloreKnowledgeOf(player);
+            if (herbloreKnowledge != null)
             {
-                HerbloreKnowledge herbloreKnowledge = HerbloreKnowledge.getHerbloreKnowledgeOf(player);
-                if (herbloreKnowledge != null)
-                {
-                    herbloreKnowledge.setReagentKnown(player, this);
-                }
+                herbloreKnowledge.setReagentKnown(player, this);
             }
         }
 

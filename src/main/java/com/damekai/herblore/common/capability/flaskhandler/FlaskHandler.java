@@ -1,16 +1,24 @@
 package com.damekai.herblore.common.capability.flaskhandler;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.capability.herbloreknowledge.HerbloreKnowledge;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
 import com.damekai.herblore.common.flask.base.*;
 import com.damekai.herblore.common.flask.perk.base.FlaskPerk;
+import com.damekai.herblore.common.network.HerblorePacketHandler;
+import com.damekai.herblore.common.network.MessageFlaskHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -69,6 +77,12 @@ public class FlaskHandler implements IFlaskHandler
         {
             livingEntity.addPotionEffect(new EffectInstance(guiEffect, flaskEffectInstance.getDurationFull()));
         }
+
+        // Sync Flask Handler from server to client, since there was a change.
+        if (livingEntity instanceof ServerPlayerEntity) // Only syncs if the Flask Handler belongs to a player.
+        {
+            sendSyncPacketToClient((ServerPlayerEntity) livingEntity);
+        }
     }
 
     public FlaskEffectInstance getFlaskEffectInstance(FlaskEffect flaskEffect)
@@ -81,6 +95,7 @@ public class FlaskHandler implements IFlaskHandler
 
     private void tickFlaskEffectInstances(LivingEntity livingEntity)
     {
+        boolean changed = false;
         Iterator<FlaskEffectInstance> iter = activeFlaskEffectInstances.iterator(); // Use iterator for in-place removal.
         while (iter.hasNext())
         {
@@ -111,6 +126,15 @@ public class FlaskHandler implements IFlaskHandler
                 {
                     livingEntity.removePotionEffect(guiEffect);
                 }
+                changed = true;
+            }
+        }
+        if (changed)
+        {
+            // Sync Flask Handler from server to client, since there was a change.
+            if (livingEntity instanceof ServerPlayerEntity) // Only syncs if the Flask Handler belongs to a player.
+            {
+                sendSyncPacketToClient((ServerPlayerEntity) livingEntity);
             }
         }
     }
@@ -132,6 +156,12 @@ public class FlaskHandler implements IFlaskHandler
             if (guiEffect != null)
             {
                 livingEntity.removePotionEffect(guiEffect);
+            }
+
+            // Sync Flask Handler from server to client, since there was a change.
+            if (livingEntity instanceof ServerPlayerEntity) // Only syncs if the Flask Handler belongs to a player.
+            {
+                sendSyncPacketToClient((ServerPlayerEntity) livingEntity);
             }
         }
     }
@@ -158,6 +188,12 @@ public class FlaskHandler implements IFlaskHandler
                 }
         );
         activeFlaskEffectInstances.clear();
+
+        // Sync Flask Handler from server to client, since there (maybe) was a change.
+        if (livingEntity instanceof ServerPlayerEntity) // Only syncs if the Flask Handler belongs to a player.
+        {
+            sendSyncPacketToClient((ServerPlayerEntity) livingEntity);
+        }
     }
 
 
@@ -174,6 +210,8 @@ public class FlaskHandler implements IFlaskHandler
 
     public void deserializeNBT(CompoundNBT nbt)
     {
+        activeFlaskEffectInstances.clear(); // Start fresh.
+
         if (nbt.contains("active_flask_effect_instances"))
         {
             ListNBT nbtList = nbt.getList("active_flask_effect_instances", Constants.NBT.TAG_COMPOUND);
@@ -181,19 +219,43 @@ public class FlaskHandler implements IFlaskHandler
         }
     }
 
+    private void sendSyncPacketToClient(ServerPlayerEntity player)
+    {
+        HerblorePacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new MessageFlaskHandler(serializeNBT()));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void syncFlaskHandlerFromServer(CompoundNBT nbt)
+    {
+        FlaskHandler flaskHandler = getFlaskHandlerOf(Minecraft.getInstance().player);
+        if (flaskHandler != null)
+        {
+            flaskHandler.deserializeNBT(nbt);
+        }
+    }
+
     @Nullable
     public static FlaskHandler getFlaskHandlerOf(LivingEntity livingEntity)
     {
+        if (livingEntity == null)
+        {
+            return null;
+        }
         return livingEntity.getCapability(CapabilityFlaskHandler.FLASK_HANDLER_CAPABILITY).orElse(null);
     }
 
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event)
     {
         LivingEntity livingEntity = event.getEntityLiving();
-        FlaskHandler flaskHandler = getFlaskHandlerOf(livingEntity);
-        if (flaskHandler != null)
+
+        // Only tick on server side.
+        if (!livingEntity.getEntityWorld().isRemote)
         {
-            flaskHandler.tickFlaskEffectInstances(livingEntity);
+            FlaskHandler flaskHandler = getFlaskHandlerOf(livingEntity);
+            if (flaskHandler != null)
+            {
+                flaskHandler.tickFlaskEffectInstances(livingEntity);
+            }
         }
     }
 }

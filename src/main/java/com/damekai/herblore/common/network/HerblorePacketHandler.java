@@ -24,5 +24,10 @@ public class HerblorePacketHandler
                 .consumer(PacketSyncKnowledge.handler())
                 .add();
 
+        INSTANCE.messageBuilder(MessageFlaskHandler.class, 1)
+                .encoder(PacketSyncFlaskHandler.encoder())
+                .decoder(PacketSyncFlaskHandler.decoder())
+                .consumer(PacketSyncFlaskHandler.handler())
+                .add();
     }
 }
