@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "herblore",
+  "pattern": [
+    "CAC",
+    "ABA",
+    "CAC"
+  ],
+  "key": {
+    "A": {
+      "item": "herblore:milled_vengervine"
+    },
+    "B": {
+      "item": "herblore:sunflower_oil"
+    },
+    "C": {
+      "item": "minecraft:snowball"
+    }
+  },
+  "result": {
+    "item": "herblore:concentrated_vengervine"
+  }
+}

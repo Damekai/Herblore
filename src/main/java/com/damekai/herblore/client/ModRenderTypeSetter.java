@@ -23,5 +23,9 @@ public class ModRenderTypeSetter
         RenderTypeLookup.setRenderLayer(ModBlocks.THUNDERSTAR_CROP.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.SUNSTRIDERS_SIN_CROP.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.SLAKEMOSS_CROP.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SLAG_RIND_CROP.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.VENGERVINE_CROP.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SKYGLOM_CROP.get(), RenderType.getCutout());
+
     }
 }

@@ -28,4 +28,7 @@ public class ModBlocks
     public static final RegistryObject<BlockPerennialCrop> THUNDERSTAR_CROP = BLOCKS.register("thunderstar_crop", () -> new BlockPerennialCrop(ModItems.THUNDERSTAR.getSeeds()));
     public static final RegistryObject<BlockPerennialCrop> SUNSTRIDERS_SIN_CROP = BLOCKS.register("sunstriders_sin_crop", () -> new BlockPerennialCrop(ModItems.SUNSPECKLE.getSeeds()));
     public static final RegistryObject<BlockPerennialCrop> SLAKEMOSS_CROP = BLOCKS.register("slakemoss_crop", () -> new BlockPerennialCrop(ModItems.SLAKEMOSS.getSeeds()));
+    public static final RegistryObject<BlockPerennialCrop> SLAG_RIND_CROP = BLOCKS.register("slag_rind_crop", () -> new BlockPerennialCrop(ModItems.SLAG_RIND.getSeeds()));
+    public static final RegistryObject<BlockPerennialCrop> VENGERVINE_CROP = BLOCKS.register("vengervine_crop", () -> new BlockPerennialCrop(ModItems.VENGERVINE.getSeeds()));
+    public static final RegistryObject<BlockPerennialCrop> SKYGLOM_CROP = BLOCKS.register("skyglom_crop", () -> new BlockPerennialCrop(ModItems.SKYGLOM.getSeeds()));
 }

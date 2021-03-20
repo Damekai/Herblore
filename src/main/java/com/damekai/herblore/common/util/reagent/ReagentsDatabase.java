@@ -2,6 +2,7 @@ package com.damekai.herblore.common.util.reagent;
 
 import com.damekai.herblore.common.item.ModItems;
 import com.google.common.collect.ImmutableList;
+import net.minecraftforge.fml.common.Mod;
 
 public class ReagentsDatabase
 {
@@ -18,5 +19,8 @@ public class ReagentsDatabase
             .add(ModItems.THUNDERSTAR)
             .add(ModItems.SUNSTRIDERS_SIN)
             .add(ModItems.SLAKEMOSS)
+            .add(ModItems.SLAG_RIND)
+            .add(ModItems.VENGERVINE)
+            .add(ModItems.SKYGLOM)
             .build();
 }

@@ -98,6 +98,24 @@ public class ModItems
                     .seeds(ModBlocks.SLAKEMOSS_CROP)
                     .tiers(1, 5));
 
+    public static final Reagent SLAG_RIND = new Reagent(
+            new Reagent.Initializer(ITEMS, "slag_rind")
+                    .flaskEffect(ModFlaskEffects.DREDGE)
+                    .seeds(ModBlocks.SLAG_RIND_CROP)
+                    .tiers(1, 5));
+
+    public static final Reagent VENGERVINE = new Reagent(
+            new Reagent.Initializer(ITEMS, "vengervine")
+                    .flaskEffect(ModFlaskEffects.FALLARBOR)
+                    .seeds(ModBlocks.VENGERVINE_CROP)
+                    .tiers(1, 5));
+
+    public static final Reagent SKYGLOM = new Reagent(
+            new Reagent.Initializer(ITEMS, "skyglom")
+                    .flaskEffect(ModFlaskEffects.AMBIT)
+                    .seeds(ModBlocks.SKYGLOM_CROP)
+                    .tiers(1, 5));
+
     public static final RegistryObject<Item> EMPTY_FLASK = ITEMS.register("empty_flask", () -> new ItemEmptyFlask(defaultItemProperties()));
     public static final RegistryObject<Item> FLASK_OF_WATER = ITEMS.register("flask_of_water", () -> new Item(defaultItemProperties()));
     public static final RegistryObject<Item> CRUDE_FLASK = ITEMS.register("crude_flask", () -> new Item(defaultItemProperties()));

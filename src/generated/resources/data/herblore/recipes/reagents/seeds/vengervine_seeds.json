@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "herblore",
+  "ingredients": [
+    {
+      "item": "herblore:perennial_vengervine"
+    }
+  ],
+  "result": {
+    "item": "herblore:vengervine_seeds"
+  }
+}

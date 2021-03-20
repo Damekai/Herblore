@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:reagents/seeds/skyglom_seeds"
+    ]
+  },
+  "criteria": {
+    "has_perennial_skyglom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:perennial_skyglom"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:reagents/seeds/skyglom_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_perennial_skyglom",
+      "has_the_recipe"
+    ]
+  ]
+}
