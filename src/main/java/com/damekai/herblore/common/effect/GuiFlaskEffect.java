@@ -1,6 +1,6 @@
 package com.damekai.herblore.common.effect;
 
-import com.damekai.herblore.common.flask.base.FlaskEffect;
+import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
@@ -17,9 +17,9 @@ import javax.annotation.Nullable;
  */
 public class GuiFlaskEffect extends Effect
 {
-    private final RegistryObject<FlaskEffect> flaskEffect;
+    private final RegistryObject<HerbloreEffect> flaskEffect;
 
-    protected GuiFlaskEffect(RegistryObject<FlaskEffect> flaskEffect)
+    protected GuiFlaskEffect(RegistryObject<HerbloreEffect> flaskEffect)
     {
         super(EffectType.BENEFICIAL, 0);
 

@@ -1,7 +1,6 @@
 package com.damekai.herblore.common.network;
 
 import com.damekai.herblore.common.Herblore;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -18,16 +17,10 @@ public class HerblorePacketHandler
 
     public static void registerPackets()
     {
-        INSTANCE.messageBuilder(CompoundNBT.class, 0)
-                .encoder(PacketSyncKnowledge.encoder())
-                .decoder(PacketSyncKnowledge.decoder())
-                .consumer(PacketSyncKnowledge.handler())
-                .add();
-
-        INSTANCE.messageBuilder(MessageFlaskHandler.class, 1)
-                .encoder(PacketSyncFlaskHandler.encoder())
-                .decoder(PacketSyncFlaskHandler.decoder())
-                .consumer(PacketSyncFlaskHandler.handler())
+        INSTANCE.messageBuilder(MessageHerbloreEffectHandler.class, 0)
+                .encoder(PacketSyncHerbloreEffectHandler.encoder())
+                .decoder(PacketSyncHerbloreEffectHandler.decoder())
+                .consumer(PacketSyncHerbloreEffectHandler.handler())
                 .add();
     }
 }

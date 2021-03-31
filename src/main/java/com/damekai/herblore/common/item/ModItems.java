@@ -2,7 +2,7 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.ModBlocks;
-import com.damekai.herblore.common.flask.ModFlaskEffects;
+import com.damekai.herblore.common.herbloreeffect.ModHerbloreEffects;
 import com.damekai.herblore.common.flask.perk.ModFlaskPerks;
 import com.damekai.herblore.common.util.reagent.Reagent;
 import net.minecraft.item.BlockItem;
@@ -28,91 +28,91 @@ public class ModItems
 
     public static final Reagent WINDY_LICHEN = new Reagent(
             new Reagent.Initializer(ITEMS, "windy_lichen")
-                    .flaskEffect(ModFlaskEffects.STRIDER)
+                    .flaskEffect(ModHerbloreEffects.STRIDER)
                     .seeds(ModBlocks.WINDY_LICHEN_CROP)
                     .tiers(1, 5));
 
     public static final Reagent SUNSPECKLE = new Reagent(
             new Reagent.Initializer(ITEMS, "sunspeckle")
-                    .flaskEffect(ModFlaskEffects.HIGH_NOON)
+                    .flaskEffect(ModHerbloreEffects.HIGH_NOON)
                     .seeds(ModBlocks.SUNSPECKLE_CROP)
                     .tiers(1, 5));
 
     public static final Reagent MOONSPECKLE = new Reagent(
             new Reagent.Initializer(ITEMS, "moonspeckle")
-                    .flaskEffect(ModFlaskEffects.WITCHING_HOUR)
+                    .flaskEffect(ModHerbloreEffects.WITCHING_HOUR)
                     .seeds(ModBlocks.MOONSPECKLE_CROP)
                     .tiers(1, 5));
 
     public static final Reagent STONESTEM = new Reagent(
             new Reagent.Initializer(ITEMS, "stonestem")
-                    .flaskEffect(ModFlaskEffects.RUBBLE)
+                    .flaskEffect(ModHerbloreEffects.RUBBLE)
                     .seeds(ModBlocks.STONESTEM_CROP)
                     .tiers(1, 5));
 
     public static final Reagent WILLOW_WORT = new Reagent(
             new Reagent.Initializer(ITEMS, "willow_wort")
-                    .flaskEffect(ModFlaskEffects.QUENCH)
+                    .flaskEffect(ModHerbloreEffects.QUENCH)
                     .seeds(ModBlocks.WILLOW_WORT_CROP)
                     .tiers(1, 5));
 
     public static final Reagent RUMBLEROOT = new Reagent(
             new Reagent.Initializer(ITEMS, "rumbleroot")
-                    .flaskEffect(ModFlaskEffects.HAPTIC)
+                    .flaskEffect(ModHerbloreEffects.HAPTIC)
                     .seeds(ModBlocks.RUMBLEROOT_CROP)
                     .tiers(1, 5));
 
     public static final Reagent PHANTOM_FROND = new Reagent(
             new Reagent.Initializer(ITEMS, "phantom_frond")
-                    .flaskEffect(ModFlaskEffects.FLEET)
+                    .flaskEffect(ModHerbloreEffects.FLEET)
                     .seeds(ModBlocks.PHANTOM_FROND_CROP)
                     .tiers(1, 5));
 
     public static final Reagent BREEZEBLOOM = new Reagent(
             new Reagent.Initializer(ITEMS, "breezebloom")
-                    .flaskEffect(ModFlaskEffects.VERDURE)
+                    .flaskEffect(ModHerbloreEffects.VERDURE)
                     .seeds(ModBlocks.BREEZEBLOOM_CROP)
                     .tiers(1, 5));
 
     public static final Reagent DESERTS_THIRST = new Reagent(
             new Reagent.Initializer(ITEMS, "deserts_thirst")
-                    .flaskEffect(ModFlaskEffects.NOMAD)
+                    .flaskEffect(ModHerbloreEffects.NOMAD)
                     .seeds(ModBlocks.DESERTS_THIRST_CROP)
                     .tiers(1, 5));
 
     public static final Reagent THUNDERSTAR = new Reagent(
             new Reagent.Initializer(ITEMS, "thunderstar")
-                    .flaskEffect(ModFlaskEffects.COMET)
+                    .flaskEffect(ModHerbloreEffects.COMET)
                     .seeds(ModBlocks.THUNDERSTAR_CROP)
                     .tiers(1, 5));
 
     public static final Reagent SUNSTRIDERS_SIN = new Reagent(
             new Reagent.Initializer(ITEMS, "sunstriders_sin")
-                    .flaskEffect(ModFlaskEffects.PENANCE)
+                    .flaskEffect(ModHerbloreEffects.PENANCE)
                     .seeds(ModBlocks.SUNSTRIDERS_SIN_CROP)
                     .tiers(1, 5));
 
     public static final Reagent SLAKEMOSS = new Reagent(
             new Reagent.Initializer(ITEMS, "slakemoss")
-                    .flaskEffect(ModFlaskEffects.RIGOR)
+                    .flaskEffect(ModHerbloreEffects.RIGOR)
                     .seeds(ModBlocks.SLAKEMOSS_CROP)
                     .tiers(1, 5));
 
     public static final Reagent SLAG_RIND = new Reagent(
             new Reagent.Initializer(ITEMS, "slag_rind")
-                    .flaskEffect(ModFlaskEffects.DREDGE)
+                    .flaskEffect(ModHerbloreEffects.DREDGE)
                     .seeds(ModBlocks.SLAG_RIND_CROP)
                     .tiers(1, 5));
 
     public static final Reagent VENGERVINE = new Reagent(
             new Reagent.Initializer(ITEMS, "vengervine")
-                    .flaskEffect(ModFlaskEffects.FALLARBOR)
+                    .flaskEffect(ModHerbloreEffects.FALLARBOR)
                     .seeds(ModBlocks.VENGERVINE_CROP)
                     .tiers(1, 5));
 
     public static final Reagent SKYGLOM = new Reagent(
             new Reagent.Initializer(ITEMS, "skyglom")
-                    .flaskEffect(ModFlaskEffects.AMBIT)
+                    .flaskEffect(ModHerbloreEffects.AMBIT)
                     .seeds(ModBlocks.SKYGLOM_CROP)
                     .tiers(1, 5));
 

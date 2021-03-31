@@ -1,38 +1,18 @@
 package com.damekai.herblore.common.util;
 
-import com.damekai.herblore.common.flask.ModFlaskEffects;
-import com.damekai.herblore.common.flask.base.FlaskEffect;
-import com.damekai.herblore.common.flask.base.FlaskEffectInstance;
+import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.flask.perk.ModFlaskPerks;
 import com.damekai.herblore.common.flask.perk.base.FlaskPerk;
 import com.damekai.herblore.common.item.ItemReagent;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.fml.RegistryObject;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class FlaskHelper
 {
-    public static FlaskEffectInstance makeFlaskEffectInstance(ItemReagent reagent)
-    {
-        if (reagent == null)
-        {
-            return new FlaskEffectInstance(ModFlaskEffects.DEBUG_ALPHA.get(), 0, 0);
-        }
-
-        FlaskEffect flaskEffect = reagent.getFlaskEffect().get();
-        return new FlaskEffectInstance(flaskEffect, reagent.getPotency(), flaskEffect.getBaseDuation());
-    }
-
     public static int getFlaskColor(ItemStack stack)
     {
         return stack.getOrCreateTag().getInt("flask_effect_color"); // Returns 0 if the flask_effect_color key is not present.
@@ -51,27 +31,8 @@ public class FlaskHelper
             return;
         }
 
-        FlaskEffectInstance flaskEffectInstance = FlaskEffectInstance.read(stack.getOrCreateTag().getCompound("flask_effect_instance"));
+        HerbloreEffectInstance herbloreEffectInstance = HerbloreEffectInstance.read(stack.getOrCreateTag().getCompound("flask_effect_instance"));
 
-        // Write doses.
-        int doses = stack.getOrCreateTag().getInt("flask_doses");
-        lores.add(new StringTextComponent(doses + (doses == 1 ? " Dose" : " Doses")).mergeStyle(TextFormatting.BLUE));
 
-        // Write potency and duration.
-        lores.add((new StringTextComponent(String.format("Potency %d (%s)", flaskEffectInstance.getPotency(), StringUtils.ticksToElapsedTime(flaskEffectInstance.getDurationFull())))).mergeStyle(TextFormatting.BLUE));
-
-        // Write perks.
-        if (stack.getOrCreateTag().contains("flask_perks"))
-        {
-            ListNBT flaskPerks = stack.getOrCreateTag().getList("flask_perks", Constants.NBT.TAG_COMPOUND);
-            flaskPerks.forEach((inbt) ->
-            {
-                FlaskPerk flaskPerk = ModFlaskPerks.getFlaskPerkFromRegistry(((CompoundNBT) inbt).getString("flask_perk"));
-                if (flaskPerk != null)
-                {
-                    lores.add(new TranslationTextComponent(flaskPerk.getTranslationKey()).mergeStyle(TextFormatting.ITALIC).mergeStyle(TextFormatting.GRAY));
-                }
-            });
-        }
     }
 }
