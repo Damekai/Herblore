@@ -1,10 +1,11 @@
 package com.damekai.herblore.common.herbloreeffect;
 
-import com.damekai.herblore.common.capability.flaskhandler.HerbloreEffectHandler;
+import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -13,15 +14,16 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.thread.EffectiveSide;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class HerbloreEffectComet extends HerbloreEffect
 {
     private static final float PERCENT_DAMAGE_PREVENTED = 0.8f;
     private static final int DAMAGE_RADIUS = 8;
 
-    public HerbloreEffectComet(Properties properties)
+    public HerbloreEffectComet(Supplier<Effect> guiEffect)
     {
-        super(properties);
+        super(guiEffect);
     }
 
     public static void onLivingDamage(LivingDamageEvent event)

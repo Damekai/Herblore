@@ -1,4 +1,4 @@
-package com.damekai.herblore.common.capability.flaskhandler;
+package com.damekai.herblore.common.capability.herbloreeffecthandler;
 
 import com.damekai.herblore.common.Herblore;
 import net.minecraft.entity.Entity;

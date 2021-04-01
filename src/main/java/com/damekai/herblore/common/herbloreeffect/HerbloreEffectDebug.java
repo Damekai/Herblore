@@ -4,14 +4,17 @@ import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.Effect;
+
+import java.util.function.Supplier;
 
 public class HerbloreEffectDebug extends HerbloreEffect implements HerbloreEffect.IApplicable, HerbloreEffect.ITickable, HerbloreEffect.IExpirable
 {
     private final String debugTag;
 
-    public HerbloreEffectDebug(HerbloreEffect.Properties properties, String debugTag)
+    public HerbloreEffectDebug(Supplier<Effect> guiEffect, String debugTag)
     {
-        super(properties);
+        super(guiEffect);
         this.debugTag = debugTag;
     }
 

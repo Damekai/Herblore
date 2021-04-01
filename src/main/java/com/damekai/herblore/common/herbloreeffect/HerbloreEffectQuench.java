@@ -1,21 +1,24 @@
 package com.damekai.herblore.common.herbloreeffect;
 
-import com.damekai.herblore.common.capability.flaskhandler.HerbloreEffectHandler;
+import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effect;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.thread.EffectiveSide;
+
+import java.util.function.Supplier;
 
 public class HerbloreEffectQuench extends HerbloreEffect
 {
     private static final float EXHAUSTION_PENALTY_PER_DAMAGE = 1f;
 
-    public HerbloreEffectQuench(HerbloreEffect.Properties properties)
+    public HerbloreEffectQuench(Supplier<Effect> guiEffect)
     {
-        super(properties);
+        super(guiEffect);
     }
 
     public static void onLivingDamage(LivingDamageEvent event)

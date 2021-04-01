@@ -1,6 +1,6 @@
 package com.damekai.herblore.common.network;
 
-import com.damekai.herblore.common.capability.flaskhandler.HerbloreEffectHandler;
+import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 

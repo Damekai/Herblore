@@ -7,9 +7,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.Direction;
 
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public class HerbloreEffectDominion extends AttributeHerbloreEffect
 {
@@ -17,9 +19,9 @@ public class HerbloreEffectDominion extends AttributeHerbloreEffect
 
     private final ImmutableList<Block> dominionBlocks;
 
-    public HerbloreEffectDominion(Properties properties, UUID uuid, ImmutableList<Block> dominionBlocks)
+    public HerbloreEffectDominion(Supplier<Effect> guiEffect, UUID uuid, ImmutableList<Block> dominionBlocks)
     {
-        super(properties, uuid, 10,
+        super(guiEffect, uuid, 10,
                 new AttributePotencyFactor(() -> Attributes.ATTACK_SPEED, AttributeModifier.Operation.ADDITION, HerbloreEffectDominion::calculateAttackSpeedModifierAmount));
 
         this.dominionBlocks = dominionBlocks;

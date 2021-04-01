@@ -3,7 +3,10 @@ package com.damekai.herblore.common.herbloreeffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.DamageSource;
+
+import java.util.function.Supplier;
 
 public class HerbloreEffectPenance extends HerbloreEffect implements HerbloreEffect.IApplicable, HerbloreEffect.ITickable, HerbloreEffect.IExpirable
 {
@@ -11,9 +14,9 @@ public class HerbloreEffectPenance extends HerbloreEffect implements HerbloreEff
     private static final int DAMAGE_OCCURENCES = 5;
 
 
-    public HerbloreEffectPenance(HerbloreEffect.Properties properties)
+    public HerbloreEffectPenance(Supplier<Effect> guiEffect)
     {
-        super(properties);
+        super(guiEffect);
     }
 
     @Override

@@ -1,42 +1,30 @@
 package com.damekai.herblore.common.herbloreeffect.base;
 
-import com.damekai.herblore.common.Herblore;
-import com.damekai.herblore.common.herbloreeffect.ModHerbloreEffects;
+import com.damekai.herblore.common.ModRegistries;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.util.Util;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public abstract class HerbloreEffect extends ForgeRegistryEntry<HerbloreEffect>
 {
-    private final String translationKey;
-    private final int baseDuation;
-    private final int color;
-    private final RegistryObject<Effect> guiEffect;
+    private String translationKey = null;
+    private final Supplier<Effect> guiEffect;
 
-    public HerbloreEffect(HerbloreEffect.Properties properties)
+    public HerbloreEffect(Supplier<Effect> guiEffect)
     {
-        translationKey = properties.translationKey;
-        baseDuation = properties.baseDuration;
-        color = properties.color;
-        guiEffect = properties.guiEffect;
-    }
-
-    public int getBaseDuation()
-    {
-        return baseDuation;
-    }
-
-    public int getColor()
-    {
-        return color;
+        this.guiEffect = guiEffect;
     }
 
     public String getTranslationKey()
     {
+        if (translationKey == null)
+        {
+            translationKey = Util.makeTranslationKey("herbloreeffect", ModRegistries.HERBLORE_EFFECTS.getKey(this));
+        }
         return translationKey;
     }
 
@@ -44,38 +32,6 @@ public abstract class HerbloreEffect extends ForgeRegistryEntry<HerbloreEffect>
     public Effect getGuiEffect()
     {
         return guiEffect != null ? guiEffect.get() : null;
-    }
-
-    public static final class Properties
-    {
-        private String translationKey = "no_translation_key";
-        private int baseDuration;
-        private int color;
-        private RegistryObject<Effect> guiEffect;
-
-        public HerbloreEffect.Properties translationName(String translationName)
-        {
-            translationKey = "flask_effect." + Herblore.MOD_ID + "." + translationName;
-            return this;
-        }
-
-        public HerbloreEffect.Properties baseDuration(int baseDuration)
-        {
-            this.baseDuration = baseDuration;
-            return this;
-        }
-
-        public HerbloreEffect.Properties color(int color)
-        {
-            this.color = color;
-            return this;
-        }
-
-        public HerbloreEffect.Properties guiEffect(RegistryObject<Effect> guiEffect)
-        {
-            this.guiEffect = guiEffect;
-            return this;
-        }
     }
 
     /**

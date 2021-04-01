@@ -1,4 +1,4 @@
-package com.damekai.herblore.common.capability.flaskhandler;
+package com.damekai.herblore.common.capability.herbloreeffecthandler;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;

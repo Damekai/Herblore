@@ -1,7 +1,7 @@
 package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
-import com.damekai.herblore.common.capability.flaskhandler.HerbloreEffectHandler;
+import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.util.FlaskHelper;

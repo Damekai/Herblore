@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifierManager;
 import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
+import net.minecraft.potion.Effect;
 
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -17,9 +18,9 @@ public abstract class AttributeHerbloreEffect extends HerbloreEffect implements 
     private final int updateFrequency;
     private final ImmutableList<AttributePotencyFactor> attributePotencyFactors;
 
-    protected AttributeHerbloreEffect(HerbloreEffect.Properties properties, UUID uuid, int updateFrequency, AttributePotencyFactor... attributePotencyFactors)
+    protected AttributeHerbloreEffect(Supplier<Effect> guiEffect, UUID uuid, int updateFrequency, AttributePotencyFactor... attributePotencyFactors)
     {
-        super(properties);
+        super(guiEffect);
 
         this.uuid = uuid;
         this.updateFrequency = updateFrequency;

@@ -6,8 +6,10 @@ import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.potion.Effect;
 
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public class HerbloreEffectPowerHour extends AttributeHerbloreEffect
 {
@@ -15,9 +17,9 @@ public class HerbloreEffectPowerHour extends AttributeHerbloreEffect
 
     private final int primeTime; // Time at which this effect is most powerful.
 
-    public HerbloreEffectPowerHour(HerbloreEffect.Properties properties, int primeTime, UUID uuid)
+    public HerbloreEffectPowerHour(Supplier<Effect> guiEffect, int primeTime, UUID uuid)
     {
-        super(properties, uuid, 100,
+        super(guiEffect, uuid, 100,
                 new AttributePotencyFactor(() -> Attributes.ATTACK_DAMAGE, AttributeModifier.Operation.ADDITION, HerbloreEffectPowerHour::calculateDamageModifierAmount));
 
         this.primeTime = primeTime;

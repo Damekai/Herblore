@@ -8,11 +8,13 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public class HerbloreEffectFleet extends AttributeHerbloreEffect
 {
@@ -22,9 +24,9 @@ public class HerbloreEffectFleet extends AttributeHerbloreEffect
     private static final int DETECTION_RADIUS_HORIZONTAL = 20;
     private static final int DETECTION_RADIUS_VERTICAL = 3;
 
-    protected HerbloreEffectFleet(HerbloreEffect.Properties properties, UUID uuid)
+    protected HerbloreEffectFleet(Supplier<Effect> guiEffect, UUID uuid)
     {
-        super(properties, uuid, 10,
+        super(guiEffect, uuid, 10,
                 new AttributeHerbloreEffect.AttributePotencyFactor(() -> Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.MULTIPLY_TOTAL, HerbloreEffectFleet::calculateMovementSpeedModifierAmount));
     }
 

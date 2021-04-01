@@ -3,6 +3,9 @@ package com.damekai.herblore.common.herbloreeffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.Effect;
+
+import java.util.function.Supplier;
 
 public class HerbloreEffectRigor extends HerbloreEffect implements HerbloreEffect.IApplicable, HerbloreEffect.ITickable, HerbloreEffect.IExpirable
 {
@@ -10,9 +13,9 @@ public class HerbloreEffectRigor extends HerbloreEffect implements HerbloreEffec
     private static final float HEALTH_COST_PER_ABSORPTION = 0.25f;
     private static final int FREQUENCY = 200; // Every 10 seconds.
 
-    public HerbloreEffectRigor(Properties properties)
+    public HerbloreEffectRigor(Supplier<Effect> guiEffect)
     {
-        super(properties);
+        super(guiEffect);
     }
 
     @Override
