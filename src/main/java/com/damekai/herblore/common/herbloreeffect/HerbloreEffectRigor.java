@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity;
 
 public class HerbloreEffectRigor extends HerbloreEffect implements HerbloreEffect.IApplicable, HerbloreEffect.ITickable, HerbloreEffect.IExpirable
 {
-    private static final float ABSORPTION_PER_POTENCY = 4f;
+    private static final float ABSORPTION_AMOUNT = 6f;
     private static final float HEALTH_COST_PER_ABSORPTION = 0.25f;
     private static final int FREQUENCY = 200; // Every 10 seconds.
 
@@ -18,7 +18,7 @@ public class HerbloreEffectRigor extends HerbloreEffect implements HerbloreEffec
     @Override
     public void onApply(HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
-        setAbsorption(herbloreEffectInstance.getPotency(), livingEntity);
+        setAbsorption(livingEntity);
     }
 
     @Override
@@ -26,19 +26,19 @@ public class HerbloreEffectRigor extends HerbloreEffect implements HerbloreEffec
     {
         if (herbloreEffectInstance.getDurationRemaining() % FREQUENCY == 0)
         {
-            setAbsorption(herbloreEffectInstance.getPotency(), livingEntity);
+            setAbsorption(livingEntity);
         }
     }
 
     @Override
     public void onExpire(HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
-        setAbsorption(herbloreEffectInstance.getPotency(), livingEntity);
+        setAbsorption(livingEntity);
     }
 
-    private void setAbsorption(int potency, LivingEntity livingEntity)
+    private void setAbsorption(LivingEntity livingEntity)
     {
-        float absorptionAddition = (potency * ABSORPTION_PER_POTENCY) - livingEntity.getAbsorptionAmount();
+        float absorptionAddition = ABSORPTION_AMOUNT - livingEntity.getAbsorptionAmount();
         float healthCost = absorptionAddition * HEALTH_COST_PER_ABSORPTION;
 
         // Scale down absorption addition and health cost if the health cost cannot be paid. Leaves the player with at least 1 health (half a heart).

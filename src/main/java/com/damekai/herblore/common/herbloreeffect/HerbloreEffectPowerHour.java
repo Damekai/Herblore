@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class HerbloreEffectPowerHour extends AttributeHerbloreEffect
 {
-    private static final float MAX_ATTACK_DAMAGE_BOOST_PER_POTENCY = 1.5f;
+    private static final float MAX_ATTACK_DAMAGE_BOOST = 4f;
 
     private final int primeTime; // Time at which this effect is most powerful.
 
@@ -43,7 +43,7 @@ public class HerbloreEffectPowerHour extends AttributeHerbloreEffect
                 distanceFromPrimeTime = Math.min(24000 - Math.abs(currentTime - powerhour.primeTime), Math.abs(currentTime - powerhour.primeTime));
             }
 
-            return MAX_ATTACK_DAMAGE_BOOST_PER_POTENCY * herbloreEffectInstance.getPotency() * (1 - (distanceFromPrimeTime / 12000f));
+            return MAX_ATTACK_DAMAGE_BOOST * (1 - (distanceFromPrimeTime / 12000f));
         }
         return 0;
     }

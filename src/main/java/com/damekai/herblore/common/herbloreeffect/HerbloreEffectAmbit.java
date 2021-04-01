@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class HerbloreEffectAmbit extends AttributeHerbloreEffect
 {
-    private static final int REACH_PER_POTENCY = 1;
+    private static final int REACH = 3;
 
     protected HerbloreEffectAmbit(Properties properties, UUID uuid)
     {
@@ -20,6 +20,6 @@ public class HerbloreEffectAmbit extends AttributeHerbloreEffect
 
     private static float calculateReachModifierAmount(AttributeHerbloreEffect attributeFlaskEffect, HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
-        return REACH_PER_POTENCY * herbloreEffectInstance.getPotency();
+        return REACH;
     }
 }

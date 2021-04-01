@@ -1,5 +1,6 @@
 package com.damekai.herblore.common.herbloreeffect;
 
+import com.damekai.herblore.common.capability.flaskhandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,7 +9,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 public class HerbloreEffectDredge extends HerbloreEffect
 {
     private static final float SEA_LEVEL = 62;
-    private static final float MAX_BREAK_SPEED_MULTIPLIER_BONUS_PER_POTENCY = 0.8f;
+    private static final float MAX_BREAK_SPEED_MULTIPLIER_BONUS = 2f; // The resulting maximum multiplier will be this value plus one.
 
     protected HerbloreEffectDredge(HerbloreEffect.Properties properties)
     {
@@ -20,13 +21,13 @@ public class HerbloreEffectDredge extends HerbloreEffect
     {
         PlayerEntity playerEntity = event.getPlayer();
 
-        FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(playerEntity);
-        if (flaskHandler != null)
+        HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(playerEntity);
+        if (herbloreEffectHandler != null)
         {
-            HerbloreEffectInstance dredge = flaskHandler.getFlaskEffectInstance(ModHerbloreEffects.DREDGE.get());
+            HerbloreEffectInstance dredge = herbloreEffectHandler.getHerbloreEffectInstance(ModHerbloreEffects.DREDGE.get());
             if (dredge != null)
             {
-                float breakSpeedMultiplier = 1f + MAX_BREAK_SPEED_MULTIPLIER_BONUS_PER_POTENCY * dredge.getPotency() * (1f - (float) Math.min(playerEntity.getPosY(), SEA_LEVEL) / SEA_LEVEL);
+                float breakSpeedMultiplier = 1f + MAX_BREAK_SPEED_MULTIPLIER_BONUS * (1f - (float) Math.min(playerEntity.getPosY(), SEA_LEVEL) / SEA_LEVEL);
                 
                 event.setNewSpeed(event.getOriginalSpeed() * breakSpeedMultiplier);
             }

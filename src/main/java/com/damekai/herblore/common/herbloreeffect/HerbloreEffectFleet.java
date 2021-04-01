@@ -16,12 +16,11 @@ import java.util.UUID;
 
 public class HerbloreEffectFleet extends AttributeHerbloreEffect
 {
-    private static final float POTENCY_FACTOR = 0.1f;
     private static final float MOB_COUNT_FACTOR = 0.5f;
     private static final int MAX_MOB_COUNT_CONTRIBUTION = 5; // Maximum benefit is reached when this number of mobs are within the radius. More mobs than this value do not increase the benefit further.
 
-    private static final int BASE_RADIUS = 15;
-    private static final int RADIUS_INCREASE_PER_POTENCY = 2;
+    private static final int DETECTION_RADIUS_HORIZONTAL = 20;
+    private static final int DETECTION_RADIUS_VERTICAL = 3;
 
     protected HerbloreEffectFleet(HerbloreEffect.Properties properties, UUID uuid)
     {
@@ -34,16 +33,16 @@ public class HerbloreEffectFleet extends AttributeHerbloreEffect
         World world = livingEntity.getEntityWorld();
 
         List<MobEntity> monstersInRange = world.getEntitiesWithinAABB(MonsterEntity.class, new AxisAlignedBB(
-                livingEntity.getPosX() - BASE_RADIUS + RADIUS_INCREASE_PER_POTENCY * herbloreEffectInstance.getPotency(),
-                livingEntity.getPosY() - 3,
-                livingEntity.getPosZ() - BASE_RADIUS + RADIUS_INCREASE_PER_POTENCY * herbloreEffectInstance.getPotency(),
-                livingEntity.getPosX() + BASE_RADIUS + RADIUS_INCREASE_PER_POTENCY * herbloreEffectInstance.getPotency(),
-                livingEntity.getPosY() + 3,
-                livingEntity.getPosZ() + BASE_RADIUS + RADIUS_INCREASE_PER_POTENCY * herbloreEffectInstance.getPotency()));
+                livingEntity.getPosX() - DETECTION_RADIUS_HORIZONTAL,
+                livingEntity.getPosY() - DETECTION_RADIUS_VERTICAL,
+                livingEntity.getPosZ() - DETECTION_RADIUS_HORIZONTAL,
+                livingEntity.getPosX() + DETECTION_RADIUS_HORIZONTAL,
+                livingEntity.getPosY() + DETECTION_RADIUS_VERTICAL,
+                livingEntity.getPosZ() + DETECTION_RADIUS_HORIZONTAL));
 
         if (monstersInRange.size() > 0)
         {
-            return herbloreEffectInstance.getPotency() * POTENCY_FACTOR * Math.min(monstersInRange.size(), MAX_MOB_COUNT_CONTRIBUTION) * MOB_COUNT_FACTOR;
+            return Math.min(monstersInRange.size(), MAX_MOB_COUNT_CONTRIBUTION) * MOB_COUNT_FACTOR;
         }
         else
         {

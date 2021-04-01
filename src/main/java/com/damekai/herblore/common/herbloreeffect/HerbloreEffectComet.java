@@ -1,5 +1,6 @@
 package com.damekai.herblore.common.herbloreeffect;
 
+import com.damekai.herblore.common.capability.flaskhandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.LivingEntity;
@@ -15,8 +16,8 @@ import java.util.List;
 
 public class HerbloreEffectComet extends HerbloreEffect
 {
-    private static final float PERCENT_DAMAGE_PREVENTED_PER_POTENCY = 0.2f;
-    private static final int RADIUS_PER_POTENCY = 2;
+    private static final float PERCENT_DAMAGE_PREVENTED = 0.8f;
+    private static final int DAMAGE_RADIUS = 8;
 
     public HerbloreEffectComet(Properties properties)
     {
@@ -34,19 +35,17 @@ public class HerbloreEffectComet extends HerbloreEffect
 
         if (event.getSource().damageType.equals(DamageSource.FALL.damageType))
         {
-            FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(livingEntity);
+            HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(livingEntity);
 
-            if (flaskHandler != null)
+            if (herbloreEffectHandler != null)
             {
-                HerbloreEffectInstance comet = flaskHandler.getFlaskEffectInstance(ModHerbloreEffects.COMET.get());
+                HerbloreEffectInstance comet = herbloreEffectHandler.getHerbloreEffectInstance(ModHerbloreEffects.COMET.get());
 
                 if (comet != null)
                 {
-                    int potency = comet.getPotency();
-
                     // Prevent the approproate amount of damage.
                     float initialAmount = event.getAmount();
-                    float damagePrevented = initialAmount * PERCENT_DAMAGE_PREVENTED_PER_POTENCY * potency;
+                    float damagePrevented = initialAmount * PERCENT_DAMAGE_PREVENTED;
 
                     event.setAmount(initialAmount - damagePrevented);
 
@@ -54,12 +53,12 @@ public class HerbloreEffectComet extends HerbloreEffect
                     World world = livingEntity.getEntityWorld();
 
                     List<MobEntity> mobsInRange = world.getEntitiesWithinAABB(MobEntity.class, new AxisAlignedBB(
-                            livingEntity.getPosX() - RADIUS_PER_POTENCY * potency,
+                            livingEntity.getPosX() - DAMAGE_RADIUS,
                             livingEntity.getPosY() - 1,
-                            livingEntity.getPosZ() - RADIUS_PER_POTENCY * potency,
-                            livingEntity.getPosX() + RADIUS_PER_POTENCY * potency,
+                            livingEntity.getPosZ() - DAMAGE_RADIUS,
+                            livingEntity.getPosX() + DAMAGE_RADIUS,
                             livingEntity.getPosY() + 1,
-                            livingEntity.getPosZ() + RADIUS_PER_POTENCY * potency));
+                            livingEntity.getPosZ() + DAMAGE_RADIUS));
 
                     mobsInRange.forEach((mob) -> mob.attackEntityFrom(DamageSource.causeMobDamage(livingEntity), damagePrevented));
 

@@ -7,7 +7,7 @@ import net.minecraft.util.DamageSource;
 
 public class HerbloreEffectPenance extends HerbloreEffect implements HerbloreEffect.IApplicable, HerbloreEffect.ITickable, HerbloreEffect.IExpirable
 {
-    private static final float HEALTH_RESTORED_PER_POTENCY = 4f;
+    private static final float HEALTH_RESTORE_AMOUNT = 10f;
     private static final int DAMAGE_OCCURENCES = 5;
 
 
@@ -20,7 +20,7 @@ public class HerbloreEffectPenance extends HerbloreEffect implements HerbloreEff
     public void onApply(HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
         float prehealHealth = livingEntity.getHealth();
-        livingEntity.heal(herbloreEffectInstance.getPotency() * HEALTH_RESTORED_PER_POTENCY);
+        livingEntity.heal(HEALTH_RESTORE_AMOUNT);
         float amountHealed = Math.max(0, livingEntity.getHealth() - prehealHealth); // Prevent case of "negative healing", just in case.
 
         float penalty = amountHealed / 2f;

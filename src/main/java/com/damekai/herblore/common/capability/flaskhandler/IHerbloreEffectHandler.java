@@ -2,7 +2,6 @@ package com.damekai.herblore.common.capability.flaskhandler;
 
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
-import com.damekai.herblore.common.flask.perk.base.FlaskPerk;
 import net.minecraft.entity.LivingEntity;
 
 public interface IHerbloreEffectHandler

@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class HerbloreEffectDominion extends AttributeHerbloreEffect
 {
-    private static final float ATTACK_SPEED_PER_POTENCY = 1f;
+    private static final float ATTACK_SPEED = 3f;
 
     private final ImmutableList<Block> dominionBlocks;
 
@@ -34,7 +34,7 @@ public class HerbloreEffectDominion extends AttributeHerbloreEffect
 
             if (dominion.dominionBlocks.contains(livingEntity.getEntityWorld().getBlockState(livingEntity.getPosition().offset(Direction.DOWN, 1)).getBlock()))
             {
-                return herbloreEffectInstance.getPotency() * ATTACK_SPEED_PER_POTENCY;
+                return ATTACK_SPEED;
             }
         }
         return 0;

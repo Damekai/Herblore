@@ -15,9 +15,9 @@ import java.util.UUID;
 
 public class HerbloreEffectNomad extends AttributeHerbloreEffect
 {
-    private static final float MOVEMENT_SPEED_PER_POTENCY = 0.25f;
-    private static final int BASE_RADIUS = 20;
-    private static final int RADIUS_REDUCTION_PER_POTENCY = 2;
+    private static final float MOVEMENT_SPEED = 1;
+    private static final int DETECTION_RADIUS_HORIZONTAL = 16;
+    private static final int DETECTION_RADIUS_VERTICAL = 3;
 
     protected HerbloreEffectNomad(Properties properties, UUID uuid)
     {
@@ -30,16 +30,16 @@ public class HerbloreEffectNomad extends AttributeHerbloreEffect
         World world = livingEntity.getEntityWorld();
 
         List<MobEntity> monstersInRange = world.getEntitiesWithinAABB(MonsterEntity.class, new AxisAlignedBB(
-                livingEntity.getPosX() - BASE_RADIUS - RADIUS_REDUCTION_PER_POTENCY * herbloreEffectInstance.getPotency(),
-                livingEntity.getPosY() - 3,
-                livingEntity.getPosZ() - BASE_RADIUS - RADIUS_REDUCTION_PER_POTENCY * herbloreEffectInstance.getPotency(),
-                livingEntity.getPosX() + BASE_RADIUS - RADIUS_REDUCTION_PER_POTENCY * herbloreEffectInstance.getPotency(),
-                livingEntity.getPosY() + 3,
-                livingEntity.getPosZ() + BASE_RADIUS - RADIUS_REDUCTION_PER_POTENCY * herbloreEffectInstance.getPotency()));
+                livingEntity.getPosX() - DETECTION_RADIUS_HORIZONTAL,
+                livingEntity.getPosY() - DETECTION_RADIUS_VERTICAL,
+                livingEntity.getPosZ() - DETECTION_RADIUS_HORIZONTAL,
+                livingEntity.getPosX() + DETECTION_RADIUS_HORIZONTAL,
+                livingEntity.getPosY() + DETECTION_RADIUS_VERTICAL,
+                livingEntity.getPosZ() + DETECTION_RADIUS_HORIZONTAL));
 
         if (monstersInRange.size() == 0)
         {
-            return herbloreEffectInstance.getPotency() * MOVEMENT_SPEED_PER_POTENCY;
+            return MOVEMENT_SPEED;
         }
         else
         {

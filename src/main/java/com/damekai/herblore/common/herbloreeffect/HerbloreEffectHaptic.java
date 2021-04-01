@@ -1,5 +1,6 @@
 package com.damekai.herblore.common.herbloreeffect;
 
+import com.damekai.herblore.common.capability.flaskhandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.LivingEntity;
@@ -10,7 +11,7 @@ import net.minecraftforge.fml.common.thread.EffectiveSide;
 
 public class HerbloreEffectHaptic extends HerbloreEffect
 {
-    private static final float KNOCKBACK_PER_POTENCY = 0.7f;
+    private static final float KNOCKBACK = 2.5f;
 
     public HerbloreEffectHaptic(Properties properties)
     {
@@ -28,18 +29,18 @@ public class HerbloreEffectHaptic extends HerbloreEffect
 
         if (event.getSource().getImmediateSource() instanceof LivingEntity)
         {
-            FlaskHandler flaskHandler = FlaskHandler.getFlaskHandlerOf(livingEntity);
+            HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(livingEntity);
 
-            if (flaskHandler != null)
+            if (herbloreEffectHandler != null)
             {
-                HerbloreEffectInstance haptic = flaskHandler.getFlaskEffectInstance(ModHerbloreEffects.HAPTIC.get());
+                HerbloreEffectInstance haptic = herbloreEffectHandler.getHerbloreEffectInstance(ModHerbloreEffects.HAPTIC.get());
 
                 if (haptic != null)
                 {
                     LivingEntity attacker = (LivingEntity) event.getSource().getImmediateSource();
                     if (attacker != null)
                     {
-                        attacker.applyKnockback(haptic.getPotency() * KNOCKBACK_PER_POTENCY, -MathHelper.sin(attacker.rotationYaw * ((float)Math.PI / 180F)), MathHelper.cos(attacker.rotationYaw * ((float)Math.PI / 180F)));
+                        attacker.applyKnockback(KNOCKBACK, -MathHelper.sin(attacker.rotationYaw * ((float)Math.PI / 180F)), MathHelper.cos(attacker.rotationYaw * ((float)Math.PI / 180F)));
                     }
                 }
             }
