@@ -19,7 +19,16 @@
                             "function": "minecraft:explosion_decay"
                         }
                     ],
-                    "name": "herblore:perennial_slakemoss"
+                    "name": "herblore:slakemoss"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "herblore:slakemoss_crop",
+                    "properties": {
+                        "age": "7"
+                    }
                 }
             ]
         }

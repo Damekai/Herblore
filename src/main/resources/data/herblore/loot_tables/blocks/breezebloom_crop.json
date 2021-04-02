@@ -19,7 +19,16 @@
                             "function": "minecraft:explosion_decay"
                         }
                     ],
-                    "name": "herblore:perennial_breezebloom"
+                    "name": "herblore:breezebloom"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "herblore:breezebloom_crop",
+                    "properties": {
+                        "age": "7"
+                    }
                 }
             ]
         }

@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "herblore:item/rumbleroot",
-    "layer1": "herblore:item/reagent_overlay_concentrated"
-  }
-}

@@ -19,7 +19,16 @@
                             "function": "minecraft:explosion_decay"
                         }
                     ],
-                    "name": "herblore:perennial_vengervine"
+                    "name": "herblore:vengervine"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "herblore:vengervine_crop",
+                    "properties": {
+                        "age": "7"
+                    }
                 }
             ]
         }

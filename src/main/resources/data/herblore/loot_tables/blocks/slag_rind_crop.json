@@ -19,7 +19,16 @@
                             "function": "minecraft:explosion_decay"
                         }
                     ],
-                    "name": "herblore:perennial_slag_rind"
+                    "name": "herblore:slag_rind"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "herblore:slag_rind_crop",
+                    "properties": {
+                        "age": "7"
+                    }
                 }
             ]
         }

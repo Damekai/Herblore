@@ -19,7 +19,16 @@
                             "function": "minecraft:explosion_decay"
                         }
                     ],
-                    "name": "herblore:perennial_deserts_thirst"
+                    "name": "herblore:deserts_thirst"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "herblore:deserts_thirst_crop",
+                    "properties": {
+                        "age": "7"
+                    }
                 }
             ]
         }

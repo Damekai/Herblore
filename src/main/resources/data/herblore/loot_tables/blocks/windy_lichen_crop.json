@@ -9,13 +9,26 @@
                     "functions": [
                         {
                             "function": "minecraft:set_count",
-                            "count": 2
+                            "count": {
+                                "min": 2.0,
+                                "max": 4.0,
+                                "type": "minecraft:uniform"
+                            }
                         },
                         {
                             "function": "minecraft:explosion_decay"
                         }
                     ],
-                    "name": "herblore:perennial_windy_lichen"
+                    "name": "herblore:windy_lichen"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "herblore:windy_lichen_crop",
+                    "properties": {
+                        "age": "7"
+                    }
                 }
             ]
         }

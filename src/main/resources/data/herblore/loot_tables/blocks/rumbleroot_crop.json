@@ -19,7 +19,16 @@
                             "function": "minecraft:explosion_decay"
                         }
                     ],
-                    "name": "herblore:perennial_rumbleroot"
+                    "name": "herblore:rumbleroot"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "herblore:rumbleroot_crop",
+                    "properties": {
+                        "age": "7"
+                    }
                 }
             ]
         }

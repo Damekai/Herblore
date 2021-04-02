@@ -2,9 +2,6 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.ModBlocks;
-import com.damekai.herblore.common.herbloreeffect.ModHerbloreEffects;
-import com.damekai.herblore.common.flask.perk.ModFlaskPerks;
-import com.damekai.herblore.common.util.reagent.Reagent;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -15,116 +12,42 @@ public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
-    public static final RegistryObject<Item> MARROW = ITEMS.register("marrow", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.HEAL_LARGE));
-    public static final RegistryObject<Item> POWDERY_SINEW = ITEMS.register("powdery_sinew", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.ADD_DURATION_SMALL));
-    public static final RegistryObject<Item> ENDER_DUST = ITEMS.register("ender_dust", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.MULTIPLY_DURATION_LARGE));
-    public static final RegistryObject<Item> SPIDER_GRIT = ITEMS.register("spider_grit", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.NIGHT_VISION));
-    public static final RegistryObject<Item> EERIE_MUCOUS = ITEMS.register("eerie_mucous", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.INVISIBILITY));
-    public static final RegistryObject<Item> POPPY_EXTRACT = ITEMS.register("poppy_extract", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.ABSORPTION));
-    public static final RegistryObject<Item> CRUSHED_PUMPKIN_SEEDS = ITEMS.register("crushed_pumpkin_seeds", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.ADD_DURATION_MEDIUM));
-    public static final RegistryObject<Item> PUREED_BERRIES = ITEMS.register("pureed_berries", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.HEAL_SMALL));
-    public static final RegistryObject<Item> COCOA_FLOUR = ITEMS.register("cocoa_flour", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.ADD_DURATION_LARGE));
-    public static final RegistryObject<Item> KELP_POWDER = ITEMS.register("kelp_powder", () -> new ItemCatalyst(defaultItemProperties(), ModFlaskPerks.MULTIPLY_DURATION_SMALL));
+    public static final RegistryObject<Item> WINDY_LICHEN = ITEMS.register("windy_lichen", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> SUNSPECKLE = ITEMS.register("sunspeckle", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> MOONSPECKLE = ITEMS.register("moonspeckle", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> STONESTEM = ITEMS.register("stonestem", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> WILLOW_WORT = ITEMS.register("willow_wort", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> RUMBLEROOT = ITEMS.register("rumbleroot", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> PHANTOM_FROND = ITEMS.register("phantom_frond", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> BREEZEBLOOM = ITEMS.register("breezebloom", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> DESERTS_THIRST = ITEMS.register("deserts_thirst", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> THUNDERSTAR = ITEMS.register("thunderstar", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> SUNSTRIDERS_SIN = ITEMS.register("sunstriders_sin", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> SLAKEMOSS = ITEMS.register("slakemoss", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> SLAG_RIND = ITEMS.register("slag_rind", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> VENGERVINE = ITEMS.register("vengervine", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<Item> SKYGLOM = ITEMS.register("skyglom", () -> new Item(defaultItemProperties()));
 
-    public static final Reagent WINDY_LICHEN = new Reagent(
-            new Reagent.Initializer(ITEMS, "windy_lichen")
-                    .flaskEffect(ModHerbloreEffects.STRIDER)
-                    .seeds(ModBlocks.WINDY_LICHEN_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent SUNSPECKLE = new Reagent(
-            new Reagent.Initializer(ITEMS, "sunspeckle")
-                    .flaskEffect(ModHerbloreEffects.HIGH_NOON)
-                    .seeds(ModBlocks.SUNSPECKLE_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent MOONSPECKLE = new Reagent(
-            new Reagent.Initializer(ITEMS, "moonspeckle")
-                    .flaskEffect(ModHerbloreEffects.WITCHING_HOUR)
-                    .seeds(ModBlocks.MOONSPECKLE_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent STONESTEM = new Reagent(
-            new Reagent.Initializer(ITEMS, "stonestem")
-                    .flaskEffect(ModHerbloreEffects.RUBBLE)
-                    .seeds(ModBlocks.STONESTEM_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent WILLOW_WORT = new Reagent(
-            new Reagent.Initializer(ITEMS, "willow_wort")
-                    .flaskEffect(ModHerbloreEffects.QUENCH)
-                    .seeds(ModBlocks.WILLOW_WORT_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent RUMBLEROOT = new Reagent(
-            new Reagent.Initializer(ITEMS, "rumbleroot")
-                    .flaskEffect(ModHerbloreEffects.HAPTIC)
-                    .seeds(ModBlocks.RUMBLEROOT_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent PHANTOM_FROND = new Reagent(
-            new Reagent.Initializer(ITEMS, "phantom_frond")
-                    .flaskEffect(ModHerbloreEffects.FLEET)
-                    .seeds(ModBlocks.PHANTOM_FROND_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent BREEZEBLOOM = new Reagent(
-            new Reagent.Initializer(ITEMS, "breezebloom")
-                    .flaskEffect(ModHerbloreEffects.VERDURE)
-                    .seeds(ModBlocks.BREEZEBLOOM_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent DESERTS_THIRST = new Reagent(
-            new Reagent.Initializer(ITEMS, "deserts_thirst")
-                    .flaskEffect(ModHerbloreEffects.NOMAD)
-                    .seeds(ModBlocks.DESERTS_THIRST_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent THUNDERSTAR = new Reagent(
-            new Reagent.Initializer(ITEMS, "thunderstar")
-                    .flaskEffect(ModHerbloreEffects.COMET)
-                    .seeds(ModBlocks.THUNDERSTAR_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent SUNSTRIDERS_SIN = new Reagent(
-            new Reagent.Initializer(ITEMS, "sunstriders_sin")
-                    .flaskEffect(ModHerbloreEffects.PENANCE)
-                    .seeds(ModBlocks.SUNSTRIDERS_SIN_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent SLAKEMOSS = new Reagent(
-            new Reagent.Initializer(ITEMS, "slakemoss")
-                    .flaskEffect(ModHerbloreEffects.RIGOR)
-                    .seeds(ModBlocks.SLAKEMOSS_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent SLAG_RIND = new Reagent(
-            new Reagent.Initializer(ITEMS, "slag_rind")
-                    .flaskEffect(ModHerbloreEffects.DREDGE)
-                    .seeds(ModBlocks.SLAG_RIND_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent VENGERVINE = new Reagent(
-            new Reagent.Initializer(ITEMS, "vengervine")
-                    .flaskEffect(ModHerbloreEffects.FALLARBOR)
-                    .seeds(ModBlocks.VENGERVINE_CROP)
-                    .tiers(1, 5));
-
-    public static final Reagent SKYGLOM = new Reagent(
-            new Reagent.Initializer(ITEMS, "skyglom")
-                    .flaskEffect(ModHerbloreEffects.AMBIT)
-                    .seeds(ModBlocks.SKYGLOM_CROP)
-                    .tiers(1, 5));
+    public static final RegistryObject<ItemReagentSeeds> WINDY_LICHEN_SEEDS = ITEMS.register("windy_lichen_seeds", () -> new ItemReagentSeeds(ModBlocks.WINDY_LICHEN_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> SUNSPECKLE_SEEDS = ITEMS.register("sunspeckle_seeds", () -> new ItemReagentSeeds(ModBlocks.SUNSPECKLE_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> MOONSPECKLE_SEEDS = ITEMS.register("moonspeckle_seeds", () -> new ItemReagentSeeds(ModBlocks.MOONSPECKLE_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> STONESTEM_SEEDS = ITEMS.register("stonestem_seeds", () -> new ItemReagentSeeds(ModBlocks.STONESTEM_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> WILLOW_WORT_SEEDS = ITEMS.register("willow_wort_seeds", () -> new ItemReagentSeeds(ModBlocks.WILLOW_WORT_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> RUMBLEROOT_SEEDS = ITEMS.register("rumbleroot_seeds", () -> new ItemReagentSeeds(ModBlocks.RUMBLEROOT_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> PHANTOM_FROND_SEEDS = ITEMS.register("phantom_frond_seeds", () -> new ItemReagentSeeds(ModBlocks.PHANTOM_FROND_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> BREEZEBLOOM_SEEDS = ITEMS.register("breezebloom_seeds", () -> new ItemReagentSeeds(ModBlocks.BREEZEBLOOM_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> DESERTS_THIRST_SEEDS = ITEMS.register("deserts_thirst_seeds", () -> new ItemReagentSeeds(ModBlocks.DESERTS_THIRST_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> THUNDERSTAR_SEEDS = ITEMS.register("thunderstar_seeds", () -> new ItemReagentSeeds(ModBlocks.THUNDERSTAR_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> SUNSTRIDERS_SIN_SEEDS = ITEMS.register("sunstriders_sin_seeds", () -> new ItemReagentSeeds(ModBlocks.SUNSTRIDERS_SIN_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> SLAKEMOSS_SEEDS = ITEMS.register("slakemoss_seeds", () -> new ItemReagentSeeds(ModBlocks.SLAKEMOSS_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> SLAG_RIND_SEEDS = ITEMS.register("slag_rind_seeds", () -> new ItemReagentSeeds(ModBlocks.SLAG_RIND_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> VENGERVINE_SEEDS = ITEMS.register("vengervine_seeds", () -> new ItemReagentSeeds(ModBlocks.VENGERVINE_CROP.get()));
+    public static final RegistryObject<ItemReagentSeeds> SKYGLOM_SEEDS = ITEMS.register("skyglom_seeds", () -> new ItemReagentSeeds(ModBlocks.SKYGLOM_CROP.get()));
 
     public static final RegistryObject<Item> EMPTY_FLASK = ITEMS.register("empty_flask", () -> new ItemEmptyFlask(defaultItemProperties()));
     public static final RegistryObject<Item> FLASK_OF_WATER = ITEMS.register("flask_of_water", () -> new Item(defaultItemProperties()));
     public static final RegistryObject<Item> CRUDE_FLASK = ITEMS.register("crude_flask", () -> new Item(defaultItemProperties()));
     public static final RegistryObject<Item> FLASK = ITEMS.register("flask", ItemFlask::new);
-
-    public static final RegistryObject<Item> PESTLE_AND_MORTAR = ITEMS.register("pestle_and_mortar", ItemPestleAndMortar::new);
-
-    public static final RegistryObject<Item> SUNFLOWER_OIL = ITEMS.register("sunflower_oil", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> FERMENTING_PASTE = ITEMS.register("fermenting_paste", () -> new Item(defaultItemProperties()));
 
     public static final RegistryObject<BlockItem> ATHANOR = ITEMS.register("athanor", () -> new BlockItem(ModBlocks.ATHANOR.get(), defaultItemProperties()));
 

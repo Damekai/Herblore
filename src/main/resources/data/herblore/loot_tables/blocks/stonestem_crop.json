@@ -19,7 +19,16 @@
                             "function": "minecraft:explosion_decay"
                         }
                     ],
-                    "name": "herblore:perennial_stonestem"
+                    "name": "herblore:stonestem"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "herblore:stonestem_crop",
+                    "properties": {
+                        "age": "7"
+                    }
                 }
             ]
         }
