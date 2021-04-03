@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:item/deserts_thirst_seeds"
+    ]
+  },
+  "criteria": {
+    "has_deserts_thirst": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:deserts_thirst"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:item/deserts_thirst_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_deserts_thirst",
+      "has_the_recipe"
+    ]
+  ]
+}

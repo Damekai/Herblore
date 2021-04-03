@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "herblore",
+  "ingredients": [
+    {
+      "item": "herblore:sunspeckle"
+    }
+  ],
+  "result": {
+    "item": "herblore:sunspeckle_seeds"
+  }
+}

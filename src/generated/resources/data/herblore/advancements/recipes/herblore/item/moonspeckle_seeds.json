@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:item/moonspeckle_seeds"
+    ]
+  },
+  "criteria": {
+    "has_moonspeckle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:moonspeckle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:item/moonspeckle_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_moonspeckle",
+      "has_the_recipe"
+    ]
+  ]
+}

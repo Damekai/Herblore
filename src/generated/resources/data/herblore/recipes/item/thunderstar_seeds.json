@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "herblore",
+  "ingredients": [
+    {
+      "item": "herblore:thunderstar"
+    }
+  ],
+  "result": {
+    "item": "herblore:thunderstar_seeds"
+  }
+}

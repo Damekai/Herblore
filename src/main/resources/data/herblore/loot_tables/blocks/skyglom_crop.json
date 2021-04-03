@@ -25,7 +25,7 @@
             "conditions": [
                 {
                     "condition": "minecraft:block_state_property",
-                    "block": "herblore:skyglombloom_crop",
+                    "block": "herblore:skyglom_crop",
                     "properties": {
                         "age": "7"
                     }

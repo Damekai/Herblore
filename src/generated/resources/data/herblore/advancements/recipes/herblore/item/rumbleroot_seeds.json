@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:item/rumbleroot_seeds"
+    ]
+  },
+  "criteria": {
+    "has_rumbleroot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:rumbleroot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:item/rumbleroot_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rumbleroot",
+      "has_the_recipe"
+    ]
+  ]
+}

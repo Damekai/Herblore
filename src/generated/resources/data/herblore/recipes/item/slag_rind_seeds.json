@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "herblore",
+  "ingredients": [
+    {
+      "item": "herblore:slag_rind"
+    }
+  ],
+  "result": {
+    "item": "herblore:slag_rind_seeds"
+  }
+}

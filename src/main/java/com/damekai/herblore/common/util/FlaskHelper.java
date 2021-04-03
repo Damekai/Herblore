@@ -1,9 +1,6 @@
 package com.damekai.herblore.common.util;
 
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
-import com.damekai.herblore.common.flask.perk.ModFlaskPerks;
-import com.damekai.herblore.common.flask.perk.base.FlaskPerk;
-import com.damekai.herblore.common.item.ItemReagent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;

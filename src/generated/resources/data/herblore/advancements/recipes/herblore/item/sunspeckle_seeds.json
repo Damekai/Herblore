@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:item/sunspeckle_seeds"
+    ]
+  },
+  "criteria": {
+    "has_sunspeckle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:sunspeckle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:item/sunspeckle_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sunspeckle",
+      "has_the_recipe"
+    ]
+  ]
+}

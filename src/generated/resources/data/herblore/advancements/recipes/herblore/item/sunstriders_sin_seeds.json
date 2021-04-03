@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:item/sunstriders_sin_seeds"
+    ]
+  },
+  "criteria": {
+    "has_sunstriders_sin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:sunstriders_sin"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:item/sunstriders_sin_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_sunstriders_sin",
+      "has_the_recipe"
+    ]
+  ]
+}

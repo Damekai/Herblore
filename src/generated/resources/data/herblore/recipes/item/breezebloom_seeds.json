@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "herblore",
+  "ingredients": [
+    {
+      "item": "herblore:breezebloom"
+    }
+  ],
+  "result": {
+    "item": "herblore:breezebloom_seeds"
+  }
+}

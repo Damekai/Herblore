@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:item/stonestem_seeds"
+    ]
+  },
+  "criteria": {
+    "has_stonestem": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:stonestem"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:item/stonestem_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stonestem",
+      "has_the_recipe"
+    ]
+  ]
+}

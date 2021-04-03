@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "herblore:item/vengervine_seeds"
+    ]
+  },
+  "criteria": {
+    "has_vengervine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "herblore:vengervine"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "herblore:item/vengervine_seeds"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_vengervine",
+      "has_the_recipe"
+    ]
+  ]
+}
