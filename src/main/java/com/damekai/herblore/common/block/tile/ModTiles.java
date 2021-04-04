@@ -11,7 +11,4 @@ public class ModTiles
 {
     public static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Herblore.MOD_ID);
 
-    public static final RegistryObject<TileEntityType<TileAthanor>> ATHANOR = TILES.register(
-            "athanor", () -> TileEntityType.Builder.create(TileAthanor::new, ModBlocks.ATHANOR.get()).build(null));
-
 }

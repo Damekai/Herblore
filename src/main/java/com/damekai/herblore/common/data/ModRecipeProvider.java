@@ -142,18 +142,5 @@ public class ModRecipeProvider extends RecipeProvider
                 .addCriterion("has_planks", hasItem(ItemTags.PLANKS))
                 .addCriterion("has_glass", hasItem(Tags.Items.GLASS))
                 .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "empty_flask"));
-
-        ShapedRecipeBuilder.shapedRecipe(ModItems.ATHANOR::get)
-                .key('A', Ingredient.fromTag(Tags.Items.INGOTS_IRON))
-                .key('B', Ingredient.fromTag(Tags.Items.SANDSTONE))
-                .key('C', Ingredient.fromTag(ItemTags.COALS))
-                .patternLine(" A ")
-                .patternLine("BCB")
-                .patternLine("BBB")
-                .setGroup("herblore")
-                .addCriterion("has_iron", hasItem(Tags.Items.INGOTS_IRON))
-                .addCriterion("has_sandstone", hasItem(Tags.Items.SANDSTONE))
-                .addCriterion("has_coals", hasItem(ItemTags.COALS))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "athanor"));
     }
 }

@@ -1,4 +1,3 @@
-54aebbd0e42845abd0b01dd309dfca9fd6fc2296 data/herblore/advancements/recipes/herblore/item/athanor.json
 db577aaae0138ce93d4c789671673149c88934ee data/herblore/advancements/recipes/herblore/item/breezebloom_seeds.json
 f719a3f13c61f80dd3277da5390db8fc281e864c data/herblore/advancements/recipes/herblore/item/deserts_thirst_seeds.json
 cac0d1ff5c1c187b7ea909f84e59fabebcd9f5d0 data/herblore/advancements/recipes/herblore/item/empty_flask.json
@@ -15,7 +14,6 @@ cfe54749b21a27c270837d2fe945fb9c676ffe01 data/herblore/advancements/recipes/herb
 0c00b0793ebb558ce609ab8efddf13cd92280472 data/herblore/advancements/recipes/herblore/item/vengervine_seeds.json
 1e310a17c9f48e3a48291798080a844c094f4ed7 data/herblore/advancements/recipes/herblore/item/willow_wort_seeds.json
 14f9d5e0ef4d810bedb7c9bfeb9ee3fd17e987bc data/herblore/advancements/recipes/herblore/item/windy_lichen_seeds.json
-438490b7735f0bd6b4377d2379811b0bea4205a3 data/herblore/recipes/item/athanor.json
 80e700ef8b248ba30e6218b09cf0de575f43280e data/herblore/recipes/item/breezebloom_seeds.json
 8651712681b9a761683235f6c9f1950731d1d9ed data/herblore/recipes/item/deserts_thirst_seeds.json
 8f1b5ab29dbe8232986afb7e0faebee6bea001d5 data/herblore/recipes/item/empty_flask.json
