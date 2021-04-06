@@ -58,8 +58,6 @@ public class Herblore
         modBus.addListener(ModRegistries::onNewRegistry);
         modBus.addListener(ModItemColors::onLoadComplete);
 
-        modBus.addGenericListener(IRecipeSerializer.class, Herblore::onRegisterRecipeSerializers);
-
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModFeatures::onBiomeLoading);
 
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityHerbloreEffectHandler::onAttachCapabilities);
@@ -85,8 +83,6 @@ public class Herblore
         MinecraftForge.EVENT_BUS.addListener(HerbloreEffectDredge::onBreakSpeed);
         MinecraftForge.EVENT_BUS.addListener(HerbloreEffectFallarbor::onBreakSpeed);
 
-        MinecraftForge.EVENT_BUS.addListener(Herblore::onLivingJump);
-
         HerblorePacketHandler.registerPackets();
     }
 
@@ -96,23 +92,9 @@ public class Herblore
         CapabilityToxicityHandler.register();
     }
 
-    public static void onLivingJump(LivingEvent.LivingJumpEvent event)
-    {
-        if (event.getEntityLiving() instanceof PlayerEntity)
-        {
-            Herblore.LOGGER.debug(ModRegistries.FLASKS.getKey(ModFlasks.DREDGE.get()));
-        }
-    }
-
     // TODO: Move this somewhere else.
     public static void onClientSetup(FMLClientSetupEvent event)
     {
         ScreenManager.registerFactory(ModContainers.FLASK_STATION.get(), ScreenFlaskStation::new);
-    }
-
-    public static void onRegisterRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event)
-    {
-        IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
-        //registry.register(ModRecipeSerializers.FLASK.get().setRegistryName(new ResourceLocation(Herblore.MOD_ID, "flask")));
     }
 }

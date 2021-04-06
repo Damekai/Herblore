@@ -42,18 +42,65 @@ public class FlaskStationInventory extends Inventory
 
     public boolean isValidPuzzleSolution()
     {
-        // Verify that all slots have reagents.
-        for (int slot = 1; slot < 18; slot++)
-        {
-            ItemStack stack = getStackInSlot(slot);
+        // TODO: Fix this mess.
 
-            if (!(stack.getItem() instanceof ItemReagent))
+        boolean topLeftEmpty = isSlotRangeEmpty(1, 4);
+        boolean bottomLeftEmpty = isSlotRangeEmpty(5, 8);
+        boolean rightEmpty = isSlotRangeEmpty(9, 17);
+
+        boolean topLeftFilled = isSlotRangeFilledWithReagents(1, 4);
+        boolean bottomLeftFilled = isSlotRangeFilledWithReagents(5, 8);
+        boolean rightFilled = isSlotRangeFilledWithReagents(9, 17);
+
+        // If there is at least one filled section, and if each section is either filled or empty, and if each filled section is valid, return true.
+
+        if (topLeftFilled && !isValidPuzzleForSlotRange(1, 4))
+        {
+            return false;
+        }
+
+        if (bottomLeftFilled && !isValidPuzzleForSlotRange(5, 8))
+        {
+            return false;
+        }
+
+        if (rightFilled && !isValidPuzzleForSlotRange(9, 17))
+        {
+            return false;
+        }
+
+        return (topLeftEmpty || topLeftFilled) && (bottomLeftEmpty || bottomLeftFilled) && (rightEmpty || rightFilled);
+    }
+
+    private boolean isSlotRangeEmpty(int minSlot, int maxSlot)
+    {
+        for (int i = minSlot; i <= maxSlot; i++)
+        {
+            ItemStack stack = getStackInSlot(i);
+            if (stack != ItemStack.EMPTY)
             {
                 return false;
             }
         }
+        return true;
+    }
 
-        for (int slot = 1; slot < 18; slot++)
+    private boolean isSlotRangeFilledWithReagents(int minSlot, int maxSlot)
+    {
+        for (int i = minSlot; i <= maxSlot; i++)
+        {
+            ItemStack stack = getStackInSlot(i);
+            if (stack == ItemStack.EMPTY || !(stack.getItem() instanceof ItemReagent))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isValidPuzzleForSlotRange(int minSlot, int maxSlot)
+    {
+        for (int slot = minSlot; slot < maxSlot; slot++)
         {
             ItemReagent reagent = (ItemReagent) getStackInSlot(slot).getItem();
 

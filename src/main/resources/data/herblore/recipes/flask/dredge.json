@@ -3,8 +3,7 @@
     "group": "herblore",
     "reagents": {
         "herblore:windy_lichen": 4,
-        "herblore:sunspeckle": 4,
-        "herblore:stonestem": 9
+        "herblore:sunspeckle": 9
     },
     "result": "herblore:dredge"
 }
