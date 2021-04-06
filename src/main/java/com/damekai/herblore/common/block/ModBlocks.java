@@ -3,7 +3,12 @@ package com.damekai.herblore.common.block;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.item.ItemReagentSeeds;
 import com.damekai.herblore.common.item.ModItems;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -11,6 +16,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModBlocks
 {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Herblore.MOD_ID);
+
+    public static final RegistryObject<BlockFlaskStation> FLASK_STATION = BLOCKS.register("flask_station", () -> new BlockFlaskStation(AbstractBlock.Properties.create(Material.IRON, MaterialColor.IRON).setRequiresTool().hardnessAndResistance(5.0F, 6.0F).sound(SoundType.METAL)));
 
     public static final RegistryObject<Block> PERENNIAL_PATCH = BLOCKS.register("perennial_patch", BlockPerennialPatch::new);
 

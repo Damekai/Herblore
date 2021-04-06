@@ -21,7 +21,7 @@ public class ModRecipeProvider extends RecipeProvider
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
     {
-        registerCrudeFlask(consumer, "crude_flask/");
+        registerFlasks(consumer, "flask/");
         registerMiscItems(consumer, "item/");
         registerSeeds(consumer, "item/");
     }
@@ -32,9 +32,9 @@ public class ModRecipeProvider extends RecipeProvider
         generator.addProvider(new ModRecipeProvider(generator));
     }
 
-    private void registerCrudeFlask(Consumer<IFinishedRecipe> consumer, String folder)
+    private void registerFlasks(Consumer<IFinishedRecipe> consumer, String folder)
     {
-        //CustomRecipeBuilder.customRecipe(CrudeFlaskRecipe.SERIALIZER).build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "crude_flask").toString());
+
     }
 
     private void registerSeeds(Consumer<IFinishedRecipe> consumer, String folder)

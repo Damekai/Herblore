@@ -1,0 +1,76 @@
+package com.damekai.herblore.common.screen;
+
+import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.container.ContainerFlaskStation;
+import com.damekai.herblore.common.item.ItemReagent;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+
+public class ScreenFlaskStation extends ContainerScreen<ContainerFlaskStation>
+{
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Herblore.MOD_ID, "textures/gui/flask_station.png");
+
+    public ScreenFlaskStation(ContainerFlaskStation container, PlayerInventory playerInventory, ITextComponent title)
+    {
+        super(container, playerInventory, title);
+        this.xSize = 256;
+        this.ySize = 240;
+    }
+
+    @Override
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
+    {
+        this.renderBackground(matrixStack);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
+
+        int relX = (this.width - this.xSize) / 2;
+        int relY = (this.height - this.ySize) / 2;
+
+        // Add reagent colors.
+        for (int i = 1; i < 17; i++)
+        {
+            Slot slot = container.getSlot(i);
+            ItemStack stack = slot.getStack();
+
+            if (stack != ItemStack.EMPTY && stack.getItem() instanceof ItemReagent)
+            {
+                ItemReagent reagent = (ItemReagent) stack.getItem();
+
+                // Up
+                AbstractGui.fill(matrixStack, relX + slot.xPos - 1, relY + slot.yPos - 1, relX + slot.xPos + 17, relY + slot.yPos - 3, reagent.getUpColor().getRGB());
+
+                // Down
+                AbstractGui.fill(matrixStack, relX + slot.xPos - 1, relY + slot.yPos + 17, relX + slot.xPos + 17, relY + slot.yPos + 19, reagent.getDownColor().getRGB());
+
+                // Left
+                AbstractGui.fill(matrixStack, relX + slot.xPos - 3, relY + slot.yPos - 1, relX + slot.xPos - 1, relY + slot.yPos + 17, reagent.getLeftColor().getRGB());
+
+                // Right
+                AbstractGui.fill(matrixStack, relX + slot.xPos + 17, relY + slot.yPos - 1, relX + slot.xPos + 19, relY + slot.yPos + 17, reagent.getRightColor().getRGB());
+            }
+        }
+
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+    }
+
+    @Override
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y)
+    {
+        this.getMinecraft().getTextureManager().bindTexture(TEXTURE);
+        int k = (this.width - this.xSize) / 2;
+        int l = (this.height - this.ySize) / 2;
+        this.blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize);
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y)
+    {
+        this.font.func_243248_b(matrixStack, this.title, (float)this.titleX, (float)this.titleY, 4210752);
+    }
+}

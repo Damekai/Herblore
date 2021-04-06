@@ -11,4 +11,7 @@ public class ModTiles
 {
     public static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Herblore.MOD_ID);
 
+    public static final RegistryObject<TileEntityType<TileFlaskStation>> FLASK_STATION = TILES.register(
+            "flask_station", () -> TileEntityType.Builder.create(TileFlaskStation::new, ModBlocks.FLASK_STATION.get()).build(null));
+
 }

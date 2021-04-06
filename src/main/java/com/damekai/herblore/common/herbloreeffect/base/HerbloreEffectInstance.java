@@ -108,7 +108,7 @@ public class HerbloreEffectInstance
 
     public HerbloreEffectInstance copy()
     {
-        return new HerbloreEffectInstance(herbloreEffect, amplifier, durationFull, durationRemaining, tag.copy());
+        return new HerbloreEffectInstance(herbloreEffect, amplifier, durationFull, durationRemaining, tag != null ? tag.copy() : null);
     }
 
     public CompoundNBT write(CompoundNBT nbt)

@@ -8,6 +8,7 @@ import com.damekai.herblore.common.capability.herbloreeffecthandler.CapabilityHe
 import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.capability.toxicityhandler.CapabilityToxicityHandler;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
+import com.damekai.herblore.common.container.ModContainers;
 import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.flask.ModFlasks;
@@ -15,14 +16,22 @@ import com.damekai.herblore.common.herbloreeffect.*;
 import com.damekai.herblore.common.item.ModItemColors;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
+import com.damekai.herblore.common.recipe.ModRecipeSerializers;
+import com.damekai.herblore.common.screen.ScreenFlaskStation;
 import com.damekai.herblore.common.world.ModFeatures;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -40,6 +49,7 @@ public class Herblore
     {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        modBus.addListener(Herblore::onClientSetup);
         modBus.addListener(Herblore::onCommonSetup);
         modBus.addListener(ModRenderTypeSetter::onClientSetup);
         modBus.addListener(ModItemPropertyGetters::onClientSetup);
@@ -60,6 +70,8 @@ public class Herblore
         ModItems.ITEMS.register(modBus);
         ModFeatures.FEATURES.register(modBus);
         ModEffects.EFFECTS.register(modBus);
+        ModContainers.CONTAINERS.register(modBus);
+        ModRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
         ModHerbloreEffects.HERBLORE_EFFECTS.register(modBus);
         ModFlasks.FLASKS.register(modBus);
 
@@ -73,6 +85,8 @@ public class Herblore
         MinecraftForge.EVENT_BUS.addListener(HerbloreEffectDredge::onBreakSpeed);
         MinecraftForge.EVENT_BUS.addListener(HerbloreEffectFallarbor::onBreakSpeed);
 
+        MinecraftForge.EVENT_BUS.addListener(Herblore::onLivingJump);
+
         HerblorePacketHandler.registerPackets();
     }
 
@@ -82,9 +96,23 @@ public class Herblore
         CapabilityToxicityHandler.register();
     }
 
+    public static void onLivingJump(LivingEvent.LivingJumpEvent event)
+    {
+        if (event.getEntityLiving() instanceof PlayerEntity)
+        {
+            Herblore.LOGGER.debug(ModRegistries.FLASKS.getKey(ModFlasks.DREDGE.get()));
+        }
+    }
+
+    // TODO: Move this somewhere else.
+    public static void onClientSetup(FMLClientSetupEvent event)
+    {
+        ScreenManager.registerFactory(ModContainers.FLASK_STATION.get(), ScreenFlaskStation::new);
+    }
+
     public static void onRegisterRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event)
     {
         IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
-        //registry.register(CrudeFlaskRecipe.SERIALIZER.setRegistryName(new ResourceLocation(Herblore.MOD_ID, "crude_flask")));
+        //registry.register(ModRecipeSerializers.FLASK.get().setRegistryName(new ResourceLocation(Herblore.MOD_ID, "flask")));
     }
 }

@@ -1,11 +1,13 @@
 package com.damekai.herblore.common.flask;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.ModRegistries;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.herbloreeffect.ModHerbloreEffects;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.DeferredRegister;
 
 public class ModFlasks

@@ -8,25 +8,27 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.awt.*;
+
 public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
-    public static final RegistryObject<Item> WINDY_LICHEN = ITEMS.register("windy_lichen", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> SUNSPECKLE = ITEMS.register("sunspeckle", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> MOONSPECKLE = ITEMS.register("moonspeckle", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> STONESTEM = ITEMS.register("stonestem", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> WILLOW_WORT = ITEMS.register("willow_wort", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> RUMBLEROOT = ITEMS.register("rumbleroot", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> PHANTOM_FROND = ITEMS.register("phantom_frond", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> BREEZEBLOOM = ITEMS.register("breezebloom", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> DESERTS_THIRST = ITEMS.register("deserts_thirst", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> THUNDERSTAR = ITEMS.register("thunderstar", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> SUNSTRIDERS_SIN = ITEMS.register("sunstriders_sin", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> SLAKEMOSS = ITEMS.register("slakemoss", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> SLAG_RIND = ITEMS.register("slag_rind", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> VENGERVINE = ITEMS.register("vengervine", () -> new Item(defaultItemProperties()));
-    public static final RegistryObject<Item> SKYGLOM = ITEMS.register("skyglom", () -> new Item(defaultItemProperties()));
+    public static final RegistryObject<ItemReagent> WINDY_LICHEN = ITEMS.register("windy_lichen", () -> new ItemReagent(Color.RED, Color.RED, Color.YELLOW, Color.YELLOW));
+    public static final RegistryObject<ItemReagent> SUNSPECKLE = ITEMS.register("sunspeckle", () -> new ItemReagent(Color.GREEN, Color.GREEN, Color.BLUE, Color.BLUE));
+    public static final RegistryObject<ItemReagent> MOONSPECKLE = ITEMS.register("moonspeckle", () -> new ItemReagent(Color.YELLOW, Color.YELLOW, Color.GREEN, Color.GREEN));
+    public static final RegistryObject<ItemReagent> STONESTEM = ITEMS.register("stonestem", () -> new ItemReagent(Color.BLUE, Color.BLUE, Color.RED, Color.RED));
+    public static final RegistryObject<ItemReagent> WILLOW_WORT = ITEMS.register("willow_wort", () -> new ItemReagent(Color.GREEN, Color.GREEN, Color.BLUE, Color.BLUE));
+    public static final RegistryObject<ItemReagent> RUMBLEROOT = ITEMS.register("rumbleroot", () -> new ItemReagent(Color.RED, Color.RED, Color.YELLOW, Color.YELLOW));
+    public static final RegistryObject<ItemReagent> PHANTOM_FROND = ITEMS.register("phantom_frond", () -> new ItemReagent(Color.BLUE, Color.BLUE, Color.RED, Color.RED));
+    public static final RegistryObject<ItemReagent> BREEZEBLOOM = ITEMS.register("breezebloom", () -> new ItemReagent(Color.YELLOW, Color.YELLOW, Color.GREEN, Color.GREEN));
+    public static final RegistryObject<ItemReagent> DESERTS_THIRST = ITEMS.register("deserts_thirst", () -> new ItemReagent(Color.BLUE, Color.BLUE, Color.GREEN, Color.GREEN));
+    public static final RegistryObject<ItemReagent> THUNDERSTAR = ITEMS.register("thunderstar", () -> new ItemReagent(Color.YELLOW, Color.YELLOW, Color.RED, Color.RED));
+    public static final RegistryObject<ItemReagent> SUNSTRIDERS_SIN = ITEMS.register("sunstriders_sin", () -> new ItemReagent(Color.GREEN, Color.GREEN, Color.YELLOW, Color.YELLOW));
+    public static final RegistryObject<ItemReagent> SLAKEMOSS = ITEMS.register("slakemoss", () -> new ItemReagent(Color.RED, Color.RED, Color.BLUE, Color.BLUE));
+    public static final RegistryObject<ItemReagent> SLAG_RIND = ITEMS.register("slag_rind", () -> new ItemReagent(Color.YELLOW, Color.YELLOW, Color.RED, Color.RED));
+    public static final RegistryObject<ItemReagent> VENGERVINE = ITEMS.register("vengervine", () -> new ItemReagent(Color.BLUE, Color.BLUE, Color.GREEN, Color.GREEN));
+    public static final RegistryObject<ItemReagent> SKYGLOM = ITEMS.register("skyglom", () -> new ItemReagent(Color.RED, Color.RED, Color.YELLOW, Color.YELLOW));
 
     public static final RegistryObject<ItemReagentSeeds> WINDY_LICHEN_SEEDS = ITEMS.register("windy_lichen_seeds", () -> new ItemReagentSeeds(ModBlocks.WINDY_LICHEN_CROP.get()));
     public static final RegistryObject<ItemReagentSeeds> SUNSPECKLE_SEEDS = ITEMS.register("sunspeckle_seeds", () -> new ItemReagentSeeds(ModBlocks.SUNSPECKLE_CROP.get()));
@@ -50,6 +52,8 @@ public class ModItems
     public static final RegistryObject<Item> FLASK = ITEMS.register("flask", ItemFlask::new);
 
     public static final RegistryObject<BlockItem> PERENNIAL_PATCH = ITEMS.register("perennial_patch", () -> new BlockItem(ModBlocks.PERENNIAL_PATCH.get(), defaultItemProperties()));
+
+    public static final RegistryObject<BlockItem> FLASK_STATION = ITEMS.register("flask_station", () -> new BlockItem(ModBlocks.FLASK_STATION.get(), defaultItemProperties()));
 
     public static Item.Properties defaultItemProperties()
     {

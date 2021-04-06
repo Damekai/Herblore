@@ -1,7 +1,9 @@
 package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.ModRegistries;
 import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
+import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.util.FlaskHelper;
@@ -14,6 +16,7 @@ import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -76,14 +79,18 @@ public class ItemFlask extends Item
 
         CompoundNBT nbt = stack.getOrCreateTag();
 
-        if (nbt.contains("flask_effect_instance"))
+        if (nbt.contains("flask"))
         {
             Herblore.LOGGER.debug(nbt.toString());
 
             HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(livingEntity);
             if (herbloreEffectHandler != null)
             {
-                herbloreEffectHandler.applyHerbloreEffectInstance(HerbloreEffectInstance.read(nbt.getCompound("flask_effect_instance")), livingEntity);
+                Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(nbt.getString("flask")));
+                if (flask != null)
+                {
+                    herbloreEffectHandler.applyHerbloreEffectInstance(flask.getHerbloreEffectInstance(), livingEntity);
+                }
             }
 
             if (nbt.contains("flask_doses"))
