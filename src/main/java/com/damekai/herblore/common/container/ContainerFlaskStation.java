@@ -4,6 +4,7 @@ import com.damekai.herblore.common.block.tile.TileFlaskStation;
 import com.damekai.herblore.common.util.FlaskStationInventory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.math.BlockPos;
@@ -42,23 +43,22 @@ public class ContainerFlaskStation extends Container
         this.addSlot(new Slot(flaskStationInventory, 3, 40, 54));
         this.addSlot(new Slot(flaskStationInventory, 4, 62, 54));
 
-        // Top right section slots (5 thru 8).
-        this.addSlot(new Slot(flaskStationInventory, 5, 178, 32));
-        this.addSlot(new Slot(flaskStationInventory, 6, 200, 32));
-        this.addSlot(new Slot(flaskStationInventory, 7, 178, 54));
-        this.addSlot(new Slot(flaskStationInventory, 8, 200, 54));
+        // Bottom left section slots (5 thru 8).
+        this.addSlot(new Slot(flaskStationInventory, 5, 40, 92));
+        this.addSlot(new Slot(flaskStationInventory, 6, 62, 92));
+        this.addSlot(new Slot(flaskStationInventory, 7, 40, 114));
+        this.addSlot(new Slot(flaskStationInventory, 8, 62, 114));
 
-        // Bottom left section slots (9 thru 12).
-        this.addSlot(new Slot(flaskStationInventory, 9, 40, 92));
-        this.addSlot(new Slot(flaskStationInventory, 10, 62, 92));
-        this.addSlot(new Slot(flaskStationInventory, 11, 40, 114));
-        this.addSlot(new Slot(flaskStationInventory, 12, 62, 114));
-
-        // Bottom right section slots (13 thru 16).
-        this.addSlot(new Slot(flaskStationInventory, 13, 178, 92));
-        this.addSlot(new Slot(flaskStationInventory, 14, 200, 92));
-        this.addSlot(new Slot(flaskStationInventory, 15, 178, 114));
-        this.addSlot(new Slot(flaskStationInventory, 16, 200, 114));
+        // Right section slots (9 - 17)
+        this.addSlot(new Slot(flaskStationInventory, 9, 170, 50));
+        this.addSlot(new Slot(flaskStationInventory, 10, 192, 50));
+        this.addSlot(new Slot(flaskStationInventory, 11, 214, 50));
+        this.addSlot(new Slot(flaskStationInventory, 12, 170, 72));
+        this.addSlot(new Slot(flaskStationInventory, 13, 192, 72));
+        this.addSlot(new Slot(flaskStationInventory, 14, 214, 72));
+        this.addSlot(new Slot(flaskStationInventory, 15, 170, 94));
+        this.addSlot(new Slot(flaskStationInventory, 16, 192, 94));
+        this.addSlot(new Slot(flaskStationInventory, 17, 214, 94));
     }
 
     private void setupPlayerInventory(PlayerInventory playerInventory)

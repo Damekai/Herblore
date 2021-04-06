@@ -61,7 +61,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
 
         HashMap<ItemReagent, Integer> inputReagents = new HashMap<>();
 
-        for (int i = 1; i < 17; i++)
+        for (int i = 1; i < 18; i++)
         {
             ItemStack stack = inventory.getStackInSlot(i);
             if (stack != ItemStack.EMPTY && stack.getItem() instanceof ItemReagent)

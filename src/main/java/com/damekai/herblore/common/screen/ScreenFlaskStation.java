@@ -3,6 +3,7 @@ package com.damekai.herblore.common.screen;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.container.ContainerFlaskStation;
 import com.damekai.herblore.common.item.ItemReagent;
+import com.damekai.herblore.common.util.FlaskStationInventory;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -33,7 +34,7 @@ public class ScreenFlaskStation extends ContainerScreen<ContainerFlaskStation>
         int relY = (this.height - this.ySize) / 2;
 
         // Add reagent colors.
-        for (int i = 1; i < 17; i++)
+        for (int i = 1; i < 18; i++)
         {
             Slot slot = container.getSlot(i);
             ItemStack stack = slot.getStack();
@@ -43,16 +44,28 @@ public class ScreenFlaskStation extends ContainerScreen<ContainerFlaskStation>
                 ItemReagent reagent = (ItemReagent) stack.getItem();
 
                 // Up
-                AbstractGui.fill(matrixStack, relX + slot.xPos - 1, relY + slot.yPos - 1, relX + slot.xPos + 17, relY + slot.yPos - 3, reagent.getUpColor().getRGB());
+                if (FlaskStationInventory.SLOT_POSITIONAL_PROPERTIES.get(i).hasUp())
+                {
+                    AbstractGui.fill(matrixStack, relX + slot.xPos - 1, relY + slot.yPos - 1, relX + slot.xPos + 17, relY + slot.yPos - 3, reagent.getUpColor().getRGB());
+                }
 
                 // Down
-                AbstractGui.fill(matrixStack, relX + slot.xPos - 1, relY + slot.yPos + 17, relX + slot.xPos + 17, relY + slot.yPos + 19, reagent.getDownColor().getRGB());
+                if (FlaskStationInventory.SLOT_POSITIONAL_PROPERTIES.get(i).hasDown())
+                {
+                    AbstractGui.fill(matrixStack, relX + slot.xPos - 1, relY + slot.yPos + 17, relX + slot.xPos + 17, relY + slot.yPos + 19, reagent.getDownColor().getRGB());
+                }
 
                 // Left
-                AbstractGui.fill(matrixStack, relX + slot.xPos - 3, relY + slot.yPos - 1, relX + slot.xPos - 1, relY + slot.yPos + 17, reagent.getLeftColor().getRGB());
+                if (FlaskStationInventory.SLOT_POSITIONAL_PROPERTIES.get(i).hasLeft())
+                {
+                    AbstractGui.fill(matrixStack, relX + slot.xPos - 3, relY + slot.yPos - 1, relX + slot.xPos - 1, relY + slot.yPos + 17, reagent.getLeftColor().getRGB());
+                }
 
                 // Right
-                AbstractGui.fill(matrixStack, relX + slot.xPos + 17, relY + slot.yPos - 1, relX + slot.xPos + 19, relY + slot.yPos + 17, reagent.getRightColor().getRGB());
+                if (FlaskStationInventory.SLOT_POSITIONAL_PROPERTIES.get(i).hasRight())
+                {
+                    AbstractGui.fill(matrixStack, relX + slot.xPos + 17, relY + slot.yPos - 1, relX + slot.xPos + 19, relY + slot.yPos + 17, reagent.getRightColor().getRGB());
+                }
             }
         }
 

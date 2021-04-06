@@ -44,7 +44,7 @@ public class TileFlaskStation extends TileEntity implements ITickableTileEntity,
         {
             Herblore.LOGGER.debug("Crafting...");
             flaskStationInventory.setInventorySlotContents(0, recipe.getCraftingResult(flaskStationInventory));
-            for (int i = 1; i < 17; i++)
+            for (int i = 1; i < 18; i++)
             {
                 flaskStationInventory.getStackInSlot(i).shrink(1);
             }

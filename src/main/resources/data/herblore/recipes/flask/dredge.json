@@ -4,8 +4,7 @@
     "reagents": {
         "herblore:windy_lichen": 4,
         "herblore:sunspeckle": 4,
-        "herblore:moonspeckle": 4,
-        "herblore:stonestem": 4
+        "herblore:stonestem": 9
     },
     "result": "herblore:dredge"
-  }
+}
