@@ -1,7 +1,12 @@
 package com.damekai.herblore.common.util;
 
+import com.damekai.herblore.common.ModRegistries;
+import com.damekai.herblore.common.flask.Flask;
+import com.damekai.herblore.common.flask.ModFlasks;
+import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -12,7 +17,12 @@ public class FlaskHelper
 {
     public static int getFlaskColor(ItemStack stack)
     {
-        return stack.getOrCreateTag().getInt("flask_effect_color"); // Returns 0 if the flask_effect_color key is not present.
+        Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(stack.getOrCreateTag().getString("flask")));
+        if (flask != null)
+        {
+            return flask.getColor();
+        }
+        return 0;
     }
 
     public static int getFlaskDoses(ItemStack stack)
@@ -23,13 +33,19 @@ public class FlaskHelper
     @OnlyIn(Dist.CLIENT)
     public static void addFlaskTooltip(ItemStack stack, List<ITextComponent> lores)
     {
-        if (!stack.getOrCreateTag().contains("flask_effect_instance"))
+        if (stack.getOrCreateTag().contains("flask_doses"))
         {
-            return;
+            int dosesRemaining = stack.getOrCreateTag().getInt("flask_doses");
+            lores.add(new TranslationTextComponent("text.herblore.doses_remaining").append(new StringTextComponent(": " + dosesRemaining)).mergeStyle(TextFormatting.BLUE));
         }
 
-        HerbloreEffectInstance herbloreEffectInstance = HerbloreEffectInstance.read(stack.getOrCreateTag().getCompound("flask_effect_instance"));
+        Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(stack.getOrCreateTag().getString("flask")));
+        if (flask != null)
+        {
+            HerbloreEffectInstance herbloreEffectInstance = flask.getHerbloreEffectInstance();
+            HerbloreEffect herbloreEffect = herbloreEffectInstance.getHerbloreEffect();
 
-
+            lores.add(new TranslationTextComponent(herbloreEffect.getTranslationKey()).mergeStyle(TextFormatting.GREEN));
+        }
     }
 }

@@ -38,14 +38,15 @@ public class ItemFlask extends Item
     public ITextComponent getDisplayName(ItemStack stack)
     {
         CompoundNBT nbt = stack.getOrCreateTag();
-        if (nbt.contains("herblore_effect_instance"))
+        if (nbt.contains("flask"))
         {
-            HerbloreEffect herbloreEffect = HerbloreEffectInstance.read(nbt.getCompound("herblore_effect_instance")).getHerbloreEffect();
-            if (herbloreEffect == null)
+
+            Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(stack.getOrCreateTag().getString("flask")));
+            if (flask == null)
             {
                 return new TranslationTextComponent("ruined_flask"); // TODO: Make this a bit more... robust.
             }
-            return new TranslationTextComponent(herbloreEffect.getTranslationKey()).mergeStyle(TextFormatting.GREEN);
+            return new TranslationTextComponent(flask.getTranslationKey());
         }
         return super.getDisplayName(stack);
     }
