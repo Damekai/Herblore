@@ -27,13 +27,19 @@ import javax.annotation.Nullable;
 
 public class TileFlaskStation extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IInventoryChangedListener
 {
+    public static final int COOK_TIME = 100;
+
     private final FlaskStationInventory flaskStationInventory;
+
+    private int elapsedCookTime;
 
     public TileFlaskStation()
     {
         super(ModTiles.FLASK_STATION.get());
 
         flaskStationInventory = new FlaskStationInventory(this);
+
+        elapsedCookTime = 0;
     }
 
     @Override
@@ -42,13 +48,22 @@ public class TileFlaskStation extends TileEntity implements ITickableTileEntity,
         IRecipe<FlaskStationInventory> recipe = this.world.getRecipeManager().getRecipe(FlaskRecipe.FLASK_RECIPE, flaskStationInventory, this.world).orElse(null);
         if (recipe != null)
         {
-            Herblore.LOGGER.debug("Crafting...");
-            flaskStationInventory.setInventorySlotContents(0, recipe.getCraftingResult(flaskStationInventory));
-            for (int i = 1; i < 18; i++)
+            elapsedCookTime++;
+            if (elapsedCookTime == COOK_TIME)
             {
-                flaskStationInventory.getStackInSlot(i).shrink(1);
+                flaskStationInventory.setInventorySlotContents(0, recipe.getCraftingResult(flaskStationInventory));
+                for (int i = 1; i < 18; i++)
+                {
+                    flaskStationInventory.getStackInSlot(i).shrink(1);
+                }
+                elapsedCookTime = 0;
             }
         }
+    }
+
+    public int getElapsedCookTime()
+    {
+        return elapsedCookTime;
     }
 
     @Override

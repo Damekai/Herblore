@@ -1,6 +1,7 @@
 package com.damekai.herblore.common.screen;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.block.tile.TileFlaskStation;
 import com.damekai.herblore.common.container.ContainerFlaskStation;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.util.FlaskStationInventory;
@@ -12,6 +13,8 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+
+import java.awt.*;
 
 public class ScreenFlaskStation extends ContainerScreen<ContainerFlaskStation>
 {
@@ -76,9 +79,20 @@ public class ScreenFlaskStation extends ContainerScreen<ContainerFlaskStation>
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y)
     {
         this.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-        int k = (this.width - this.xSize) / 2;
-        int l = (this.height - this.ySize) / 2;
-        this.blit(matrixStack, k, l, 0, 0, this.xSize, this.ySize);
+        int relX = (this.width - this.xSize) / 2;
+        int relY = (this.height - this.ySize) / 2;
+
+        // Progress bar background.
+        AbstractGui.fill(matrixStack, relX + 104, relY + 90, relX + 151, relY + 151, new Color(9145227).getRGB());
+
+        // Progress bar based on cook time elapsed.
+        int elapsedCookTime = container.getFlaskStationTile().getElapsedCookTime();
+        if (elapsedCookTime > 0)
+        {
+            AbstractGui.fill(matrixStack, relX + 104, relY + (151 - Math.round(61 * (elapsedCookTime / (float) TileFlaskStation.COOK_TIME))), relX + 151, relY + 151, Color.WHITE.getRGB());
+        }
+
+        this.blit(matrixStack, relX, relY, 0, 0, this.xSize, this.ySize);
     }
 
     @Override

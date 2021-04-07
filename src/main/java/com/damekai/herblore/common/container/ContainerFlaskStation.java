@@ -27,6 +27,11 @@ public class ContainerFlaskStation extends Container
         setupPlayerInventory(playerInventory);
     }
 
+    public TileFlaskStation getFlaskStationTile()
+    {
+        return flaskStationTile;
+    }
+
     @Override
     public boolean canInteractWith(PlayerEntity playerEntity)
     {
