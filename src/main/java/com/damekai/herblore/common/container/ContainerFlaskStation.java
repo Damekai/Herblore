@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -77,5 +78,11 @@ public class ContainerFlaskStation extends Container
         {
             this.addSlot(new Slot(playerInventory, i, 48 + i * 18, 219));
         }
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index)
+    {
+        return ItemStack.EMPTY;
     }
 }
