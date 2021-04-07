@@ -15,7 +15,6 @@ public class ModFlasks
     public static final DeferredRegister<Flask> FLASKS = DeferredRegister.create(Flask.class, Herblore.MOD_ID);
 
     public static final RegistryObject<Flask> DREDGE = FLASKS.register("dredge", () -> new Flask(
-            "flask.herblore.dredge",
             new HerbloreEffectInstance(ModHerbloreEffects.DREDGE, 0, 2400),
             4,
             0x6B4A46));

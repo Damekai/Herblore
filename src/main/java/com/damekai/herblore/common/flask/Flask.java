@@ -1,18 +1,19 @@
 package com.damekai.herblore.common.flask;
 
+import com.damekai.herblore.common.ModRegistries;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
+import net.minecraft.util.Util;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class Flask extends ForgeRegistryEntry<Flask>
 {
-    private final String translationKey;
+    private String translationKey = null;
     private final HerbloreEffectInstance herbloreEffectInstance;
     private final int baseDoses;
     private final int color;
 
-    public Flask(String translationKey, HerbloreEffectInstance herbloreEffectInstance, int baseDoses, int color)
+    public Flask(HerbloreEffectInstance herbloreEffectInstance, int baseDoses, int color)
     {
-        this.translationKey = translationKey;
         this.herbloreEffectInstance = herbloreEffectInstance;
         this.baseDoses = baseDoses;
         this.color = color;
@@ -20,6 +21,10 @@ public class Flask extends ForgeRegistryEntry<Flask>
 
     public String getTranslationKey()
     {
+        if (translationKey == null)
+        {
+            translationKey = Util.makeTranslationKey("flask", ModRegistries.FLASKS.getKey(this));
+        }
         return translationKey;
     }
 
