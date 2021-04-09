@@ -3,6 +3,7 @@ package com.damekai.herblore.common.recipe;
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.ModRegistries;
 import com.damekai.herblore.common.flask.Flask;
+import com.damekai.herblore.common.item.ItemFlask;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.util.FlaskStationInventory;
@@ -101,7 +102,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
     {
         ItemStack flask = new ItemStack(ModItems.FLASK::get);
         flask.getOrCreateTag().putString("flask", ModRegistries.FLASKS.getKey(result.get()).toString());
-        flask.getOrCreateTag().putInt("flask_doses", 4);
+        flask.getOrCreateTag().putInt("flask_sips", ItemFlask.INITIAL_FLASK_SIPS);
         return flask;
     }
 
@@ -116,7 +117,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
     {
         ItemStack flask = new ItemStack(ModItems.FLASK::get);
         flask.getOrCreateTag().putString("flask", ModRegistries.FLASKS.getKey(result.get()).toString());
-        flask.getOrCreateTag().putInt("flask_doses", 4);
+        flask.getOrCreateTag().putInt("flask_sips", ItemFlask.INITIAL_FLASK_SIPS);
         return flask;
     }
 

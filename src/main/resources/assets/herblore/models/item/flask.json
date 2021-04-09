@@ -1,33 +1,69 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "herblore:item/flask_overlay_4",
+    "layer0": "herblore:item/flask_overlay_10",
     "layer1": "herblore:item/empty_flask"
   },
   "overrides": [
     {
       "predicate": {
-        "herblore:doses": 1.0
+        "herblore:flask_fill": 1.0
       },
       "model": "herblore:item/flask_1"
     },
     {
       "predicate": {
-        "herblore:doses": 2.0
+        "herblore:flask_fill": 2.0
       },
       "model": "herblore:item/flask_2"
     },
     {
       "predicate": {
-        "herblore:doses": 3.0
+        "herblore:flask_fill": 3.0
       },
       "model": "herblore:item/flask_3"
     },
     {
       "predicate": {
-        "herblore:doses": 4.0
+        "herblore:flask_fill": 4.0
       },
       "model": "herblore:item/flask_4"
+    },
+    {
+      "predicate": {
+        "herblore:flask_fill": 5.0
+      },
+      "model": "herblore:item/flask_5"
+    },
+    {
+      "predicate": {
+        "herblore:flask_fill": 6.0
+      },
+      "model": "herblore:item/flask_6"
+    },
+    {
+      "predicate": {
+        "herblore:flask_fill": 7.0
+      },
+      "model": "herblore:item/flask_7"
+    },
+    {
+      "predicate": {
+        "herblore:flask_fill": 8.0
+      },
+      "model": "herblore:item/flask_8"
+    },
+    {
+      "predicate": {
+        "herblore:flask_fill": 9.0
+      },
+      "model": "herblore:item/flask_9"
+    },
+    {
+      "predicate": {
+        "herblore:flask_fill": 10.0
+      },
+      "model": "herblore:item/flask_10"
     }
   ]
 }

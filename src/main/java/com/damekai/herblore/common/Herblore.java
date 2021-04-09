@@ -4,6 +4,8 @@ import com.damekai.herblore.client.ModItemPropertyGetters;
 import com.damekai.herblore.client.ModRenderTypeSetter;
 import com.damekai.herblore.common.block.ModBlocks;
 import com.damekai.herblore.common.block.tile.ModTiles;
+import com.damekai.herblore.common.capability.continuousdrinkhandler.CapabilityContinuousDrinkHandler;
+import com.damekai.herblore.common.capability.continuousdrinkhandler.ContinuousDrinkHandler;
 import com.damekai.herblore.common.capability.herbloreeffecthandler.CapabilityHerbloreEffectHandler;
 import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.capability.toxicityhandler.CapabilityToxicityHandler;
@@ -13,6 +15,7 @@ import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.flask.ModFlasks;
 import com.damekai.herblore.common.herbloreeffect.*;
+import com.damekai.herblore.common.item.ItemFlask;
 import com.damekai.herblore.common.item.ModItemColors;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
@@ -62,6 +65,7 @@ public class Herblore
 
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityHerbloreEffectHandler::onAttachCapabilities);
         MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityToxicityHandler::onAttachCapabilities);
+        MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, CapabilityContinuousDrinkHandler::onAttachCapabilities);
 
         ModBlocks.BLOCKS.register(modBus);
         ModTiles.TILES.register(modBus);
@@ -72,6 +76,8 @@ public class Herblore
         ModRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
         ModHerbloreEffects.HERBLORE_EFFECTS.register(modBus);
         ModFlasks.FLASKS.register(modBus);
+
+        MinecraftForge.EVENT_BUS.addListener(ContinuousDrinkHandler::onUseItem);
 
         MinecraftForge.EVENT_BUS.addListener(HerbloreEffectHandler::onLivingUpdate);
         MinecraftForge.EVENT_BUS.addListener(ToxicityHandler::onLivingUpdate);
@@ -90,6 +96,7 @@ public class Herblore
     {
         CapabilityHerbloreEffectHandler.register();
         CapabilityToxicityHandler.register();
+        CapabilityContinuousDrinkHandler.register();
     }
 
     // TODO: Move this somewhere else.

@@ -34,6 +34,15 @@ public abstract class HerbloreEffect extends ForgeRegistryEntry<HerbloreEffect>
         return guiEffect != null ? guiEffect.get() : null;
     }
 
+    public HerbloreEffectInstance combineInstances(HerbloreEffectInstance first, HerbloreEffectInstance second)
+    {
+        if (first.getHerbloreEffect() != second.getHerbloreEffect())
+        {
+            return first;
+        }
+        return new HerbloreEffectInstance(() -> this, Math.min(first.getAmplifier(), second.getAmplifier()), first.getDurationRemaining() + second.getDurationRemaining());
+    }
+
     /**
      * Implies that a Flask Effect has functionality when it is applied.
      */

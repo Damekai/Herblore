@@ -23,6 +23,6 @@ public class ModItemPropertyGetters
 
     private static void registerPropertyGetters()
     {
-        registerPropertyGetter(ModItems.FLASK::get, new ResourceLocation(Herblore.MOD_ID, "doses"), (stack, clientWorld, livingEntity) -> FlaskHelper.getFlaskDoses(stack));
+        registerPropertyGetter(ModItems.FLASK::get, new ResourceLocation(Herblore.MOD_ID, "flask_fill"), (stack, clientWorld, livingEntity) -> FlaskHelper.getFlaskFillPredicate(stack));
     }
 }

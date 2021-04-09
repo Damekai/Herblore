@@ -2,14 +2,18 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.ModRegistries;
+import com.damekai.herblore.common.capability.continuousdrinkhandler.ContinuousDrinkHandler;
 import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.util.FlaskHelper;
+import com.damekai.herblore.common.util.IContinuousDrinkItem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
@@ -23,12 +27,16 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemFlask extends Item
+public class ItemFlask extends Item implements IContinuousDrinkItem
 {
+    public static int INITIAL_FLASK_SIPS = 200;
+
     public ItemFlask()
     {
         super(ModItems.defaultItemProperties().maxStackSize(1));
@@ -54,7 +62,44 @@ public class ItemFlask extends Item
     @Override
     public int getUseDuration(ItemStack stack)
     {
-        return 40;
+        return 16;
+    }
+
+    @Override
+    public int getMaxDrinkTime(ItemStack stack)
+    {
+        return stack.getOrCreateTag().getInt("flask_sips");
+    }
+
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity livingEntity, int timeLeft)
+    {
+        ContinuousDrinkHandler continuousDrinkHandler = ContinuousDrinkHandler.getContinuousDrinkHandlerOf(livingEntity);
+        if (continuousDrinkHandler == null)
+        {
+            return;
+        }
+
+        int drinkTime = continuousDrinkHandler.finishDrink();
+
+        if (world.isRemote)
+        {
+            return;
+        }
+
+        stack.getOrCreateTag().putInt("flask_sips", stack.getOrCreateTag().getInt("flask_sips") - drinkTime);
+
+        HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(livingEntity);
+        if (herbloreEffectHandler != null)
+        {
+            Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(stack.getOrCreateTag().getString("flask")));
+            if (flask != null)
+            {
+                HerbloreEffectInstance herbloreEffectInstance = flask.getHerbloreEffectInstance();
+                herbloreEffectInstance.setDuration(Math.round(herbloreEffectInstance.getDurationFull() * (float) drinkTime / INITIAL_FLASK_SIPS));
+                herbloreEffectHandler.applyHerbloreEffectInstance(herbloreEffectInstance, livingEntity);
+            }
+        }
     }
 
     @Override
@@ -67,49 +112,38 @@ public class ItemFlask extends Item
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
     {
         player.setActiveHand(hand);
-        return ActionResult.resultSuccess(player.getHeldItem(hand));
+        return ActionResult.func_233538_a_(player.getHeldItem(hand), world.isRemote);
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity livingEntity)
     {
-        if (world.isRemote)
+        ContinuousDrinkHandler continuousDrinkHandler = ContinuousDrinkHandler.getContinuousDrinkHandlerOf(livingEntity);
+        if (continuousDrinkHandler == null)
         {
             return stack;
         }
 
-        CompoundNBT nbt = stack.getOrCreateTag();
+        int drinkTime = continuousDrinkHandler.finishDrink();
 
-        if (nbt.contains("flask"))
+        Herblore.LOGGER.debug(drinkTime);
+
+        if (!world.isRemote)
         {
-            Herblore.LOGGER.debug(nbt.toString());
-
             HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(livingEntity);
             if (herbloreEffectHandler != null)
             {
-                Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(nbt.getString("flask")));
+                Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(stack.getOrCreateTag().getString("flask")));
                 if (flask != null)
                 {
-                    herbloreEffectHandler.applyHerbloreEffectInstance(flask.getHerbloreEffectInstance(), livingEntity);
+                    HerbloreEffectInstance herbloreEffectInstance = flask.getHerbloreEffectInstance();
+                    herbloreEffectInstance.setDuration(Math.round(herbloreEffectInstance.getDurationFull() * (float) drinkTime / INITIAL_FLASK_SIPS));
+                    herbloreEffectHandler.applyHerbloreEffectInstance(herbloreEffectInstance, livingEntity);
                 }
             }
-
-            if (nbt.contains("flask_doses"))
-            {
-                int doses = nbt.getInt("flask_doses");
-                if (doses == 1)
-                {
-                    return new ItemStack(ModItems.EMPTY_FLASK.get());
-                }
-                else
-                {
-                    nbt.putInt("flask_doses", doses - 1);
-                }
-            }
-
-            return stack;
         }
-        return stack;
+
+        return new ItemStack(ModItems.EMPTY_FLASK::get);
     }
 
     @OnlyIn(Dist.CLIENT)
