@@ -59,6 +59,10 @@ public class TileFlaskStation extends TileEntity implements ITickableTileEntity,
                 elapsedCookTime = 0;
             }
         }
+        else
+        {
+            elapsedCookTime = 0;
+        }
     }
 
     public int getElapsedCookTime()
