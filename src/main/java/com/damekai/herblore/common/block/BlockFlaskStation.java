@@ -10,13 +10,18 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockFlaskStation extends ContainerBlock
 {
@@ -42,12 +47,35 @@ public class BlockFlaskStation extends ContainerBlock
             if (tile instanceof TileFlaskStation)
             {
                 NetworkHooks.openGui((ServerPlayerEntity) playerEntity, (TileFlaskStation) tile, tile.getPos());
-            }
-            else
+            } else
             {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
         }
         return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState state, World world, BlockPos pos, Random rand)
+    {
+        super.animateTick(state, world, pos, rand);
+
+        TileFlaskStation flaskStationTile = (TileFlaskStation) world.getTileEntity(pos);
+
+        if (flaskStationTile != null)
+        {
+            double blockPosX = pos.getX();
+            double blockPosY = pos.getY();
+            double blockPosZ = pos.getZ();
+
+            if (flaskStationTile.getElapsedCookTime() > 0)
+            {
+                if (rand.nextDouble() < 0.4d)
+                {
+                    world.playSound(blockPosX + 0.5d, blockPosY + 1d, blockPosZ + 0.5d, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.BLOCKS, 2f, rand.nextFloat() * 0.1F + 0.5f, false);
+                }
+            }
+        }
     }
 }
