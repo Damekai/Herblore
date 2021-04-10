@@ -1,0 +1,11 @@
+{
+  "type": "herblore:flask",
+  "group": "herblore",
+  "reagents": {
+    "herblore:windy_lichen": 3,
+    "herblore:sunspeckle": 2,
+    "herblore:breezebloom": 3,
+    "herblore:skyglom": 1
+  },
+  "result": "herblore:strider"
+}

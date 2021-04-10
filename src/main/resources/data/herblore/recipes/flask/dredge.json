@@ -2,8 +2,8 @@
     "type": "herblore:flask",
     "group": "herblore",
     "reagents": {
-        "herblore:windy_lichen": 4,
-        "herblore:sunspeckle": 9
+        "herblore:stonestem": 2,
+        "herblore:rumbleroot": 2
     },
     "result": "herblore:dredge"
 }

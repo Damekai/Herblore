@@ -14,21 +14,27 @@ public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Herblore.MOD_ID);
 
-    public static final RegistryObject<ItemReagent> WINDY_LICHEN = ITEMS.register("windy_lichen", () -> new ItemReagent(Color.RED, Color.RED, Color.YELLOW, Color.YELLOW));
-    public static final RegistryObject<ItemReagent> SUNSPECKLE = ITEMS.register("sunspeckle", () -> new ItemReagent(Color.GREEN, Color.GREEN, Color.BLUE, Color.BLUE));
-    public static final RegistryObject<ItemReagent> MOONSPECKLE = ITEMS.register("moonspeckle", () -> new ItemReagent(Color.YELLOW, Color.YELLOW, Color.GREEN, Color.GREEN));
-    public static final RegistryObject<ItemReagent> STONESTEM = ITEMS.register("stonestem", () -> new ItemReagent(Color.BLUE, Color.BLUE, Color.RED, Color.RED));
-    public static final RegistryObject<ItemReagent> WILLOW_WORT = ITEMS.register("willow_wort", () -> new ItemReagent(Color.GREEN, Color.GREEN, Color.BLUE, Color.BLUE));
-    public static final RegistryObject<ItemReagent> RUMBLEROOT = ITEMS.register("rumbleroot", () -> new ItemReagent(Color.RED, Color.RED, Color.YELLOW, Color.YELLOW));
-    public static final RegistryObject<ItemReagent> PHANTOM_FROND = ITEMS.register("phantom_frond", () -> new ItemReagent(Color.BLUE, Color.BLUE, Color.RED, Color.RED));
-    public static final RegistryObject<ItemReagent> BREEZEBLOOM = ITEMS.register("breezebloom", () -> new ItemReagent(Color.YELLOW, Color.YELLOW, Color.GREEN, Color.GREEN));
+    private static final Color MAROON = new Color(0x861F41);
+    private static final Color ORANGE = new Color(0xE87722);
+
+    public static final RegistryObject<ItemReagent> WINDY_LICHEN = ITEMS.register("windy_lichen", () -> new ItemReagent(MAROON, ORANGE, MAROON, ORANGE));
+    public static final RegistryObject<ItemReagent> BREEZEBLOOM = ITEMS.register("breezebloom", () -> new ItemReagent(ORANGE, MAROON, ORANGE, MAROON));
+    public static final RegistryObject<ItemReagent> SKYGLOM = ITEMS.register("skyglom", () -> new ItemReagent(ORANGE, MAROON, MAROON, ORANGE));
+    public static final RegistryObject<ItemReagent> SUNSPECKLE = ITEMS.register("sunspeckle", () -> new ItemReagent(MAROON, ORANGE, ORANGE, MAROON));
+
+    public static final RegistryObject<ItemReagent> STONESTEM = ITEMS.register("stonestem", () -> new ItemReagent(MAROON, MAROON, MAROON, ORANGE));
+    public static final RegistryObject<ItemReagent> RUMBLEROOT = ITEMS.register("rumbleroot", () -> new ItemReagent(MAROON, MAROON, ORANGE, MAROON));
+    public static final RegistryObject<ItemReagent> SLAG_RIND = ITEMS.register("slag_rind", () -> new ItemReagent(ORANGE, ORANGE, ORANGE, MAROON));
+    public static final RegistryObject<ItemReagent> SLAKEMOSS = ITEMS.register("slakemoss", () -> new ItemReagent(ORANGE, ORANGE, MAROON, ORANGE));
+
+    public static final RegistryObject<ItemReagent> SUNSTRIDERS_SIN = ITEMS.register("sunstriders_sin", () -> new ItemReagent(ORANGE, MAROON, MAROON, MAROON));
+    public static final RegistryObject<ItemReagent> PHANTOM_FROND = ITEMS.register("phantom_frond", () -> new ItemReagent(MAROON, ORANGE, MAROON, MAROON));
+    public static final RegistryObject<ItemReagent> WILLOW_WORT = ITEMS.register("willow_wort", () -> new ItemReagent(MAROON, ORANGE, ORANGE, ORANGE));
+    public static final RegistryObject<ItemReagent> MOONSPECKLE = ITEMS.register("moonspeckle", () -> new ItemReagent(ORANGE, MAROON, ORANGE, ORANGE));
+
     public static final RegistryObject<ItemReagent> DESERTS_THIRST = ITEMS.register("deserts_thirst", () -> new ItemReagent(Color.BLUE, Color.BLUE, Color.GREEN, Color.GREEN));
     public static final RegistryObject<ItemReagent> THUNDERSTAR = ITEMS.register("thunderstar", () -> new ItemReagent(Color.YELLOW, Color.YELLOW, Color.RED, Color.RED));
-    public static final RegistryObject<ItemReagent> SUNSTRIDERS_SIN = ITEMS.register("sunstriders_sin", () -> new ItemReagent(Color.GREEN, Color.GREEN, Color.YELLOW, Color.YELLOW));
-    public static final RegistryObject<ItemReagent> SLAKEMOSS = ITEMS.register("slakemoss", () -> new ItemReagent(Color.RED, Color.RED, Color.BLUE, Color.BLUE));
-    public static final RegistryObject<ItemReagent> SLAG_RIND = ITEMS.register("slag_rind", () -> new ItemReagent(Color.YELLOW, Color.YELLOW, Color.RED, Color.RED));
     public static final RegistryObject<ItemReagent> VENGERVINE = ITEMS.register("vengervine", () -> new ItemReagent(Color.BLUE, Color.BLUE, Color.GREEN, Color.GREEN));
-    public static final RegistryObject<ItemReagent> SKYGLOM = ITEMS.register("skyglom", () -> new ItemReagent(Color.RED, Color.RED, Color.YELLOW, Color.YELLOW));
 
     public static final RegistryObject<ItemReagentSeeds> WINDY_LICHEN_SEEDS = ITEMS.register("windy_lichen_seeds", () -> new ItemReagentSeeds(ModBlocks.WINDY_LICHEN_CROP.get()));
     public static final RegistryObject<ItemReagentSeeds> SUNSPECKLE_SEEDS = ITEMS.register("sunspeckle_seeds", () -> new ItemReagentSeeds(ModBlocks.SUNSPECKLE_CROP.get()));

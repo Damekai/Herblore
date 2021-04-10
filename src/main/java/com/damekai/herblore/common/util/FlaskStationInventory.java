@@ -5,7 +5,11 @@ import com.damekai.herblore.common.block.tile.TileFlaskStation;
 import com.damekai.herblore.common.item.ItemReagent;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.thread.EffectiveSide;
+
+import javax.annotation.Nullable;
 
 
 public class FlaskStationInventory extends Inventory
@@ -20,9 +24,9 @@ public class FlaskStationInventory extends Inventory
                     .put(6, new SlotPositionalProperties(null, 8, 5, null))
                     .put(7, new SlotPositionalProperties(5, null, null, 8))
                     .put(8, new SlotPositionalProperties(6, null, 7, null))
-                    .put(9, new SlotPositionalProperties(null, 11, null, 10))
-                    .put(10, new SlotPositionalProperties(null, 12, 9, 11))
-                    .put(11, new SlotPositionalProperties(null, 13, 10, null))
+                    .put(9, new SlotPositionalProperties(null, 12, null, 10))
+                    .put(10, new SlotPositionalProperties(null, 13, 9, 11))
+                    .put(11, new SlotPositionalProperties(null, 14, 10, null))
                     .put(12, new SlotPositionalProperties(9, 15, null, 13))
                     .put(13, new SlotPositionalProperties(10, 16, 12, 14))
                     .put(14, new SlotPositionalProperties(11, 17, 13, null))
@@ -48,28 +52,11 @@ public class FlaskStationInventory extends Inventory
         boolean bottomLeftEmpty = isSlotRangeEmpty(5, 8);
         boolean rightEmpty = isSlotRangeEmpty(9, 17);
 
-        boolean topLeftFilled = isSlotRangeFilledWithReagents(1, 4);
-        boolean bottomLeftFilled = isSlotRangeFilledWithReagents(5, 8);
-        boolean rightFilled = isSlotRangeFilledWithReagents(9, 17);
+        boolean topLeftPuzzleValid = isValidPuzzleForSlotRange(1, 4);
+        boolean bottomLeftPuzzleValid = isValidPuzzleForSlotRange(5, 8);
+        boolean rightPuzzleValid = isValidPuzzleForSlotRange(9, 17);
 
-        // If there is at least one filled section, and if each section is either filled or empty, and if each filled section is valid, return true.
-
-        if (topLeftFilled && !isValidPuzzleForSlotRange(1, 4))
-        {
-            return false;
-        }
-
-        if (bottomLeftFilled && !isValidPuzzleForSlotRange(5, 8))
-        {
-            return false;
-        }
-
-        if (rightFilled && !isValidPuzzleForSlotRange(9, 17))
-        {
-            return false;
-        }
-
-        return (topLeftEmpty || topLeftFilled) && (bottomLeftEmpty || bottomLeftFilled) && (rightEmpty || rightFilled);
+        return (topLeftEmpty || topLeftPuzzleValid) && (bottomLeftEmpty || bottomLeftPuzzleValid) && (rightEmpty || rightPuzzleValid);
     }
 
     private boolean isSlotRangeEmpty(int minSlot, int maxSlot)
@@ -85,59 +72,46 @@ public class FlaskStationInventory extends Inventory
         return true;
     }
 
-    private boolean isSlotRangeFilledWithReagents(int minSlot, int maxSlot)
+    private boolean isValidPuzzleForSlotRange(int minSlot, int maxSlot)
     {
-        for (int i = minSlot; i <= maxSlot; i++)
+        for (int slot = minSlot; slot <= maxSlot; slot++)
         {
-            ItemStack stack = getStackInSlot(i);
-            if (stack == ItemStack.EMPTY || !(stack.getItem() instanceof ItemReagent))
+            ItemReagent reagent = getReagentInSlot(slot);
+            if (reagent == null)
             {
                 return false;
             }
-        }
-        return true;
-    }
-
-    private boolean isValidPuzzleForSlotRange(int minSlot, int maxSlot)
-    {
-        for (int slot = minSlot; slot < maxSlot; slot++)
-        {
-            ItemReagent reagent = (ItemReagent) getStackInSlot(slot).getItem();
 
             SlotPositionalProperties slotPositionalProperties = SLOT_POSITIONAL_PROPERTIES.get(slot);
 
             if (slotPositionalProperties.hasUp())
             {
-                ItemReagent other = (ItemReagent) getStackInSlot(slotPositionalProperties.getUp()).getItem();
-
-                if (reagent.getUpColor() != other.getDownColor())
+                ItemReagent other = getReagentInSlot(slotPositionalProperties.getUp());
+                if (other == null || reagent.getUpColor() != other.getDownColor())
                 {
                     return false;
                 }
             }
             if (slotPositionalProperties.hasDown())
             {
-                ItemReagent other = (ItemReagent) getStackInSlot(slotPositionalProperties.getDown()).getItem();
-
-                if (reagent.getDownColor() != other.getUpColor())
+                ItemReagent other = getReagentInSlot(slotPositionalProperties.getDown());
+                if (other == null || reagent.getDownColor() != other.getUpColor())
                 {
                     return false;
                 }
             }
             if (slotPositionalProperties.hasLeft())
             {
-                ItemReagent other = (ItemReagent) getStackInSlot(slotPositionalProperties.getLeft()).getItem();
-
-                if (reagent.getLeftColor() != other.getRightColor())
+                ItemReagent other = getReagentInSlot(slotPositionalProperties.getLeft());
+                if (other == null || reagent.getLeftColor() != other.getRightColor())
                 {
                     return false;
                 }
             }
             if (slotPositionalProperties.hasRight())
             {
-                ItemReagent other = (ItemReagent) getStackInSlot(slotPositionalProperties.getRight()).getItem();
-
-                if (reagent.getRightColor() != other.getLeftColor())
+                ItemReagent other = getReagentInSlot(slotPositionalProperties.getRight());
+                if (other == null || reagent.getRightColor() != other.getLeftColor())
                 {
                     return false;
                 }
@@ -145,6 +119,17 @@ public class FlaskStationInventory extends Inventory
         }
 
         return true;
+    }
+
+    @Nullable
+    private ItemReagent getReagentInSlot(int slot)
+    {
+        Item item = getStackInSlot(slot).getItem();
+        if (item instanceof ItemReagent)
+        {
+            return (ItemReagent) item;
+        }
+        return null;
     }
 
     public static class SlotPositionalProperties
