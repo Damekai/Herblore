@@ -1,0 +1,10 @@
+{
+  "type": "herblore:flask",
+  "group": "herblore",
+  "reagents": {
+    "herblore:sunspeckle": 1,
+    "herblore:willow_wort": 1,
+    "herblore:vengervine": 2
+  },
+  "result": "herblore:fallarbor"
+}

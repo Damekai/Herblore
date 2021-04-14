@@ -2,8 +2,10 @@
     "type": "herblore:flask",
     "group": "herblore",
     "reagents": {
-        "herblore:stonestem": 2,
-        "herblore:rumbleroot": 2
+        "herblore:slakemoss": 3,
+        "herblore:rumbleroot": 2,
+        "herblore:stonestem": 3,
+        "herblore:slag_rind": 1
     },
     "result": "herblore:dredge"
 }

@@ -1,0 +1,11 @@
+{
+  "type": "herblore:flask",
+  "group": "herblore",
+  "reagents": {
+    "herblore:phantom_frond": 4,
+    "herblore:deserts_thirst": 4,
+    "herblore:sunstriders_sin": 5,
+    "herblore:slakemoss": 4
+  },
+  "result": "herblore:rigor"
+}

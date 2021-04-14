@@ -1,0 +1,11 @@
+{
+  "type": "herblore:flask",
+  "group": "herblore",
+  "reagents": {
+    "herblore:moonspeckle": 5,
+    "herblore:willow_wort": 5,
+    "herblore:phantom_frond": 3,
+    "herblore:skyglom": 4
+  },
+  "result": "herblore:witching_hour"
+}

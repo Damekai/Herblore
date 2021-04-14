@@ -1,0 +1,11 @@
+{
+  "type": "herblore:flask",
+  "group": "herblore",
+  "reagents": {
+    "herblore:willow_wort": 5,
+    "herblore:phantom_frond": 3,
+    "herblore:breezebloom": 1,
+    "herblore:skyglom": 4
+  },
+  "result": "herblore:ambit"
+}

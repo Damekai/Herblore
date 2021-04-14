@@ -75,7 +75,7 @@ public class ModFlasks
             0xF7F80C));
 
     public static final RegistryObject<Flask> RIGOR = FLASKS.register("rigor", () -> new Flask(
-            new HerbloreEffectInstance(ModHerbloreEffects.QUENCH, 0, 600),
+            new HerbloreEffectInstance(ModHerbloreEffects.RIGOR, 0, 600),
             4,
             0xE8420E));
 

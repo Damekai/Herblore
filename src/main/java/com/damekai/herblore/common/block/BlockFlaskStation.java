@@ -1,8 +1,8 @@
 package com.damekai.herblore.common.block;
 
 import com.damekai.herblore.common.block.tile.TileFlaskStation;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ContainerBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.monster.piglin.PiglinTasks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -25,9 +25,9 @@ import java.util.Random;
 
 public class BlockFlaskStation extends ContainerBlock
 {
-    protected BlockFlaskStation(Properties builder)
+    protected BlockFlaskStation()
     {
-        super(builder);
+        super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD).hardnessAndResistance(1.0f).notSolid());
     }
 
     @Nullable
@@ -53,6 +53,13 @@ public class BlockFlaskStation extends ContainerBlock
             }
         }
         return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public BlockRenderType getRenderType(BlockState state)
+    {
+        return BlockRenderType.MODEL;
     }
 
     @Override

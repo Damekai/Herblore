@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "herblore:block/flask_station"
+    }
+  }
+}

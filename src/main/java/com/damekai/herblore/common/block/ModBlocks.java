@@ -17,7 +17,7 @@ public class ModBlocks
 {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Herblore.MOD_ID);
 
-    public static final RegistryObject<BlockFlaskStation> FLASK_STATION = BLOCKS.register("flask_station", () -> new BlockFlaskStation(AbstractBlock.Properties.create(Material.IRON, MaterialColor.IRON).setRequiresTool().hardnessAndResistance(5.0F, 6.0F).sound(SoundType.METAL)));
+    public static final RegistryObject<BlockFlaskStation> FLASK_STATION = BLOCKS.register("flask_station", BlockFlaskStation::new);
 
     public static final RegistryObject<Block> PERENNIAL_PATCH = BLOCKS.register("perennial_patch", BlockPerennialPatch::new);
 
