@@ -76,6 +76,7 @@
     "herbloreeffect.herblore.rigor": "Rigor",
     "herbloreeffect.herblore.fallarbor": "Fallarbor",
     "herbloreeffect.herblore.ambit": "Ambit",
+    "herbloreeffect.herblore.shadowstep": "Shadowstep",
 
     "flask.herblore.debug_alpha": "Debug Alpha",
     "flask.herblore.strider": "Strider",
@@ -92,5 +93,6 @@
     "flask.herblore.fleet": "Fleet",
     "flask.herblore.rigor": "Rigor",
     "flask.herblore.fallarbor": "Fallarbor",
-    "flask.herblore.ambit": "Ambit"
+    "flask.herblore.ambit": "Ambit",
+    "flask.herblore.shadowstep": "Shadowstep"
 }

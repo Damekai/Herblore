@@ -88,4 +88,9 @@ public class ModFlasks
             new HerbloreEffectInstance(ModHerbloreEffects.AMBIT, 0, 1200),
             4,
             0x7A0069));
+
+    public static final RegistryObject<Flask> SHADOWSTEP = FLASKS.register("shadowstep", () -> new Flask(
+            new HerbloreEffectInstance(ModHerbloreEffects.SHADOWSTEP, 0, 200),
+            4,
+            0x7600F5));
 }
