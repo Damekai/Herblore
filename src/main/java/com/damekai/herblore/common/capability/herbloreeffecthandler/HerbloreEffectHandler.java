@@ -1,5 +1,6 @@
 package com.damekai.herblore.common.capability.herbloreeffecthandler;
 
+import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
@@ -40,11 +41,35 @@ public class HerbloreEffectHandler implements IHerbloreEffectHandler
             return;
         }
 
-        // If there is a Herblore Effect Instance with this Flask Effect already, expire it.
+        // If there is a Herblore Effect Instance with this Flask Effect already, attempt to combine it.
         HerbloreEffectInstance existingInstance = getHerbloreEffectInstance(herbloreEffect);
         if (existingInstance != null)
         {
-            removeHerbloreEffectInstance(existingInstance, livingEntity);
+            // Attempt to combine the new effect into the existing effect.
+            if (existingInstance.combineWith(herbloreEffectInstance))
+            {
+                // Successful combination. Update GUI Effect, if there is one.
+                Effect guiEffect = existingInstance.getHerbloreEffect().getGuiEffect();
+                if (guiEffect != null)
+                {
+                    livingEntity.removePotionEffect(guiEffect);
+                    livingEntity.addPotionEffect(new EffectInstance(guiEffect, existingInstance.getDurationRemaining()));
+                }
+
+                // Sync Herblore Effect Handler from server to client, since there was a change.
+                if (livingEntity instanceof ServerPlayerEntity) // Only syncs if the Herblore Effect Handler belongs to a player.
+                {
+                    sendSyncPacketToClient((ServerPlayerEntity) livingEntity);
+                }
+
+                // No need to proceed further with the function.
+                return;
+            }
+            // If the combine attempt fails, remove the existing effect, then proceed to add the new one.
+            else
+            {
+                removeHerbloreEffectInstance(existingInstance, livingEntity);
+            }
         }
 
         // Add Herblore Effect Instance to list of active Instances.
@@ -67,7 +92,7 @@ public class HerbloreEffectHandler implements IHerbloreEffectHandler
         Effect guiEffect = herbloreEffect.getGuiEffect();
         if (guiEffect != null)
         {
-            livingEntity.addPotionEffect(new EffectInstance(guiEffect, herbloreEffectInstance.getDurationFull()));
+            livingEntity.addPotionEffect(new EffectInstance(guiEffect, herbloreEffectInstance.getDurationRemaining()));
         }
 
         // Sync Herblore Effect Handler from server to client, since there was a change.

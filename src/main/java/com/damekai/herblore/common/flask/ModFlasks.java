@@ -35,7 +35,7 @@ public class ModFlasks
             0x27055E));
 
     public static final RegistryObject<Flask> DREDGE = FLASKS.register("dredge", () -> new Flask(
-            new HerbloreEffectInstance(ModHerbloreEffects.DREDGE, 0, 2400),
+            new HerbloreEffectInstance(ModHerbloreEffects.DREDGE, 0, 9600),
             4,
             0x6B4A46));
 

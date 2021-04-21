@@ -34,13 +34,19 @@ public abstract class HerbloreEffect extends ForgeRegistryEntry<HerbloreEffect>
         return guiEffect != null ? guiEffect.get() : null;
     }
 
-    public HerbloreEffectInstance combineInstances(HerbloreEffectInstance first, HerbloreEffectInstance second)
+    @Nullable
+    public boolean combineInstances(HerbloreEffectInstance left, HerbloreEffectInstance right)
     {
-        if (first.getHerbloreEffect() != second.getHerbloreEffect())
+        if (left.getHerbloreEffect() != right.getHerbloreEffect())
         {
-            return first;
+            return false;
         }
-        return new HerbloreEffectInstance(() -> this, Math.min(first.getAmplifier(), second.getAmplifier()), first.getDurationRemaining() + second.getDurationRemaining());
+
+        left.setAmplifier(Math.min(left.getAmplifier(), right.getAmplifier()));
+        left.setDurationFull(left.getDurationFull() + right.getDurationFull());
+        left.setDurationRemaining(left.getDurationRemaining() + right.getDurationRemaining());
+
+        return true;
     }
 
     /**

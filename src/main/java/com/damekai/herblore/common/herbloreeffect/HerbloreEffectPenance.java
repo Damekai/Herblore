@@ -3,16 +3,18 @@ package com.damekai.herblore.common.herbloreeffect;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.DamageSource;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
-public class HerbloreEffectPenance extends HerbloreEffect implements HerbloreEffect.IApplicable, HerbloreEffect.ITickable, HerbloreEffect.IExpirable
+public class HerbloreEffectPenance extends HerbloreEffect implements HerbloreEffect.ITickable, HerbloreEffect.IExpirable
 {
-    private static final float HEALTH_RESTORE_AMOUNT = 10f;
-    private static final int DAMAGE_OCCURENCES = 5;
-
+    private static final int HEALTH_REGEN_FREQUENCY = 20;
+    private static final float HEALTH_REGEN_AMOUNT = 1f;
+    private static final float HEALTH_PENALTY_PER_HEALTH_REGENERATED = 0.5f;
 
     public HerbloreEffectPenance(Supplier<Effect> guiEffect)
     {
@@ -20,40 +22,45 @@ public class HerbloreEffectPenance extends HerbloreEffect implements HerbloreEff
     }
 
     @Override
-    public void onApply(HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
-    {
-        float prehealHealth = livingEntity.getHealth();
-        livingEntity.heal(HEALTH_RESTORE_AMOUNT);
-        float amountHealed = Math.max(0, livingEntity.getHealth() - prehealHealth); // Prevent case of "negative healing", just in case.
-
-        float penalty = amountHealed / 2f;
-        herbloreEffectInstance.getOrCreateTag().putFloat("penance_penalty_total", penalty);
-        herbloreEffectInstance.getOrCreateTag().putFloat("penance_penalty_remaining", penalty);
-    }
-
-    @Override
     public void onTick(HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
-        if (herbloreEffectInstance.getDurationRemaining() == herbloreEffectInstance.getDurationFull() || herbloreEffectInstance.getDurationRemaining() % (herbloreEffectInstance.getDurationFull() / DAMAGE_OCCURENCES) != 0) // Divide the damage over five damage instances.
+        if (herbloreEffectInstance.getDurationRemaining() % HEALTH_REGEN_FREQUENCY != 0)
         {
             return;
         }
 
-        float penalty = herbloreEffectInstance.getOrCreateTag().getFloat("penance_penalty_total");
-        float damage = penalty * (float) (herbloreEffectInstance.getDurationFull() / DAMAGE_OCCURENCES) / (float) herbloreEffectInstance.getDurationFull();
-        float penaltyRemaining = herbloreEffectInstance.getOrCreateTag().getFloat("penance_penalty_remaining");
-        herbloreEffectInstance.getOrCreateTag().putFloat("penance_penalty_remaining", penaltyRemaining - damage);
+        float prehealHealth = livingEntity.getHealth();
+        livingEntity.heal(HEALTH_REGEN_AMOUNT);
+        float amountHealed = Math.max(0, livingEntity.getHealth() - prehealHealth); // Prevent case of "negative healing", just in case.
 
-        livingEntity.attackEntityFrom(DamageSource.MAGIC, damage);
+        CompoundNBT tag = herbloreEffectInstance.getOrCreateTag();
+        tag.putFloat("penance_penalty", tag.getFloat("penance_penalty") + amountHealed * HEALTH_PENALTY_PER_HEALTH_REGENERATED);
     }
 
     @Override
     public void onExpire(HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
-        float damageRemaining = herbloreEffectInstance.getOrCreateTag().getFloat("penance_penalty_remaining");
-        if (damageRemaining > 0f)
+        float penalty = herbloreEffectInstance.getOrCreateTag().getFloat("penance_penalty");
+        if (penalty > 0f)
         {
-            livingEntity.attackEntityFrom(DamageSource.MAGIC, damageRemaining);
+            livingEntity.attackEntityFrom(DamageSource.MAGIC, penalty);
         }
+    }
+
+    @Nullable
+    @Override
+    public boolean combineInstances(HerbloreEffectInstance left, HerbloreEffectInstance right)
+    {
+        if (!super.combineInstances(left, right))
+        {
+            return false;
+        }
+
+        CompoundNBT leftTag = left.getOrCreateTag();
+        CompoundNBT rightTag = right.getOrCreateTag();
+
+        left.getOrCreateTag().putFloat("penance_penalty", leftTag.getFloat("penance_penalty") + rightTag.getFloat("penance_penalty"));
+
+        return true;
     }
 }

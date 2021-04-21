@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 public class HerbloreEffectInstance
 {
     private final Supplier<HerbloreEffect> herbloreEffect;
-    private final int amplifier;
+    private int amplifier;
     private int durationFull;
     private int durationRemaining;
     private CompoundNBT tag;
@@ -63,6 +63,11 @@ public class HerbloreEffectInstance
         return herbloreEffect.get();
     }
 
+    public void setAmplifier(int amplifier)
+    {
+        this.amplifier = amplifier;
+    }
+
     public int getAmplifier()
     {
         return amplifier;
@@ -75,6 +80,16 @@ public class HerbloreEffectInstance
     {
         durationFull = duration;
         durationRemaining = duration;
+    }
+
+    public void setDurationFull(int durationFull)
+    {
+        this.durationFull = durationFull;
+    }
+
+    public void setDurationRemaining(int durationRemaining)
+    {
+        this.durationRemaining = durationRemaining;
     }
 
     public int getDurationFull()
@@ -109,6 +124,11 @@ public class HerbloreEffectInstance
     public HerbloreEffectInstance copy()
     {
         return new HerbloreEffectInstance(herbloreEffect, amplifier, durationFull, durationRemaining, tag != null ? tag.copy() : null);
+    }
+
+    public boolean combineWith(HerbloreEffectInstance other)
+    {
+        return herbloreEffect.get().combineInstances(this, other);
     }
 
     public CompoundNBT write(CompoundNBT nbt)
