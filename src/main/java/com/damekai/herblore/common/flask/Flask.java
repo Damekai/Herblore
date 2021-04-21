@@ -9,13 +9,11 @@ public class Flask extends ForgeRegistryEntry<Flask>
 {
     private String translationKey = null;
     private final HerbloreEffectInstance herbloreEffectInstance;
-    private final int baseDoses;
     private final int color;
 
-    public Flask(HerbloreEffectInstance herbloreEffectInstance, int baseDoses, int color)
+    public Flask(HerbloreEffectInstance herbloreEffectInstance, int color)
     {
         this.herbloreEffectInstance = herbloreEffectInstance;
-        this.baseDoses = baseDoses;
         this.color = color;
     }
 
@@ -31,11 +29,6 @@ public class Flask extends ForgeRegistryEntry<Flask>
     public HerbloreEffectInstance getHerbloreEffectInstance()
     {
         return herbloreEffectInstance.copy();
-    }
-
-    public int getBaseDoses()
-    {
-        return baseDoses;
     }
 
     public int getColor()
