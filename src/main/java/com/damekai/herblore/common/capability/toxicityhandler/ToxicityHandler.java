@@ -1,6 +1,7 @@
 package com.damekai.herblore.common.capability.toxicityhandler;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.effect.ModEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,21 +16,19 @@ import javax.annotation.Nullable;
 
 public class ToxicityHandler implements IToxicityHandler
 {
-    private static final int MAX_TOXICITY = 25;
+    private static final int MAX_TOXICITY = 12000;
     private static final int MAX_TOXICITY_TIER = 5;
-    private static final int TOXICITY_DECAY_RATE = 100; // Number of ticks required for toxicity to decrease by 1.
-    private static final int CRITICAL_THRESHOLD = 20;
-    private static final float HUNGER_EXHAUSTION_PER_TOXICITY = 0.01f; // In testing, a value of 0.01f requires eating a steak every ~8 sec (accounting for saturation) to maintain a full hunger bar.
+    private static final float HUNGER_EXHAUSTION_PER_TOXICITY_TIER = 0.5f;
 
     private int toxicity;
     private int toxicityTier;
-    private int ticksSinceLastDecay;
+    private int ticksSinceLastUpdate;
 
     public ToxicityHandler()
     {
         toxicity = 0;
         toxicityTier = 0;
-        ticksSinceLastDecay = 0;
+        ticksSinceLastUpdate = 0;
     }
 
     @Override
@@ -63,7 +62,6 @@ public class ToxicityHandler implements IToxicityHandler
     public void clearToxicity(LivingEntity livingEntity)
     {
         toxicity = 0;
-        ticksSinceLastDecay = 0;
         onToxicityChange(livingEntity);
     }
 
@@ -72,7 +70,7 @@ public class ToxicityHandler implements IToxicityHandler
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("toxicity", toxicity);
         nbt.putInt("toxicity_tier", toxicityTier);
-        nbt.putInt("ticks_since_last_decay", ticksSinceLastDecay);
+        nbt.putInt("ticks_since_last_update", ticksSinceLastUpdate);
         return nbt;
     }
 
@@ -80,7 +78,7 @@ public class ToxicityHandler implements IToxicityHandler
     {
         toxicity = nbt.getInt("toxicity");
         toxicityTier = nbt.getInt("toxicity_tier");
-        ticksSinceLastDecay = nbt.getInt("ticks_since_last_decay");
+        ticksSinceLastUpdate = nbt.getInt("ticks_since_last_update");
     }
 
     /**
@@ -88,7 +86,7 @@ public class ToxicityHandler implements IToxicityHandler
      */
     private boolean updateToxicityTier()
     {
-        int updatedToxicityTier = toxicity == 0 ? 0 : Math.min(toxicity / (CRITICAL_THRESHOLD / 4) + 1, MAX_TOXICITY_TIER);
+        int updatedToxicityTier = Math.min(MAX_TOXICITY_TIER, /* int cast floors value. */ (int) (((float) toxicity / (float) MAX_TOXICITY) * (float) MAX_TOXICITY_TIER));
         if (toxicityTier != updatedToxicityTier)
         {
             toxicityTier = updatedToxicityTier;
@@ -99,7 +97,7 @@ public class ToxicityHandler implements IToxicityHandler
 
     private void onToxicityChange(LivingEntity livingEntity)
     {
-        Herblore.LOGGER.debug("Updating toxicity to be " + toxicity);
+        //Herblore.LOGGER.debug("Updating toxicity to be " + toxicity);
 
         if (updateToxicityTier())
         {
@@ -117,31 +115,29 @@ public class ToxicityHandler implements IToxicityHandler
 
     private void tickToxicity(LivingEntity livingEntity)
     {
+        if (ticksSinceLastUpdate != 20)
+        {
+            ticksSinceLastUpdate++;
+            return;
+        }
+        else
+        {
+            ticksSinceLastUpdate = 0;
+        }
+
         if (livingEntity instanceof PlayerEntity)
         {
             PlayerEntity playerEntity = (PlayerEntity) livingEntity;
-            playerEntity.addExhaustion(toxicity * HUNGER_EXHAUSTION_PER_TOXICITY);
-        }
-        if (toxicity >= CRITICAL_THRESHOLD && livingEntity.getHealth() > 1f)
-        {
-            livingEntity.attackEntityFrom(DamageSource.MAGIC, 1f);
-        }
-        tickToxicityDecay(livingEntity);
-    }
-
-    private void tickToxicityDecay(LivingEntity livingEntity)
-    {
-        if (toxicity > 0)
-        {
-            if (ticksSinceLastDecay == TOXICITY_DECAY_RATE)
+            HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(playerEntity);
+            if (herbloreEffectHandler != null)
             {
-                removeToxicity(livingEntity, 1);
-                ticksSinceLastDecay = 0;
+                setToxicity(playerEntity, herbloreEffectHandler.getTotaledDurations());
             }
-            else
-            {
-                ticksSinceLastDecay++;
-            }
+            playerEntity.addExhaustion(toxicityTier * HUNGER_EXHAUSTION_PER_TOXICITY_TIER);
+        }
+        if (toxicityTier == MAX_TOXICITY_TIER && livingEntity.getHealth() > 1f)
+        {
+            livingEntity.attackEntityFrom(DamageSource.MAGIC, 2f);
         }
     }
 
