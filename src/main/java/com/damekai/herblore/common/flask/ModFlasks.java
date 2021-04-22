@@ -61,4 +61,7 @@ public class ModFlasks
 
     public static final RegistryObject<Flask> SHADOWSTEP = FLASKS.register("shadowstep", () -> new Flask(
             new HerbloreEffectInstance(ModHerbloreEffects.SHADOWSTEP, 0, 200), 0x7600F5));
+
+    public static final RegistryObject<Flask> GLACIAL = FLASKS.register("glacial", () -> new Flask(
+            new HerbloreEffectInstance(ModHerbloreEffects.GLACIAL, 0, 9600), 0xD5FDEC));
 }

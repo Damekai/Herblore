@@ -32,4 +32,5 @@ public class ModHerbloreEffects
     public static final RegistryObject<HerbloreEffect> FALLARBOR = HERBLORE_EFFECTS.register("fallarbor", () -> new HerbloreEffectFallarbor(ModEffects.FALLARBOR_RENDER));
     public static final RegistryObject<HerbloreEffect> AMBIT = HERBLORE_EFFECTS.register("ambit", () -> new HerbloreEffectAmbit(ModEffects.AMBIT_RENDER, UUID.fromString("d5c45518-e921-4193-a5c2-dd1274524b47")));
     public static final RegistryObject<HerbloreEffect> SHADOWSTEP = HERBLORE_EFFECTS.register("shadowstep", () -> new HerbloreEffectShadowstep(ModEffects.DEBUG_ALPHA_RENDER));
+    public static final RegistryObject<HerbloreEffect> GLACIAL = HERBLORE_EFFECTS.register("glacial", () -> new HerbloreEffectGlacial(ModEffects.DEBUG_ALPHA_RENDER));
 }
