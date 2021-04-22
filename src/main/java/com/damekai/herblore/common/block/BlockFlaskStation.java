@@ -47,9 +47,10 @@ public class BlockFlaskStation extends ContainerBlock
             if (tile instanceof TileFlaskStation)
             {
                 NetworkHooks.openGui((ServerPlayerEntity) playerEntity, (TileFlaskStation) tile, tile.getPos());
-            } else
+            }
+            else
             {
-                throw new IllegalStateException("Our named container provider is missing!");
+                throw new IllegalStateException("Missing named container provider.");
             }
         }
         return ActionResultType.SUCCESS;

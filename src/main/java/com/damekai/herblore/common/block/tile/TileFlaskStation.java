@@ -73,7 +73,7 @@ public class TileFlaskStation extends TileEntity implements ITickableTileEntity,
     @Override
     public ITextComponent getDisplayName()
     {
-        return new TranslationTextComponent("tile_flask_station");
+        return getBlockState().getBlock().getTranslatedName();
     }
 
     @Nullable

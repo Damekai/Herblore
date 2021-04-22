@@ -57,6 +57,7 @@
     "block.herblore.skyglom_crop": "Skyglom Crop",
 
     "block.herblore.perennial_patch": "Perennial Patch",
+    "block.herblore.flask_station": "Flask Station",
 
     "effect.herblore.toxicity": "Toxicity",
 
@@ -77,6 +78,7 @@
     "herbloreeffect.herblore.fallarbor": "Fallarbor",
     "herbloreeffect.herblore.ambit": "Ambit",
     "herbloreeffect.herblore.shadowstep": "Shadowstep",
+    "herbloreeffect.herblore.glacial": "Glacial",
 
     "flask.herblore.debug_alpha": "Debug Alpha",
     "flask.herblore.strider": "Strider",
@@ -94,5 +96,6 @@
     "flask.herblore.rigor": "Rigor",
     "flask.herblore.fallarbor": "Fallarbor",
     "flask.herblore.ambit": "Ambit",
-    "flask.herblore.shadowstep": "Shadowstep"
+    "flask.herblore.shadowstep": "Shadowstep",
+    "flask.herblore.glacial": "Glacial"
 }
