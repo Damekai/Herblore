@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "herblore",
+  "pattern": [
+    "AAA",
+    "BBB",
+    "B B"
+  ],
+  "key": {
+    "A": {
+      "item": "herblore:empty_flask"
+    },
+    "B": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "herblore:flask_station"
+  }
+}

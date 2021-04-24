@@ -142,5 +142,16 @@ public class ModRecipeProvider extends RecipeProvider
                 .addCriterion("has_planks", hasItem(ItemTags.PLANKS))
                 .addCriterion("has_glass", hasItem(Tags.Items.GLASS))
                 .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "empty_flask"));
+
+        ShapedRecipeBuilder.shapedRecipe(ModItems.FLASK_STATION::get)
+                .key('A', ModItems.EMPTY_FLASK::get)
+                .key('B', Ingredient.fromTag(ItemTags.PLANKS))
+                .patternLine("AAA")
+                .patternLine("BBB")
+                .patternLine("B B")
+                .setGroup("herblore")
+                .addCriterion("has_empty_flask", hasItem(ModItems.EMPTY_FLASK::get))
+                .addCriterion("has_planks", hasItem(ItemTags.PLANKS))
+                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "flask_station"));
     }
 }

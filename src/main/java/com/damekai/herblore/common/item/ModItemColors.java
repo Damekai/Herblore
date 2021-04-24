@@ -16,7 +16,6 @@ public class ModItemColors
             ItemColors itemColors = Minecraft.getInstance().getItemColors();
 
             itemColors.register((stack, color) -> color > 0 ? -1 : FlaskHelper.getFlaskColor(stack), ModItems.FLASK.get());
-            itemColors.register((stack, color) -> color > 0 ? -1 : FlaskHelper.getFlaskColor(stack), ModItems.CRUDE_FLASK.get());
         });
     }
 }
