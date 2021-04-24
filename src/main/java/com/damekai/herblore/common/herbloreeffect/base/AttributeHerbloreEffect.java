@@ -66,7 +66,7 @@ public abstract class AttributeHerbloreEffect extends HerbloreEffect implements 
                         attributePotencyFactor.operation);
                 modifiableAttributeInstance.applyPersistentModifier(attributeModifier);
 
-                Herblore.LOGGER.debug("Applied modifier: " + attributeModifier.toString());
+                //Herblore.LOGGER.debug("Applied modifier: " + attributeModifier.toString());
             }
         });
     }
@@ -80,7 +80,7 @@ public abstract class AttributeHerbloreEffect extends HerbloreEffect implements 
             if (modifiableAttributeInstance != null)
             {
                 modifiableAttributeInstance.removeModifier(uuid);
-                Herblore.LOGGER.debug("Removed modifier: uuid=" + uuid.toString());
+                //Herblore.LOGGER.debug("Removed modifier: uuid=" + uuid.toString());
             }
         });
     }

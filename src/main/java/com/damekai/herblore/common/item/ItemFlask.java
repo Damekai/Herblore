@@ -99,8 +99,6 @@ public class ItemFlask extends Item implements IContinuousDrinkItem
         int drinkTime = stack.getOrCreateTag().getInt("drink_time");
         stack.getOrCreateTag().putInt("drink_time", 0);
 
-        Herblore.LOGGER.debug(drinkTime);
-
         if (!world.isRemote)
         {
             HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(livingEntity);
