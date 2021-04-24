@@ -30,10 +30,6 @@ public class ModEffects
 
     public static final RegistryObject<Effect> HAPTIC_RENDER = EFFECTS.register("haptic", () -> new GuiFlaskEffect(ModHerbloreEffects.HAPTIC));
 
-    public static final RegistryObject<Effect> VERDURE_RENDER = EFFECTS.register("verdure", () -> new GuiFlaskEffect(ModHerbloreEffects.VERDURE));
-
-    public static final RegistryObject<Effect> RUBBLE_RENDER = EFFECTS.register("rubble", () -> new GuiFlaskEffect(ModHerbloreEffects.RUBBLE));
-
     public static final RegistryObject<Effect> NOMAD_RENDER = EFFECTS.register("nomad", () -> new GuiFlaskEffect(ModHerbloreEffects.NOMAD));
 
     public static final RegistryObject<Effect> FLEET_RENDER = EFFECTS.register("fleet", () -> new GuiFlaskEffect(ModHerbloreEffects.FLEET));
@@ -43,11 +39,4 @@ public class ModEffects
     public static final RegistryObject<Effect> FALLARBOR_RENDER = EFFECTS.register("fallarbor", () -> new GuiFlaskEffect(ModHerbloreEffects.FALLARBOR));
 
     public static final RegistryObject<Effect> AMBIT_RENDER = EFFECTS.register("ambit", () -> new GuiFlaskEffect(ModHerbloreEffects.AMBIT));
-
-    public static Effect getEffectFromRegistry(String name)
-    {
-        RegistryObject<Effect> match = EFFECTS.getEntries().stream().filter((effectSupplier) -> effectSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
-        return match != null ? match.get() : null;
-    }
-
 }
