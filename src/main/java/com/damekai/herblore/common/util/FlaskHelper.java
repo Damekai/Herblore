@@ -9,6 +9,7 @@ import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.item.ItemFlask;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StringUtils;
 import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -76,16 +77,14 @@ public class FlaskHelper
     @OnlyIn(Dist.CLIENT)
     public static void addFlaskTooltip(ItemStack stack, List<ITextComponent> lores)
     {
-        if (stack.getOrCreateTag().contains("flask_sips"))
-        {
-            int amountRemaining = stack.getOrCreateTag().getInt("flask_sips");
-            lores.add(new TranslationTextComponent("text.herblore.amount_remaining")
-                    .append(new StringTextComponent(": " + Math.round(100f * (float) amountRemaining / (float) ItemFlask.INITIAL_FLASK_SIPS) + "%")).mergeStyle(TextFormatting.BLUE));
-        }
-
         Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(stack.getOrCreateTag().getString("flask")));
+        int amountRemaining = stack.getOrCreateTag().getInt("flask_sips");
+
         if (flask != null)
         {
+            lores.add(new TranslationTextComponent("text.herblore.duration_remaining")
+                    .append(new StringTextComponent(": " + StringUtils.ticksToElapsedTime(Math.round(flask.getHerbloreEffectInstance().getDurationFull() * (float) amountRemaining / ((ItemFlask) stack.getItem()).getInitialSips())))).mergeStyle(TextFormatting.BLUE));
+
             HerbloreEffectInstance herbloreEffectInstance = flask.getHerbloreEffectInstance();
             HerbloreEffect herbloreEffect = herbloreEffectInstance.getHerbloreEffect();
 

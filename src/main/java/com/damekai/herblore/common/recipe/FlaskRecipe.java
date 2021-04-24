@@ -102,7 +102,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
     {
         ItemStack flask = new ItemStack(ModItems.FLASK::get);
         flask.getOrCreateTag().putString("flask", ModRegistries.FLASKS.getKey(result.get()).toString());
-        flask.getOrCreateTag().putInt("flask_sips", ItemFlask.INITIAL_FLASK_SIPS);
+        flask.getOrCreateTag().putInt("flask_sips", ((ItemFlask) flask.getItem()).getInitialSips());
         return flask;
     }
 
@@ -117,7 +117,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
     {
         ItemStack flask = new ItemStack(ModItems.FLASK::get);
         flask.getOrCreateTag().putString("flask", ModRegistries.FLASKS.getKey(result.get()).toString());
-        flask.getOrCreateTag().putInt("flask_sips", ItemFlask.INITIAL_FLASK_SIPS);
+        flask.getOrCreateTag().putInt("flask_sips", ((ItemFlask) flask.getItem()).getInitialSips());
         return flask;
     }
 
