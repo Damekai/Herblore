@@ -39,4 +39,8 @@ public class ModEffects
     public static final RegistryObject<Effect> FALLARBOR_RENDER = EFFECTS.register("fallarbor", () -> new GuiFlaskEffect(ModHerbloreEffects.FALLARBOR));
 
     public static final RegistryObject<Effect> AMBIT_RENDER = EFFECTS.register("ambit", () -> new GuiFlaskEffect(ModHerbloreEffects.AMBIT));
+
+    public static final RegistryObject<Effect> SHADOWSTEP_RENDER = EFFECTS.register("shadowstep", () -> new GuiFlaskEffect(ModHerbloreEffects.SHADOWSTEP));
+
+    public static final RegistryObject<Effect> GLACIAL_RENDER = EFFECTS.register("glacial", () -> new GuiFlaskEffect(ModHerbloreEffects.GLACIAL));
 }
