@@ -10,8 +10,8 @@ import java.util.function.Supplier;
 public class HerbloreEffectRigor extends HerbloreEffect implements HerbloreEffect.IApplicable, HerbloreEffect.ITickable, HerbloreEffect.IExpirable
 {
     private static final float ABSORPTION_AMOUNT = 6f;
-    private static final float HEALTH_COST_PER_ABSORPTION = 0.25f;
-    private static final int FREQUENCY = 200; // Every 10 seconds.
+    private static final float HEALTH_COST_PER_ABSORPTION = 0.5f;
+    private static final int FREQUENCY = 100; // Every 5 seconds.
 
     public HerbloreEffectRigor(Supplier<Effect> guiEffect)
     {
