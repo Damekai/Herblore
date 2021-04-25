@@ -73,7 +73,7 @@ public class TileFlaskStation extends TileEntity implements ITickableTileEntity,
     @Override
     public ITextComponent getDisplayName()
     {
-        return getBlockState().getBlock().getTranslatedName();
+        return new TranslationTextComponent("block.herblore.flask_station");
     }
 
     @Nullable
