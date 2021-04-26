@@ -30,7 +30,7 @@ public class HerbloreEffectPowerHour extends AttributeHerbloreEffect
         if (attributeFlaskEffect instanceof HerbloreEffectPowerHour)
         {
             HerbloreEffectPowerHour powerhour = (HerbloreEffectPowerHour) attributeFlaskEffect;
-            long currentTime = livingEntity.getEntityWorld().getDayTime();
+            long currentTime = livingEntity.level.getDayTime();
 
             long distanceFromPrimeTime; // Circular nature of time, linear nature of Minecraft time. Both need to be accounted for.
 

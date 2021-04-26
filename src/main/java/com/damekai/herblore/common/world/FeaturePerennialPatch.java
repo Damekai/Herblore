@@ -29,7 +29,7 @@ public class FeaturePerennialPatch extends Feature<NoFeatureConfig>
     }
 
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos pos, NoFeatureConfig config)
+    public boolean place(ISeedReader world, ChunkGenerator chunkGenerator, Random rand, BlockPos pos, NoFeatureConfig config)
     {
         int i = 0;
 
@@ -39,9 +39,9 @@ public class FeaturePerennialPatch extends Feature<NoFeatureConfig>
                     pos.getX() + rand.nextInt(8) - rand.nextInt(8),
                     pos.getY() + rand.nextInt(4) - rand.nextInt(4),
                     pos.getZ() + rand.nextInt(8) - rand.nextInt(8));
-            if (world.getBlockState(position).canBeReplacedByLeaves(world, position) && world.getBlockState(position.offset(Direction.DOWN, 1)).getBlock() == Blocks.GRASS_BLOCK)
+            if (world.getBlockState(position).canBeReplacedByLeaves(world, position) && world.getBlockState(position.below()).getBlock() == Blocks.GRASS_BLOCK)
             {
-                world.setBlockState(position, perennialPatchBlock.get().getDefaultState(), 2);
+                world.setBlock(position, perennialPatchBlock.get().defaultBlockState(), 2);
                 ++i;
             }
         }

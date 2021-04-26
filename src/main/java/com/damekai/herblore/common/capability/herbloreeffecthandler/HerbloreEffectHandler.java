@@ -53,8 +53,8 @@ public class HerbloreEffectHandler implements IHerbloreEffectHandler
                 Effect guiEffect = existingInstance.getHerbloreEffect().getGuiEffect();
                 if (guiEffect != null)
                 {
-                    livingEntity.removePotionEffect(guiEffect);
-                    livingEntity.addPotionEffect(new EffectInstance(guiEffect, existingInstance.getDurationRemaining()));
+                    livingEntity.removeEffect(guiEffect);
+                    livingEntity.addEffect(new EffectInstance(guiEffect, existingInstance.getDurationRemaining()));
                 }
 
                 // Sync Herblore Effect Handler from server to client, since there was a change.
@@ -93,7 +93,7 @@ public class HerbloreEffectHandler implements IHerbloreEffectHandler
         Effect guiEffect = herbloreEffect.getGuiEffect();
         if (guiEffect != null)
         {
-            livingEntity.addPotionEffect(new EffectInstance(guiEffect, herbloreEffectInstance.getDurationRemaining()));
+            livingEntity.addEffect(new EffectInstance(guiEffect, herbloreEffectInstance.getDurationRemaining()));
         }
 
         // Sync Herblore Effect Handler from server to client, since there was a change.
@@ -142,7 +142,7 @@ public class HerbloreEffectHandler implements IHerbloreEffectHandler
                 Effect guiEffect = herbloreEffect.getGuiEffect();
                 if (guiEffect != null)
                 {
-                    livingEntity.removePotionEffect(guiEffect);
+                    livingEntity.removeEffect(guiEffect);
                 }
                 changed = true;
             }
@@ -173,7 +173,7 @@ public class HerbloreEffectHandler implements IHerbloreEffectHandler
             Effect guiEffect = herbloreEffect.getGuiEffect();
             if (guiEffect != null)
             {
-                livingEntity.removePotionEffect(guiEffect);
+                livingEntity.removeEffect(guiEffect);
             }
 
             // Sync Herblore Effect Handler from server to client, since there was a change.
@@ -201,7 +201,7 @@ public class HerbloreEffectHandler implements IHerbloreEffectHandler
                     Effect guiEffect = herbloreEffect.getGuiEffect();
                     if (guiEffect != null)
                     {
-                        livingEntity.removePotionEffect(guiEffect);
+                        livingEntity.removeEffect(guiEffect);
                     }
                 }
         );
@@ -271,7 +271,7 @@ public class HerbloreEffectHandler implements IHerbloreEffectHandler
         LivingEntity livingEntity = event.getEntityLiving();
 
         // Only tick on server side.
-        if (!livingEntity.getEntityWorld().isRemote)
+        if (!livingEntity.level.isClientSide)
         {
             HerbloreEffectHandler flaskHandler = getHerbloreEffectHandlerOf(livingEntity);
             if (flaskHandler != null)

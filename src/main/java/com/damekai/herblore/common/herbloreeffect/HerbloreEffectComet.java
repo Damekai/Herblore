@@ -3,6 +3,7 @@ package com.damekai.herblore.common.herbloreeffect;
 import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffectInstance;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.potion.Effect;
@@ -35,7 +36,7 @@ public class HerbloreEffectComet extends HerbloreEffect
 
         LivingEntity livingEntity = event.getEntityLiving();
 
-        if (event.getSource().damageType.equals(DamageSource.FALL.damageType))
+        if (event.getSource().msgId.equals(DamageSource.FALL.msgId))
         {
             HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(livingEntity);
 
@@ -52,17 +53,17 @@ public class HerbloreEffectComet extends HerbloreEffect
                     event.setAmount(initialAmount - damagePrevented);
 
                     // Cause damage to all entities in radius.
-                    World world = livingEntity.getEntityWorld();
+                    World world = livingEntity.level;
 
-                    List<MobEntity> mobsInRange = world.getEntitiesWithinAABB(MobEntity.class, new AxisAlignedBB(
-                            livingEntity.getPosX() - DAMAGE_RADIUS,
-                            livingEntity.getPosY() - 1,
-                            livingEntity.getPosZ() - DAMAGE_RADIUS,
-                            livingEntity.getPosX() + DAMAGE_RADIUS,
-                            livingEntity.getPosY() + 1,
-                            livingEntity.getPosZ() + DAMAGE_RADIUS));
+                    List<MobEntity> mobsInRange = world.getEntitiesOfClass(MobEntity.class, new AxisAlignedBB(
+                            livingEntity.getX() - DAMAGE_RADIUS,
+                            livingEntity.getY() - 1,
+                            livingEntity.getZ() - DAMAGE_RADIUS,
+                            livingEntity.getX() + DAMAGE_RADIUS,
+                            livingEntity.getY() + 1,
+                            livingEntity.getZ() + DAMAGE_RADIUS));
 
-                    mobsInRange.forEach((mob) -> mob.attackEntityFrom(DamageSource.causeMobDamage(livingEntity), damagePrevented));
+                    mobsInRange.forEach((mob) -> mob.hurt(DamageSource.mobAttack(livingEntity), damagePrevented));
 
                     if (event.getAmount() <= 0f)
                     {

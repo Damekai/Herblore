@@ -21,7 +21,7 @@ public class Flask extends ForgeRegistryEntry<Flask>
     {
         if (translationKey == null)
         {
-            translationKey = Util.makeTranslationKey("flask", ModRegistries.FLASKS.getKey(this));
+            translationKey = Util.makeDescriptionId("flask", ModRegistries.FLASKS.getKey(this));
         }
         return translationKey;
     }

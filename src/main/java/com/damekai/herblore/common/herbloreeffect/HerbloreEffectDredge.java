@@ -30,7 +30,7 @@ public class HerbloreEffectDredge extends HerbloreEffect
             HerbloreEffectInstance dredge = herbloreEffectHandler.getHerbloreEffectInstance(ModHerbloreEffects.DREDGE.get());
             if (dredge != null)
             {
-                float breakSpeedMultiplier = 1f + MAX_BREAK_SPEED_MULTIPLIER_BONUS * (1f - (float) Math.min(playerEntity.getPosY(), SEA_LEVEL) / SEA_LEVEL);
+                float breakSpeedMultiplier = 1f + MAX_BREAK_SPEED_MULTIPLIER_BONUS * (1f - (float) Math.min(playerEntity.getY(), SEA_LEVEL) / SEA_LEVEL);
                 
                 event.setNewSpeed(event.getOriginalSpeed() * breakSpeedMultiplier);
             }

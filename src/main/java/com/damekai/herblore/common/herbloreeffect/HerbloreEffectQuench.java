@@ -28,7 +28,7 @@ public class HerbloreEffectQuench extends HerbloreEffect
             return;
         }
 
-        if (event.getSource().isFireDamage())
+        if (event.getSource().isFire())
         {
             LivingEntity livingEntity = event.getEntityLiving();
 
@@ -36,7 +36,7 @@ public class HerbloreEffectQuench extends HerbloreEffect
             {
                 PlayerEntity playerEntity = (PlayerEntity) livingEntity;
 
-                if (playerEntity.getFoodStats().getFoodLevel() > 0) // No need to continue if the player has no hunger remaining, since the effect should not do anything in this case.
+                if (playerEntity.getFoodData().getFoodLevel() > 0) // No need to continue if the player has no hunger remaining, since the effect should not do anything in this case.
                 {
                     HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(playerEntity);
                     if (herbloreEffectHandler != null)
@@ -44,7 +44,7 @@ public class HerbloreEffectQuench extends HerbloreEffect
                         HerbloreEffectInstance quench = herbloreEffectHandler.getHerbloreEffectInstance(ModHerbloreEffects.QUENCH.get());
                         if (quench != null)
                         {
-                            playerEntity.addExhaustion(event.getAmount() * (EXHAUSTION_PENALTY_PER_DAMAGE));
+                            playerEntity.causeFoodExhaustion(event.getAmount() * (EXHAUSTION_PENALTY_PER_DAMAGE));
                             event.setCanceled(true); // Cancel damage occurence.
                         }
                     }

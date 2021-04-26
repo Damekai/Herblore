@@ -9,6 +9,6 @@ public class BlockPerennialPatch extends Block
 {
     public BlockPerennialPatch()
     {
-        super(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT));
+        super(AbstractBlock.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.CROP));
     }
 }

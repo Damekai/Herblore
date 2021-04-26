@@ -53,10 +53,10 @@ public abstract class AttributeHerbloreEffect extends HerbloreEffect implements 
 
     private void applyAttributesModifiers(HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
-        AttributeModifierManager attributeModifierManager = livingEntity.getAttributeManager();
+        AttributeModifierManager attributeModifierManager = livingEntity.getAttributes();
         attributePotencyFactors.forEach((attributePotencyFactor) ->
         {
-            ModifiableAttributeInstance modifiableAttributeInstance = attributeModifierManager.createInstanceIfAbsent(attributePotencyFactor.attribute.get());
+            ModifiableAttributeInstance modifiableAttributeInstance = attributeModifierManager.getInstance(attributePotencyFactor.attribute.get());
             if (modifiableAttributeInstance != null)
             {
                 modifiableAttributeInstance.removeModifier(uuid);
@@ -64,7 +64,7 @@ public abstract class AttributeHerbloreEffect extends HerbloreEffect implements 
                         this::getTranslationKey,
                         attributePotencyFactor.amount.get(this, herbloreEffectInstance, livingEntity),
                         attributePotencyFactor.operation);
-                modifiableAttributeInstance.applyPersistentModifier(attributeModifier);
+                modifiableAttributeInstance.addTransientModifier(attributeModifier);
 
                 //Herblore.LOGGER.debug("Applied modifier: " + attributeModifier.toString());
             }
@@ -73,10 +73,10 @@ public abstract class AttributeHerbloreEffect extends HerbloreEffect implements 
 
     private void removeAttributesModifiers(HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
-        AttributeModifierManager attributeModifierManager = livingEntity.getAttributeManager();
+        AttributeModifierManager attributeModifierManager = livingEntity.getAttributes();
         attributePotencyFactors.forEach((attributePotencyFactor) ->
         {
-            ModifiableAttributeInstance modifiableAttributeInstance = attributeModifierManager.createInstanceIfAbsent(attributePotencyFactor.attribute.get());
+            ModifiableAttributeInstance modifiableAttributeInstance = attributeModifierManager.getInstance(attributePotencyFactor.attribute.get());
             if (modifiableAttributeInstance != null)
             {
                 modifiableAttributeInstance.removeModifier(uuid);

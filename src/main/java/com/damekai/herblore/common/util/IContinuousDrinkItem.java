@@ -1,5 +1,6 @@
 package com.damekai.herblore.common.util;
 
+import com.damekai.herblore.common.Herblore;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,7 +34,7 @@ public interface IContinuousDrinkItem
             if (item.getUseDuration(stack) <= 10 && stack.getOrCreateTag().getInt("drink_time") % 4 == 0)
             {
                 LivingEntity livingEntity = event.getEntityLiving();
-                livingEntity.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 0.5f, livingEntity.getEntityWorld().getRandom().nextFloat() * 0.1F + 0.9f);
+                livingEntity.playSound(SoundEvents.GENERIC_DRINK, 0.5f, livingEntity.level.getRandom().nextFloat() * 0.1F + 0.9f);
             }
 
             stack.getOrCreateTag().putInt("flask_sips", stack.getOrCreateTag().getInt("flask_sips") - 1);

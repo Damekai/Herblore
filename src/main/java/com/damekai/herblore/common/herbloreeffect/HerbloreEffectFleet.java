@@ -32,15 +32,15 @@ public class HerbloreEffectFleet extends AttributeHerbloreEffect
 
     private static float calculateMovementSpeedModifierAmount(AttributeHerbloreEffect attributeFlaskEffect, HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
-        World world = livingEntity.getEntityWorld();
+        World world = livingEntity.level;
 
-        List<MobEntity> monstersInRange = world.getEntitiesWithinAABB(MonsterEntity.class, new AxisAlignedBB(
-                livingEntity.getPosX() - DETECTION_RADIUS_HORIZONTAL,
-                livingEntity.getPosY() - DETECTION_RADIUS_VERTICAL,
-                livingEntity.getPosZ() - DETECTION_RADIUS_HORIZONTAL,
-                livingEntity.getPosX() + DETECTION_RADIUS_HORIZONTAL,
-                livingEntity.getPosY() + DETECTION_RADIUS_VERTICAL,
-                livingEntity.getPosZ() + DETECTION_RADIUS_HORIZONTAL));
+        List<MobEntity> monstersInRange = world.getEntitiesOfClass(MonsterEntity.class, new AxisAlignedBB(
+                livingEntity.getX() - DETECTION_RADIUS_HORIZONTAL,
+                livingEntity.getY() - DETECTION_RADIUS_VERTICAL,
+                livingEntity.getZ() - DETECTION_RADIUS_HORIZONTAL,
+                livingEntity.getX() + DETECTION_RADIUS_HORIZONTAL,
+                livingEntity.getY() + DETECTION_RADIUS_VERTICAL,
+                livingEntity.getZ() + DETECTION_RADIUS_HORIZONTAL));
 
         if (monstersInRange.size() > 0)
         {

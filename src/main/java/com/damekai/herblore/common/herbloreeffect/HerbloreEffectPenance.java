@@ -43,7 +43,7 @@ public class HerbloreEffectPenance extends HerbloreEffect implements HerbloreEff
         float penalty = herbloreEffectInstance.getOrCreateTag().getFloat("penance_penalty");
         if (penalty > 0f)
         {
-            livingEntity.attackEntityFrom(DamageSource.MAGIC, penalty);
+            livingEntity.hurt(DamageSource.MAGIC, penalty);
         }
     }
 

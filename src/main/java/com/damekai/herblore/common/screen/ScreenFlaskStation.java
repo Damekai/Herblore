@@ -23,8 +23,8 @@ public class ScreenFlaskStation extends ContainerScreen<ContainerFlaskStation>
     public ScreenFlaskStation(ContainerFlaskStation container, PlayerInventory playerInventory, ITextComponent title)
     {
         super(container, playerInventory, title);
-        this.xSize = 256;
-        this.ySize = 240;
+        this.imageWidth = 256;
+        this.imageHeight = 240;
     }
 
     @Override
@@ -33,14 +33,14 @@ public class ScreenFlaskStation extends ContainerScreen<ContainerFlaskStation>
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
 
-        int relX = (this.width - this.xSize) / 2;
-        int relY = (this.height - this.ySize) / 2;
+        int relX = (this.width - this.imageWidth) / 2;
+        int relY = (this.height - this.imageHeight) / 2;
 
         // Add reagent colors.
         for (int i = 1; i < 18; i++)
         {
-            Slot slot = container.getSlot(i);
-            ItemStack stack = slot.getStack();
+            Slot slot = menu.getSlot(i);
+            ItemStack stack = slot.getItem();
 
             if (stack != ItemStack.EMPTY && stack.getItem() instanceof ItemReagent)
             {
@@ -49,55 +49,57 @@ public class ScreenFlaskStation extends ContainerScreen<ContainerFlaskStation>
                 // Up
                 if (FlaskStationInventory.SLOT_POSITIONAL_PROPERTIES.get(i).hasUp())
                 {
-                    AbstractGui.fill(matrixStack, relX + slot.xPos - 1, relY + slot.yPos - 1, relX + slot.xPos + 17, relY + slot.yPos - 3, reagent.getUpColor().getRGB());
+                    AbstractGui.fill(matrixStack, relX + slot.x - 1, relY + slot.y - 1, relX + slot.x + 17, relY + slot.y - 3, reagent.getUpColor().getRGB());
                 }
 
                 // Down
                 if (FlaskStationInventory.SLOT_POSITIONAL_PROPERTIES.get(i).hasDown())
                 {
-                    AbstractGui.fill(matrixStack, relX + slot.xPos - 1, relY + slot.yPos + 17, relX + slot.xPos + 17, relY + slot.yPos + 19, reagent.getDownColor().getRGB());
+                    AbstractGui.fill(matrixStack, relX + slot.x - 1, relY + slot.y + 17, relX + slot.x + 17, relY + slot.y + 19, reagent.getDownColor().getRGB());
                 }
 
                 // Left
                 if (FlaskStationInventory.SLOT_POSITIONAL_PROPERTIES.get(i).hasLeft())
                 {
-                    AbstractGui.fill(matrixStack, relX + slot.xPos - 3, relY + slot.yPos - 1, relX + slot.xPos - 1, relY + slot.yPos + 17, reagent.getLeftColor().getRGB());
+                    AbstractGui.fill(matrixStack, relX + slot.x - 3, relY + slot.y - 1, relX + slot.x - 1, relY + slot.y + 17, reagent.getLeftColor().getRGB());
                 }
 
                 // Right
                 if (FlaskStationInventory.SLOT_POSITIONAL_PROPERTIES.get(i).hasRight())
                 {
-                    AbstractGui.fill(matrixStack, relX + slot.xPos + 17, relY + slot.yPos - 1, relX + slot.xPos + 19, relY + slot.yPos + 17, reagent.getRightColor().getRGB());
+                    AbstractGui.fill(matrixStack, relX + slot.x + 17, relY + slot.y - 1, relX + slot.x + 19, relY + slot.y + 17, reagent.getRightColor().getRGB());
                 }
             }
         }
 
-        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y)
+    protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y)
     {
-        this.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-        int relX = (this.width - this.xSize) / 2;
-        int relY = (this.height - this.ySize) / 2;
+        this.getMinecraft().getTextureManager().bind(TEXTURE);
+        int relX = (this.width - this.imageWidth) / 2;
+        int relY = (this.height - this.imageHeight) / 2;
 
         // Progress bar background.
         AbstractGui.fill(matrixStack, relX + 104, relY + 90, relX + 151, relY + 151, new Color(9145227).getRGB());
 
         // Progress bar based on cook time elapsed.
-        int elapsedCookTime = container.getFlaskStationTile().getElapsedCookTime();
+        int elapsedCookTime = menu.getFlaskStationTile().getElapsedCookTime();
         if (elapsedCookTime > 0)
         {
             AbstractGui.fill(matrixStack, relX + 104, relY + (151 - Math.round(61 * (elapsedCookTime / (float) TileFlaskStation.COOK_TIME))), relX + 151, relY + 151, Color.WHITE.getRGB());
         }
 
-        this.blit(matrixStack, relX, relY, 0, 0, this.xSize, this.ySize);
+        this.blit(matrixStack, relX, relY, 0, 0, this.imageWidth, this.imageHeight);
     }
 
+
+
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y)
+    protected void renderLabels(MatrixStack matrixStack, int x, int y)
     {
-        this.font.func_243248_b(matrixStack, this.title, (float)this.titleX, (float)this.titleY, 4210752);
+        this.font.draw(matrixStack, this.title, (float)this.titleLabelX, (float)this.titleLabelY, 4210752);
     }
 }

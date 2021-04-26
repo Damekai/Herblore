@@ -21,7 +21,7 @@ public class CapabilityToxicityHandler
 
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event)
     {
-        if (!event.getObject().getEntityWorld().isRemote && event.getObject() instanceof PlayerEntity)
+        if (!event.getObject().level.isClientSide && event.getObject() instanceof PlayerEntity)
         {
             event.addCapability(new ResourceLocation(Herblore.MOD_ID, "toxicity_handler_capability"), new ToxicityHandlerProvider());
         }

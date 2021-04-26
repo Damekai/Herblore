@@ -91,6 +91,6 @@ public class Herblore
     // TODO: Move this somewhere else.
     public static void onClientSetup(FMLClientSetupEvent event)
     {
-        ScreenManager.registerFactory(ModContainers.FLASK_STATION.get(), ScreenFlaskStation::new);
+        ScreenManager.register(ModContainers.FLASK_STATION.get(), ScreenFlaskStation::new);
     }
 }

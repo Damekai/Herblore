@@ -20,7 +20,7 @@ public class ContainerFlaskStation extends Container
     {
         super(ModContainers.FLASK_STATION.get(), id);
 
-        flaskStationTile = (TileFlaskStation) world.getTileEntity(pos);
+        flaskStationTile = (TileFlaskStation) world.getBlockEntity(pos);
         flaskStationInventory = flaskStationTile.getFlaskStationInventory();
 
         setupFlaskStationInventory();
@@ -33,7 +33,7 @@ public class ContainerFlaskStation extends Container
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerEntity)
+    public boolean stillValid(PlayerEntity playerEntity)
     {
         return true;
     }
@@ -86,7 +86,7 @@ public class ContainerFlaskStation extends Container
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index)
+    public ItemStack quickMoveStack(PlayerEntity playerIn, int index)
     {
         return ItemStack.EMPTY;
     }

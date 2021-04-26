@@ -50,7 +50,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
     @Override
     public boolean matches(FlaskStationInventory inventory, World world)
     {
-        if (inventory.getStackInSlot(0).getItem() != ModItems.FLASK_OF_WATER.get())
+        if (inventory.getItem(0).getItem() != ModItems.FLASK_OF_WATER.get())
         {
             return false;
         }
@@ -64,7 +64,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
 
         for (int i = 1; i < 18; i++)
         {
-            ItemStack stack = inventory.getStackInSlot(i);
+            ItemStack stack = inventory.getItem(i);
             if (stack != ItemStack.EMPTY && stack.getItem() instanceof ItemReagent)
             {
                 ItemReagent reagent = (ItemReagent) stack.getItem();
@@ -98,7 +98,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
     }
 
     @Override
-    public ItemStack getCraftingResult(FlaskStationInventory inventory)
+    public ItemStack assemble(FlaskStationInventory inventory)
     {
         ItemStack flask = new ItemStack(ModItems.FLASK::get);
         flask.getOrCreateTag().putString("flask", ModRegistries.FLASKS.getKey(result.get()).toString());
@@ -107,18 +107,18 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
     }
 
     @Override
-    public boolean canFit(int width, int height)
+    public ItemStack getResultItem()
+    {
+        ItemStack flask = new ItemStack(ModItems.FLASK::get);
+        flask.getOrCreateTag().putString("flask", ModRegistries.FLASKS.getKey(result.get()).toString());
+        flask.getOrCreateTag().putInt("flask_sips", ((ItemFlask) flask.getItem()).getInitialSips());
+        return flask;
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int p_194133_1_, int p_194133_2_)
     {
         return true;
-    }
-
-    @Override
-    public ItemStack getRecipeOutput()
-    {
-        ItemStack flask = new ItemStack(ModItems.FLASK::get);
-        flask.getOrCreateTag().putString("flask", ModRegistries.FLASKS.getKey(result.get()).toString());
-        flask.getOrCreateTag().putInt("flask_sips", ((ItemFlask) flask.getItem()).getInitialSips());
-        return flask;
     }
 
     @Override
@@ -142,11 +142,11 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<FlaskRecipe>
     {
         @Override
-        public FlaskRecipe read(ResourceLocation recipeId, JsonObject json)
+        public FlaskRecipe fromJson(ResourceLocation recipeId, JsonObject json)
         {
             HashMap<Supplier<ItemReagent>, Integer> reagentQuantities = new HashMap<>();
 
-            JsonObject reagentQuantitiesJson = JSONUtils.getJsonObject(json, "reagents");
+            JsonObject reagentQuantitiesJson = JSONUtils.getAsJsonObject(json, "reagents");
             for (Map.Entry<String, JsonElement> entry : reagentQuantitiesJson.entrySet())
             {
                 Supplier<ItemReagent> key = () -> (ItemReagent) ForgeRegistries.ITEMS.getValue(new ResourceLocation(entry.getKey()));
@@ -154,7 +154,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
                 reagentQuantities.put(key, value);
             }
 
-            String resultLocation = JSONUtils.getString(json, "result");
+            String resultLocation = JSONUtils.getAsString(json, "result");
             Herblore.LOGGER.debug(resultLocation);
             Supplier<Flask> result = () -> ModRegistries.FLASKS.getValue(new ResourceLocation(resultLocation));
 
@@ -163,7 +163,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
 
         @Nullable
         @Override
-        public FlaskRecipe read(ResourceLocation recipeId, PacketBuffer buffer)
+        public FlaskRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer)
         {
             HashMap<Supplier<ItemReagent>, Integer> reagentQuantities = new HashMap<>();
 
@@ -181,7 +181,7 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
         }
 
         @Override
-        public void write(PacketBuffer buffer, FlaskRecipe recipe)
+        public void toNetwork(PacketBuffer buffer, FlaskRecipe recipe)
         {
             // Write the reagent quantity map, quick and dirty.
             buffer.writeVarInt(recipe.requiredReagentQuantities.size());

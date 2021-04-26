@@ -16,14 +16,14 @@ public class BlockPerennialCrop extends CropsBlock
 
     public BlockPerennialCrop(Supplier<ItemReagentSeeds> reagentSeeds)
     {
-        super(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.CROP));
+        super(AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
 
         this.reagentSeeds = reagentSeeds;
     }
 
     @Nonnull
     @Override
-    protected IItemProvider getSeedsItem()
+    protected IItemProvider getBaseSeedId()
     {
         return reagentSeeds.get();
     }

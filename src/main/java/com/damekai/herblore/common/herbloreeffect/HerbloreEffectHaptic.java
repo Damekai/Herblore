@@ -30,7 +30,7 @@ public class HerbloreEffectHaptic extends HerbloreEffect
 
         LivingEntity livingEntity = event.getEntityLiving();
 
-        if (event.getSource().getImmediateSource() instanceof LivingEntity)
+        if (event.getSource().getDirectEntity() instanceof LivingEntity)
         {
             HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(livingEntity);
 
@@ -40,10 +40,10 @@ public class HerbloreEffectHaptic extends HerbloreEffect
 
                 if (haptic != null)
                 {
-                    LivingEntity attacker = (LivingEntity) event.getSource().getImmediateSource();
+                    LivingEntity attacker = (LivingEntity) event.getSource().getDirectEntity();
                     if (attacker != null)
                     {
-                        attacker.applyKnockback(KNOCKBACK, -MathHelper.sin(attacker.rotationYaw * ((float)Math.PI / 180F)), MathHelper.cos(attacker.rotationYaw * ((float)Math.PI / 180F)));
+                        attacker.knockback(KNOCKBACK, -MathHelper.sin(attacker.yRot * ((float)Math.PI / 180F)), MathHelper.cos(attacker.yRot * ((float)Math.PI / 180F)));
                     }
                 }
             }

@@ -14,12 +14,12 @@ public class PacketSyncHerbloreEffectHandler
 
     public static BiConsumer<MessageHerbloreEffectHandler, PacketBuffer> encoder()
     {
-        return (message, buffer) -> buffer.writeCompoundTag(message.getNbt());
+        return (message, buffer) -> buffer.writeNbt(message.getNbt());
     }
 
     public static Function<PacketBuffer, MessageHerbloreEffectHandler> decoder()
     {
-        return (buffer) -> new MessageHerbloreEffectHandler(buffer.readCompoundTag());
+        return (buffer) -> new MessageHerbloreEffectHandler(buffer.readNbt());
     }
 
     public static BiConsumer<MessageHerbloreEffectHandler, Supplier<NetworkEvent.Context>> handler()

@@ -33,14 +33,15 @@ public class GuiFlaskEffect extends Effect
     }
 
     @Override
-    public String getName()
+    public String getDescriptionId()
     {
         return flaskEffect.get().getTranslationKey();
     }
 
     @Override
-    public void performEffect(LivingEntity livingEntity, int amplifier) { }
+    public void applyEffectTick(LivingEntity livingEntity, int amplifier) { }
+
 
     @Override
-    public void affectEntity(@Nullable Entity source, @Nullable Entity indirectSource, LivingEntity livingEntity, int amplifier, double health) { }
+    public void applyInstantenousEffect(@Nullable Entity source, @Nullable Entity indirectSource, LivingEntity livingEntity, int amplifier, double health) { }
 }

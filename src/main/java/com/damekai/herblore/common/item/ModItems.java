@@ -51,7 +51,7 @@ public class ModItems
     public static final RegistryObject<ItemReagentSeeds> SKYGLOM_SEEDS = ITEMS.register("skyglom_seeds", () -> new ItemReagentSeeds(ModBlocks.SKYGLOM_CROP.get()));
 
     public static final RegistryObject<Item> EMPTY_FLASK = ITEMS.register("empty_flask", () -> new ItemEmptyFlask(defaultItemProperties()));
-    public static final RegistryObject<Item> FLASK_OF_WATER = ITEMS.register("flask_of_water", () -> new Item(defaultItemProperties().maxStackSize(1)));
+    public static final RegistryObject<Item> FLASK_OF_WATER = ITEMS.register("flask_of_water", () -> new Item(defaultItemProperties().stacksTo(1)));
     public static final RegistryObject<Item> FLASK = ITEMS.register("flask", ItemFlask::new);
 
     public static final RegistryObject<BlockItem> PERENNIAL_PATCH = ITEMS.register("perennial_patch", () -> new BlockItem(ModBlocks.PERENNIAL_PATCH.get(), defaultItemProperties()));
@@ -60,8 +60,7 @@ public class ModItems
 
     public static Item.Properties defaultItemProperties()
     {
-        return (new Item.Properties())
-                .group(ModItemGroups.HERBLORE);
+        return (new Item.Properties()).tab(ModItemGroups.HERBLORE);
     }
 
     public static Item getItemFromRegistry(String name)

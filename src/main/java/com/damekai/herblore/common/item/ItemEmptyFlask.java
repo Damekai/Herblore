@@ -24,14 +24,14 @@ public class ItemEmptyFlask extends Item
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {
-        ItemStack stack = player.getHeldItem(hand);
+        ItemStack stack = player.getItemInHand(hand);
 
-        BlockRayTraceResult blockRayTraceResult = rayTrace(world, player, RayTraceContext.FluidMode.SOURCE_ONLY);
-        if (blockRayTraceResult.getType() == RayTraceResult.Type.BLOCK && world.getBlockState(blockRayTraceResult.getPos()).getFluidState().getFluid() == Fluids.WATER)
+        BlockRayTraceResult blockRayTraceResult = getPlayerPOVHitResult(world, player, RayTraceContext.FluidMode.SOURCE_ONLY);
+        if (blockRayTraceResult.getType() == RayTraceResult.Type.BLOCK && world.getBlockState(blockRayTraceResult.getBlockPos()).getFluidState().getType() == Fluids.WATER)
         {
-            world.playSound(player, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+            world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 
             ItemStack productStack = new ItemStack(ModItems.FLASK_OF_WATER::get);
             stack.shrink(1);
@@ -42,12 +42,12 @@ public class ItemEmptyFlask extends Item
             }
             else
             {
-                player.addItemStackToInventory(productStack);
+                player.addItem(productStack);
             }
 
-            return ActionResult.func_233538_a_(stack, world.isRemote);
+            return ActionResult.sidedSuccess(stack, world.isClientSide);
         }
 
-        return ActionResult.resultPass(stack);
+        return ActionResult.pass(stack);
     }
 }

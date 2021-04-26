@@ -23,7 +23,7 @@ public abstract class HerbloreEffect extends ForgeRegistryEntry<HerbloreEffect>
     {
         if (translationKey == null)
         {
-            translationKey = Util.makeTranslationKey("herbloreeffect", ModRegistries.HERBLORE_EFFECTS.getKey(this));
+            translationKey = Util.makeDescriptionId("herbloreeffect", ModRegistries.HERBLORE_EFFECTS.getKey(this));
         }
         return translationKey;
     }

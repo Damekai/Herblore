@@ -16,6 +16,7 @@ import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.HandSide;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -30,11 +31,11 @@ public class ItemFlask extends Item implements IContinuousDrinkItem
 {
     public ItemFlask()
     {
-        super(ModItems.defaultItemProperties().maxStackSize(1));
+        super(ModItems.defaultItemProperties().stacksTo(1));
     }
 
     @Override
-    public ITextComponent getDisplayName(ItemStack stack)
+    public ITextComponent getName(ItemStack stack)
     {
         CompoundNBT nbt = stack.getOrCreateTag();
         if (nbt.contains("flask"))
@@ -47,7 +48,7 @@ public class ItemFlask extends Item implements IContinuousDrinkItem
             }
             return new TranslationTextComponent(flask.getTranslationKey());
         }
-        return super.getDisplayName(stack);
+        return super.getName(stack);
     }
 
     @Override
@@ -57,12 +58,12 @@ public class ItemFlask extends Item implements IContinuousDrinkItem
     }
 
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity livingEntity, int timeLeft)
+    public void releaseUsing(ItemStack stack, World world, LivingEntity livingEntity, int timeLeft)
     {
         int drinkTime = stack.getOrCreateTag().getInt("drink_time");
         stack.getOrCreateTag().putInt("drink_time", 0);
 
-        if (world.isRemote)
+        if (world.isClientSide)
         {
             return;
         }
@@ -81,25 +82,25 @@ public class ItemFlask extends Item implements IContinuousDrinkItem
     }
 
     @Override
-    public UseAction getUseAction(ItemStack stack)
+    public UseAction getUseAnimation(ItemStack stack)
     {
         return UseAction.DRINK;
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {
-        player.setActiveHand(hand);
-        return ActionResult.func_233538_a_(player.getHeldItem(hand), world.isRemote);
+        player.startUsingItem(hand);
+        return ActionResult.consume(player.getItemInHand(hand));
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity livingEntity)
+    public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity livingEntity)
     {
         int drinkTime = stack.getOrCreateTag().getInt("drink_time");
         stack.getOrCreateTag().putInt("drink_time", 0);
 
-        if (!world.isRemote)
+        if (!world.isClientSide)
         {
             HerbloreEffectHandler herbloreEffectHandler = HerbloreEffectHandler.getHerbloreEffectHandlerOf(livingEntity);
             if (herbloreEffectHandler != null)
@@ -125,9 +126,9 @@ public class ItemFlask extends Item implements IContinuousDrinkItem
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag)
+    public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag)
     {
-        super.addInformation(stack, world, tooltip, flag);
+        super.appendHoverText(stack, world, tooltip, flag);
         FlaskHelper.addFlaskTooltip(stack, tooltip);
     }
 }

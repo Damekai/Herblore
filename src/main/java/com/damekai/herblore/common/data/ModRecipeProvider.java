@@ -19,7 +19,7 @@ public class ModRecipeProvider extends RecipeProvider
     }
 
     @Override
-    protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
+    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer)
     {
         registerFlasks(consumer, "flask/");
         registerMiscItems(consumer, "item/");
@@ -29,7 +29,10 @@ public class ModRecipeProvider extends RecipeProvider
     public static void onGatherData(GatherDataEvent event)
     {
         DataGenerator generator = event.getGenerator();
-        generator.addProvider(new ModRecipeProvider(generator));
+        if (event.includeServer())
+        {
+            generator.addProvider(new ModRecipeProvider(generator));
+        }
     }
 
     private void registerFlasks(Consumer<IFinishedRecipe> consumer, String folder)
@@ -39,119 +42,119 @@ public class ModRecipeProvider extends RecipeProvider
 
     private void registerSeeds(Consumer<IFinishedRecipe> consumer, String folder)
     {
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.WINDY_LICHEN_SEEDS::get)
-                .addIngredient(ModItems.WINDY_LICHEN::get)
-                .setGroup("herblore")
-                .addCriterion("has_windy_lichen", hasItem(ModItems.WINDY_LICHEN::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "windy_lichen_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.WINDY_LICHEN_SEEDS::get)
+                .requires(ModItems.WINDY_LICHEN::get)
+                .group("herblore")
+                .unlockedBy("has_windy_lichen", has(ModItems.WINDY_LICHEN::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.SUNSPECKLE_SEEDS::get)
-                .addIngredient(ModItems.SUNSPECKLE::get)
-                .setGroup("herblore")
-                .addCriterion("has_sunspeckle", hasItem(ModItems.SUNSPECKLE::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "sunspeckle_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.SUNSPECKLE_SEEDS::get)
+                .requires(ModItems.SUNSPECKLE::get)
+                .group("herblore")
+                .unlockedBy("has_sunspeckle", has(ModItems.SUNSPECKLE::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.MOONSPECKLE_SEEDS::get)
-                .addIngredient(ModItems.MOONSPECKLE::get)
-                .setGroup("herblore")
-                .addCriterion("has_moonspeckle", hasItem(ModItems.MOONSPECKLE::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "moonspeckle_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.MOONSPECKLE_SEEDS::get)
+                .requires(ModItems.MOONSPECKLE::get)
+                .group("herblore")
+                .unlockedBy("has_moonspeckle", has(ModItems.MOONSPECKLE::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.STONESTEM_SEEDS::get)
-                .addIngredient(ModItems.STONESTEM::get)
-                .setGroup("herblore")
-                .addCriterion("has_stonestem", hasItem(ModItems.STONESTEM::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "stonestem_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.STONESTEM_SEEDS::get)
+                .requires(ModItems.STONESTEM::get)
+                .group("herblore")
+                .unlockedBy("has_stonestem", has(ModItems.STONESTEM::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.WILLOW_WORT_SEEDS::get)
-                .addIngredient(ModItems.WILLOW_WORT::get)
-                .setGroup("herblore")
-                .addCriterion("has_willow_wort", hasItem(ModItems.WILLOW_WORT::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "willow_wort_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.WILLOW_WORT_SEEDS::get)
+                .requires(ModItems.WILLOW_WORT::get)
+                .group("herblore")
+                .unlockedBy("has_willow_wort", has(ModItems.WILLOW_WORT::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.RUMBLEROOT_SEEDS::get)
-                .addIngredient(ModItems.RUMBLEROOT::get)
-                .setGroup("herblore")
-                .addCriterion("has_rumbleroot", hasItem(ModItems.RUMBLEROOT::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "rumbleroot_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.RUMBLEROOT_SEEDS::get)
+                .requires(ModItems.RUMBLEROOT::get)
+                .group("herblore")
+                .unlockedBy("has_rumbleroot", has(ModItems.RUMBLEROOT::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.PHANTOM_FROND_SEEDS::get)
-                .addIngredient(ModItems.PHANTOM_FROND::get)
-                .setGroup("herblore")
-                .addCriterion("has_phantom_frond", hasItem(ModItems.PHANTOM_FROND::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "phantom_frond_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.PHANTOM_FROND_SEEDS::get)
+                .requires(ModItems.PHANTOM_FROND::get)
+                .group("herblore")
+                .unlockedBy("has_phantom_frond", has(ModItems.PHANTOM_FROND::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.BREEZEBLOOM_SEEDS::get)
-                .addIngredient(ModItems.BREEZEBLOOM::get)
-                .setGroup("herblore")
-                .addCriterion("has_breezebloom", hasItem(ModItems.BREEZEBLOOM::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "breezebloom_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.BREEZEBLOOM_SEEDS::get)
+                .requires(ModItems.BREEZEBLOOM::get)
+                .group("herblore")
+                .unlockedBy("has_breezebloom", has(ModItems.BREEZEBLOOM::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.DESERTS_THIRST_SEEDS::get)
-                .addIngredient(ModItems.DESERTS_THIRST::get)
-                .setGroup("herblore")
-                .addCriterion("has_deserts_thirst", hasItem(ModItems.DESERTS_THIRST::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "deserts_thirst_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.DESERTS_THIRST_SEEDS::get)
+                .requires(ModItems.DESERTS_THIRST::get)
+                .group("herblore")
+                .unlockedBy("has_deserts_thirst", has(ModItems.DESERTS_THIRST::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.THUNDERSTAR_SEEDS::get)
-                .addIngredient(ModItems.THUNDERSTAR::get)
-                .setGroup("herblore")
-                .addCriterion("has_thunderstar", hasItem(ModItems.THUNDERSTAR::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "thunderstar_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.THUNDERSTAR_SEEDS::get)
+                .requires(ModItems.THUNDERSTAR::get)
+                .group("herblore")
+                .unlockedBy("has_thunderstar", has(ModItems.THUNDERSTAR::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.SUNSTRIDERS_SIN_SEEDS::get)
-                .addIngredient(ModItems.SUNSTRIDERS_SIN::get)
-                .setGroup("herblore")
-                .addCriterion("has_sunstriders_sin", hasItem(ModItems.SUNSTRIDERS_SIN::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "sunstriders_sin_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.SUNSTRIDERS_SIN_SEEDS::get)
+                .requires(ModItems.SUNSTRIDERS_SIN::get)
+                .group("herblore")
+                .unlockedBy("has_sunstriders_sin", has(ModItems.SUNSTRIDERS_SIN::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.SLAKEMOSS_SEEDS::get)
-                .addIngredient(ModItems.SLAKEMOSS::get)
-                .setGroup("herblore")
-                .addCriterion("has_slakemoss", hasItem(ModItems.SLAKEMOSS::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "slakemoss_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.SLAKEMOSS_SEEDS::get)
+                .requires(ModItems.SLAKEMOSS::get)
+                .group("herblore")
+                .unlockedBy("has_slakemoss", has(ModItems.SLAKEMOSS::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.SLAG_RIND_SEEDS::get)
-                .addIngredient(ModItems.SLAG_RIND::get)
-                .setGroup("herblore")
-                .addCriterion("has_slag_rind", hasItem(ModItems.SLAG_RIND::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "slag_rind_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.SLAG_RIND_SEEDS::get)
+                .requires(ModItems.SLAG_RIND::get)
+                .group("herblore")
+                .unlockedBy("has_slag_rind", has(ModItems.SLAG_RIND::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.VENGERVINE_SEEDS::get)
-                .addIngredient(ModItems.VENGERVINE::get)
-                .setGroup("herblore")
-                .addCriterion("has_vengervine", hasItem(ModItems.VENGERVINE::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "vengervine_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.VENGERVINE_SEEDS::get)
+                .requires(ModItems.VENGERVINE::get)
+                .group("herblore")
+                .unlockedBy("has_vengervine", has(ModItems.VENGERVINE::get))
+                .save(consumer);
 
-        ShapelessRecipeBuilder.shapelessRecipe(ModItems.SKYGLOM_SEEDS::get)
-                .addIngredient(ModItems.SKYGLOM::get)
-                .setGroup("herblore")
-                .addCriterion("has_skyglom", hasItem(ModItems.SKYGLOM::get))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "skyglom_seeds"));
+        ShapelessRecipeBuilder.shapeless(ModItems.SKYGLOM_SEEDS::get)
+                .requires(ModItems.SKYGLOM::get)
+                .group("herblore")
+                .unlockedBy("has_skyglom", has(ModItems.SKYGLOM::get))
+                .save(consumer);
     }
 
     private void registerMiscItems(Consumer<IFinishedRecipe> consumer, String folder)
     {
-        ShapedRecipeBuilder.shapedRecipe(ModItems.EMPTY_FLASK::get, 4)
-                .key('A', Ingredient.fromTag(ItemTags.PLANKS))
-                .key('B', Ingredient.fromTag(Tags.Items.GLASS))
-                .patternLine(" A ")
-                .patternLine(" B ")
-                .patternLine("BBB")
-                .setGroup("herblore")
-                .addCriterion("has_planks", hasItem(ItemTags.PLANKS))
-                .addCriterion("has_glass", hasItem(Tags.Items.GLASS))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "empty_flask"));
+        ShapedRecipeBuilder.shaped(ModItems.EMPTY_FLASK::get, 4)
+                .define('A', ItemTags.PLANKS)
+                .define('B', Tags.Items.GLASS)
+                .pattern(" A ")
+                .pattern(" B ")
+                .pattern("BBB")
+                .group("herblore")
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .unlockedBy("has_glass", has(Tags.Items.GLASS))
+                .save(consumer);
 
-        ShapedRecipeBuilder.shapedRecipe(ModItems.FLASK_STATION::get)
-                .key('A', ModItems.EMPTY_FLASK::get)
-                .key('B', Ingredient.fromTag(ItemTags.PLANKS))
-                .patternLine("AAA")
-                .patternLine("BBB")
-                .patternLine("B B")
-                .setGroup("herblore")
-                .addCriterion("has_empty_flask", hasItem(ModItems.EMPTY_FLASK::get))
-                .addCriterion("has_planks", hasItem(ItemTags.PLANKS))
-                .build(consumer, new ResourceLocation(Herblore.MOD_ID, folder + "flask_station"));
+        ShapedRecipeBuilder.shaped(ModItems.FLASK_STATION::get)
+                .define('A', ModItems.EMPTY_FLASK::get)
+                .define('B', ItemTags.PLANKS)
+                .pattern("AAA")
+                .pattern("BBB")
+                .pattern("B B")
+                .group("herblore")
+                .unlockedBy("has_empty_flask", has(ModItems.EMPTY_FLASK::get))
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(consumer);
     }
 }

@@ -25,7 +25,7 @@ import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 
-public class TileFlaskStation extends TileEntity implements ITickableTileEntity, INamedContainerProvider, IInventoryChangedListener
+public class TileFlaskStation extends TileEntity implements ITickableTileEntity, IInventoryChangedListener
 {
     public static final int COOK_TIME = 100;
 
@@ -45,16 +45,21 @@ public class TileFlaskStation extends TileEntity implements ITickableTileEntity,
     @Override
     public void tick()
     {
-        IRecipe<FlaskStationInventory> recipe = this.world.getRecipeManager().getRecipe(FlaskRecipe.FLASK_RECIPE, flaskStationInventory, this.world).orElse(null);
+        if (level == null)
+        {
+            return;
+        }
+
+        IRecipe<FlaskStationInventory> recipe = this.level.getRecipeManager().getRecipeFor(FlaskRecipe.FLASK_RECIPE, flaskStationInventory, this.level).orElse(null);
         if (recipe != null)
         {
             elapsedCookTime++;
             if (elapsedCookTime == COOK_TIME)
             {
-                flaskStationInventory.setInventorySlotContents(0, recipe.getCraftingResult(flaskStationInventory));
+                flaskStationInventory.setItem(0, recipe.getResultItem());
                 for (int i = 1; i < 18; i++)
                 {
-                    flaskStationInventory.getStackInSlot(i).shrink(1);
+                    flaskStationInventory.getItem(i).shrink(1);
                 }
                 elapsedCookTime = 0;
             }
@@ -71,22 +76,9 @@ public class TileFlaskStation extends TileEntity implements ITickableTileEntity,
     }
 
     @Override
-    public ITextComponent getDisplayName()
+    public void containerChanged(IInventory inventory)
     {
-        return new TranslationTextComponent("block.herblore.flask_station");
-    }
-
-    @Nullable
-    @Override
-    public Container createMenu(int id, PlayerInventory playerInventory, PlayerEntity playerEntity)
-    {
-        return new ContainerFlaskStation(id, world, pos, playerInventory);
-    }
-
-    @Override
-    public void onInventoryChanged(IInventory invBasic)
-    {
-        markDirty();
+        setChanged();
     }
 
     public FlaskStationInventory getFlaskStationInventory()
@@ -94,17 +86,19 @@ public class TileFlaskStation extends TileEntity implements ITickableTileEntity,
         return flaskStationInventory;
     }
 
+
     @Override
-    public void read(BlockState state, CompoundNBT nbt)
+    public void deserializeNBT(CompoundNBT nbt)
     {
-        super.read(state, nbt);
-        flaskStationInventory.read(nbt.getList("flask_station_inventory", Constants.NBT.TAG_COMPOUND));
+        super.deserializeNBT(nbt);
+        flaskStationInventory.fromTag(nbt.getList("flask_station_inventory", Constants.NBT.TAG_COMPOUND));
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound)
+    public CompoundNBT serializeNBT()
     {
-        compound.put("flask_station_inventory", flaskStationInventory.write());
-        return super.write(compound);
+        CompoundNBT nbt = super.serializeNBT();
+        nbt.put("flask_station_inventory", flaskStationInventory.createTag());
+        return nbt;
     }
 }

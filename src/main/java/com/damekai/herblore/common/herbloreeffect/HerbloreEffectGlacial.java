@@ -23,6 +23,6 @@ public class HerbloreEffectGlacial extends HerbloreEffect implements HerbloreEff
     @Override
     public void onTick(HerbloreEffectInstance herbloreEffectInstance, LivingEntity livingEntity)
     {
-        FrostWalkerEnchantment.freezeNearby(livingEntity, livingEntity.world, livingEntity.getPosition(), 0);
+        FrostWalkerEnchantment.onEntityMoved(livingEntity, livingEntity.level, livingEntity.blockPosition(), 0);
     }
 }

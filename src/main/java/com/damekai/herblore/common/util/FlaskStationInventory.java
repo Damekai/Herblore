@@ -63,7 +63,7 @@ public class FlaskStationInventory extends Inventory
     {
         for (int i = minSlot; i <= maxSlot; i++)
         {
-            ItemStack stack = getStackInSlot(i);
+            ItemStack stack = getItem(i);
             if (stack != ItemStack.EMPTY)
             {
                 return false;
@@ -124,7 +124,7 @@ public class FlaskStationInventory extends Inventory
     @Nullable
     private ItemReagent getReagentInSlot(int slot)
     {
-        Item item = getStackInSlot(slot).getItem();
+        Item item = getItem(slot).getItem();
         if (item instanceof ItemReagent)
         {
             return (ItemReagent) item;

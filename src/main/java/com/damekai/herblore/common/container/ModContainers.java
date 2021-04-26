@@ -15,7 +15,7 @@ public class ModContainers
 
     public static final RegistryObject<ContainerType<ContainerFlaskStation>> FLASK_STATION = CONTAINERS.register("flask_station", () -> IForgeContainerType.create((id, playerInventory, data) -> {
         BlockPos pos = data.readBlockPos();
-        World world = playerInventory.player.getEntityWorld();
+        World world = playerInventory.player.level;
         return new ContainerFlaskStation(id, world, pos, playerInventory);
     }));
 }

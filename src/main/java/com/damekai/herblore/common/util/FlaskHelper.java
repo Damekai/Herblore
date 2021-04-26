@@ -83,12 +83,12 @@ public class FlaskHelper
         if (flask != null)
         {
             lores.add(new TranslationTextComponent("text.herblore.duration_remaining")
-                    .append(new StringTextComponent(": " + StringUtils.ticksToElapsedTime(Math.round(flask.getHerbloreEffectInstance().getDurationFull() * (float) amountRemaining / ((ItemFlask) stack.getItem()).getInitialSips())))).mergeStyle(TextFormatting.BLUE));
+                    .append(new StringTextComponent(": " + StringUtils.formatTickDuration(Math.round(flask.getHerbloreEffectInstance().getDurationFull() * (float) amountRemaining / ((ItemFlask) stack.getItem()).getInitialSips())))).withStyle(TextFormatting.BLUE));
 
             HerbloreEffectInstance herbloreEffectInstance = flask.getHerbloreEffectInstance();
             HerbloreEffect herbloreEffect = herbloreEffectInstance.getHerbloreEffect();
 
-            lores.add(new TranslationTextComponent(herbloreEffect.getTranslationKey()).mergeStyle(TextFormatting.GREEN));
+            lores.add(new TranslationTextComponent(herbloreEffect.getTranslationKey()).withStyle(TextFormatting.GREEN));
         }
     }
 }

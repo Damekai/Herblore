@@ -18,7 +18,7 @@ public class ModItemPropertyGetters
 
     private static void registerPropertyGetter(IItemProvider itemProvider, ResourceLocation id, IItemPropertyGetter itemPropertyGetter)
     {
-        ItemModelsProperties.registerProperty(itemProvider.asItem(), id, itemPropertyGetter);
+        ItemModelsProperties.register(itemProvider.asItem(), id, itemPropertyGetter);
     }
 
     private static void registerPropertyGetters()

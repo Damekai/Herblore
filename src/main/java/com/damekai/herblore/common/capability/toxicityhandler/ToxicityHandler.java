@@ -103,12 +103,12 @@ public class ToxicityHandler implements IToxicityHandler
         {
             if (toxicityTier == 0)
             {
-                livingEntity.removePotionEffect(ModEffects.TOXICITY_RENDER.get());
+                livingEntity.removeEffect(ModEffects.TOXICITY_RENDER.get());
             }
             else
             {
-                livingEntity.removePotionEffect(ModEffects.TOXICITY_RENDER.get());
-                livingEntity.addPotionEffect(new EffectInstance(ModEffects.TOXICITY_RENDER.get(), Integer.MAX_VALUE, toxicityTier - 1, false, false));
+                livingEntity.removeEffect(ModEffects.TOXICITY_RENDER.get());
+                livingEntity.addEffect(new EffectInstance(ModEffects.TOXICITY_RENDER.get(), Integer.MAX_VALUE, toxicityTier - 1, false, false));
             }
         }
     }
@@ -133,11 +133,11 @@ public class ToxicityHandler implements IToxicityHandler
             {
                 setToxicity(playerEntity, herbloreEffectHandler.getTotaledDurations());
             }
-            playerEntity.addExhaustion(toxicityTier * HUNGER_EXHAUSTION_PER_TOXICITY_TIER);
+            playerEntity.causeFoodExhaustion(toxicityTier * HUNGER_EXHAUSTION_PER_TOXICITY_TIER);
         }
         if (toxicityTier == MAX_TOXICITY_TIER && livingEntity.getHealth() > 1f)
         {
-            livingEntity.attackEntityFrom(DamageSource.MAGIC, 2f);
+            livingEntity.hurt(DamageSource.MAGIC, 2f);
         }
     }
 

@@ -37,13 +37,11 @@ public class HerbloreEffectStrider extends HerbloreEffect
             HerbloreEffectInstance strider = herbloreEffectHandler.getHerbloreEffectInstance(ModHerbloreEffects.STRIDER.get());
             if (strider != null)
             {
-                Vector3d currentMotion = livingEntity.getMotion();
-                livingEntity.setMotion(
-                        currentMotion.getX() * HORIZONTAL_VELOCITY_MULTIPLIER,
-                        currentMotion.getY() * VERTICAL_VELOCITY_MULTIPLIER,
-                        currentMotion.getZ() * HORIZONTAL_VELOCITY_MULTIPLIER);
-
-                livingEntity.velocityChanged = true;
+                Vector3d currentMotion = livingEntity.getDeltaMovement();
+                livingEntity.setDeltaMovement(
+                        currentMotion.x() * HORIZONTAL_VELOCITY_MULTIPLIER,
+                        currentMotion.y() * VERTICAL_VELOCITY_MULTIPLIER,
+                        currentMotion.z() * HORIZONTAL_VELOCITY_MULTIPLIER);
             }
         }
     }

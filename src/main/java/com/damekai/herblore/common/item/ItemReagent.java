@@ -52,18 +52,20 @@ public class ItemReagent extends Item
         return right;
     }
 
+
+
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag)
+    public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag)
     {
-        super.addInformation(stack, world, tooltip, flag);
+        super.appendHoverText(stack, world, tooltip, flag);
 
-        tooltip.add((new TranslationTextComponent("Up").mergeStyle(up == ModItems.RED ? TextFormatting.RED : TextFormatting.BLUE))
-                .append(new TranslationTextComponent("/").mergeStyle(TextFormatting.WHITE))
-                .append(new TranslationTextComponent("Down").mergeStyle(down == ModItems.RED ? TextFormatting.RED : TextFormatting.BLUE))
-                .append(new TranslationTextComponent("/").mergeStyle(TextFormatting.WHITE))
-                .append(new TranslationTextComponent("Left").mergeStyle(left == ModItems.RED ? TextFormatting.RED : TextFormatting.BLUE))
-                .append(new TranslationTextComponent("/").mergeStyle(TextFormatting.WHITE))
-                .append(new TranslationTextComponent("Right").mergeStyle(right == ModItems.RED ? TextFormatting.RED : TextFormatting.BLUE)));
+        tooltip.add((new TranslationTextComponent("Up").withStyle(up == ModItems.RED ? TextFormatting.RED : TextFormatting.BLUE))
+                .append(new TranslationTextComponent("/").withStyle(TextFormatting.WHITE))
+                .append(new TranslationTextComponent("Down").withStyle(down == ModItems.RED ? TextFormatting.RED : TextFormatting.BLUE))
+                .append(new TranslationTextComponent("/").withStyle(TextFormatting.WHITE))
+                .append(new TranslationTextComponent("Left").withStyle(left == ModItems.RED ? TextFormatting.RED : TextFormatting.BLUE))
+                .append(new TranslationTextComponent("/").withStyle(TextFormatting.WHITE))
+                .append(new TranslationTextComponent("Right").withStyle(right == ModItems.RED ? TextFormatting.RED : TextFormatting.BLUE)));
     }
 }
