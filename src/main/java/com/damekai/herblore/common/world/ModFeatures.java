@@ -24,7 +24,8 @@ public class ModFeatures
 
     public static final Supplier<ConfiguredFeature<?, ?>> PERENNIAL_PATCH_CONFIG = () -> PERENNIAL_PATCH.get()
             .configured(NoFeatureConfig.NONE)
-            .decorated(Features.Placements.HEIGHTMAP);
+            .decorated(Features.Placements.ADD_32)
+            .decorated(Features.Placements.HEIGHTMAP_SQUARE);
 
     public static void onBiomeLoading(BiomeLoadingEvent event)
     {
