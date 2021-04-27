@@ -170,12 +170,16 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
             int numEntries = buffer.readVarInt();
             for (int i = 0; i < numEntries; i++)
             {
-                Supplier<ItemReagent> key = () -> (ItemReagent) ForgeRegistries.ITEMS.getValue(buffer.readResourceLocation());
+                ResourceLocation regKey = buffer.readResourceLocation();
+                //Herblore.LOGGER.debug("fromNetwork: " + regKey);
+                Supplier<ItemReagent> key = () -> (ItemReagent) ForgeRegistries.ITEMS.getValue(regKey);
                 Integer value = buffer.readVarInt();
                 reagentQuantities.put(key, value);
             }
 
-            Supplier<Flask> result = () -> ModRegistries.FLASKS.getValue(buffer.readResourceLocation());
+            ResourceLocation regKey = buffer.readResourceLocation();
+            //Herblore.LOGGER.debug("fromNetwork: " + regKey);
+            Supplier<Flask> result = () -> ModRegistries.FLASKS.getValue(regKey);
 
             return new FlaskRecipe(recipeId, ImmutableMap.copyOf(reagentQuantities), result);
         }
@@ -187,11 +191,15 @@ public class FlaskRecipe implements IRecipe<FlaskStationInventory>
             buffer.writeVarInt(recipe.requiredReagentQuantities.size());
             recipe.requiredReagentQuantities.entrySet().forEach((entry) ->
             {
-                buffer.writeResourceLocation(ForgeRegistries.ITEMS.getKey(entry.getKey().get()));
+                //Herblore.LOGGER.debug("toNetwork " + ForgeRegistries.ITEMS.getKey(entry.getKey().get()));
+                ResourceLocation regKey = ForgeRegistries.ITEMS.getKey(entry.getKey().get());
+                buffer.writeResourceLocation(regKey);
                 buffer.writeVarInt(entry.getValue());
             });
 
-            buffer.writeResourceLocation(ModRegistries.FLASKS.getKey(recipe.result.get()));
+            //Herblore.LOGGER.debug("toNetwork " + ModRegistries.FLASKS.getKey(recipe.result.get()));
+            ResourceLocation regKey = ModRegistries.FLASKS.getKey(recipe.result.get());
+            buffer.writeResourceLocation(regKey);
         }
     }
 }
