@@ -17,6 +17,7 @@ import com.damekai.herblore.common.item.ModItemColors;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
 import com.damekai.herblore.common.recipe.ModRecipeSerializers;
+import com.damekai.herblore.common.screen.ScreenDiffuser;
 import com.damekai.herblore.common.screen.ScreenFlaskStation;
 import com.damekai.herblore.common.util.IContinuousDrinkItem;
 import com.damekai.herblore.common.world.ModFeatures;
@@ -92,5 +93,6 @@ public class Herblore
     public static void onClientSetup(FMLClientSetupEvent event)
     {
         ScreenManager.register(ModContainers.FLASK_STATION.get(), ScreenFlaskStation::new);
+        ScreenManager.register(ModContainers.DIFFUSER.get(), ScreenDiffuser::new);
     }
 }
