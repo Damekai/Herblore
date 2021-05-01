@@ -5,17 +5,19 @@ import com.damekai.herblore.common.item.effusion.base.ItemEffusion;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ItemEffusionVerdure extends ItemEffusion
 {
-    private static final int TICK_FREQUENCY = 100;
-    private static final float DOUBLE_TICK_PROBABILITY = 0.01f;
+    private static final int ADDITIONAL_TICKS = 2;
+    private static final float EFFECT_PROBABILITY = 0.01f;
 
     public ItemEffusionVerdure()
     {
@@ -25,22 +27,34 @@ public class ItemEffusionVerdure extends ItemEffusion
     @Override
     public void tick(ItemStack itemStack, World world, BlockPos blockPos)
     {
+        // Select blocks that will be affected.
+        List<BlockPos> selection = getBlockPosInRadius(blockPos, 4).stream()
+                .filter((pos) -> world.random.nextFloat() < EFFECT_PROBABILITY)
+                .collect(Collectors.toList());
+
+        // On the server side, perform the effect.
         if (!world.isClientSide)
         {
-            int damageValue = itemStack.getDamageValue();
-            //Herblore.LOGGER.debug("Bonemealing crops.");
-
-            getBlockPosInRadius(blockPos, 4).forEach((pos) ->
+            selection.forEach((pos) ->
             {
-                if (world.random.nextFloat() < DOUBLE_TICK_PROBABILITY)
+                BlockState blockState = world.getBlockState(pos);
+                if (blockState.getBlock() instanceof CropsBlock)
                 {
-                    BlockState blockState = world.getBlockState(pos);
-                    if (blockState.getBlock() instanceof CropsBlock)
+                    CropsBlock cropsBlock = (CropsBlock) blockState.getBlock();
+
+                    for (int i = 0; i < ADDITIONAL_TICKS; i++)
                     {
-                        CropsBlock cropsBlock = (CropsBlock) blockState.getBlock();
                         cropsBlock.randomTick(blockState, (ServerWorld) world, pos, world.random);
                     }
                 }
+            });
+        }
+        // On the client side, render some effect particles.
+        else
+        {
+            selection.forEach((pos) ->
+            {
+                world.addParticle(ParticleTypes.EFFECT, pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, 0d, 1d, 0d);
             });
         }
     }
