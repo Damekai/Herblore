@@ -66,7 +66,7 @@ public class ItemEffusionCrumblemist extends ItemEffusion
                     int count = ThreadLocalRandom.current().nextInt(result.minCount, result.maxCount);
 
                     SoundType soundType = world.getBlockState(crumblePos).getSoundType();
-                    world.playLocalSound(crumblePos.getX(), crumblePos.getY(), crumblePos.getZ(), soundType.getBreakSound(), SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F, false);
+                    world.playSound(null, crumblePos, soundType.getBreakSound(), SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
 
                     world.setBlockAndUpdate(crumblePos, Blocks.AIR.defaultBlockState());
 
