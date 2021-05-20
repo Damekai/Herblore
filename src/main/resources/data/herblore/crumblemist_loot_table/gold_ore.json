@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:gold_ore",
+  "item": "minecraft:gold_nugget",
+  "min": 10,
+  "max": 14
+}

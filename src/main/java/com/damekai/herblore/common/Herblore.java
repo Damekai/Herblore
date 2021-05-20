@@ -9,6 +9,7 @@ import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffe
 import com.damekai.herblore.common.capability.toxicityhandler.CapabilityToxicityHandler;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
 import com.damekai.herblore.common.container.ModContainers;
+import com.damekai.herblore.common.data.ModAssetManagers;
 import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.flask.ModFlasks;
@@ -50,6 +51,7 @@ public class Herblore
         modBus.addListener(ModItemPropertyGetters::onClientSetup);
 
         modBus.addListener(ModRecipeProvider::onGatherData);
+
         modBus.addListener(ModRegistries::onNewRegistry);
         modBus.addListener(ModItemColors::onLoadComplete);
 
@@ -67,6 +69,8 @@ public class Herblore
         ModRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
         ModHerbloreEffects.HERBLORE_EFFECTS.register(modBus);
         ModFlasks.FLASKS.register(modBus);
+
+        MinecraftForge.EVENT_BUS.addListener(ModAssetManagers::onAddReloadListener);
 
         MinecraftForge.EVENT_BUS.addListener(IContinuousDrinkItem::onUseItem);
 

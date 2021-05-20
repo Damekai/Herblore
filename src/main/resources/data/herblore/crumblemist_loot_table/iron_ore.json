@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:iron_ore",
+  "item": "minecraft:iron_nugget",
+  "min": 10,
+  "max": 14
+}

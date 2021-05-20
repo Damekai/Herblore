@@ -2,6 +2,7 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.ModBlocks;
+import com.damekai.herblore.common.item.effusion.ItemEffusionCrumblemist;
 import com.damekai.herblore.common.item.effusion.ItemEffusionVerdure;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -56,6 +57,7 @@ public class ModItems
     public static final RegistryObject<Item> FLASK = ITEMS.register("flask", ItemFlask::new);
 
     public static final RegistryObject<Item> EFFUSION_VERDURE = ITEMS.register("effusion_verdure", ItemEffusionVerdure::new);
+    public static final RegistryObject<Item> EFFUSION_CRUMBLEMIST = ITEMS.register("effusion_crumblemist", ItemEffusionCrumblemist::new);
 
     public static final RegistryObject<BlockItem> PERENNIAL_PATCH = ITEMS.register("perennial_patch", () -> new BlockItem(ModBlocks.PERENNIAL_PATCH.get(), defaultItemProperties()));
 

@@ -49,7 +49,7 @@ public class ItemEffusionVerdure extends ItemEffusion
                 }
             });
         }
-        // On the client side, render some effect particles.
+        // On the client side, render some effect particles. TODO: THIS WILL NOT PARTICLE THE CORRECT ONES!
         else
         {
             selection.forEach((pos) ->
