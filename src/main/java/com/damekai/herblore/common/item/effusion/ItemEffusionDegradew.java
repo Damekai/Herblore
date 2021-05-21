@@ -5,11 +5,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ItemEffusionDepredew extends ItemEffusion
+public class ItemEffusionDegradew extends ItemEffusion
 {
     private static final int RADIUS = 1;
 
-    public ItemEffusionDepredew()
+    public ItemEffusionDegradew()
     {
         super(2400);
     }

@@ -69,7 +69,7 @@ public class ItemEffusionCrumblemist extends ItemEffusion
                     world.destroyBlock(crumblePos, false);
 
                     // Drop the appropriate items.
-                    tableEntry.getItems().forEach(((item, count) -> world.addFreshEntity(new ItemEntity(world, crumblePos.getX() + 0.5d, crumblePos.getY() + 0.5d, crumblePos.getZ() + 0.5d, new ItemStack(item.get(), count.getCount())))));
+                    tableEntry.getItems().forEach((item) -> world.addFreshEntity(new ItemEntity(world, crumblePos.getX() + 0.5d, crumblePos.getY() + 0.5d, crumblePos.getZ() + 0.5d, item.createItemStack())));
                 }
             }
         }

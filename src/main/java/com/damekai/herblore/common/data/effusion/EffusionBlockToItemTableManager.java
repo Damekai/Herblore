@@ -54,7 +54,7 @@ public class EffusionBlockToItemTableManager extends EffusionTableManager
     {
         EffusionBlockToItem.Builder builder = new EffusionBlockToItem.Builder();
 
-        builder.block(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(jsonObject.get("block").getAsString())));
+        builder.blockInput(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(jsonObject.get("block").getAsString())));
 
         jsonObject.getAsJsonArray("items").forEach((itemJsonElement) ->
         {
@@ -66,13 +66,13 @@ public class EffusionBlockToItemTableManager extends EffusionTableManager
             switch (itemCountJsonObject.get("type").getAsString())
             {
                 case "fixed":
-                    builder.item(item, itemCountJsonObject.get("count").getAsInt());
+                    builder.itemOutput(new EffusionItemResult(item, itemCountJsonObject.get("count").getAsInt()));
                     break;
                 case "range":
-                    builder.item(item, itemCountJsonObject.get("min").getAsInt(), itemCountJsonObject.get("max").getAsInt());
+                    builder.itemOutput(new EffusionItemResult(item, itemCountJsonObject.get("min").getAsInt(), itemCountJsonObject.get("max").getAsInt()));
                     break;
                 default:
-                    builder.item(item, 1);
+                    builder.itemOutput(new EffusionItemResult(item, 1));
                     break;
             }
         });
