@@ -1,0 +1,13 @@
+{
+  "block": "minecraft:iron_ore",
+  "items": [
+    {
+      "item": "minecraft:iron_nugget",
+      "count": {
+        "type": "range",
+        "min": 10,
+        "max": 15
+      }
+    }
+  ]
+}

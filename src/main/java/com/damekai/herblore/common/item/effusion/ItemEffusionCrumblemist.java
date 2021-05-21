@@ -2,6 +2,7 @@ package com.damekai.herblore.common.item.effusion;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.data.ModAssetManagers;
+import com.damekai.herblore.common.data.effusion.EffusionBlockToItem;
 import com.damekai.herblore.common.item.effusion.base.ItemEffusion;
 import com.damekai.herblore.common.util.EffusionHelper;
 import com.google.common.collect.ImmutableMap;
@@ -49,11 +50,11 @@ public class ItemEffusionCrumblemist extends ItemEffusion
             if (world.random.nextFloat() <= CRUMBLE_CHANCE)
             {
                 // Get map of valid blocks.
-                ImmutableMap<Block, Result> results = ModAssetManagers.CRUMBLEMIST_LOOT_TABLE.getResultsMap();
+                ImmutableMap<Block, EffusionBlockToItem> table = ModAssetManagers.CRUMBLEMIST_TABLE.getTable();
 
                 // Reduce positions to only include valid blocks.
                 List<BlockPos> validPos = posInRange.stream()
-                        .filter((pos) -> results.containsKey(world.getBlockState(pos).getBlock()))
+                        .filter((pos) -> table.containsKey(world.getBlockState(pos).getBlock()))
                         .collect(Collectors.toList());
 
                 if (!validPos.isEmpty())
@@ -61,37 +62,16 @@ public class ItemEffusionCrumblemist extends ItemEffusion
                     // Choose a random valid block to crumble.
                     BlockPos crumblePos = validPos.get(ThreadLocalRandom.current().nextInt(0, validPos.size()));
 
-                    Result result = results.get(world.getBlockState(crumblePos).getBlock());
-                    Item item = result.item.get();
-                    int count = ThreadLocalRandom.current().nextInt(result.minCount, result.maxCount);
+                    // Get the drops for that block.
+                    EffusionBlockToItem tableEntry = table.get(world.getBlockState(crumblePos).getBlock());
 
+                    // Destroy the block.
                     world.destroyBlock(crumblePos, false);
-                    world.addFreshEntity(new ItemEntity(world, crumblePos.getX() + 0.5d, crumblePos.getY() + 0.5d, crumblePos.getZ() + 0.5d, new ItemStack(item, count)));
+
+                    // Drop the appropriate items.
+                    tableEntry.getItems().forEach(((item, count) -> world.addFreshEntity(new ItemEntity(world, crumblePos.getX() + 0.5d, crumblePos.getY() + 0.5d, crumblePos.getZ() + 0.5d, new ItemStack(item.get(), count.getCount())))));
                 }
             }
-
-
-        }
-    }
-
-    public static class Result
-    {
-        private final Supplier<Block> block;
-        private final Supplier<Item> item;
-        private final int minCount;
-        private final int maxCount;
-
-        public Result(Supplier<Block> block, Supplier<Item> item, int minCount, int maxCount)
-        {
-            this.block = block;
-            this.item = item;
-            this.minCount = minCount;
-            this.maxCount = maxCount;
-        }
-
-        public Supplier<Block> getBlock()
-        {
-            return block;
         }
     }
 }
