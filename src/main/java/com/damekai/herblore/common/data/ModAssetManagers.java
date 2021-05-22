@@ -1,14 +1,17 @@
 package com.damekai.herblore.common.data;
 
-import com.damekai.herblore.common.data.effusion.EffusionBlockToItemTableManager;
-import net.minecraft.resources.IReloadableResourceManager;
-import net.minecraft.resources.IResourceManager;
+import com.damekai.herblore.common.data.effusion.EffusionConversionJsonDeserializers;
+import com.damekai.herblore.common.data.effusion.EffusionConversionTableManager;
+import com.damekai.herblore.common.data.effusion.EffusionItemResult;
+import com.google.common.collect.ImmutableList;
+import com.google.gson.Gson;
+import net.minecraft.block.Block;
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 
 public class ModAssetManagers
 {
-    public static final EffusionBlockToItemTableManager CRUMBLEMIST_TABLE = new EffusionBlockToItemTableManager("effusion/crumblemist");
+    public static final EffusionConversionTableManager<Block, ImmutableList<EffusionItemResult>> CRUMBLEMIST_TABLE =
+            new EffusionConversionTableManager<>(new Gson(), "effusion/crumblemist", EffusionConversionJsonDeserializers.BLOCK_TO_ITEMS);
 
     public static void onAddReloadListener(AddReloadListenerEvent event)
     {

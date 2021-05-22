@@ -1,23 +1,26 @@
 package com.damekai.herblore.common.data.effusion;
 
+import com.google.gson.JsonObject;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
 public class EffusionItemResult
 {
-    private final Supplier<Item> item;
+    private final Item item;
     private final IItemCount count;
 
-    public EffusionItemResult(Supplier<Item> item, int count)
+    public EffusionItemResult(Item item, int count)
     {
         this.item = item;
         this.count = new ItemCountFixed(count);
     }
 
-    public EffusionItemResult(Supplier<Item> item, int minCount, int maxCount)
+    public EffusionItemResult(Item item, int minCount, int maxCount)
     {
         this.item = item;
         this.count = new ItemCountRange(minCount, maxCount);
@@ -25,7 +28,23 @@ public class EffusionItemResult
 
     public ItemStack createItemStack()
     {
-        return new ItemStack(item.get(), count.getCount());
+        return new ItemStack(item, count.getCount());
+    }
+
+    public static EffusionItemResult fromJson(JsonObject jsonObject)
+    {
+        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(jsonObject.get("item").getAsString()));
+
+        JsonObject itemCountJsonObject = jsonObject.get("count").getAsJsonObject();
+        switch (itemCountJsonObject.get("type").getAsString())
+        {
+            case "fixed":
+                return new EffusionItemResult(item, itemCountJsonObject.get("count").getAsInt());
+            case "range":
+                return new EffusionItemResult(item, itemCountJsonObject.get("min").getAsInt(), itemCountJsonObject.get("max").getAsInt());
+            default:
+                return new EffusionItemResult(item, 1);
+        }
     }
 
     private interface IItemCount

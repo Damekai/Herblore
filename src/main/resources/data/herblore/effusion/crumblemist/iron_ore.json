@@ -1,6 +1,6 @@
 {
-  "block": "minecraft:iron_ore",
-  "items": [
+  "input": "minecraft:iron_ore",
+  "outputs": [
     {
       "item": "minecraft:iron_nugget",
       "count": {
