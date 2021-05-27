@@ -65,17 +65,26 @@ public class TileEffusion extends TileEntity implements ITickableTileEntity
     }
 
     @Override
+    public CompoundNBT save(CompoundNBT nbt)
+    {
+        super.save(nbt);
+
+        if (effusionInstance != null)
+        {
+            nbt.put("effusion", effusionInstance.write(new CompoundNBT()));
+        }
+
+        return nbt;
+    }
+
+    @Override
     public void load(BlockState state, CompoundNBT nbt)
     {
-        Herblore.LOGGER.debug("deserializing");
-
         super.load(state, nbt);
 
         if (nbt.contains("effusion"))
         {
             effusionInstance = EffusionInstance.read(nbt.getCompound("effusion"));
-
-            Herblore.LOGGER.debug("deserialized");
         }
     }
 }
