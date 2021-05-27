@@ -18,10 +18,4 @@ public class ModContainers
         World world = playerInventory.player.level;
         return new ContainerFlaskStation(id, world, pos, playerInventory);
     }));
-
-    public static final RegistryObject<ContainerType<ContainerDiffuser>> DIFFUSER = CONTAINERS.register("diffuser", () -> IForgeContainerType.create((id, playerInventory, data) -> {
-        BlockPos pos = data.readBlockPos();
-        World world = playerInventory.player.level;
-        return new ContainerDiffuser(id, world, pos, playerInventory);
-    }));
 }

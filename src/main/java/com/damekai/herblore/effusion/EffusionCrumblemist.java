@@ -1,14 +1,13 @@
-package com.damekai.herblore.common.item.effusion;
+package com.damekai.herblore.effusion;
 
+import com.damekai.herblore.common.block.tile.TileEffusion;
 import com.damekai.herblore.common.data.ModAssetManagers;
 import com.damekai.herblore.common.data.effusion.EffusionItemResult;
-import com.damekai.herblore.common.item.effusion.base.ItemEffusion;
-import com.damekai.herblore.common.util.EffusionHelper;
+import com.damekai.herblore.effusion.base.Effusion;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -16,26 +15,21 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
-public class ItemEffusionCrumblemist extends ItemEffusion
+public class EffusionCrumblemist extends Effusion
 {
     private static final int RADIUS = 4;
     private static final float CRUMBLE_CHANCE = 0.05f;
 
-    public ItemEffusionCrumblemist()
+    public EffusionCrumblemist()
     {
-        super(2400);
+        super(0x676056);
     }
 
     @Override
-    public void tick(ItemStack itemStack, World world, BlockPos blockPos)
+    public void onTick(TileEffusion effusionTile)
     {
-        List<BlockPos> posInRange = EffusionHelper.getBlockPosInRadius(blockPos, RADIUS, false);
-        if (posInRange.size() == 0)
-        {
-            return;
-        }
-
-        if (!world.isClientSide)
+        World world = effusionTile.getLevel();
+        if (world != null && !world.isClientSide)
         {
             // Roll to see if a block gets affected.
             if (world.random.nextFloat() <= CRUMBLE_CHANCE)
@@ -43,8 +37,8 @@ public class ItemEffusionCrumblemist extends ItemEffusion
                 // Get map of valid blocks.
                 ImmutableMap<Block, ImmutableList<EffusionItemResult>> table = ModAssetManagers.CRUMBLEMIST_TABLE.getTable();
 
-                // Reduce positions to only include valid blocks.
-                List<BlockPos> validPos = posInRange.stream()
+                // Find all blocks within the radius that are valid.
+                List<BlockPos> validPos = effusionTile.getBlockPosInRadius(RADIUS, false).stream()
                         .filter((pos) -> table.containsKey(world.getBlockState(pos).getBlock()))
                         .collect(Collectors.toList());
 

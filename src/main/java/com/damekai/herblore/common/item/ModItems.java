@@ -2,9 +2,6 @@ package com.damekai.herblore.common.item;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.ModBlocks;
-import com.damekai.herblore.common.item.effusion.ItemEffusionCrumblemist;
-import com.damekai.herblore.common.item.effusion.ItemEffusionPheromone;
-import com.damekai.herblore.common.item.effusion.ItemEffusionVerdure;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -57,23 +54,13 @@ public class ModItems
     public static final RegistryObject<Item> FLASK_OF_WATER = ITEMS.register("flask_of_water", () -> new Item(defaultItemProperties().stacksTo(1)));
     public static final RegistryObject<Item> FLASK = ITEMS.register("flask", ItemFlask::new);
 
-    public static final RegistryObject<Item> EFFUSION_VERDURE = ITEMS.register("effusion_verdure", ItemEffusionVerdure::new);
-    public static final RegistryObject<Item> EFFUSION_CRUMBLEMIST = ITEMS.register("effusion_crumblemist", ItemEffusionCrumblemist::new);
-    public static final RegistryObject<Item> EFFUSION_PHEROMONE = ITEMS.register("effusion_pheromone", ItemEffusionPheromone::new);
-
     public static final RegistryObject<BlockItem> PERENNIAL_PATCH = ITEMS.register("perennial_patch", () -> new BlockItem(ModBlocks.PERENNIAL_PATCH.get(), defaultItemProperties()));
 
     public static final RegistryObject<BlockItem> FLASK_STATION = ITEMS.register("flask_station", () -> new BlockItem(ModBlocks.FLASK_STATION.get(), defaultItemProperties()));
-    public static final RegistryObject<BlockItem> DIFFUSER = ITEMS.register("diffuser", () -> new BlockItem(ModBlocks.DIFFUSER.get(), defaultItemProperties()));
+    public static final RegistryObject<BlockItem> EFFUSION = ITEMS.register("effusion", BlockItemEffusion::new);
 
     public static Item.Properties defaultItemProperties()
     {
         return (new Item.Properties()).tab(ModItemGroups.HERBLORE);
-    }
-
-    public static Item getItemFromRegistry(String name)
-    {
-        RegistryObject<Item> match = ITEMS.getEntries().stream().filter((itemSupplier) -> itemSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
-        return match != null ? match.get() : null;
     }
 }
