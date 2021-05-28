@@ -12,4 +12,5 @@ public class ModEffusions
     public static final RegistryObject<Effusion> CRUMBLEMIST = EFFUSIONS.register("crumblemist", EffusionCrumblemist::new);
     public static final RegistryObject<Effusion> VERDURE = EFFUSIONS.register("verdure", EffusionVerdure::new);
     public static final RegistryObject<Effusion> PHEROMONE = EFFUSIONS.register("pheromone", EffusionPheromone::new);
+    public static final RegistryObject<Effusion> TERRASMOG = EFFUSIONS.register("terrasmog", EffusionTerrasmog::new);
 }

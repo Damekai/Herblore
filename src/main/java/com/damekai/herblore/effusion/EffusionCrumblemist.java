@@ -38,7 +38,7 @@ public class EffusionCrumblemist extends Effusion
                 ImmutableMap<Block, ImmutableList<EffusionItemResult>> table = ModAssetManagers.CRUMBLEMIST_TABLE.getTable();
 
                 // Find all blocks within the radius that are valid.
-                List<BlockPos> validPos = effusionTile.getBlockPosInRadius(RADIUS, false).stream()
+                List<BlockPos> validPos = effusionTile.getBlockPosInFlatRadius(RADIUS, false).stream()
                         .filter((pos) -> table.containsKey(world.getBlockState(pos).getBlock()))
                         .collect(Collectors.toList());
 

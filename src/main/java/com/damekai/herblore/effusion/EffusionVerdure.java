@@ -31,7 +31,7 @@ public class EffusionVerdure extends Effusion
             if (world.random.nextFloat() <= VERDURE_CHANCE)
             {
                 // Find all blocks within the radius that are growable.
-                List<BlockPos> validPos = effusionTile.getBlockPosInRadius(RADIUS, false).stream()
+                List<BlockPos> validPos = effusionTile.getBlockPosInFlatRadius(RADIUS, false).stream()
                         .filter((pos) -> world.getBlockState(pos).getBlock() instanceof IGrowable)
                         .collect(Collectors.toList());
 

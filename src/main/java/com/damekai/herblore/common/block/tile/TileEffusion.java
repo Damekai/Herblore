@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
@@ -47,28 +48,37 @@ public class TileEffusion extends TileEntity implements ITickableTileEntity
         return effusionInstance;
     }
 
-    public List<BlockPos> getBlockPosInRadius(int radius, boolean includeOrigin)
+    public List<BlockPos> getBlockPosInBounds(AxisAlignedBB range, boolean includeOrigin)
     {
         BlockPos origin = getBlockPos();
+        int originX = origin.getX();
+        int originY = origin.getY();
+        int originZ = origin.getZ();
 
         List<BlockPos> positions = new ArrayList<>();
 
-        int j = origin.getY();
-
-        for (int i = origin.getX() - radius; i <= origin.getX() + radius; i++)
+        for (double i = originX + range.minX; i <= originX + range.maxX; i++)
         {
-            for (int k = origin.getZ() - radius; k <= origin.getZ() + radius; k++)
+            for (double j = originY + range.minY; j <= originY + range.maxY; j++)
             {
-                BlockPos blockPos = new BlockPos(i, j, k);
-                if (!includeOrigin && blockPos.equals(origin))
+                for (double k = originZ + range.minZ; k <= originZ + range.maxZ; k++)
                 {
-                    continue;
+                    BlockPos blockPos = new BlockPos(i, j, k);
+                    if (!includeOrigin && blockPos.equals(origin))
+                    {
+                        continue;
+                    }
+                    positions.add(blockPos);
                 }
-                positions.add(blockPos);
             }
         }
 
         return positions;
+    }
+
+    public List<BlockPos> getBlockPosInFlatRadius(int radius, boolean includeOrigin)
+    {
+        return getBlockPosInBounds(new AxisAlignedBB(-radius, 0, -radius, radius, 0, radius), includeOrigin);
     }
 
     private void updateRenderedFluidAmount()
