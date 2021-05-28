@@ -1,5 +1,6 @@
 package com.damekai.herblore.client;
 
+import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.ModBlocks;
 import com.damekai.herblore.common.block.tile.TileEffusion;
 import com.damekai.herblore.effusion.base.EffusionInstance;
@@ -16,7 +17,7 @@ public class ModColorHandlers
     {
         event.getBlockColors().register((blockState, blockDisplayReader, blockPos, tintIndex) ->
         {
-            if (blockPos != null && tintIndex == 0)
+            if (blockPos != null && tintIndex == 1)
             {
                 World world = Minecraft.getInstance().level;
                 if (world != null)
@@ -32,7 +33,7 @@ public class ModColorHandlers
                     }
                 }
             }
-            return 0;
+            return 0xFFFFFF;
         }, ModBlocks.EFFUSION.get());
     }
 }

@@ -2,6 +2,7 @@ package com.damekai.herblore.common.block.tile;
 
 import com.damekai.herblore.common.Herblore;
 import com.damekai.herblore.common.block.BlockEffusion;
+import com.damekai.herblore.common.util.EffusionHelper;
 import com.damekai.herblore.effusion.base.EffusionInstance;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -26,17 +27,20 @@ public class TileEffusion extends TileEntity implements ITickableTileEntity
     {
         if (getBlockState().getValue(BlockEffusion.OPEN) && effusionInstance != null)
         {
-            if (effusionInstance.tick(this))
+            boolean finished = effusionInstance.tick(this);
+            if (finished)
             {
-                if (level != null)
+                if (level != null && !level.isClientSide)
                 {
                     level.destroyBlock(getBlockPos(), false);
                 }
             }
+            else
+            {
+                updateRenderedFluidAmount();
+            }
         }
     }
-
-
 
     public EffusionInstance getEffusionInstance()
     {
@@ -65,6 +69,26 @@ public class TileEffusion extends TileEntity implements ITickableTileEntity
         }
 
         return positions;
+    }
+
+    private void updateRenderedFluidAmount()
+    {
+        if (level != null)
+        {
+            int amount = EffusionHelper.getRenderedEffusionAmount(effusionInstance);
+
+            BlockState blockState = getBlockState();
+            if (blockState.getValue(BlockEffusion.AMOUNT) != amount)
+            {
+                level.setBlockAndUpdate(getBlockPos(), blockState.setValue(BlockEffusion.AMOUNT, amount));
+            }
+        }
+    }
+
+    @Override
+    public CompoundNBT getUpdateTag()
+    {
+        return save(new CompoundNBT());
     }
 
     @Override
