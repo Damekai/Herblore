@@ -1,6 +1,7 @@
 package com.damekai.herblore.common.block.tile;
 
 import com.damekai.herblore.common.Herblore;
+import com.damekai.herblore.common.block.BlockEffusion;
 import com.damekai.herblore.effusion.base.EffusionInstance;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -23,7 +24,7 @@ public class TileEffusion extends TileEntity implements ITickableTileEntity
     @Override
     public void tick()
     {
-        if (effusionInstance != null)
+        if (getBlockState().getValue(BlockEffusion.OPEN) && effusionInstance != null)
         {
             if (effusionInstance.tick(this))
             {
@@ -34,6 +35,8 @@ public class TileEffusion extends TileEntity implements ITickableTileEntity
             }
         }
     }
+
+
 
     public EffusionInstance getEffusionInstance()
     {
