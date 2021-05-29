@@ -97,5 +97,12 @@
     "flask.herblore.fallarbor": "Fallarbor",
     "flask.herblore.ambit": "Ambit",
     "flask.herblore.shadowstep": "Shadowstep",
-    "flask.herblore.glacial": "Glacial"
+    "flask.herblore.glacial": "Glacial",
+
+    "effusion.herblore.ruined_effusion": "Ruined Effusion",
+    "effusion.herblore.verdure": "Verdure",
+    "effusion.herblore.crumblemist": "Crumblemist",
+    "effusion.herblore.pheromone": "Pheromone",
+    "effusion.herblore.terrasmog": "Terrasmog",
+    "effusion.herblore.pacimist": "Pacimist"
 }

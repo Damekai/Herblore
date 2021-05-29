@@ -5,6 +5,7 @@ import com.damekai.herblore.common.util.EffusionHelper;
 import com.damekai.herblore.effusion.base.EffusionInstance;
 import com.damekai.herblore.effusion.ModEffusions;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -12,16 +13,39 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.StringUtils;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockItemEffusion extends BlockItem
 {
     public BlockItemEffusion()
     {
         super(ModBlocks.EFFUSION.get(), ModItems.defaultItemProperties());
+    }
+
+    @Override
+    public ITextComponent getName(ItemStack stack)
+    {
+        CompoundNBT nbt = stack.getOrCreateTag();
+        if (nbt.contains("BlockEntityTag"))
+        {
+            CompoundNBT blockEntityTag = nbt.getCompound("BlockEntityTag");
+            if (blockEntityTag.contains("effusion"))
+            {
+                EffusionInstance effusionInstance = EffusionInstance.read(blockEntityTag.getCompound("effusion"));
+                return new TranslationTextComponent(effusionInstance.getEffusion().getTranslationKey());
+            }
+        }
+        return new TranslationTextComponent("effusion.herblore.ruined_effusion");
     }
 
     @Override
@@ -79,5 +103,23 @@ public class BlockItemEffusion extends BlockItem
             }
         }
         return false;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> lores, ITooltipFlag flag)
+    {
+        super.appendHoverText(stack, world, lores, flag);
+        CompoundNBT nbt = stack.getOrCreateTag();
+        if (nbt.contains("BlockEntityTag"))
+        {
+            CompoundNBT blockEntityTag = nbt.getCompound("BlockEntityTag");
+            if (blockEntityTag.contains("effusion"))
+            {
+                EffusionInstance effusionInstance = EffusionInstance.read(blockEntityTag.getCompound("effusion"));
+                lores.add(new TranslationTextComponent("text.herblore.duration_remaining")
+                        .append(new StringTextComponent(": " + StringUtils.formatTickDuration(effusionInstance.getDurationRemaining())))
+                        .withStyle(TextFormatting.BLUE));
+            }
+        }
     }
 }
