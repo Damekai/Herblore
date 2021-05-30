@@ -1,0 +1,69 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "herblore:item/effusion/effusion_overlay_10",
+    "layer1": "herblore:item/effusion/empty_effusion"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "herblore:effusion_fill": 1.0
+      },
+      "model": "herblore:item/effusion/effusion_1"
+    },
+    {
+      "predicate": {
+        "herblore:effusion_fill": 2.0
+      },
+      "model": "herblore:item/effusion/effusion_2"
+    },
+    {
+      "predicate": {
+        "herblore:effusion_fill": 3.0
+      },
+      "model": "herblore:item/effusion/effusion_3"
+    },
+    {
+      "predicate": {
+        "herblore:effusion_fill": 4.0
+      },
+      "model": "herblore:item/effusion/effusion_4"
+    },
+    {
+      "predicate": {
+        "herblore:effusion_fill": 5.0
+      },
+      "model": "herblore:item/effusion/effusion_5"
+    },
+    {
+      "predicate": {
+        "herblore:effusion_fill": 6.0
+      },
+      "model": "herblore:item/effusion/effusion_6"
+    },
+    {
+      "predicate": {
+        "herblore:effusion_fill": 7.0
+      },
+      "model": "herblore:item/effusion/effusion_7"
+    },
+    {
+      "predicate": {
+        "herblore:effusion_fill": 8.0
+      },
+      "model": "herblore:item/effusion/effusion_8"
+    },
+    {
+      "predicate": {
+        "herblore:effusion_fill": 9.0
+      },
+      "model": "herblore:item/effusion/effusion_9"
+    },
+    {
+      "predicate": {
+        "herblore:effusion_fill": 10.0
+      },
+      "model": "herblore:item/effusion/effusion_10"
+    }
+  ]
+}

@@ -53,7 +53,7 @@ public class BlockItemEffusion extends BlockItem
     {
         // TODO: This is here for debugging. Eventually, this override can be removed.
 
-        EffusionHelper.writeEffusionTag(new EffusionInstance(ModEffusions.PACIMIST, 400), playerEntity.getItemInHand(hand));
+        EffusionHelper.writeEffusionTag(new EffusionInstance(ModEffusions.VERDURE, 400), playerEntity.getItemInHand(hand));
 
         return super.use(world, playerEntity, hand);
     }

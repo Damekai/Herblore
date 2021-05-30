@@ -57,6 +57,7 @@ public class Herblore
         modBus.addListener(ModItemColors::onLoadComplete);
 
         modBus.addListener(ModColorHandlers::onRegisterBlockColors);
+        modBus.addListener(ModColorHandlers::onRegisterItemColors);
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModFeatures::onBiomeLoading);
 
