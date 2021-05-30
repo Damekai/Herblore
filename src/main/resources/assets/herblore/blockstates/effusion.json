@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "effusion_open=false,effusion_amount=10": {
+      "model": "herblore:block/effusion/effusion_closed_10"
+    },
+    "effusion_open=false,effusion_amount=9": {
+      "model": "herblore:block/effusion/effusion_closed_9"
+    },
+    "effusion_open=false,effusion_amount=8": {
+      "model": "herblore:block/effusion/effusion_closed_8"
+    },
+    "effusion_open=false,effusion_amount=7": {
+      "model": "herblore:block/effusion/effusion_closed_7"
+    },
+    "effusion_open=false,effusion_amount=6": {
+      "model": "herblore:block/effusion/effusion_closed_6"
+    },
+    "effusion_open=false,effusion_amount=5": {
+      "model": "herblore:block/effusion/effusion_closed_5"
+    },
+    "effusion_open=false,effusion_amount=4": {
+      "model": "herblore:block/effusion/effusion_closed_4"
+    },
+    "effusion_open=false,effusion_amount=3": {
+      "model": "herblore:block/effusion/effusion_closed_3"
+    },
+    "effusion_open=false,effusion_amount=2": {
+      "model": "herblore:block/effusion/effusion_closed_2"
+    },
+    "effusion_open=false,effusion_amount=1": {
+      "model": "herblore:block/effusion/effusion_closed_1"
+    },
+    "effusion_open=true,effusion_amount=10": {
+      "model": "herblore:block/effusion/effusion_open_10"
+    },
+    "effusion_open=true,effusion_amount=9": {
+      "model": "herblore:block/effusion/effusion_open_9"
+    },
+    "effusion_open=true,effusion_amount=8": {
+      "model": "herblore:block/effusion/effusion_open_8"
+    },
+    "effusion_open=true,effusion_amount=7": {
+      "model": "herblore:block/effusion/effusion_open_7"
+    },
+    "effusion_open=true,effusion_amount=6": {
+      "model": "herblore:block/effusion/effusion_open_6"
+    },
+    "effusion_open=true,effusion_amount=5": {
+      "model": "herblore:block/effusion/effusion_open_5"
+    },
+    "effusion_open=true,effusion_amount=4": {
+      "model": "herblore:block/effusion/effusion_open_4"
+    },
+    "effusion_open=true,effusion_amount=3": {
+      "model": "herblore:block/effusion/effusion_open_3"
+    },
+    "effusion_open=true,effusion_amount=2": {
+      "model": "herblore:block/effusion/effusion_open_2"
+    },
+    "effusion_open=true,effusion_amount=1": {
+      "model": "herblore:block/effusion/effusion_open_1"
+    }
+  }
+}

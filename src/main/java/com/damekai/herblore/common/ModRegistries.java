@@ -2,17 +2,17 @@ package com.damekai.herblore.common;
 
 import com.damekai.herblore.common.flask.Flask;
 import com.damekai.herblore.common.herbloreeffect.base.HerbloreEffect;
+import com.damekai.herblore.effusion.base.Effusion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
-import net.minecraftforge.registries.RegistryManager;
 
 public class ModRegistries
 {
     public static IForgeRegistry<HerbloreEffect> HERBLORE_EFFECTS;
     public static IForgeRegistry<Flask> FLASKS;
+    public static IForgeRegistry<Effusion> EFFUSIONS;
 
     public static void onNewRegistry(RegistryEvent.NewRegistry event)
     {
@@ -29,6 +29,13 @@ public class ModRegistries
         flaskRegistryBuilder.setName(flaskResourceLocation);
         flaskRegistryBuilder.setDefaultKey(flaskResourceLocation);
         FLASKS = flaskRegistryBuilder.create();
+
+        ResourceLocation effusionResourceLocation = new ResourceLocation(Herblore.MOD_ID, "effusion");
+        RegistryBuilder<Effusion> effusionRegistryBuilder = new RegistryBuilder<>();
+        effusionRegistryBuilder.setType(Effusion.class);
+        effusionRegistryBuilder.setName(effusionResourceLocation);
+        effusionRegistryBuilder.setDefaultKey(effusionResourceLocation);
+        EFFUSIONS = effusionRegistryBuilder.create();
 
         Herblore.LOGGER.debug("Created Herblore registries.");
     }

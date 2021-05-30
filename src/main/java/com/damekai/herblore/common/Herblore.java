@@ -8,7 +8,9 @@ import com.damekai.herblore.common.capability.herbloreeffecthandler.CapabilityHe
 import com.damekai.herblore.common.capability.herbloreeffecthandler.HerbloreEffectHandler;
 import com.damekai.herblore.common.capability.toxicityhandler.CapabilityToxicityHandler;
 import com.damekai.herblore.common.capability.toxicityhandler.ToxicityHandler;
+import com.damekai.herblore.client.ModColorHandlers;
 import com.damekai.herblore.common.container.ModContainers;
+import com.damekai.herblore.common.data.ModAssetManagers;
 import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.flask.ModFlasks;
@@ -20,6 +22,7 @@ import com.damekai.herblore.common.recipe.ModRecipeSerializers;
 import com.damekai.herblore.common.screen.ScreenFlaskStation;
 import com.damekai.herblore.common.util.IContinuousDrinkItem;
 import com.damekai.herblore.common.world.ModFeatures;
+import com.damekai.herblore.effusion.ModEffusions;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.common.MinecraftForge;
@@ -49,8 +52,12 @@ public class Herblore
         modBus.addListener(ModItemPropertyGetters::onClientSetup);
 
         modBus.addListener(ModRecipeProvider::onGatherData);
+
         modBus.addListener(ModRegistries::onNewRegistry);
         modBus.addListener(ModItemColors::onLoadComplete);
+
+        modBus.addListener(ModColorHandlers::onRegisterBlockColors);
+        modBus.addListener(ModColorHandlers::onRegisterItemColors);
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ModFeatures::onBiomeLoading);
 
@@ -66,6 +73,9 @@ public class Herblore
         ModRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
         ModHerbloreEffects.HERBLORE_EFFECTS.register(modBus);
         ModFlasks.FLASKS.register(modBus);
+        ModEffusions.EFFUSIONS.register(modBus);
+
+        MinecraftForge.EVENT_BUS.addListener(ModAssetManagers::onAddReloadListener);
 
         MinecraftForge.EVENT_BUS.addListener(IContinuousDrinkItem::onUseItem);
 

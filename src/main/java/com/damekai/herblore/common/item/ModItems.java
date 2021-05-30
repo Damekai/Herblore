@@ -57,15 +57,10 @@ public class ModItems
     public static final RegistryObject<BlockItem> PERENNIAL_PATCH = ITEMS.register("perennial_patch", () -> new BlockItem(ModBlocks.PERENNIAL_PATCH.get(), defaultItemProperties()));
 
     public static final RegistryObject<BlockItem> FLASK_STATION = ITEMS.register("flask_station", () -> new BlockItem(ModBlocks.FLASK_STATION.get(), defaultItemProperties()));
+    public static final RegistryObject<BlockItem> EFFUSION = ITEMS.register("effusion", BlockItemEffusion::new);
 
     public static Item.Properties defaultItemProperties()
     {
         return (new Item.Properties()).tab(ModItemGroups.HERBLORE);
-    }
-
-    public static Item getItemFromRegistry(String name)
-    {
-        RegistryObject<Item> match = ITEMS.getEntries().stream().filter((itemSupplier) -> itemSupplier.get().getRegistryName().toString().equals(name)).findAny().orElse(null);
-        return match != null ? match.get() : null;
     }
 }

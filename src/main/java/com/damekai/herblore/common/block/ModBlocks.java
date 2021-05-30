@@ -36,4 +36,6 @@ public class ModBlocks
     public static final RegistryObject<BlockPerennialCrop> SLAG_RIND_CROP = BLOCKS.register("slag_rind_crop", () -> new BlockPerennialCrop(ModItems.SLAG_RIND_SEEDS));
     public static final RegistryObject<BlockPerennialCrop> VENGERVINE_CROP = BLOCKS.register("vengervine_crop", () -> new BlockPerennialCrop(ModItems.VENGERVINE_SEEDS));
     public static final RegistryObject<BlockPerennialCrop> SKYGLOM_CROP = BLOCKS.register("skyglom_crop", () -> new BlockPerennialCrop(ModItems.SKYGLOM_SEEDS));
+
+    public static final RegistryObject<Block> EFFUSION = BLOCKS.register("effusion", BlockEffusion::new);
 }

@@ -1,0 +1,13 @@
+{
+  "input": "minecraft:iron_ore",
+  "outputs": [
+    {
+      "item": "minecraft:iron_nugget",
+      "count": {
+        "type": "range",
+        "min": 10,
+        "max": 15
+      }
+    }
+  ]
+}

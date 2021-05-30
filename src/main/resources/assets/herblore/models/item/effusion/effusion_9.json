@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "herblore:item/effusion/effusion_overlay_9",
+    "layer1": "herblore:item/effusion/empty_effusion"
+  }
+}

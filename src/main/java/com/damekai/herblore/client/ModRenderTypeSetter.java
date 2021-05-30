@@ -3,7 +3,9 @@ package com.damekai.herblore.client;
 import com.damekai.herblore.common.block.ModBlocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModRenderTypeSetter
 {
@@ -27,5 +29,6 @@ public class ModRenderTypeSetter
         RenderTypeLookup.setRenderLayer(ModBlocks.VENGERVINE_CROP.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.SKYGLOM_CROP.get(), RenderType.cutout());
 
+        ForgeRegistries.BLOCKS.getValues().forEach((block) -> RenderTypeLookup.setRenderLayer(block, RenderType.translucent()));
     }
 }

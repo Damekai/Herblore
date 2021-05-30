@@ -14,4 +14,6 @@ public class ModTiles
     public static final RegistryObject<TileEntityType<TileFlaskStation>> FLASK_STATION = TILES.register(
             "flask_station", () -> TileEntityType.Builder.of(TileFlaskStation::new, ModBlocks.FLASK_STATION.get()).build(null));
 
+    public static final RegistryObject<TileEntityType<TileEffusion>> EFFUSION = TILES.register(
+            "effusion", () -> TileEntityType.Builder.of(TileEffusion::new, ModBlocks.EFFUSION.get()).build(null));
 }
