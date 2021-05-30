@@ -15,7 +15,6 @@ import com.damekai.herblore.common.data.ModRecipeProvider;
 import com.damekai.herblore.common.effect.ModEffects;
 import com.damekai.herblore.common.flask.ModFlasks;
 import com.damekai.herblore.common.herbloreeffect.*;
-import com.damekai.herblore.common.item.ModItemColors;
 import com.damekai.herblore.common.item.ModItems;
 import com.damekai.herblore.common.network.HerblorePacketHandler;
 import com.damekai.herblore.common.recipe.ModRecipeSerializers;
@@ -54,7 +53,6 @@ public class Herblore
         modBus.addListener(ModRecipeProvider::onGatherData);
 
         modBus.addListener(ModRegistries::onNewRegistry);
-        modBus.addListener(ModItemColors::onLoadComplete);
 
         modBus.addListener(ModColorHandlers::onRegisterBlockColors);
         modBus.addListener(ModColorHandlers::onRegisterItemColors);

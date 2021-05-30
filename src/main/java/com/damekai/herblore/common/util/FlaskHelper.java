@@ -19,14 +19,17 @@ import java.util.*;
 
 public class FlaskHelper
 {
-    public static int getFlaskColor(ItemStack stack)
+    public static int getFlaskItemColor(ItemStack stack, int tintIndex)
     {
-        Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(stack.getOrCreateTag().getString("flask")));
-        if (flask != null)
+        if (tintIndex == 0)
         {
-            return flask.getColor();
+            Flask flask = ModRegistries.FLASKS.getValue(new ResourceLocation(stack.getOrCreateTag().getString("flask")));
+            if (flask != null)
+            {
+                return flask.getColor();
+            }
         }
-        return 0;
+        return 0xFFFFFF;
     }
 
     public static int getFlaskFillPredicate(ItemStack stack)
