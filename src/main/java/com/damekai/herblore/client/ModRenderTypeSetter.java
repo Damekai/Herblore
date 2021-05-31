@@ -29,6 +29,6 @@ public class ModRenderTypeSetter
         RenderTypeLookup.setRenderLayer(ModBlocks.VENGERVINE_CROP.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.SKYGLOM_CROP.get(), RenderType.cutout());
 
-        ForgeRegistries.BLOCKS.getValues().forEach((block) -> RenderTypeLookup.setRenderLayer(block, RenderType.translucent()));
+        RenderTypeLookup.setRenderLayer(ModBlocks.EFFUSION.get(), RenderType.translucent());
     }
 }
